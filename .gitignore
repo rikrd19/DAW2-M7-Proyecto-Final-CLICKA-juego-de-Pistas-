@@ -1,0 +1,20 @@
+# =============================================================================
+# Educational project — grading requirement
+# The SQLite database (db/wall.db) and static images under assets/img/ MUST
+# remain tracked in Git. Do NOT add rules that ignore:
+#   - db/*.db / db/*.sqlite
+#   - assignment image assets
+# =============================================================================
+
+.DS_Store
+*.log
+
+# Environment / dependencies (not part of this stack)
+/vendor/
+/node_modules/
+.env
+
+# Editor junk
+.vscode/
+.idea/
+*.swp
