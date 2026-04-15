@@ -1,0 +1,37 @@
+PRAGMA foreign_keys = ON;
+
+CREATE TABLE IF NOT EXISTS temes (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nom TEXT NOT NULL UNIQUE
+);
+
+CREATE TABLE IF NOT EXISTS preguntes (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    tema_id INTEGER NOT NULL,
+    pista1 TEXT NOT NULL,
+    pista2 TEXT NOT NULL,
+    pista3 TEXT NOT NULL,
+    pista_extra TEXT,
+    resposta TEXT NOT NULL,
+    FOREIGN KEY (tema_id) REFERENCES temes (id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS usuaris (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT NOT NULL UNIQUE,
+    password TEXT NOT NULL,
+    rol TEXT NOT NULL DEFAULT 'jugador',
+    punts INTEGER NOT NULL DEFAULT 0
+);
+
+CREATE TABLE IF NOT EXISTS partides (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    usuari_id INTEGER NULL,
+    nom_temporal TEXT,
+    punts INTEGER NOT NULL DEFAULT 0,
+    tema TEXT NOT NULL,
+    data TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (usuari_id) REFERENCES usuaris (id) ON DELETE SET NULL
+);
+
+CREATE INDEX IF NOT EXISTS idx_preguntes_tema ON preguntes (tema_id);
