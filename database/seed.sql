@@ -1,10 +1,10 @@
-INSERT INTO temes (nom) VALUES
+INSERT INTO temas (nombre) VALUES
     ('adivinanzas'),
     ('cine'),
     ('banderas'),
     ('dichos');
 
-INSERT INTO preguntes (tema_id, pista1, pista2, pista3, pista_extra, resposta) VALUES
+INSERT INTO preguntas (tema_id, pista1, pista2, pista3, pista_extra, respuesta) VALUES
     (1, 'Tengo agujas pero no coso', 'Doy vueltas todo el día', 'Estoy en tu pared o muñeca', 'Mido el tiempo', 'reloj'),
     (1, 'Cuanto más seco, más moja', 'Es de tela', 'Se abre cuando llueve', 'Suele tener mango', 'toalla'),
     (1, 'Tengo dientes pero no muerdo', 'Sirvo para el pelo', 'Soy pequeño y de plástico o madera', 'Voy en el baño o bolso', 'peine'),
