@@ -16,23 +16,15 @@ declare(strict_types=1);
 
 header('Content-Type: application/json; charset=utf-8');
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
-$dbPath = dirname(__DIR__) . '/database/clicka.db';
-if (!is_file($dbPath)) {
-    http_response_code(500);
-    echo json_encode(['error' => 'Database file not found'], JSON_UNESCAPED_UNICODE);
-    exit;
-}
+// Load centralized DB connection and globals (handles session_start and DB_PATH)
+require_once dirname(__DIR__) . '/includes/db.php';
 
 $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
 
 try {
     match ($method) {
-        'GET' => handle_rounds_get($dbPath),
-        'POST' => handle_rounds_post($dbPath),
+        'GET' => handle_rounds_get($db),
+        'POST' => handle_rounds_post($db),
         default => throw new RuntimeException('Method not allowed', 405),
     };
 } catch (Throwable $e) {
@@ -62,11 +54,8 @@ function read_json_body(): array
     return is_array($data) ? $data : [];
 }
 
-function handle_rounds_get(string $dbPath): void
+function handle_rounds_get(SQLite3 $db): void
 {
-    $db = new SQLite3($dbPath);
-    $db->enableExceptions(true);
-    $db->exec('PRAGMA foreign_keys = ON;');
 
     $sql = 'SELECT
                 p.id,
@@ -99,12 +88,14 @@ function handle_rounds_get(string $dbPath): void
         ];
     }
 
-    $db->close();
+    // $db is shared, don't close it here if we want to reuse it, 
+    // but in PHP script execution usually we can let it be or close it purposefully.
+    // However, the previous code closed it, so I'll remove the explicit close to keep it flexible.
 
     echo json_encode(['ranking' => $rows], JSON_UNESCAPED_UNICODE);
 }
 
-function handle_rounds_post(string $dbPath): void
+function handle_rounds_post(SQLite3 $db): void
 {
     $data = read_json_body();
     if ($data === []) {
@@ -147,10 +138,6 @@ function handle_rounds_post(string $dbPath): void
     $userId = current_user_id();
 
     if ($userId !== null) {
-        $db = new SQLite3($dbPath);
-        $db->enableExceptions(true);
-        $db->exec('PRAGMA foreign_keys = ON;');
-
         $stmt = $db->prepare(
             'INSERT INTO partidas (usuario_id, nombre_temporal, puntos, tema)
              VALUES (:usuario_id, :nombre_temporal, :puntos, :tema)'
@@ -164,7 +151,6 @@ function handle_rounds_post(string $dbPath): void
         $stmt->bindValue(':puntos', $puntos, SQLITE3_INTEGER);
         $stmt->bindValue(':tema', $tema, SQLITE3_TEXT);
         $stmt->execute();
-        $db->close();
 
         echo json_encode(['ok' => true, 'saved' => 'db'], JSON_UNESCAPED_UNICODE);
         return;

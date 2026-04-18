@@ -34,19 +34,10 @@ if ($temaId < 1) {
     exit;
 }
 
-// Same SQLite file as the rest of the app (PHP + optional Python tooling).
-$dbPath = dirname(__DIR__) . '/database/clicka.db';
-if (!is_file($dbPath)) {
-    http_response_code(500);
-    echo json_encode(['error' => 'Database file not found'], JSON_UNESCAPED_UNICODE);
-    exit;
-}
+// Load centralized DB connection and globals
+require_once dirname(__DIR__) . '/includes/db.php';
 
 try {
-    $db = new SQLite3($dbPath);
-    $db->enableExceptions(true);
-    // Enforce referential integrity for this connection (see schema.sql).
-    $db->exec('PRAGMA foreign_keys = ON;');
 
     // Never concatenate user input into SQL — use placeholders + bindValue (RA6 / SQL injection).
     $stmt = $db->prepare(
