@@ -1,0 +1,2 @@
+# Dependencias básicas para CLICKA
+# sqlite3 viene incluido en la librería estándar de Python

@@ -16,6 +16,8 @@ if (!defined('CLICKA_GLOBALS')) {
 
     // App Info
     define('APP_NAME', 'CLICKA - Juego de Pistas');
+    // Adjust BASE_URL according to your XAMPP/Local setup
+    define('BASE_URL', '/DAW2-M7-Proyecto-Final-CLICKA-juego-de-Pistas-');
 
     // Session Management
     if (session_status() === PHP_SESSION_NONE) {
