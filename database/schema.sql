@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS usuarios (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     username TEXT NOT NULL UNIQUE,
     password_hash TEXT NOT NULL,
-    rol TEXT NOT NULL DEFAULT 'jugador',
+    rol TEXT NOT NULL DEFAULT 'jugador' CHECK (rol IN ('jugador', 'admin')),
     puntos INTEGER NOT NULL DEFAULT 0,
     created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
