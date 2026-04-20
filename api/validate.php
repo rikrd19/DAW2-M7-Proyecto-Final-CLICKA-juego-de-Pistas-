@@ -51,12 +51,8 @@ if ($cluesUsed < 1 || $cluesUsed > 4) {
     exit;
 }
 
-$dbPath = dirname(__DIR__) . '/database/clicka.db';
-if (!is_file($dbPath)) {
-    http_response_code(500);
-    echo json_encode(['error' => 'Database file not found'], JSON_UNESCAPED_UNICODE);
-    exit;
-}
+// Load centralized DB connection and globals
+require_once dirname(__DIR__) . '/includes/db.php';
 
 /**
  * Normalize text for safe comparison.
@@ -81,9 +77,6 @@ function score_for_clues_used(int $cluesUsed): int
 }
 
 try {
-    $db = new SQLite3($dbPath);
-    $db->enableExceptions(true);
-    $db->exec('PRAGMA foreign_keys = ON;');
 
     $stmt = $db->prepare('SELECT respuesta, pista_extra FROM preguntas WHERE id = :id LIMIT 1');
     $stmt->bindValue(':id', $preguntaId, SQLITE3_INTEGER);

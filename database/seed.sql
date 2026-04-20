@@ -4,6 +4,9 @@ INSERT INTO temas (nombre) VALUES
     ('banderas'),
     ('dichos');
 
+INSERT INTO usuarios (username, password_hash, rol) VALUES
+    ('admin', '$2y$12$7homUAqp74z7KBdbwi8Wvu7Oh/.pFvVyimGSZPb5p9je6X3yQU8f2', 'admin');
+
 INSERT INTO preguntas (tema_id, pista1, pista2, pista3, pista_extra, respuesta) VALUES
     (1, 'Tengo agujas pero no coso', 'Doy vueltas todo el día', 'Estoy en tu pared o muñeca', 'Mido el tiempo', 'reloj'),
     (1, 'Cuanto más seco, más moja', 'Es de tela', 'Se abre cuando llueve', 'Suele tener mango', 'toalla'),
