@@ -1,0 +1,288 @@
+/* ============================================================
+   CLIKA – Paleta "Warm White & Pastel Orange"
+   ============================================================ */
+:root {
+  /* Colores */
+  --clika-bg:            #FDFCFB;   /* blanco cálido */
+  --clika-card-bg:       #FFFFFF;
+  --clika-surface:       #FFF3EB;   /* naranja pastel muy suave */
+  --clika-primary:       #FF8C57;   /* naranja pastel principal */
+  --clika-primary-hover: #F07040;
+  --clika-accent:        #FFB380;   /* naranja pastel claro */
+  --clika-text:          #2C2C3E;   /* casi negro cálido */
+  --clika-muted:         #888899;
+  --clika-border:        rgba(255, 140, 87, 0.18);
+  --clika-border-strong: rgba(255, 140, 87, 0.38);
+  --clika-shadow:        rgba(255, 140, 87, 0.18);
+  --clika-shadow-dark:   rgba(44, 44, 62, 0.08);
+
+  /* Fuentes */
+  --font-heading: 'Poppins', sans-serif;
+  --font-body:    'Nunito', sans-serif;
+
+  /* Override Bootstrap */
+  --bs-body-bg:     var(--clika-bg);
+  --bs-body-color:  var(--clika-text);
+  --bs-primary:     var(--clika-primary);
+  --bs-primary-rgb: 255, 140, 87;
+}
+
+/* ── Base ───────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  background-color: var(--clika-bg);
+  color: var(--clika-text);
+  font-family: var(--font-body);
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6, .navbar-brand {
+  font-family: var(--font-heading);
+}
+
+/* ── Navbar ─────────────────────────────────────────────── */
+.navbar-clika {
+  background-color: rgba(253, 252, 251, 0.95) !important;
+  border-bottom: 1.5px solid var(--clika-border);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 2px 16px var(--clika-shadow-dark);
+}
+
+.navbar-clika .nav-link {
+  color: var(--clika-muted) !important;
+  font-weight: 600;
+  font-size: .9rem;
+  letter-spacing: .02em;
+  padding: .38rem .7rem;
+  border-radius: 7px;
+  transition: color .2s, background .2s;
+}
+
+.navbar-clika .nav-link:hover {
+  color: var(--clika-primary) !important;
+  background: rgba(255, 140, 87, .08);
+}
+
+.navbar-clika .nav-link.active {
+  color: var(--clika-primary) !important;
+  background: rgba(255, 140, 87, .12);
+}
+
+/* ── Helpers ─────────────────────────────────────────────── */
+.text-accent  { color: var(--clika-accent)  !important; }
+.text-primary { color: var(--clika-primary) !important; }
+.text-muted   { color: var(--clika-muted)   !important; }
+
+/* ── Botones ─────────────────────────────────────────────── */
+.btn-primary {
+  background: linear-gradient(135deg, var(--clika-primary), var(--clika-accent));
+  border: none;
+  color: #fff;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  letter-spacing: .04em;
+  border-radius: 9px;
+  box-shadow: 0 4px 16px var(--clika-shadow);
+  transition: transform .18s, box-shadow .18s, filter .18s;
+}
+.btn-primary:hover,
+.btn-primary:focus {
+  filter: brightness(1.07);
+  box-shadow: 0 6px 22px var(--clika-shadow);
+  transform: translateY(-1px);
+  color: #fff;
+}
+
+.btn-accent {
+  background: linear-gradient(135deg, var(--clika-primary), var(--clika-accent));
+  border: none;
+  color: #fff;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  letter-spacing: .04em;
+  border-radius: 9px;
+  box-shadow: 0 4px 16px var(--clika-shadow);
+  transition: transform .18s, box-shadow .18s, filter .18s;
+}
+.btn-accent:hover,
+.btn-accent:focus {
+  filter: brightness(1.07);
+  box-shadow: 0 6px 22px var(--clika-shadow);
+  transform: translateY(-1px);
+  color: #fff;
+}
+
+.btn-outline-accent {
+  border: 2px solid var(--clika-primary);
+  color: var(--clika-primary);
+  font-weight: 700;
+  border-radius: 9px;
+  background: transparent;
+  transition: background .2s, color .2s, box-shadow .2s;
+}
+.btn-outline-accent:hover {
+  background: var(--clika-primary);
+  color: #fff;
+  box-shadow: 0 4px 16px var(--clika-shadow);
+}
+
+/* ── Hero ────────────────────────────────────────────────── */
+.hero-section {
+  padding: 5.5rem 0 3.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* manchas decorativas de color pastel */
+.hero-section::before {
+  content: '';
+  position: absolute;
+  width: 520px; height: 520px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,179,128,.28) 0%, transparent 70%);
+  top: -160px; right: -120px;
+  pointer-events: none;
+  z-index: 0;
+}
+.hero-section::after {
+  content: '';
+  position: absolute;
+  width: 380px; height: 380px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,140,87,.14) 0%, transparent 70%);
+  bottom: -100px; left: -80px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-section > .container { position: relative; z-index: 1; }
+
+.hero-badge {
+  display: inline-block;
+  background: var(--clika-surface);
+  border: 1.5px solid var(--clika-border-strong);
+  color: var(--clika-primary);
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  padding: .28rem .9rem;
+  border-radius: 50px;
+  margin-bottom: 1.25rem;
+}
+
+.hero-section h1 {
+  font-size: clamp(2rem, 5.5vw, 3.4rem);
+  font-weight: 800;
+  color: var(--clika-text);
+  letter-spacing: -.02em;
+  line-height: 1.15;
+}
+
+.hero-highlight {
+  color: var(--clika-primary);
+}
+
+.hero-section .lead {
+  color: var(--clika-muted);
+  font-size: 1.1rem;
+  max-width: 490px;
+  margin: 0 auto;
+  line-height: 1.65;
+}
+
+/* ── Cards de temáticas ──────────────────────────────────── */
+.tema-card {
+  background-color: var(--clika-card-bg);
+  border: 1.5px solid rgba(255,140,87,.15);
+  border-radius: 18px;
+  color: var(--clika-text);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 12px var(--clika-shadow-dark);
+  transition: transform .28s cubic-bezier(.4,0,.2,1),
+              box-shadow .28s cubic-bezier(.4,0,.2,1),
+              border-color .28s;
+  cursor: pointer;
+}
+
+.tema-card:hover {
+  transform: translateY(-9px);
+  box-shadow: 0 14px 36px rgba(255,140,87,.22),
+              0 4px 12px var(--clika-shadow-dark);
+  border-color: var(--clika-border-strong);
+}
+
+.tema-card .card-title {
+  color: var(--clika-text);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.08rem;
+}
+
+.tema-card .card-text {
+  color: var(--clika-muted);
+  font-size: .88rem;
+  line-height: 1.55;
+}
+
+/* ícono con fondo pill */
+.tema-icon-wrap {
+  width: 66px;
+  height: 66px;
+  background: var(--clika-surface);
+  border: 1.5px solid var(--clika-border);
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  transition: background .28s, border-color .28s, box-shadow .28s;
+}
+
+.tema-card:hover .tema-icon-wrap {
+  background: rgba(255,140,87,.16);
+  border-color: var(--clika-border-strong);
+  box-shadow: 0 4px 12px rgba(255,140,87,.2);
+}
+
+.tema-icon { font-size: 2.1rem; line-height: 1; }
+
+/* ── Sección de temáticas ────────────────────────────────── */
+.temas-section { padding-bottom: 4.5rem; }
+
+.section-eyebrow {
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--clika-primary);
+  margin-bottom: .4rem;
+}
+
+/* ── Footer ─────────────────────────────────────────────── */
+footer {
+  background-color: #FFF8F3;
+  border-top: 1.5px solid var(--clika-border);
+  color: var(--clika-muted);
+  font-size: .82rem;
+  padding: 1.4rem 0;
+  text-align: center;
+}
+
+footer a {
+  color: var(--clika-primary);
+  text-decoration: none;
+}
+footer a:hover { text-decoration: underline; }
+
+/* ── Responsive ─────────────────────────────────────────── */
+@media (max-width: 575px) {
+  .tema-card     { border-radius: 13px; }
+  .tema-icon     { font-size: 1.8rem; }
+  .tema-icon-wrap { width: 56px; height: 56px; border-radius: 14px; }
+  .hero-section  { padding: 3.5rem 0 2rem; }
+}

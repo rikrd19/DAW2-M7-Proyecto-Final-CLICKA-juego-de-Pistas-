@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 52" width="220" height="52" role="img" aria-label="CLICKA - Juego de Pistas">
+  <defs>
+    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#F4956A"/>
+      <stop offset="100%" stop-color="#F7B48E"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Fondo blanco -->
+  <rect width="220" height="52" rx="13" fill="#FFFFFF"/>
+  <rect width="220" height="52" rx="13" fill="none" stroke="#F4956A" stroke-width="1.5" opacity="0.4"/>
+
+  <!-- Icono cursor (izquierda) -->
+  <g transform="translate(16, 11)">
+    <path d="M0,0 L0,18 L4.5,13.5 L7.5,20 L10,19 L7,12.5 L13,12.5 Z"
+          fill="#F4956A" opacity="0.85"/>
+  </g>
+
+  <!-- Texto CLICKA -->
+  <text
+    x="125" y="33"
+    dominant-baseline="auto"
+    text-anchor="middle"
+    font-family="Poppins, 'Arial Black', Arial, sans-serif"
+    font-weight="800"
+    font-size="25"
+    letter-spacing="5"
+    fill="url(#textGrad)"
+  >CLICKA</text>
+
+  <!-- Subrayado accent -->
+  <rect x="40" y="43" width="140" height="2" rx="1" fill="#F4956A" opacity="0.35"/>
+</svg>
