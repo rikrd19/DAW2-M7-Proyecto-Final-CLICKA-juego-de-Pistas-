@@ -70,6 +70,63 @@ h1, h2, h3, h4, h5, h6, .navbar-brand {
   background: rgba(255, 140, 87, .12);
 }
 
+/* Unified top navigation pills (Inicio / Jugar / Ranking / Panel Admin). Higher specificity beats Bootstrap navbar defaults. */
+.navbar-clika.navbar-expand-lg .navbar-nav .nav-link.nav-pill {
+  color: var(--clika-primary) !important;
+  background: var(--clika-surface) !important;
+  border: 1px solid var(--clika-border) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 2px 10px var(--clika-shadow-dark) !important;
+  margin-right: 0.35rem;
+  padding: 0.45rem 0.9rem !important;
+  font-weight: 600;
+}
+
+.navbar-clika.navbar-expand-lg .navbar-nav .nav-link.nav-pill:hover {
+  color: var(--clika-primary-hover) !important;
+  background: #ffffff !important;
+  border-color: var(--clika-border-strong) !important;
+  box-shadow: 0 4px 14px var(--clika-shadow) !important;
+}
+
+.navbar-clika.navbar-expand-lg .navbar-nav .nav-link.nav-pill.active {
+  color: #fff !important;
+  background: linear-gradient(135deg, var(--clika-primary), var(--clika-accent)) !important;
+  border-color: transparent !important;
+  box-shadow: 0 4px 16px var(--clika-shadow) !important;
+}
+
+/* DiceBear gallery trigger: no Bootstrap .btn* classes (they override background). */
+button.avatar-dicebear-more {
+  width: 50px;
+  height: 50px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff !important;
+  background-color: #4c6ef5 !important;
+  border: none !important;
+  box-shadow: 0 4px 14px rgba(76, 110, 245, 0.35);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+}
+
+button.avatar-dicebear-more:hover {
+  color: #fff !important;
+  background-color: #4c6ef5 !important;
+  filter: brightness(1.06);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(76, 110, 245, 0.45);
+}
+
+button.avatar-dicebear-more:focus-visible {
+  outline: 2px solid rgba(76, 110, 245, 0.45);
+  outline-offset: 2px;
+}
+
 /* ── Helpers ─────────────────────────────────────────────── */
 .text-accent  { color: var(--clika-accent)  !important; }
 .text-primary { color: var(--clika-primary) !important; }

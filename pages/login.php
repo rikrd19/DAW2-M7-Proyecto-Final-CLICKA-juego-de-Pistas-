@@ -74,6 +74,3 @@ $pageTitle = 'Iniciar Sesión';
     </div>
 
     <?php include '../includes/foot.php'; ?>
-</body>
-
-</html>

@@ -1,3 +1,6 @@
+<?php
+require_once dirname(__DIR__) . '/config/globals.php';
+?>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title><?php echo htmlspecialchars($pageTitle ?? 'Inicio'); ?> | CLIKA</title>
@@ -19,4 +22,4 @@
 >
 
 <!-- CLIKA custom styles -->
-<link rel="stylesheet" href="<?php echo htmlspecialchars($basePath ?? ''); ?>assets/css/styles.css">
+<link rel="stylesheet" href="<?php echo BASE_URL; ?>/assets/css/styles.css">

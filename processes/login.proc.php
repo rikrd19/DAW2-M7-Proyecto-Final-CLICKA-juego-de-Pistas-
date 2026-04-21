@@ -25,7 +25,7 @@ if (empty($username) || empty($password)) {
 
 try {
     // 1. Find user in database using Prepared Statements
-    $stmt = $db->prepare('SELECT id, username, password_hash, rol FROM usuarios WHERE username = :user');
+    $stmt = $db->prepare('SELECT id, username, password_hash, rol, foto FROM usuarios WHERE username = :user');
     $stmt->bindValue(':user', $username, SQLITE3_TEXT);
     $result = $stmt->execute();
     $user = $result->fetchArray(SQLITE3_ASSOC);
@@ -40,6 +40,7 @@ try {
         $_SESSION['usuari_id'] = $user['id'];
         $_SESSION['username'] = $user['username'];
         $_SESSION['rol'] = $user['rol'];
+        $_SESSION['foto'] = $user['foto'] ?? 'default.png';
 
         // 5. Persistent Guest Score Logic:
         // If the user played as a guest before logging in, we save that score now.

@@ -1,4 +1,8 @@
 <?php
+require_once dirname(__DIR__) . '/config/globals.php';
+require_once dirname(__DIR__) . '/includes/auth.php';
+
+// Guest can play: do not call check_access() here.
 $basePath  = '../';
 $pageTitle = 'Jugar';
 
@@ -157,7 +161,7 @@ if (is_file($dbPath)) {
           <button type="button" id="btn-tornar" class="btn btn-primary px-4">
             Jugar otra vez
           </button>
-          <a href="../pages/ranking.php" class="btn btn-outline-accent px-4">
+          <a href="<?php echo BASE_URL; ?>/pages/ranking.php" class="btn btn-outline-accent px-4">
             Ver ranking
           </a>
         </div>
@@ -166,10 +170,6 @@ if (is_file($dbPath)) {
 
   </main>
 
-  <?php include '../includes/foot.php'; ?>
-
-  <!-- Game script -->
   <script src="../assets/js/joc.js"></script>
 
-</body>
-</html>
+  <?php include '../includes/foot.php'; ?>
