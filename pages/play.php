@@ -1,4 +1,8 @@
 <?php
+require_once dirname(__DIR__) . '/config/globals.php';
+require_once dirname(__DIR__) . '/includes/auth.php';
+
+// Guest can play: do not call check_access() here.
 $basePath  = '../';
 $pageTitle = 'Jugar';
 
@@ -166,10 +170,6 @@ if (is_file($dbPath)) {
 
   </main>
 
-  <?php include '../includes/foot.php'; ?>
-
-  <!-- Game script -->
   <script src="../assets/js/joc.js"></script>
 
-</body>
-</html>
+  <?php include '../includes/foot.php'; ?>
