@@ -19,4 +19,4 @@
 >
 
 <!-- CLIKA custom styles -->
-<link rel="stylesheet" href="assets/css/styles.css">
+<link rel="stylesheet" href="<?php echo htmlspecialchars($basePath ?? ''); ?>assets/css/styles.css">
