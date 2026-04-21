@@ -1,4 +1,5 @@
 <?php
+require_once '../config/globals.php';
 require_once '../includes/auth.php';
 
 // Protecting the page. If not admin, redirects to index.php
@@ -54,6 +55,3 @@ $pageTitle = 'Panel de Administración';
     </main>
 
     <?php include '../includes/foot.php'; ?>
-</body>
-
-</html>

@@ -132,5 +132,3 @@ $results = $db->query("SELECT * FROM usuarios ORDER BY
     </script>
 
     <?php include '../includes/foot.php'; ?>
-</body>
-</html>

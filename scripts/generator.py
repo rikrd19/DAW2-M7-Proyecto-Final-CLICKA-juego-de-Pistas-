@@ -45,9 +45,9 @@ def seed_questions():
             (2, 'Protagonista: Jack Sparrow', 'Barco: La Perla Negra', 'Saga de piratas', 'Johnny Depp es el actor', 'piratas del caribe', 'python'),
             (3, 'País de Sudamérica', 'Capital Brasilia', 'Bandera verde, amarilla y azul', 'Famoso por el carnaval de Río', 'brasil', 'python'),
             (1, 'Vuelo sin tener alas', 'Lloro sin tener ojos', 'Soy gris o blanca', 'Traigo la lluvia', 'nube', 'python'),
-            # (4, 'Protagonista: Jack Sparrow', 'Barco: La Perla Negra', 'Saga de piratas', 'Johnny Depp es el actor', 'piratas del caribe', 'python'),
-            # (5, 'País de Sudamérica', 'Capital Brasilia', 'Bandera verde, amarilla y azul', 'Famoso por el carnaval de Río', 'brasil', 'python'),
-            # (6, 'Vuelo sin tener alas', 'Lloro sin tener ojos', 'Soy gris o blanca', 'Traigo la lluvia', 'nube', 'python')
+            (4, 'Protagonista: Jack Sparrow', 'Barco: La Perla Negra', 'Saga de piratas', 'Johnny Depp es el actor', 'piratas del caribe', 'python'),
+            (5, 'País de Sudamérica', 'Capital Brasilia', 'Bandera verde, amarilla y azul', 'Famoso por el carnaval de Río', 'brasil', 'python'),
+            (6, 'Vuelo sin tener alas', 'Lloro sin tener ojos', 'Soy gris o blanca', 'Traigo la lluvia', 'nube', 'python')
         ]
 
         print(f"\nInsertando {len(new_questions)} preguntas nuevas...")

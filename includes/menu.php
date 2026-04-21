@@ -7,7 +7,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
   <div class="container">
 
     <a class="navbar-brand p-0" href="<?php echo BASE_URL; ?>/index.php">
-      <img src="<?php echo BASE_URL; ?>/assets/images/logo.svg" alt="CLIKA" height="38" width="auto">
+      <img src="<?php echo BASE_URL; ?>/assets/images/logo.svg" alt="CLICKA" height="38" width="auto">
     </a>
 
     <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain"

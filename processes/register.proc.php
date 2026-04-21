@@ -16,6 +16,13 @@ if (empty($username) || empty($password)) {
     exit;
 }
 
+// Only admins can assign elevated roles; public registration is always "jugador".
+if (!is_admin()) {
+    $rol = 'jugador';
+} elseif (!in_array($rol, ['jugador', 'admin'], true)) {
+    $rol = 'jugador';
+}
+
 try {
     // Check if user exists
     $check = $db->prepare("SELECT id FROM usuarios WHERE username = :u");

@@ -50,7 +50,7 @@ $temas = [
         <p class="hero-badge">Juego de Pistas</p>
         <h1 class="mb-3">
           Bienvenido a&nbsp;<span
-            style="background:linear-gradient(135deg,#5C7CFA,#FF4D8D);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">CLIKA</span>
+            style="background:linear-gradient(135deg,#5C7CFA,#FF4D8D);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">CLICKA</span>
         </h1>
         <p class="lead mb-4">
           El juego de pistas que pondrá a prueba tus conocimientos.<br>
@@ -69,7 +69,7 @@ $temas = [
     <section class="temas-section container">
       <div class="text-center mb-4">
         <p class="section-eyebrow">Elige tu categoría</p>
-        <h2 class="h4 fw-bold" style="color:var(--clika-text)">¿De qué quieres demostrar que sabes?</h2>
+        <h2 class="h4 fw-bold" style="color:var(--clicka-text)">¿De qué quieres demostrar que sabes?</h2>
       </div>
 
       <div class="row g-4 justify-content-center">

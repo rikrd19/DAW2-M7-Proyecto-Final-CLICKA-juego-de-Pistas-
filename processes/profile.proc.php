@@ -5,6 +5,7 @@
  */
 require_once dirname(__DIR__) . '/includes/db.php';
 require_once dirname(__DIR__) . '/includes/auth.php';
+require_once dirname(__DIR__) . '/api/lib/dicebear.php';
 
 check_access();
 
@@ -47,6 +48,21 @@ if ($deletePhoto) {
     }
     $fotoFinal = 'default.png';
 } elseif (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
+    // Basic upload hardening: file size and MIME validation.
+    $maxBytes = 2 * 1024 * 1024; // 2MB
+    $allowedMime = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+    $tmpPath = $_FILES['photo']['tmp_name'];
+    $mime = mime_content_type($tmpPath) ?: '';
+
+    if ($_FILES['photo']['size'] > $maxBytes) {
+        header("Location: ../pages/profile.php?id=$targetId&error=file_too_large");
+        exit;
+    }
+    if (!in_array($mime, $allowedMime, true)) {
+        header("Location: ../pages/profile.php?id=$targetId&error=invalid_file_type");
+        exit;
+    }
+
     // Generate unique filename
     $extension = pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION);
     $newFilename = time() . "_" . $targetId . "." . $extension;
@@ -60,7 +76,11 @@ if ($deletePhoto) {
         $fotoFinal = $newFilename;
     }
 } elseif (!empty($selectedAvatar)) {
-    // If user chose a DiceBear avatar
+    // Remote DiceBear URL: validate host/path before storing (same spirit as centralised API helpers).
+    if (!dicebear_is_allowed_remote_avatar_url($selectedAvatar)) {
+        header("Location: ../pages/profile.php?id=$targetId&error=invalid_avatar_url");
+        exit;
+    }
     if ($fotoFinal !== 'default.png' && !str_starts_with($fotoFinal, 'http') && file_exists($uploadsDir . $fotoFinal)) {
         unlink($uploadsDir . $fotoFinal);
     }
