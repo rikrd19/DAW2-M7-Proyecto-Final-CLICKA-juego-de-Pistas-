@@ -3,12 +3,13 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 $currentPage = basename($_SERVER['PHP_SELF']);
+$bp = $basePath ?? '';
 ?>
 <nav class="navbar navbar-expand-lg navbar-clika sticky-top" aria-label="Navegación principal">
   <div class="container">
 
-    <a class="navbar-brand p-0" href="index.php">
-      <img src="assets/images/logo.svg" alt="CLIKA" height="38" width="auto">
+    <a class="navbar-brand p-0" href="<?php echo $bp; ?>index.php">
+      <img src="<?php echo $bp; ?>assets/images/logo.svg" alt="CLIKA" height="38" width="auto">
     </a>
 
     <button
@@ -28,15 +29,15 @@ $currentPage = basename($_SERVER['PHP_SELF']);
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link <?php echo ($currentPage === 'index.php') ? 'active' : ''; ?>"
-             href="index.php">Inicio</a>
+             href="<?php echo $bp; ?>index.php">Inicio</a>
         </li>
         <li class="nav-item">
           <a class="nav-link <?php echo ($currentPage === 'play.php') ? 'active' : ''; ?>"
-             href="pages/play.php">Jugar</a>
+             href="<?php echo $bp; ?>pages/play.php">Jugar</a>
         </li>
         <li class="nav-item">
           <a class="nav-link <?php echo ($currentPage === 'ranking.php') ? 'active' : ''; ?>"
-             href="pages/ranking.php">Ranking</a>
+             href="<?php echo $bp; ?>pages/ranking.php">Ranking</a>
         </li>
       </ul>
 
@@ -48,13 +49,13 @@ $currentPage = basename($_SERVER['PHP_SELF']);
             </span>
           </li>
           <li class="nav-item">
-            <a class="btn btn-outline-accent btn-sm px-3" href="pages/logout.php">
+            <a class="btn btn-outline-accent btn-sm px-3" href="<?php echo $bp; ?>pages/logout.php">
               Cerrar sesión
             </a>
           </li>
         <?php else: ?>
           <li class="nav-item">
-            <a class="btn btn-accent btn-sm px-3" href="pages/login.php">
+            <a class="btn btn-accent btn-sm px-3" href="<?php echo $bp; ?>pages/login.php">
               Iniciar sesión
             </a>
           </li>
