@@ -41,10 +41,10 @@ $currentPage = basename($_SERVER['PHP_SELF']);
       </ul>
 
       <ul class="navbar-nav ms-auto align-items-center gap-2">
-        <?php if (!empty($_SESSION['user'])): ?>
+        <?php if (!empty($_SESSION['usuari_id'])): ?>
           <li class="nav-item">
             <span class="navbar-text text-accent fw-semibold">
-              <?php echo htmlspecialchars($_SESSION['user']['username'] ?? 'Usuario'); ?>
+              <?php echo htmlspecialchars($_SESSION['username'] ?? 'Usuario'); ?>
             </span>
           </li>
           <li class="nav-item">
