@@ -40,6 +40,7 @@ try {
         $_SESSION['usuari_id'] = $user['id'];
         $_SESSION['username'] = $user['username'];
         $_SESSION['rol'] = $user['rol'];
+        $_SESSION['foto'] = $user['foto'] ?? 'default.png';
 
         // 5. Persistent Guest Score Logic:
         // If the user played as a guest before logging in, we save that score now.

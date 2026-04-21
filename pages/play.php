@@ -161,7 +161,7 @@ if (is_file($dbPath)) {
           <button type="button" id="btn-tornar" class="btn btn-primary px-4">
             Jugar otra vez
           </button>
-          <a href="../pages/ranking.php" class="btn btn-outline-accent px-4">
+          <a href="<?php echo BASE_URL; ?>/pages/ranking.php" class="btn btn-outline-accent px-4">
             Ver ranking
           </a>
         </div>

@@ -41,10 +41,10 @@ $pageTitle = 'Panel de Administración';
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="card h-100 shadow-sm border-0">
+                        <div class="card h-100 shadow-sm border-0 text-primary">
                             <div class="card-body text-center">
                                 <h3 class="h5">Gestionar Usuarios</h3>
-                                <a href="users.php" class="btn btn-primary mt-3">Ir a Usuarios</a>
+                                <a href="<?php echo BASE_URL; ?>/pages/users.php" class="btn btn-primary mt-3">Ir a Usuarios</a>
                             </div>
                         </div>
                     </div>
