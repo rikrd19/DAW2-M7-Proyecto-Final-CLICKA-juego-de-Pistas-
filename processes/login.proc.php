@@ -14,19 +14,24 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-// Get input from POST
-$username = isset($_POST['username']) ? trim($_POST['username']) : '';
-$password = isset($_POST['password']) ? $_POST['password'] : '';
+// Form field name stays "username"; value is normalized login email (stored in username column).
+$raw = isset($_POST['username']) ? trim((string) $_POST['username']) : '';
+$loginId = strtolower($raw);
+$password = isset($_POST['password']) ? (string) $_POST['password'] : '';
 
-if (empty($username) || empty($password)) {
+if ($loginId === '' || $password === '') {
     header("Location: ../pages/login.php?error=missing_fields");
     exit;
 }
 
+if (!filter_var($loginId, FILTER_VALIDATE_EMAIL)) {
+    header("Location: ../pages/login.php?error=invalid_email");
+    exit;
+}
+
 try {
-    // 1. Find user in database using Prepared Statements
-    $stmt = $db->prepare('SELECT id, username, password_hash, rol, foto FROM usuarios WHERE username = :user');
-    $stmt->bindValue(':user', $username, SQLITE3_TEXT);
+    $stmt = $db->prepare('SELECT id, username, password_hash, rol, foto FROM usuarios WHERE LOWER(username) = :user');
+    $stmt->bindValue(':user', $loginId, SQLITE3_TEXT);
     $result = $stmt->execute();
     $user = $result->fetchArray(SQLITE3_ASSOC);
 

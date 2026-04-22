@@ -21,6 +21,7 @@ CREATE TABLE IF NOT EXISTS preguntas (
 
 CREATE TABLE IF NOT EXISTS usuarios (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
+    -- username stores normalized login email (lowercase); label in UI remains "Usuario".
     username TEXT NOT NULL UNIQUE,
     password_hash TEXT NOT NULL,
     rol TEXT NOT NULL DEFAULT 'jugador' CHECK (rol IN ('jugador', 'admin')),
