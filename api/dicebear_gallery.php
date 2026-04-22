@@ -9,10 +9,18 @@
 
 declare(strict_types=1);
 
+// Suppress display of PHP errors/notices so they cannot corrupt the JSON response.
+// Errors are still written to the server error log.
+ini_set('display_errors', '0');
+
+// Buffer all output so any stray PHP output can be wiped before we emit JSON.
+ob_start();
+
 header('Content-Type: application/json; charset=utf-8');
 header('Cache-Control: private, no-store');
 
 if (($_SERVER['REQUEST_METHOD'] ?? 'GET') !== 'GET') {
+    ob_clean();
     http_response_code(405);
     echo json_encode(['error' => 'Method not allowed'], JSON_UNESCAPED_UNICODE);
     exit;
@@ -23,6 +31,7 @@ require_once dirname(__DIR__) . '/includes/auth.php';
 require_once __DIR__ . '/lib/dicebear.php';
 
 if (!is_logged_in()) {
+    ob_clean();
     http_response_code(401);
     echo json_encode(['error' => 'Unauthorized'], JSON_UNESCAPED_UNICODE);
     exit;
@@ -35,6 +44,7 @@ $targetId = $sessionUserId;
 if (isset($_GET['user_id']) && is_numeric($_GET['user_id'])) {
     $requested = (int) $_GET['user_id'];
     if ($requested !== $sessionUserId && $sessionRole !== 'admin') {
+        ob_clean();
         http_response_code(403);
         echo json_encode(['error' => 'Forbidden'], JSON_UNESCAPED_UNICODE);
         exit;
@@ -43,6 +53,7 @@ if (isset($_GET['user_id']) && is_numeric($_GET['user_id'])) {
 }
 
 if ($targetId < 1) {
+    ob_clean();
     http_response_code(400);
     echo json_encode(['error' => 'Invalid user_id'], JSON_UNESCAPED_UNICODE);
     exit;
@@ -58,6 +69,7 @@ try {
     $user = $result->fetchArray(SQLITE3_ASSOC);
 
     if (!$user) {
+        ob_clean();
         http_response_code(404);
         echo json_encode(['error' => 'User not found'], JSON_UNESCAPED_UNICODE);
         exit;
@@ -75,8 +87,11 @@ try {
         ];
     }
 
+    ob_clean();
     echo json_encode(['ok' => true, 'items' => $items], JSON_UNESCAPED_UNICODE);
-} catch (Throwable) {
+} catch (Throwable $e) {
+    error_log('[dicebear_gallery] ' . $e->getMessage());
+    ob_clean();
     http_response_code(500);
     echo json_encode(['error' => 'Internal server error'], JSON_UNESCAPED_UNICODE);
 } finally {
