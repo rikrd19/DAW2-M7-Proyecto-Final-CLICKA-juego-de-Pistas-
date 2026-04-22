@@ -52,21 +52,59 @@ $photoUrl = ($user['foto'] === 'default.png' || !$user['foto'])
 <head>
     <?php include '../includes/head.php'; ?>
     <style>
-        .profile-card { max-width: 600px; margin: 40px auto; }
-        .avatar-preview { width: 100px; height: 100px; object-fit: cover; border-radius: 50%; border: 3px solid var(--clika-accent); }
+        .profile-card {
+            max-width: 680px;
+            margin: 16px auto;
+        }
+        .profile-card .card {
+            padding: 1rem 1.1rem !important;
+        }
+        .avatar-preview {
+            width: 84px;
+            height: 84px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid var(--clika-accent);
+        }
+        .role-pill {
+            text-transform: uppercase;
+            letter-spacing: .08em;
+        }
+        .profile-card .form-label {
+            margin-bottom: .25rem;
+            font-size: .92rem;
+        }
+        .profile-card .form-text {
+            font-size: .8rem;
+        }
+        .avatar-picker-grid {
+            max-height: 132px;
+            overflow-y: auto;
+            align-content: flex-start;
+        }
+        .avatar-picker-grid .avatar-option img {
+            width: 44px !important;
+            height: 44px !important;
+            object-fit: cover;
+        }
+        @media (max-width: 768px) {
+            .profile-card { margin: 10px auto; }
+            .profile-card .card { padding: .9rem .85rem !important; }
+            .avatar-picker-grid { max-height: 148px; }
+        }
     </style>
 </head>
 <body class="bg-light">
 
     <?php include '../includes/menu.php'; ?>
 
-    <main class="container">
+    <main class="container py-2">
         <div class="profile-card">
             <div class="card border-0 shadow-sm p-4">
-                <div class="text-center mb-4">
+                <div class="text-center mb-3">
                     <img src="<?php echo $photoUrl; ?>" alt="Avatar" class="avatar-preview mb-3">
                     <h2 class="fw-bold"><?php echo htmlspecialchars($user['username']); ?></h2>
-                    <span class="badge bg-primary rounded-pill uppercase"><?php echo strtoupper($user['rol']); ?></span>
+                    <span class="badge bg-primary rounded-pill role-pill text-uppercase"><?php echo strtoupper($user['rol']); ?></span>
                 </div>
 
                 <?php if (isset($_GET['msg'])): ?>
@@ -79,21 +117,26 @@ $photoUrl = ($user['foto'] === 'default.png' || !$user['foto'])
                 <form action="../processes/profile.proc.php" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="target_id" value="<?php echo $user['id']; ?>">
 
-                    <div class="mb-3">
+                    <div class="mb-2">
                         <label class="form-label fw-bold">Nombre de Usuario</label>
-                        <input type="text" class="form-control bg-light" value="<?php echo htmlspecialchars($user['username']); ?>" disabled>
+                        <input type="text" class="form-control form-control-sm bg-light" value="<?php echo htmlspecialchars($user['username']); ?>" disabled>
                         <div class="form-text">El nombre de usuario no se puede cambiar.</div>
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mb-2">
                         <label for="password" class="form-label fw-bold">Nueva Contraseña</label>
-                        <input type="password" name="password" id="password" class="form-control" placeholder="••••••••">
+                        <div class="input-group input-group-sm">
+                            <input type="password" name="password" id="password" class="form-control form-control-sm password-placeholder" placeholder="••••••••">
+                            <button type="button" class="btn password-toggle-btn px-2" data-password-toggle="#password" aria-label="Mostrar contraseña">
+                                <i class="bi bi-eye-fill"></i>
+                            </button>
+                        </div>
                         <div class="form-text">Dejar en blanco para mantener la actual.</div>
                     </div>
 
-                    <div class="mb-4">
+                    <div class="mb-3">
                         <label class="form-label fw-bold">O elige un avatar del juego</label>
-                        <div class="d-flex flex-wrap gap-2 p-2 bg-light rounded border">
+                        <div class="d-flex flex-wrap gap-2 p-2 bg-light rounded border avatar-picker-grid">
                             <?php foreach ($_galleryItems as $_item): ?>
                                 <div class="avatar-option" role="button" tabindex="0" onclick="pickAvatarFromTile(this)">
                                     <img src="<?php echo htmlspecialchars($_item['url']); ?>"
@@ -107,13 +150,13 @@ $photoUrl = ($user['foto'] === 'default.png' || !$user['foto'])
                         <input type="hidden" name="selected_avatar" id="selected_avatar">
                     </div>
 
-                    <div class="mb-4">
+                    <div class="mb-3">
                         <label for="photo" class="form-label fw-bold">O sube tu propia foto</label>
-                        <input type="file" name="photo" id="photo" class="form-control" accept="image/*">
+                        <input type="file" name="photo" id="photo" class="form-control form-control-sm" accept="image/*">
                     </div>
 
                     <?php if ($user['foto'] !== 'default.png'): ?>
-                    <div class="form-check mb-4">
+                    <div class="form-check mb-3">
                         <input class="form-check-input" type="checkbox" name="delete_photo" id="delPhoto">
                         <label class="form-check-label text-danger" for="delPhoto">
                             Eliminar foto actual y volver al avatar del juego
@@ -130,18 +173,6 @@ $photoUrl = ($user['foto'] === 'default.png' || !$user['foto'])
         </div>
     </main>
 
-    <script>
-        window.pickAvatarFromTile = function (tile) {
-            var img = tile.querySelector('img');
-            if (!img) return;
-            var url = img.currentSrc || img.src;
-            document.querySelector('.avatar-preview').src = url;
-            document.getElementById('selected_avatar').value = url;
-            document.querySelectorAll('.avatar-option img').forEach(function (im) {
-                im.classList.remove('border-primary', 'border-3');
-            });
-            img.classList.add('border-primary', 'border-3');
-        };
-    </script>
+    <script src="<?php echo BASE_URL; ?>/assets/js/profile.js"></script>
 
     <?php include '../includes/foot.php'; ?>

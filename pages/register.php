@@ -22,7 +22,12 @@ $pageTitle = 'Registro de Usuario';
                 </div>
                 <div class="mb-3">
                     <label class="form-label fw-bold">Contraseña</label>
-                    <input type="password" name="password" class="form-control" required>
+                    <div class="input-group">
+                        <input type="password" name="password" id="registerPassword" class="form-control password-placeholder" required>
+                        <button type="button" class="btn password-toggle-btn px-2" data-password-toggle="#registerPassword" aria-label="Mostrar contraseña">
+                            <i class="bi bi-eye-fill"></i>
+                        </button>
+                    </div>
                 </div>
                 <div class="mb-4">
                     <label class="form-label fw-bold">Rol</label>

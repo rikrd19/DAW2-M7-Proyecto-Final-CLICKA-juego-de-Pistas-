@@ -10,5 +10,8 @@
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc4s9bIOgUxi8T/jzmFJ0mzTF3WEPZIFjU5SKaNSBTs"
     crossorigin="anonymous"
   ></script>
+
+  <!-- Shared UI helpers -->
+  <script src="<?php echo BASE_URL; ?>/assets/js/password-toggle.js"></script>
 </body>
 </html>

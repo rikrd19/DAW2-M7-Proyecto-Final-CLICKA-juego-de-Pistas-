@@ -105,7 +105,8 @@ $results = $db->query("SELECT * FROM usuarios ORDER BY
     </main>
 
     <!-- Modal de Confirmación (Bootstrap 5) -->
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true"
+         data-delete-url-base="<?php echo BASE_URL; ?>/processes/delete_user.proc.php?id=">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content border-0 shadow">
           <div class="modal-header border-0 pb-0">
@@ -123,12 +124,6 @@ $results = $db->query("SELECT * FROM usuarios ORDER BY
       </div>
     </div>
 
-    <script>
-        function confirmDelete(id) {
-            const modal = new bootstrap.Modal(document.getElementById('deleteModal'));
-            document.getElementById('confirmDeleteBtn').href = '../processes/delete_user.proc.php?id=' + id;
-            modal.show();
-        }
-    </script>
+    <script src="<?php echo BASE_URL; ?>/assets/js/users.js"></script>
 
     <?php include '../includes/foot.php'; ?>
