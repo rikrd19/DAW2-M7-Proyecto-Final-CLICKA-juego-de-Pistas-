@@ -16,8 +16,17 @@ if (!defined('CLICKA_GLOBALS')) {
 
     // App Info
     define('APP_NAME', 'CLICKA - Juego de Pistas');
-    // Adjust BASE_URL according to your XAMPP/Local setup
-    define('BASE_URL', '/DAW2-M7-Proyecto-Final-CLICKA-juego-de-Pistas-');
+    // Derive BASE_URL automatically from the filesystem path vs. document root.
+    // Works regardless of where the project is placed inside htdocs.
+    $_dr = isset($_SERVER['DOCUMENT_ROOT']) ? realpath($_SERVER['DOCUMENT_ROOT']) : false;
+    if ($_dr !== false && $_dr !== '') {
+        $docRoot = rtrim(str_replace('\\', '/', $_dr), '/');
+        $appRoot = rtrim(str_replace('\\', '/', BASE_PATH), '/');
+        define('BASE_URL', str_replace($docRoot, '', $appRoot));
+    } else {
+        define('BASE_URL', '');
+    }
+    unset($_dr, $docRoot, $appRoot);
 
     // Session Management
     if (session_status() === PHP_SESSION_NONE) {

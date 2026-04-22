@@ -31,6 +31,16 @@ if (!$user) {
 
 $pageTitle = 'Editar Perfil';
 
+// Pre-generate full gallery items server-side (avoids AJAX JSON-corruption issues)
+$_galleryRoll = bin2hex(random_bytes(4));
+$_galleryBust = bin2hex(random_bytes(4));
+$_galleryItems = [];
+foreach (dicebear_gallery_styles() as $_gs) {
+    $_seed = $user['username'] . '|' . $_gs . '|' . $_galleryRoll;
+    $_galleryItems[] = ['style' => $_gs, 'url' => dicebear_avatar_url($_gs, $_seed, ['cb' => $_galleryBust])];
+}
+unset($_galleryRoll, $_galleryBust, $_gs, $_seed);
+
 // Image path logic: use custom SVG if default, or storage if uploaded
 $photoUrl = ($user['foto'] === 'default.png' || !$user['foto']) 
     ? BASE_URL . "/assets/images/social_media/profile.svg"
@@ -84,20 +94,15 @@ $photoUrl = ($user['foto'] === 'default.png' || !$user['foto'])
                     <div class="mb-4">
                         <label class="form-label fw-bold">O elige un avatar del juego</label>
                         <div class="d-flex flex-wrap gap-2 p-2 bg-light rounded border">
-                            <?php
-                            $bust = bin2hex(random_bytes(4));
-                            foreach (dicebear_quick_styles() as $style):
-                                $url = dicebear_avatar_url($style, $user['username'], ['cb' => $bust]);
-                            ?>
+                            <?php foreach ($_galleryItems as $_item): ?>
                                 <div class="avatar-option" role="button" tabindex="0" onclick="pickAvatarFromTile(this)">
-                                    <img src="<?php echo htmlspecialchars($url); ?>" alt="" class="rounded-circle border" style="width: 50px; cursor: pointer;">
+                                    <img src="<?php echo htmlspecialchars($_item['url']); ?>"
+                                         alt="<?php echo htmlspecialchars($_item['style']); ?>"
+                                         class="rounded-circle border"
+                                         title="<?php echo htmlspecialchars($_item['style']); ?>"
+                                         style="width:50px;height:50px;object-fit:cover;cursor:pointer;">
                                 </div>
                             <?php endforeach; ?>
-                            <button type="button" id="openAvatarGalleryBtn"
-                                    class="rounded-circle avatar-dicebear-more"
-                                    title="Ver más avatares">
-                                +
-                            </button>
                         </div>
                         <input type="hidden" name="selected_avatar" id="selected_avatar">
                     </div>
@@ -125,155 +130,18 @@ $photoUrl = ($user['foto'] === 'default.png' || !$user['foto'])
         </div>
     </main>
 
-    <!-- Modal: Galería de Avatares -->
-    <div class="modal fade" id="avatarGallery" tabindex="-1" aria-labelledby="avatarGalleryLabel" aria-hidden="true"
-         data-target-user-id="<?php echo (int) $user['id']; ?>">
-      <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content border-0 shadow">
-          <div class="modal-header">
-            <h5 class="modal-title fw-bold" id="avatarGalleryLabel">Elige tu Avatar del Juego</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <p class="text-muted small mb-3">La galería se genera al abrir esta ventana (petición al backend). Puedes pedir otra tanda sin cerrar.</p>
-            <div id="avatarGalleryStatus" class="small text-muted mb-2" aria-live="polite"></div>
-            <div class="row g-3 text-center" id="avatarGalleryGrid"></div>
-          </div>
-          <div class="modal-footer border-0 pt-0">
-            <button type="button" class="btn btn-outline-secondary btn-sm" id="refreshDicebearGalleryBtn">Otra tanda aleatoria</button>
-            <button type="button" class="btn btn-accent btn-sm" data-bs-dismiss="modal">Cerrar</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <script>
-        (function () {
-            // Resolve API from this page path (works with any vhost/docroot; BASE_URL alone often 404s).
-            function galleryRequestUrl() {
-                var modal = document.getElementById('avatarGallery');
-                var uid = modal ? modal.getAttribute('data-target-user-id') : '';
-                var u = new URL('../api/dicebear_gallery.php', window.location.href);
-                if (uid) {
-                    u.searchParams.set('user_id', uid);
-                }
-                return u.toString();
-            }
-
-            function renderGalleryItems(items) {
-                var grid = document.getElementById('avatarGalleryGrid');
-                if (!grid) return;
-                grid.innerHTML = '';
-                items.forEach(function (item) {
-                    var col = document.createElement('div');
-                    col.className = 'col-3 col-md-2';
-                    var wrap = document.createElement('div');
-                    wrap.className = 'avatar-option';
-                    wrap.setAttribute('role', 'button');
-                    wrap.tabIndex = 0;
-                    wrap.addEventListener('click', function () {
-                        window.pickAvatarFromTile(wrap);
-                    });
-                    var img = document.createElement('img');
-                    img.className = 'rounded-circle border w-100 dicebear-gallery-tile';
-                    img.style.cursor = 'pointer';
-                    img.style.aspectRatio = '1/1';
-                    img.alt = '';
-                    img.src = item.url;
-                    img.setAttribute('data-dicebear-style', item.style);
-                    var small = document.createElement('small');
-                    small.className = 'text-muted d-block mt-1';
-                    small.style.fontSize = '0.6rem';
-                    small.textContent = item.style;
-                    wrap.appendChild(img);
-                    wrap.appendChild(small);
-                    col.appendChild(wrap);
-                    grid.appendChild(col);
-                });
-            }
-
-            function loadDicebearGallery() {
-                var status = document.getElementById('avatarGalleryStatus');
-                if (status) status.textContent = 'Cargando galería…';
-                fetch(galleryRequestUrl(), {
-                    credentials: 'same-origin',
-                    headers: { Accept: 'application/json' },
-                    cache: 'no-store'
-                })
-                    .then(function (res) {
-                        return res.text().then(function (text) {
-                            var data;
-                            try {
-                                data = JSON.parse(text);
-                            } catch (e) {
-                                throw new Error('Respuesta no JSON (¿404 del servidor?). Primeros caracteres: ' + text.slice(0, 120));
-                            }
-                            if (!res.ok || !data.ok) {
-                                throw new Error((data && data.error) || ('HTTP ' + res.status));
-                            }
-                            if (!Array.isArray(data.items)) {
-                                throw new Error('Formato inesperado del servidor.');
-                            }
-                            return data.items;
-                        });
-                    })
-                    .then(function (items) {
-                        renderGalleryItems(items);
-                        if (status) status.textContent = '';
-                    })
-                    .catch(function (err) {
-                        console.error('[dicebear_gallery]', err);
-                        if (status) {
-                            status.textContent = err && err.message ? err.message : 'Error al cargar la galería.';
-                        }
-                    });
-            }
-
-            window.pickAvatarFromTile = function (tile) {
-                var img = tile.querySelector('img');
-                if (!img) return;
-                var url = img.currentSrc || img.src;
-                document.querySelector('.avatar-preview').src = url;
-                document.getElementById('selected_avatar').value = url;
-                document.querySelectorAll('.avatar-option img').forEach(function (im) {
-                    im.classList.remove('border-primary', 'border-3');
-                });
-                img.classList.add('border-primary', 'border-3');
-                var modalEl = document.getElementById('avatarGallery');
-                if (modalEl && typeof bootstrap !== 'undefined') {
-                    var instance = bootstrap.Modal.getInstance(modalEl);
-                    if (instance) instance.hide();
-                }
-            };
-
-            document.addEventListener('DOMContentLoaded', function () {
-                var modalEl = document.getElementById('avatarGallery');
-                var openBtn = document.getElementById('openAvatarGalleryBtn');
-                if (openBtn && modalEl) {
-                    openBtn.addEventListener('click', function (e) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        if (typeof bootstrap === 'undefined') {
-                            console.error('Bootstrap no está cargado (revisa includes/foot.php o la red).');
-                            return;
-                        }
-                        bootstrap.Modal.getOrCreateInstance(modalEl).show();
-                    });
-                }
-                if (modalEl) {
-                    modalEl.addEventListener('shown.bs.modal', function () {
-                        loadDicebearGallery();
-                    });
-                }
-                var regenBtn = document.getElementById('refreshDicebearGalleryBtn');
-                if (regenBtn) {
-                    regenBtn.addEventListener('click', function (e) {
-                        e.preventDefault();
-                        loadDicebearGallery();
-                    });
-                }
+        window.pickAvatarFromTile = function (tile) {
+            var img = tile.querySelector('img');
+            if (!img) return;
+            var url = img.currentSrc || img.src;
+            document.querySelector('.avatar-preview').src = url;
+            document.getElementById('selected_avatar').value = url;
+            document.querySelectorAll('.avatar-option img').forEach(function (im) {
+                im.classList.remove('border-primary', 'border-3');
             });
-        })();
+            img.classList.add('border-primary', 'border-3');
+        };
     </script>
 
     <?php include '../includes/foot.php'; ?>
