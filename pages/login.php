@@ -42,7 +42,8 @@ $pageTitle = 'Iniciar Sesión';
                         <div class="alert alert-danger py-2 text-center" role="alert">
                             <?php
                             echo match ($_GET['error']) {
-                                'invalid_credentials' => 'Usuario o contraseña incorrectos.',
+                                'invalid_credentials' => 'Correo o contraseña incorrectos.',
+                                'invalid_email' => 'Introduce un correo electrónico válido.',
                                 'missing_fields' => 'Por favor, rellena todos los campos.',
                                 'unauthorized' => 'Debes iniciar sesión para acceder.',
                                 default => 'Ha ocurrido un error en el sistema.'
@@ -54,12 +55,16 @@ $pageTitle = 'Iniciar Sesión';
                     <form action="../processes/login.proc.php" method="POST">
                         <div class="mb-3">
                             <label for="username" class="form-label">Usuario</label>
-                            <input type="text" name="username" id="username" class="form-control" required autofocus>
+                            <input type="email" name="username" id="username" class="form-control" required autofocus
+                                autocomplete="email" inputmode="email"
+                                placeholder="ejemplo@correo.com">
                         </div>
                         <div class="mb-4">
                             <label for="password" class="form-label">Contraseña</label>
                             <div class="input-group">
-                                <input type="password" name="password" id="password" class="form-control password-placeholder" required>
+                                <input type="password" name="password" id="password" class="form-control password-placeholder" required
+                                    minlength="6" autocomplete="current-password"
+                                    placeholder="Mínimo 6 caracteres">
                                 <button type="button" class="btn password-toggle-btn px-2" data-password-toggle="#password" aria-label="Mostrar contraseña">
                                     <i class="bi bi-eye-fill"></i>
                                 </button>

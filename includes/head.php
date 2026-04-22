@@ -5,6 +5,9 @@ require_once dirname(__DIR__) . '/config/globals.php';
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title><?php echo htmlspecialchars($pageTitle ?? 'Inicio'); ?> | CLIKA</title>
 
+<!-- Favicon: BASE_URL keeps correct path under subfolders (e.g. htdocs/CLICKA/...) -->
+<link rel="icon" type="image/png" href="<?php echo BASE_URL; ?>/assets/images/social_media/favicon_clicka.png">
+
 <!-- Bootstrap 5 CSS -->
 <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"

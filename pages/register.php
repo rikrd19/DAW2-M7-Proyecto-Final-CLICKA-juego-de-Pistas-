@@ -15,15 +15,33 @@ $pageTitle = 'Registro de Usuario';
     <div class="container mt-5" style="max-width: 500px;">
         <div class="card shadow-sm border-0 p-4">
             <h2 class="fw-bold text-center mb-4">Nuevo Usuario</h2>
+            <?php if (isset($_GET['error'])): ?>
+                <div class="alert alert-danger py-2 small" role="alert">
+                    <?php
+                    echo match ($_GET['error']) {
+                        'invalid_email' => 'Introduce un correo electrónico válido.',
+                        'weak_password' => 'La contraseña debe tener al menos 6 caracteres.',
+                        'missing_fields' => 'Por favor, rellena todos los campos.',
+                        'already_exists' => 'Ya existe una cuenta con ese correo.',
+                        'db_error' => 'No se pudo crear la cuenta. Inténtalo de nuevo.',
+                        default => 'Ha ocurrido un error.',
+                    };
+                    ?>
+                </div>
+            <?php endif; ?>
             <form action="../processes/register.proc.php" method="POST">
                 <div class="mb-3">
                     <label class="form-label fw-bold">Usuario</label>
-                    <input type="text" name="username" class="form-control" required>
+                    <input type="email" name="username" class="form-control" required
+                        autocomplete="email" inputmode="email"
+                        placeholder="ejemplo@correo.com">
                 </div>
                 <div class="mb-3">
                     <label class="form-label fw-bold">Contraseña</label>
                     <div class="input-group">
-                        <input type="password" name="password" id="registerPassword" class="form-control password-placeholder" required>
+                        <input type="password" name="password" id="registerPassword" class="form-control password-placeholder" required
+                            minlength="6" autocomplete="new-password"
+                            placeholder="Mínimo 6 caracteres">
                         <button type="button" class="btn password-toggle-btn px-2" data-password-toggle="#registerPassword" aria-label="Mostrar contraseña">
                             <i class="bi bi-eye-fill"></i>
                         </button>
