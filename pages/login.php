@@ -58,7 +58,12 @@ $pageTitle = 'Iniciar Sesión';
                         </div>
                         <div class="mb-4">
                             <label for="password" class="form-label">Contraseña</label>
-                            <input type="password" name="password" id="password" class="form-control" required>
+                            <div class="input-group">
+                                <input type="password" name="password" id="password" class="form-control password-placeholder" required>
+                                <button type="button" class="btn password-toggle-btn px-2" data-password-toggle="#password" aria-label="Mostrar contraseña">
+                                    <i class="bi bi-eye-fill"></i>
+                                </button>
+                            </div>
                         </div>
                         <button type="submit" class="btn btn-accent w-100 py-2 fw-bold">
                             Entrar

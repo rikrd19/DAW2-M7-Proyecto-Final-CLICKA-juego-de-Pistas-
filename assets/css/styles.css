@@ -1,5 +1,5 @@
 /* ============================================================
-   CLIKA – Paleta "Warm White & Pastel Orange"
+   CLICKA – Paleta "Warm White & Pastel Orange"
    ============================================================ */
 :root {
   /* Colores */
@@ -131,6 +131,22 @@ button.avatar-dicebear-more:focus-visible {
 .text-accent  { color: var(--clika-accent)  !important; }
 .text-primary { color: var(--clika-primary) !important; }
 .text-muted   { color: var(--clika-muted)   !important; }
+
+/* Reusable password visibility toggle (login/register/profile). */
+.password-toggle-btn {
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: var(--clika-text);
+}
+.password-toggle-btn:focus {
+  box-shadow: none !important;
+  outline: none;
+}
+.password-placeholder::placeholder {
+  color: #adb5bd;
+  opacity: 1;
+}
 
 /* ── Botones ─────────────────────────────────────────────── */
 .btn-primary {
@@ -335,89 +351,6 @@ footer a {
   text-decoration: none;
 }
 footer a:hover { text-decoration: underline; }
-
-/* ── Game screen ─────────────────────────────────────────── */
-
-/* Points badge in game header */
-.punts-badge {
-  background: var(--clika-surface);
-  border: 1.5px solid var(--clika-border-strong);
-  color: var(--clika-primary);
-  font-family: var(--font-heading);
-  font-weight: 700;
-  border-radius: 50px;
-}
-
-/* Clue cards */
-.pista-card {
-  background: var(--clika-card-bg);
-  border: 1.5px solid var(--clika-border);
-  border-radius: 14px;
-  padding: 1.1rem 1.4rem;
-  margin-bottom: .75rem;
-  box-shadow: 0 2px 10px var(--clika-shadow-dark);
-  animation: pista-in .3s ease;
-}
-
-.pista-card.pista-visible  { border-color: var(--clika-border-strong); }
-.pista-card.pista-oculta   { border-color: rgba(255,140,87,.2); background: #fffaf7; }
-.pista-card.pista-extra    { border-color: rgba(255,140,87,.4); background: #fff4ec; }
-
-.pista-num {
-  display: inline-block;
-  font-size: .7rem;
-  font-weight: 700;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: var(--clika-primary);
-  margin-bottom: .4rem;
-}
-
-@keyframes pista-in {
-  from { opacity: 0; transform: translateY(-6px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-/* Feedback box */
-.feedback-box {
-  padding: .85rem 1.2rem;
-  border-radius: 10px;
-  font-weight: 600;
-  margin-bottom: 1rem;
-}
-
-.feedback-error   { background: #fff0f0; border: 1.5px solid #f8b4b4; color: #c0392b; }
-.feedback-correct { background: #f0fff4; border: 1.5px solid #9ae6b4; color: #276749; }
-
-/* Result box */
-.resultat-box {
-  padding: 1.25rem 1.4rem;
-  border-radius: 14px;
-  margin-top: .5rem;
-  animation: pista-in .25s ease;
-}
-
-.resultat-correct { background: #f0fff4; border: 2px solid #9ae6b4; color: #276749; }
-.resultat-error   { background: #fff0f0; border: 2px solid #f8b4b4; color: #c0392b; }
-
-/* End-of-game card */
-.fi-partida-card {
-  max-width: 420px;
-  background: var(--clika-card-bg);
-  border: 1.5px solid var(--clika-border-strong);
-  border-radius: 22px;
-  padding: 2.5rem 2rem;
-  box-shadow: 0 8px 32px var(--clika-shadow-dark);
-  text-align: center;
-}
-
-.punts-finals-num {
-  font-family: var(--font-heading);
-  font-size: 3.5rem;
-  font-weight: 800;
-  color: var(--clika-primary);
-  line-height: 1;
-}
 
 /* ── Responsive ─────────────────────────────────────────── */
 @media (max-width: 575px) {
