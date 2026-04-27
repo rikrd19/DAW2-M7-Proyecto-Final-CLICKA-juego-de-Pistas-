@@ -1,13 +1,14 @@
 <?php
 
 /**
- * Save a completed game round to the partidas table.
+ * Game rounds (partidas) API.
  *
- * POST JSON body:
- *   { "puntos": <int>, "tema": "<string>", "usuario_id": <int|null>, "nombre_temporal": "<string|null>" }
+ * GET  → returns top-10 rows for the ranking page.
+ *        Response: [ { id, usuario_id, nombre, puntos, tema, fecha }, … ]
  *
- * Response:
- *   { "id": <int>, "puntos": <int> }
+ * POST → saves a completed round.
+ *        Body: { "puntos": <int>, "tema": "<string>", "usuario_id": <int|null>, "nombre_temporal": "<string|null>" }
+ *        Response: { "id": <int>, "puntos": <int> }
  */
 
 declare(strict_types=1);
@@ -15,7 +16,49 @@ ini_set('display_errors', '0');
 
 header('Content-Type: application/json; charset=utf-8');
 
-if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
+$method = $_SERVER['REQUEST_METHOD'] ?? '';
+
+/* ── GET: top-10 ranking ───────────────────────────────────── */
+if ($method === 'GET') {
+    require_once dirname(__DIR__) . '/includes/db.php';
+    try {
+        $result = $db->query(
+            "SELECT p.id,
+                    p.usuario_id,
+                    COALESCE(u.username, p.nombre_temporal, 'Anónimo') AS nombre,
+                    p.puntos,
+                    p.tema,
+                    p.fecha
+             FROM   partidas p
+             LEFT JOIN usuarios u ON p.usuario_id = u.id
+             ORDER  BY p.puntos DESC, p.fecha ASC
+             LIMIT  10"
+        );
+        $rows = [];
+        while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+            $rows[] = [
+                'id'         => (int) $row['id'],
+                'usuario_id' => $row['usuario_id'] !== null ? (int) $row['usuario_id'] : null,
+                'nombre'     => $row['nombre'],
+                'puntos'     => (int) $row['puntos'],
+                'tema'       => $row['tema'],
+                'fecha'      => $row['fecha'],
+            ];
+        }
+        echo json_encode($rows, JSON_UNESCAPED_UNICODE);
+    } catch (Throwable) {
+        http_response_code(500);
+        echo json_encode(['error' => 'Internal server error'], JSON_UNESCAPED_UNICODE);
+    } finally {
+        if (isset($db) && $db instanceof SQLite3) {
+            $db->close();
+        }
+    }
+    exit;
+}
+
+/* ── POST: save round ──────────────────────────────────────── */
+if ($method !== 'POST') {
     http_response_code(405);
     echo json_encode(['error' => 'Method not allowed'], JSON_UNESCAPED_UNICODE);
     exit;
