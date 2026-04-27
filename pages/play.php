@@ -170,6 +170,9 @@ if (is_file($dbPath)) {
 
   </main>
 
+  <script>
+    const USUARI_ID = <?php echo is_logged_in() ? (int) $_SESSION['usuari_id'] : 'null'; ?>;
+  </script>
   <script src="../assets/js/joc.js"></script>
 
   <?php include '../includes/foot.php'; ?>
