@@ -67,6 +67,23 @@ if (is_file($dbPath)) {
             </button>
           </div>
           <?php endforeach; ?>
+
+          <!-- Temática especial: Banderas del Mundo -->
+          <div class="col-10 col-sm-6 col-md-4 col-lg-3">
+            <a
+              href="<?php echo BASE_URL; ?>/pages/banderes.php"
+              class="card tema-card h-100 border-0 w-100 text-decoration-none p-0"
+            >
+              <div class="card-body d-flex flex-column align-items-center text-center py-4 px-3">
+                <div class="tema-icon-wrap mb-3">
+                  <span class="tema-icon" aria-hidden="true">&#127988;</span>
+                </div>
+                <h2 class="card-title h5 mb-2">Banderas del Mundo</h2>
+                <span class="btn btn-primary w-100 mt-3">Jugar</span>
+              </div>
+            </a>
+          </div>
+
         </div>
       <?php endif; ?>
     </section>

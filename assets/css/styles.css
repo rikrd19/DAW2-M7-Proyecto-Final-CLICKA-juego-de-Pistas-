@@ -452,6 +452,17 @@ footer a:hover { text-decoration: underline; }
   line-height: 1;
 }
 
+/* ── Banderas ────────────────────────────────────────────── */
+.bandera-img {
+  max-width: 240px;
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, .08);
+  box-shadow: 0 3px 14px rgba(44, 44, 62, .13);
+  display: block;
+  margin: .5rem auto 0;
+}
+
 /* ── Ranking ─────────────────────────────────────────────── */
 .ranking-table-container {
   background: var(--clika-card-bg);
