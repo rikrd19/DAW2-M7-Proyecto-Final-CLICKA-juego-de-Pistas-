@@ -352,10 +352,112 @@ footer a {
 }
 footer a:hover { text-decoration: underline; }
 
+/* ── Pantalla de juego ───────────────────────────────────── */
+
+/* Pistas */
+.pista-card {
+  background: var(--clika-card-bg);
+  border: 1.5px solid var(--clika-border);
+  border-radius: 14px;
+  padding: 1rem 1.25rem;
+  margin-bottom: .75rem;
+  box-shadow: 0 2px 10px var(--clika-shadow-dark);
+  transition: opacity .3s, transform .3s;
+}
+
+.pista-card.pista-visible {
+  border-color: var(--clika-border-strong);
+  background: var(--clika-surface);
+}
+
+.pista-card.pista-oculta {
+  opacity: .55;
+}
+
+.pista-card.pista-extra {
+  border-color: rgba(255, 140, 87, .45);
+  background: #fff8f3;
+}
+
+.pista-num {
+  display: inline-block;
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+  color: var(--clika-primary);
+  margin-bottom: .35rem;
+}
+
+/* Feedback (incorrecto / error) */
+.feedback-box {
+  padding: .85rem 1.1rem;
+  border-radius: 11px;
+  font-weight: 600;
+  font-size: .95rem;
+  margin-bottom: .75rem;
+  border: 1.5px solid transparent;
+}
+
+.feedback-error {
+  background: #fff1f0;
+  border-color: #ffccc7;
+  color: #cf1322;
+}
+
+/* Resultado de la pregunta */
+.resultat-box {
+  padding: 1.1rem 1.25rem;
+  border-radius: 14px;
+  border: 1.5px solid transparent;
+  margin-top: .5rem;
+}
+
+.resultat-correct {
+  background: #f6ffed;
+  border-color: #b7eb8f;
+  color: #237804;
+}
+
+.resultat-error {
+  background: #fff1f0;
+  border-color: #ffccc7;
+  color: #cf1322;
+}
+
+/* Badge de puntuación */
+.punts-badge {
+  background: linear-gradient(135deg, var(--clika-primary), var(--clika-accent));
+  color: #fff;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  border-radius: 50px;
+}
+
+/* Pantalla de fin de partida */
+.fi-partida-card {
+  background: var(--clika-card-bg);
+  border: 1.5px solid var(--clika-border);
+  border-radius: 22px;
+  padding: 2.5rem 2rem;
+  max-width: 420px;
+  box-shadow: 0 6px 32px var(--clika-shadow-dark);
+}
+
+.punts-finals-num {
+  font-family: var(--font-heading);
+  font-size: 4rem;
+  font-weight: 800;
+  color: var(--clika-primary);
+  line-height: 1;
+}
+
 /* ── Responsive ─────────────────────────────────────────── */
 @media (max-width: 575px) {
-  .tema-card     { border-radius: 13px; }
-  .tema-icon     { font-size: 1.8rem; }
+  .tema-card      { border-radius: 13px; }
+  .tema-icon      { font-size: 1.8rem; }
   .tema-icon-wrap { width: 56px; height: 56px; border-radius: 14px; }
-  .hero-section  { padding: 3.5rem 0 2rem; }
+  .hero-section   { padding: 3.5rem 0 2rem; }
+  .fi-partida-card { padding: 1.75rem 1.25rem; }
+  .punts-finals-num { font-size: 3rem; }
 }

@@ -76,11 +76,14 @@ async function carregarPregunta(tema_id) {
     feedbackEl.className   = 'feedback-box';
     resultatEl.hidden      = true;
 
-    // Hide non-first pistas
+    // Hide non-first pistas and reset classes
     pista2El.hidden        = true;
     pista3El.hidden        = true;
     pistaExtraEl.hidden    = true;
     pista1El.className     = 'pista-card pista-visible';
+    pista2El.className     = 'pista-card pista-oculta';
+    pista3El.className     = 'pista-card pista-oculta';
+    pistaExtraEl.className = 'pista-card pista-extra';
 
     btnSeguентPista.hidden = false;
 
@@ -128,10 +131,13 @@ btnSeguентPista.addEventListener('click', () => {
 
     if (pistesVistes === 2) {
         pista2El.hidden = false;
+        pista2El.classList.replace('pista-oculta', 'pista-visible');
     } else if (pistesVistes === 3) {
         pista3El.hidden = false;
+        pista3El.classList.replace('pista-oculta', 'pista-visible');
     } else if (pistesVistes === 4) {
         pistaExtraEl.hidden = false;
+        pistaExtraEl.classList.replace('pista-extra', 'pista-visible');
     }
 
     if (pistesVistes >= maxPistes) {
@@ -247,7 +253,7 @@ async function acabarPartida() {
             body:    JSON.stringify({
                 puntos:          puntsPartida,
                 tema:            temaNom,
-                usuario_id:      null,
+                usuario_id:      (typeof USUARI_ID !== 'undefined' ? USUARI_ID : null),
                 nombre_temporal: null,
             }),
         });
