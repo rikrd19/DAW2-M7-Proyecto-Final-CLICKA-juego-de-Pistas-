@@ -67,6 +67,23 @@ if (is_file($dbPath)) {
             </button>
           </div>
           <?php endforeach; ?>
+
+          <!-- Temática especial: Banderas del Mundo -->
+          <div class="col-10 col-sm-6 col-md-4 col-lg-3">
+            <a
+              href="<?php echo BASE_URL; ?>/pages/banderes.php"
+              class="card tema-card h-100 border-0 w-100 text-decoration-none p-0"
+            >
+              <div class="card-body d-flex flex-column align-items-center text-center py-4 px-3">
+                <div class="tema-icon-wrap mb-3">
+                  <span class="tema-icon" aria-hidden="true">&#127988;</span>
+                </div>
+                <h2 class="card-title h5 mb-2">Banderas del Mundo</h2>
+                <span class="btn btn-primary w-100 mt-3">Jugar</span>
+              </div>
+            </a>
+          </div>
+
         </div>
       <?php endif; ?>
     </section>
@@ -84,24 +101,61 @@ if (is_file($dbPath)) {
         </span>
       </div>
 
-      <!-- Pistas -->
-      <div id="pistas-container" class="mb-4">
-        <div class="pista-card pista-visible" id="pista-1">
-          <span class="pista-num">Pista 1</span>
-          <p id="pista-1-text" class="mb-0"></p>
+      <!-- Pistas: 3D card deck -->
+      <div id="pistas-container" class="cartes-container mb-2">
+
+        <div class="carta" id="pista-1" title="Pista 1">
+          <div class="carta-inner">
+            <div class="carta-back">
+              <span class="carta-back-label">Pista 1</span>
+              <span class="carta-back-icon">?</span>
+            </div>
+            <div class="carta-front">
+              <span class="carta-num-badge">Pista 1</span>
+              <p id="pista-1-text" class="carta-text"></p>
+            </div>
+          </div>
         </div>
-        <div class="pista-card pista-oculta" id="pista-2" hidden>
-          <span class="pista-num">Pista 2</span>
-          <p id="pista-2-text" class="mb-0"></p>
+
+        <div class="carta" id="pista-2" title="Haz clic para revelar la pista 2">
+          <div class="carta-inner">
+            <div class="carta-back">
+              <span class="carta-back-label">Pista 2</span>
+              <span class="carta-back-icon">?</span>
+            </div>
+            <div class="carta-front">
+              <span class="carta-num-badge">Pista 2</span>
+              <p id="pista-2-text" class="carta-text"></p>
+            </div>
+          </div>
         </div>
-        <div class="pista-card pista-oculta" id="pista-3" hidden>
-          <span class="pista-num">Pista 3</span>
-          <p id="pista-3-text" class="mb-0"></p>
+
+        <div class="carta" id="pista-3" title="Haz clic para revelar la pista 3">
+          <div class="carta-inner">
+            <div class="carta-back">
+              <span class="carta-back-label">Pista 3</span>
+              <span class="carta-back-icon">?</span>
+            </div>
+            <div class="carta-front">
+              <span class="carta-num-badge">Pista 3</span>
+              <p id="pista-3-text" class="carta-text"></p>
+            </div>
+          </div>
         </div>
-        <div class="pista-card pista-extra" id="pista-extra" hidden>
-          <span class="pista-num">Pista extra</span>
-          <p id="pista-extra-text" class="mb-0"></p>
+
+        <div class="carta carta-extra" id="pista-extra" title="Haz clic para revelar la pista extra">
+          <div class="carta-inner">
+            <div class="carta-back">
+              <span class="carta-back-label">Extra</span>
+              <span class="carta-back-icon">&#9733;</span>
+            </div>
+            <div class="carta-front">
+              <span class="carta-num-badge">Pista Extra</span>
+              <p id="pista-extra-text" class="carta-text"></p>
+            </div>
+          </div>
         </div>
+
       </div>
 
       <!-- Contador de pistas -->

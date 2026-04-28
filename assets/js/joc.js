@@ -10,14 +10,19 @@ const fiPartida        = document.getElementById('fi-partida');
 
 const preguntaNumEl    = document.getElementById('pregunta-num');
 const puntsEl          = document.getElementById('punts-total');
-const pista1El         = document.getElementById('pista-1');
-const pista2El         = document.getElementById('pista-2');
-const pista3El         = document.getElementById('pista-3');
-const pistaExtraEl     = document.getElementById('pista-extra');
-const pista1Text       = document.getElementById('pista-1-text');
-const pista2Text       = document.getElementById('pista-2-text');
-const pista3Text       = document.getElementById('pista-3-text');
-const pistaExtraText   = document.getElementById('pista-extra-text');
+
+// Card elements
+const pistesContainerEl = document.getElementById('pistas-container');
+const pista1El          = document.getElementById('pista-1');
+const pista2El          = document.getElementById('pista-2');
+const pista3El          = document.getElementById('pista-3');
+const pistaExtraEl      = document.getElementById('pista-extra');
+
+// Text content inside card fronts
+const pista1Text        = document.getElementById('pista-1-text');
+const pista2Text        = document.getElementById('pista-2-text');
+const pista3Text        = document.getElementById('pista-3-text');
+const pistaExtraText    = document.getElementById('pista-extra-text');
 
 const pistesNumEl      = document.getElementById('pistes-num');
 const pistesMaxEl      = document.getElementById('pistes-max');
@@ -34,14 +39,43 @@ const puntsFinalsEl    = document.getElementById('punts-finals');
 const btnTornar        = document.getElementById('btn-tornar');
 
 /* ── State ──────────────────────────────────────────────────── */
-let temaId        = null;
-let temaNom       = '';
-let preguntaActual = null;
-let numPregunta   = 0;
-let pistesVistes  = 1;   // clue counter: 1 = only pista1 shown
-let maxPistes     = 3;   // 3 or 4 depending on pista_extra
-let puntsPartida  = 0;   // accumulated score for the round
+let temaId          = null;
+let temaNom         = '';
+let preguntaActual  = null;
+let numPregunta     = 0;
+let pistesVistes    = 1;   // clue counter: 1 = only pista1 revealed
+let maxPistes       = 3;   // 3 or 4 depending on pista_extra
+let puntsPartida    = 0;   // accumulated score for the round
 let respostaEnviada = false;
+
+/* ── Card reveal helper ─────────────────────────────────────── */
+function revelarCarta(el) {
+    el.classList.add('revelada');
+}
+
+/**
+ * Reset all cards to face-down instantly (no flip animation).
+ * Does NOT auto-flip pista 1 — callers do that after content is ready.
+ */
+function resetCartes() {
+    pistesContainerEl.classList.add('no-transition');
+    pista1El.classList.remove('revelada');
+    pista2El.classList.remove('revelada');
+    pista3El.classList.remove('revelada');
+    pistaExtraEl.classList.remove('revelada');
+    // Force reflow so the transition-disable is committed before we re-enable it
+    void pistesContainerEl.offsetWidth;
+    pistesContainerEl.classList.remove('no-transition');
+}
+
+/* ── Click on a face-down card → trigger next reveal ───────── */
+[pista2El, pista3El, pistaExtraEl].forEach(card => {
+    card.addEventListener('click', () => {
+        if (!card.classList.contains('revelada') && !btnSeguентPista.hidden) {
+            btnSeguентPista.click();
+        }
+    });
+});
 
 /* ── Theme selection ────────────────────────────────────────── */
 document.querySelectorAll('.btn-tema').forEach(btn => {
@@ -66,60 +100,62 @@ async function carregarPregunta(tema_id) {
     respostaEnviada = false;
     pistesVistes    = 1;
 
-    // Reset UI
+    // ── 1. Fetch first ───────────────────────────────────────
+    let q;
+    try {
+        const resp = await fetch(`../api/questions.php?tema_id=${tema_id}`);
+        if (!resp.ok) throw new Error('HTTP ' + resp.status);
+        q = await resp.json();
+        if (q.error) throw new Error(q.error);
+    } catch (err) {
+        mostrarFeedback('error', `Error al cargar la pregunta: ${err.message}. Recarga la página.`);
+        btnComprovar.disabled  = true;
+        btnSeguентPista.hidden = true;
+        return;
+    }
+
+    // ── 2. All UI work synchronously once data is ready ──────
+    //    (same pattern as banderes.js: reset + content + rAF flip in one block)
+    preguntaActual = q;
+    numPregunta++;
+
+    // Controls
     respostaInput.value    = '';
     respostaInput.disabled = false;
     btnComprovar.disabled  = false;
     btnComprovar.hidden    = false;
-
     feedbackEl.hidden      = true;
     feedbackEl.className   = 'feedback-box';
     resultatEl.hidden      = true;
-
-    // Hide non-first pistas and reset classes
-    pista2El.hidden        = true;
-    pista3El.hidden        = true;
-    pistaExtraEl.hidden    = true;
-    pista1El.className     = 'pista-card pista-visible';
-    pista2El.className     = 'pista-card pista-oculta';
-    pista3El.className     = 'pista-card pista-oculta';
-    pistaExtraEl.className = 'pista-card pista-extra';
-
     btnSeguентPista.hidden = false;
 
-    numPregunta++;
     preguntaNumEl.textContent = `Pregunta ${numPregunta}/${TOTAL_PREGUNTES}`;
     puntsEl.textContent       = `${puntsPartida}`;
 
-    try {
-        const resp = await fetch(`../api/questions.php?tema_id=${tema_id}`);
-        if (!resp.ok) throw new Error('HTTP ' + resp.status);
-        const q = await resp.json();
+    // Card content
+    pista1Text.textContent = q.pista1;
+    pista2Text.textContent = q.pista2;
+    pista3Text.textContent = q.pista3;
 
-        if (q.error) throw new Error(q.error);
-
-        preguntaActual = q;
-
-        pista1Text.textContent = q.pista1;
-        pista2Text.textContent = q.pista2;
-        pista3Text.textContent = q.pista3;
-
-        if (q.pista_extra && q.pista_extra.trim() !== '') {
-            pistaExtraText.textContent = q.pista_extra;
-            maxPistes = 4;
-        } else {
-            maxPistes = 3;
-        }
-
-        pistesMaxEl.textContent = maxPistes;
-        pistesNumEl.textContent = '1';
-
-        respostaInput.focus();
-    } catch (err) {
-        mostrarFeedback('error', `Error al cargar la pregunta: ${err.message}. Recarga la página.`);
-        btnComprovar.disabled     = true;
-        btnSeguентPista.hidden    = true;
+    pistaExtraEl.classList.remove('carta-bloqueada');
+    if (q.pista_extra && q.pista_extra.trim() !== '') {
+        pistaExtraText.textContent = q.pista_extra;
+        maxPistes = 4;
+    } else {
+        pistaExtraEl.classList.add('carta-bloqueada');
+        maxPistes = 3;
     }
+
+    pistesMaxEl.textContent = maxPistes;
+    pistesNumEl.textContent = '1';
+
+    // Reset to face-down in this task, then flip pista-1 in the NEXT task.
+    // setTimeout(0) guarantees the browser renders the reset state before
+    // the reveal, so the CSS flip transition/animation actually fires.
+    resetCartes();
+    setTimeout(() => revelarCarta(pista1El), 0);
+
+    respostaInput.focus();
 }
 
 /* ── Ver siguiente pista ────────────────────────────────────── */
@@ -130,14 +166,11 @@ btnSeguентPista.addEventListener('click', () => {
     pistesNumEl.textContent = pistesVistes;
 
     if (pistesVistes === 2) {
-        pista2El.hidden = false;
-        pista2El.classList.replace('pista-oculta', 'pista-visible');
+        revelarCarta(pista2El);
     } else if (pistesVistes === 3) {
-        pista3El.hidden = false;
-        pista3El.classList.replace('pista-oculta', 'pista-visible');
+        revelarCarta(pista3El);
     } else if (pistesVistes === 4) {
-        pistaExtraEl.hidden = false;
-        pistaExtraEl.classList.replace('pista-extra', 'pista-visible');
+        revelarCarta(pistaExtraEl);
     }
 
     if (pistesVistes >= maxPistes) {
@@ -183,17 +216,15 @@ async function comprovarResposta() {
             mostrarResultat(true, result.puntos);
         } else {
             if (pistesVistes >= maxPistes) {
-                // All clues exhausted and still wrong → 0 points, move on
                 respostaEnviada = true;
                 mostrarResultat(false, 0);
             } else {
-                // Clues still available: soft error, let user try again
-                mostrarFeedback('error', 'Incorrecto. Inténtalo de nuevo o pide otra pista.');
+                mostrarFeedback('error', 'Incorrecto. Inténtalo de nuevo o revela otra carta.');
                 btnComprovar.disabled = false;
                 respostaInput.select();
             }
         }
-    } catch (err) {
+    } catch (_) {
         mostrarFeedback('error', 'Error al comprobar la respuesta. Inténtalo de nuevo.');
         btnComprovar.disabled = false;
     }
@@ -221,12 +252,9 @@ function mostrarResultat(correct, punts) {
         resultatEl.className     = 'resultat-box resultat-error';
     }
 
-    // Change button label on last question
-    if (numPregunta >= TOTAL_PREGUNTES) {
-        btnSegurentPregunta.textContent = 'Ver resultados';
-    } else {
-        btnSegurentPregunta.textContent = 'Siguiente pregunta →';
-    }
+    btnSegurentPregunta.textContent = numPregunta >= TOTAL_PREGUNTES
+        ? 'Ver resultados'
+        : 'Siguiente pregunta →';
 
     resultatEl.hidden = false;
 }
@@ -242,8 +270,8 @@ btnSegurentPregunta.addEventListener('click', async () => {
 
 /* ── Fin de partida ─────────────────────────────────────────── */
 async function acabarPartida() {
-    gameArea.hidden  = true;
-    fiPartida.hidden = false;
+    gameArea.hidden           = true;
+    fiPartida.hidden          = false;
     puntsFinalsEl.textContent = puntsPartida;
 
     try {
@@ -253,12 +281,11 @@ async function acabarPartida() {
             body:    JSON.stringify({
                 puntos:          puntsPartida,
                 tema:            temaNom,
-                usuario_id:      (typeof USUARI_ID !== 'undefined' ? USUARI_ID : null),
                 nombre_temporal: null,
             }),
         });
     } catch (_) {
-        // Silently ignore save errors — the game is still over
+        // Silently ignore — the game is still over
     }
 }
 
