@@ -3,7 +3,7 @@
 /**
  * Game rounds (partidas) API.
  *
- * GET  → returns top-10 rows for the ranking page.
+ * GET  → returns ranking rows for registered users (one best score per user).
  *        Response: [ { id, usuario_id, nombre, puntos, tema, fecha }, … ]
  *
  * POST → saves a completed round.
@@ -18,21 +18,27 @@ header('Content-Type: application/json; charset=utf-8');
 
 $method = $_SERVER['REQUEST_METHOD'] ?? '';
 
-/* ── GET: top-10 ranking ───────────────────────────────────── */
+/* ── GET: ranking for registered users only (best score per user) ─────── */
 if ($method === 'GET') {
     require_once dirname(__DIR__) . '/includes/db.php';
     try {
         $result = $db->query(
             "SELECT p.id,
                     p.usuario_id,
-                    COALESCE(u.username, p.nombre_temporal, 'Anónimo') AS nombre,
+                    u.username AS nombre,
                     p.puntos,
                     p.tema,
                     p.fecha
-             FROM   partidas p
-             LEFT JOIN usuarios u ON p.usuario_id = u.id
-             ORDER  BY p.puntos DESC, p.fecha ASC
-             LIMIT  10"
+             FROM partidas p
+             INNER JOIN usuarios u ON u.id = p.usuario_id
+             WHERE p.id = (
+                 SELECT p2.id
+                 FROM partidas p2
+                 WHERE p2.usuario_id = p.usuario_id
+                 ORDER BY p2.puntos DESC, p2.fecha ASC, p2.id ASC
+                 LIMIT 1
+             )
+             ORDER BY p.puntos DESC, p.fecha ASC, p.id ASC"
         );
         $rows = [];
         while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
@@ -87,6 +93,25 @@ if ($tema === '') {
 // globals.php (loaded via db.php) already called session_start().
 $sessionUserId = isset($_SESSION['usuari_id']) ? (int) $_SESSION['usuari_id'] : null;
 
+// Defensive fallback: if usuari_id is missing but username exists in session,
+// resolve and restore usuari_id so scores are persisted for logged users.
+if ($sessionUserId === null && isset($_SESSION['username']) && is_string($_SESSION['username'])) {
+    $sessionUsername = strtolower(trim($_SESSION['username']));
+    if ($sessionUsername !== '') {
+        try {
+            $lookup = $db->prepare('SELECT id FROM usuarios WHERE LOWER(username) = :u LIMIT 1');
+            $lookup->bindValue(':u', $sessionUsername, SQLITE3_TEXT);
+            $found = $lookup->execute()->fetchArray(SQLITE3_ASSOC);
+            if ($found && isset($found['id'])) {
+                $sessionUserId = (int) $found['id'];
+                $_SESSION['usuari_id'] = $sessionUserId;
+            }
+        } catch (Throwable) {
+            // Keep guest path behavior if lookup fails.
+        }
+    }
+}
+
 /* ── Guest path: store in session for retroactive linking on login ── */
 if ($sessionUserId === null) {
     $_SESSION['last_score'] = [
@@ -94,7 +119,7 @@ if ($sessionUserId === null) {
         'tema'            => $tema,
         'nombre_temporal' => $nombreTemporal,
     ];
-    echo json_encode(['id' => null, 'puntos' => $puntos], JSON_UNESCAPED_UNICODE);
+    echo json_encode(['id' => null, 'puntos' => $puntos, 'saved_as_guest' => true], JSON_UNESCAPED_UNICODE);
     exit;
 }
 

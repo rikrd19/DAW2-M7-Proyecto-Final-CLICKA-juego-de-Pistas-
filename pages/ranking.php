@@ -23,8 +23,15 @@ $pageTitle = 'Ranking';
       <h1 class="h3 fw-bold" style="color:var(--clika-text)">
         <i class="bi bi-trophy-fill me-2" style="color:var(--clika-primary)"></i>Ranking
       </h1>
-      <p class="text-muted">Las 10 mejores partidas de todos los jugadores.</p>
+      <p class="text-muted">Ranking exclusivo para usuarios registrados (mejor puntuación por jugador).</p>
     </div>
+
+    <?php if (!is_logged_in()): ?>
+      <div class="alert alert-info d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-2 mb-4" role="alert">
+        <span>¿Jugaste como invitado? Regístrate para guardar tu progreso y aparecer en el ranking.</span>
+        <a href="<?php echo BASE_URL; ?>/pages/register.php" class="btn btn-sm btn-primary">Crear cuenta</a>
+      </div>
+    <?php endif; ?>
 
     <!-- Loading spinner -->
     <div id="ranking-loading" class="text-center py-5">
@@ -62,7 +69,7 @@ $pageTitle = 'Ranking';
       </div>
 
       <p class="text-muted small text-center mt-3">
-        Mostrando las 10 mejores puntuaciones de todos los tiempos.
+        Mostrando el ranking de usuarios registrados por mejor puntuación.
       </p>
     </div>
 

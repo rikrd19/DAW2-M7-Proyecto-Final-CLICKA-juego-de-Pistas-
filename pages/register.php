@@ -49,16 +49,9 @@ $pageTitle = 'Registro de Usuario';
                 </div>
                 <div class="mb-4">
                     <label class="form-label fw-bold">Rol</label>
-                    <?php if (is_admin()): ?>
-                        <select name="rol" class="form-select">
-                            <option value="jugador">Jugador</option>
-                            <option value="admin">Administrador</option>
-                        </select>
-                    <?php else: ?>
-                        <input type="hidden" name="rol" value="jugador">
-                        <input type="text" class="form-control bg-light" value="Jugador" disabled>
-                        <div class="form-text">El registro público crea cuentas de jugador.</div>
-                    <?php endif; ?>
+                    <input type="hidden" name="rol" value="jugador">
+                    <input type="text" class="form-control bg-light" value="Jugador" disabled>
+                    <div class="form-text">Las nuevas cuentas se crean como jugador.</div>
                 </div>
                 <button type="submit" class="btn btn-accent w-100 py-2 fw-bold">CREAR CUENTA</button>
             </form>

@@ -1,45 +1,64 @@
 <?php
 /**
  * Delete User Process.
- * Handles database record removal and associated file cleanup.
+ * Deletes related partidas rows, then the user row; removes local upload files only.
  */
 require_once dirname(__DIR__) . '/includes/db.php';
 require_once dirname(__DIR__) . '/includes/auth.php';
 
 check_admin();
 
-$targetId = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+$targetId = isset($_GET['id']) ? (int) $_GET['id'] : 0;
 
-// Security: Prevent self-deletion
-if ($targetId === $_SESSION['usuari_id']) {
-    header("Location: ../pages/users.php?error=self_delete");
+if ($targetId <= 0) {
+    header('Location: ../pages/users.php?error=invalid_user');
     exit;
 }
 
+if ($targetId === (int) ($_SESSION['usuari_id'] ?? 0)) {
+    header('Location: ../pages/users.php?error=self_delete');
+    exit;
+}
+
+$uploadsDir = dirname(__DIR__) . '/storage/uploads/';
+
 try {
-    // 1. Get user info for file cleanup
-    $stmt = $db->prepare("SELECT foto FROM usuarios WHERE id = :id");
+    $stmt = $db->prepare('SELECT foto FROM usuarios WHERE id = :id');
     $stmt->bindValue(':id', $targetId, SQLITE3_INTEGER);
     $user = $stmt->execute()->fetchArray(SQLITE3_ASSOC);
 
-    if ($user) {
-        // 2. Delete from database
-        $del = $db->prepare("DELETE FROM usuarios WHERE id = :id");
-        $del->bindValue(':id', $targetId, SQLITE3_INTEGER);
-        $del->execute();
+    if (!$user) {
+        header('Location: ../pages/users.php?error=not_found');
+        exit;
+    }
 
-        // 3. Delete photo from storage if not default
-        if ($user['foto'] !== 'default.png') {
-            $photoPath = dirname(__DIR__) . '/storage/uploads/' . $user['foto'];
-            if (file_exists($photoPath)) {
-                unlink($photoPath);
-            }
+    $db->exec('BEGIN IMMEDIATE');
+    $delParts = $db->prepare('DELETE FROM partidas WHERE usuario_id = :id');
+    $delParts->bindValue(':id', $targetId, SQLITE3_INTEGER);
+    $delParts->execute();
+
+    $delUser = $db->prepare('DELETE FROM usuarios WHERE id = :id');
+    $delUser->bindValue(':id', $targetId, SQLITE3_INTEGER);
+    $delUser->execute();
+    $db->exec('COMMIT');
+
+    $foto = $user['foto'] ?? 'default.png';
+    if ($foto !== 'default.png' && $foto !== '' && !str_starts_with((string) $foto, 'http')) {
+        $photoPath = $uploadsDir . basename((string) $foto);
+        if (is_file($photoPath)) {
+            unlink($photoPath);
         }
     }
 
-    header("Location: ../pages/users.php?msg=Usuario eliminado correctamente");
+    header('Location: ../pages/users.php');
     exit;
 } catch (Throwable $e) {
-    header("Location: ../pages/users.php?error=db_error");
+    error_log($e->getMessage());
+    try {
+        $db->exec('ROLLBACK');
+    } catch (Throwable $ignored) {
+        // Safe when no transaction is active.
+    }
+    header('Location: ../pages/users.php?error=db_error');
     exit;
 }

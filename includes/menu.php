@@ -30,17 +30,16 @@ $currentPage = basename($_SERVER['PHP_SELF']);
           <a class="nav-link nav-pill <?php echo ($currentPage === 'ranking.php') ? 'active' : ''; ?>"
             href="<?php echo BASE_URL; ?>/pages/ranking.php">Ranking</a>
         </li>
+        <?php if (!empty($_SESSION['usuari_id']) && $_SESSION['rol'] === 'admin'): ?>
+          <li class="nav-item">
+            <a class="nav-link nav-pill fw-bold <?php echo in_array($currentPage, ['admin_config.php', 'users.php', 'themes.php', 'questions.php'], true) ? 'active' : ''; ?>"
+              href="<?php echo BASE_URL; ?>/pages/admin_config.php">Panel Admin</a>
+          </li>
+        <?php endif; ?>
       </ul>
 
       <ul class="navbar-nav ms-auto align-items-center gap-2">
         <?php if (!empty($_SESSION['usuari_id'])): ?>
-          <?php if ($_SESSION['rol'] === 'admin'): ?>
-            <li class="nav-item">
-              <a class="nav-link nav-pill fw-bold <?php echo ($currentPage === 'admin_config.php' || $currentPage === 'users.php') ? 'active' : ''; ?>"
-                href="<?php echo BASE_URL; ?>/pages/admin_config.php">Panel Admin</a>
-            </li>
-          <?php endif; ?>
-
           <li class="nav-item ms-lg-3">
             <a class="d-flex align-items-center text-decoration-none" href="<?php echo BASE_URL; ?>/pages/profile.php">
               <?php
