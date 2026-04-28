@@ -2,7 +2,7 @@
 
 /* ── Constants ──────────────────────────────────────────────── */
 const TOTAL_PREGUNTES = 5;
-const API_URL = 'https://restcountries.com/v3.1/all?fields=name,flags,cca2,capital,region,population';
+const API_URL = 'https://restcountries.com/v3.1/all?fields=name,translations,flags,cca2,capital,region,population';
 
 /* ── DOM refs ───────────────────────────────────────────────── */
 const temaSelector        = document.getElementById('tema-selector');
@@ -189,7 +189,24 @@ respostaInput.addEventListener('keydown', e => {
 });
 
 function normalitzar(str) {
-    return str.trim().toLowerCase();
+    return str
+        .trim()
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '');
+}
+
+function respostesValidesPais(pais) {
+    const answers = [];
+
+    if (pais?.name?.common) {
+        answers.push(pais.name.common);
+    }
+    if (pais?.translations?.spa?.common) {
+        answers.push(pais.translations.spa.common);
+    }
+
+    return [...new Set(answers.map(normalitzar))];
 }
 
 function comprovarResposta() {
@@ -204,7 +221,8 @@ function comprovarResposta() {
     btnComprovar.disabled = true;
     feedbackEl.hidden     = true;
 
-    const correcte = normalitzar(resposta) === normalitzar(paisActual.name.common);
+    const respostaNorm = normalitzar(resposta);
+    const correcte = respostesValidesPais(paisActual).includes(respostaNorm);
 
     if (correcte) {
         respostaEnviada  = true;
@@ -283,7 +301,7 @@ async function acabarPartida() {
     puntsFinalsEl.textContent = puntsPartida;
 
     try {
-        await fetch('../api/partides.php', {
+        const resp = await fetch('../api/partides.php', {
             method:  'POST',
             headers: { 'Content-Type': 'application/json' },
             body:    JSON.stringify({
@@ -292,8 +310,16 @@ async function acabarPartida() {
                 nombre_temporal: null,
             }),
         });
+        if (!resp.ok) {
+            throw new Error(`HTTP ${resp.status}`);
+        }
+        const data = await resp.json();
+        if (data && data.saved_as_guest) {
+            throw new Error('Partida guardada como invitado');
+        }
     } catch (_) {
-        // Silently ignore
+        mostrarFeedback('error', 'No se pudo guardar tu puntuación en el ranking. Verifica tu sesión e inténtalo de nuevo.');
+        feedbackEl.hidden = false;
     }
 }
 

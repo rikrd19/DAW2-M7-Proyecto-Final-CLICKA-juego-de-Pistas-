@@ -93,6 +93,25 @@ if ($tema === '') {
 // globals.php (loaded via db.php) already called session_start().
 $sessionUserId = isset($_SESSION['usuari_id']) ? (int) $_SESSION['usuari_id'] : null;
 
+// Defensive fallback: if usuari_id is missing but username exists in session,
+// resolve and restore usuari_id so scores are persisted for logged users.
+if ($sessionUserId === null && isset($_SESSION['username']) && is_string($_SESSION['username'])) {
+    $sessionUsername = strtolower(trim($_SESSION['username']));
+    if ($sessionUsername !== '') {
+        try {
+            $lookup = $db->prepare('SELECT id FROM usuarios WHERE LOWER(username) = :u LIMIT 1');
+            $lookup->bindValue(':u', $sessionUsername, SQLITE3_TEXT);
+            $found = $lookup->execute()->fetchArray(SQLITE3_ASSOC);
+            if ($found && isset($found['id'])) {
+                $sessionUserId = (int) $found['id'];
+                $_SESSION['usuari_id'] = $sessionUserId;
+            }
+        } catch (Throwable) {
+            // Keep guest path behavior if lookup fails.
+        }
+    }
+}
+
 /* ── Guest path: store in session for retroactive linking on login ── */
 if ($sessionUserId === null) {
     $_SESSION['last_score'] = [
@@ -100,7 +119,7 @@ if ($sessionUserId === null) {
         'tema'            => $tema,
         'nombre_temporal' => $nombreTemporal,
     ];
-    echo json_encode(['id' => null, 'puntos' => $puntos], JSON_UNESCAPED_UNICODE);
+    echo json_encode(['id' => null, 'puntos' => $puntos, 'saved_as_guest' => true], JSON_UNESCAPED_UNICODE);
     exit;
 }
 

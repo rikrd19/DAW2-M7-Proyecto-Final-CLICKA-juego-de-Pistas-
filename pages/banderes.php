@@ -137,7 +137,7 @@ $pageTitle = 'Banderas del Mundo';
             type="text"
             id="resposta-input"
             class="form-control"
-            placeholder="Escribe el nombre del país en inglés…"
+            placeholder="Escribe el nombre del país (español o inglés)…"
             autocomplete="off"
             autocorrect="off"
             spellcheck="false"
@@ -146,7 +146,7 @@ $pageTitle = 'Banderas del Mundo';
             Comprobar
           </button>
         </div>
-        <small class="text-muted mt-1 d-block">Usa el nombre en inglés (ej: France, Germany, Japan)</small>
+        <small class="text-muted mt-1 d-block">Puedes responder en español o en inglés (ej: Alemania / Germany)</small>
       </div>
 
       <!-- Feedback -->

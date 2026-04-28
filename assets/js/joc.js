@@ -275,7 +275,7 @@ async function acabarPartida() {
     puntsFinalsEl.textContent = puntsPartida;
 
     try {
-        await fetch('../api/partides.php', {
+        const resp = await fetch('../api/partides.php', {
             method:  'POST',
             headers: { 'Content-Type': 'application/json' },
             body:    JSON.stringify({
@@ -284,8 +284,17 @@ async function acabarPartida() {
                 nombre_temporal: null,
             }),
         });
+        if (!resp.ok) {
+            throw new Error(`HTTP ${resp.status}`);
+        }
+        const data = await resp.json();
+        if (data && data.saved_as_guest) {
+            throw new Error('Partida guardada como invitado');
+        }
     } catch (_) {
-        // Silently ignore — the game is still over
+        // Make save issues visible so users understand why they are missing in ranking.
+        mostrarFeedback('error', 'No se pudo guardar tu puntuación en el ranking. Verifica tu sesión e inténtalo de nuevo.');
+        feedbackEl.hidden = false;
     }
 }
 
