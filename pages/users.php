@@ -21,12 +21,6 @@ $results = $db->query("SELECT * FROM usuarios ORDER BY
 <html lang="es">
 <head>
     <?php include '../includes/head.php'; ?>
-    <style>
-        .user-img { width: 40px; height: 40px; object-fit: cover; border-radius: 50%; border: 1px solid var(--clika-border); }
-        .table-card { border-radius: 15px; overflow: hidden; border: none; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
-        .badge-admin { background-color: #f8d7da; color: #842029; }
-        .badge-player { background-color: #d1e7dd; color: #0f5132; }
-    </style>
 </head>
 <body class="bg-light">
 
@@ -50,7 +44,23 @@ $results = $db->query("SELECT * FROM usuarios ORDER BY
             </div>
         <?php endif; ?>
 
-        <div class="card table-card">
+        <?php if (isset($_GET['error'])): ?>
+            <?php
+            $errMsg = match ($_GET['error']) {
+                'self_delete' => 'No puedes eliminar tu propia cuenta desde este panel.',
+                'db_error' => 'No se pudo completar la operación. Inténtalo de nuevo.',
+                'not_found' => 'Usuario no encontrado.',
+                'invalid_user' => 'Solicitud no válida.',
+                default => 'Ha ocurrido un error.',
+            };
+            ?>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <?php echo htmlspecialchars($errMsg); ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php endif; ?>
+
+        <div class="card users-table-card">
             <div class="table-responsive">
                 <table class="table table-hover align-middle mb-0">
                     <thead class="bg-white border-bottom">
@@ -63,7 +73,7 @@ $results = $db->query("SELECT * FROM usuarios ORDER BY
                     </thead>
                     <tbody class="bg-white">
                         <?php while ($row = $results->fetchArray(SQLITE3_ASSOC)): 
-                            $badgeClass = ($row['rol'] === 'admin') ? 'badge-admin' : 'badge-player';
+                            $badgeClass = ($row['rol'] === 'admin') ? 'users-badge-admin' : 'users-badge-player';
                             $photoUrl = ($row['foto'] === 'default.png' || !$row['foto']) 
                                 ? BASE_URL . "/assets/images/social_media/profile.svg"
                                 : (str_starts_with($row['foto'], 'http') ? $row['foto'] : BASE_URL . "/storage/uploads/" . $row['foto']);
@@ -71,7 +81,7 @@ $results = $db->query("SELECT * FROM usuarios ORDER BY
                             <tr>
                                 <td class="px-4 py-3">
                                     <div class="d-flex align-items-center gap-3">
-                                        <img src="<?php echo $photoUrl; ?>" alt="Avatar" class="user-img" 
+                                        <img src="<?php echo $photoUrl; ?>" alt="Avatar" class="users-user-img" 
                                              onerror="this.src='<?php echo BASE_URL; ?>/assets/images/social_media/profile.svg'">
                                         <span class="fw-bold"><?php echo htmlspecialchars($row['username']); ?></span>
                                     </div>
@@ -86,11 +96,16 @@ $results = $db->query("SELECT * FROM usuarios ORDER BY
                                 </td>
                                 <td class="px-4 py-3 text-center">
                                     <div class="d-flex justify-content-center gap-2">
-                                        <a href="profile.php?id=<?php echo $row['id']; ?>" class="btn btn-sm btn-outline-primary" title="Editar">
+                                        <a href="profile.php?id=<?php echo $row['id']; ?>&return_to=users" class="btn btn-sm btn-outline-primary" title="Editar">
                                             &#9998;
                                         </a>
                                         <?php if ($row['id'] != $_SESSION['usuari_id']): ?>
-                                            <button onclick="confirmDelete(<?php echo $row['id']; ?>)" class="btn btn-sm btn-outline-danger" title="Eliminar">
+                                            <button type="button"
+                                                    class="btn btn-sm btn-outline-danger js-delete-user-open"
+                                                    title="Eliminar"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#deleteModal"
+                                                    data-delete-url="<?php echo htmlspecialchars('../processes/delete_user.proc.php?id=' . (int) $row['id'], ENT_QUOTES, 'UTF-8'); ?>">
                                                 &#128465;
                                             </button>
                                         <?php endif; ?>
@@ -104,17 +119,15 @@ $results = $db->query("SELECT * FROM usuarios ORDER BY
         </div>
     </main>
 
-    <!-- Modal de Confirmación (Bootstrap 5) -->
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true"
-         data-delete-url-base="<?php echo BASE_URL; ?>/processes/delete_user.proc.php?id=">
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content border-0 shadow">
           <div class="modal-header border-0 pb-0">
-            <h5 class="modal-title fw-bold">¿Eliminar Usuario?</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <h5 class="modal-title fw-bold">¿Eliminar usuario?</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
           </div>
           <div class="modal-body text-center py-4">
-            <p class="text-muted">Esta acción es irreversible y borrará todos los datos del usuario.</p>
+            <p class="text-muted mb-0">Esta acción es irreversible y borrará todos los registros de este usuario, incluyendo su <strong>foto/avatar</strong>, su posición en el <strong>ranking</strong> y sus partidas jugadas.</p>
           </div>
           <div class="modal-footer border-0 pt-0">
             <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancelar</button>
@@ -124,6 +137,24 @@ $results = $db->query("SELECT * FROM usuarios ORDER BY
       </div>
     </div>
 
-    <script src="<?php echo BASE_URL; ?>/assets/js/users.js"></script>
+    <script>
+      // Copy data-delete-url onto #confirmDeleteBtn (capture so href is set before Bootstrap handles the click).
+      (function () {
+        var confirmLink = document.getElementById('confirmDeleteBtn');
+        var modalEl = document.getElementById('deleteModal');
+        if (!confirmLink || !modalEl) return;
+
+        document.addEventListener('click', function (ev) {
+          var btn = ev.target.closest('button.js-delete-user-open[data-delete-url]');
+          if (!btn) return;
+          var url = btn.getAttribute('data-delete-url');
+          if (url) confirmLink.href = url;
+        }, true);
+
+        modalEl.addEventListener('hidden.bs.modal', function () {
+          confirmLink.setAttribute('href', '#');
+        });
+      })();
+    </script>
 
     <?php include '../includes/foot.php'; ?>

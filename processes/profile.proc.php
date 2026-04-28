@@ -16,11 +16,17 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 $currentUserId = $_SESSION['usuari_id'];
 $currentUserRole = $_SESSION['rol'];
+$returnTo = (isset($_POST['return_to']) && $_POST['return_to'] === 'users' && $currentUserRole === 'admin') ? 'users' : '';
 
 // Target logic: Admins can edit others, others only themselves
 $targetId = isset($_POST['target_id']) ? (int)$_POST['target_id'] : $currentUserId;
 if ($targetId !== $currentUserId && $currentUserRole !== 'admin') {
     $targetId = $currentUserId;
+}
+
+$profileRedirect = "../pages/profile.php?id=$targetId";
+if ($returnTo === 'users') {
+    $profileRedirect .= '&return_to=users';
 }
 
 // Fetch current data to compare and handle files
@@ -55,11 +61,11 @@ if ($deletePhoto) {
     $mime = mime_content_type($tmpPath) ?: '';
 
     if ($_FILES['photo']['size'] > $maxBytes) {
-        header("Location: ../pages/profile.php?id=$targetId&error=file_too_large");
+        header("Location: {$profileRedirect}&error=file_too_large");
         exit;
     }
     if (!in_array($mime, $allowedMime, true)) {
-        header("Location: ../pages/profile.php?id=$targetId&error=invalid_file_type");
+        header("Location: {$profileRedirect}&error=invalid_file_type");
         exit;
     }
 
@@ -78,7 +84,7 @@ if ($deletePhoto) {
 } elseif (!empty($selectedAvatar)) {
     // Remote DiceBear URL: validate host/path before storing (same spirit as centralised API helpers).
     if (!dicebear_is_allowed_remote_avatar_url($selectedAvatar)) {
-        header("Location: ../pages/profile.php?id=$targetId&error=invalid_avatar_url");
+        header("Location: {$profileRedirect}&error=invalid_avatar_url");
         exit;
     }
     if ($fotoFinal !== 'default.png' && !str_starts_with($fotoFinal, 'http') && file_exists($uploadsDir . $fotoFinal)) {
@@ -100,10 +106,14 @@ try {
         $_SESSION['foto'] = $fotoFinal;
     }
 
-    header("Location: ../pages/profile.php?id=$targetId&msg=Perfil actualizado correctamente");
+    if ($returnTo === 'users') {
+        header('Location: ../pages/users.php');
+        exit;
+    }
+    header("Location: {$profileRedirect}&msg=Perfil actualizado correctamente");
     exit;
 } catch (Throwable $e) {
     error_log($e->getMessage());
-    header("Location: ../pages/profile.php?id=$targetId&error=db_error");
+    header("Location: {$profileRedirect}&error=db_error");
     exit;
 }

@@ -11,7 +11,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $emailRaw = trim((string) ($_POST['username'] ?? ''));
 $email = strtolower($emailRaw);
 $password = (string) ($_POST['password'] ?? '');
-$rol = $_POST['rol'] ?? 'jugador';
+// Registration always creates player accounts; admins cannot elevate via this form.
+$rol = 'jugador';
 
 if ($email === '' || $password === '') {
     header("Location: ../pages/register.php?error=missing_fields");
@@ -26,13 +27,6 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 if (strlen($password) < 6) {
     header("Location: ../pages/register.php?error=weak_password");
     exit;
-}
-
-// Only admins can assign elevated roles; public registration is always "jugador".
-if (!is_admin()) {
-    $rol = 'jugador';
-} elseif (!in_array($rol, ['jugador', 'admin'], true)) {
-    $rol = 'jugador';
 }
 
 try {
@@ -54,7 +48,7 @@ try {
 
     // Admin creating another account: stay on admin flow (do not switch session to the new user).
     if (is_admin()) {
-        header("Location: ../pages/users.php?msg=Usuario creado correctamente");
+        header('Location: ../pages/users.php');
         exit;
     }
 

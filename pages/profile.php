@@ -12,6 +12,7 @@ check_access();
 
 $sessionUserId = $_SESSION['usuari_id'];
 $sessionRole = $_SESSION['rol'];
+$returnTo = (isset($_GET['return_to']) && $_GET['return_to'] === 'users' && $sessionRole === 'admin') ? 'users' : '';
 
 // Target user: Admins can edit anyone, players only themselves
 $targetId = $sessionUserId;
@@ -116,6 +117,7 @@ $photoUrl = ($user['foto'] === 'default.png' || !$user['foto'])
 
                 <form action="../processes/profile.proc.php" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="target_id" value="<?php echo $user['id']; ?>">
+                    <input type="hidden" name="return_to" value="<?php echo $returnTo; ?>">
 
                     <div class="mb-2">
                         <label class="form-label fw-bold">Nombre de Usuario</label>
@@ -166,7 +168,7 @@ $photoUrl = ($user['foto'] === 'default.png' || !$user['foto'])
 
                     <div class="d-grid gap-2">
                         <button type="submit" class="btn btn-accent py-2 fw-bold">GUARDAR CAMBIOS</button>
-                        <a href="../index.php" class="btn btn-link text-muted">Cancelar</a>
+                        <a href="<?php echo $returnTo === 'users' ? '../pages/users.php' : '../index.php'; ?>" class="btn btn-link text-muted">Cancelar</a>
                     </div>
                 </form>
             </div>
