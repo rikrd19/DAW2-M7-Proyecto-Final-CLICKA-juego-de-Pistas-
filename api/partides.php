@@ -72,10 +72,10 @@ if (!is_array($data)) {
     exit;
 }
 
-$puntos        = isset($data['puntos'])  ? (int) $data['puntos']  : 0;
-$tema          = isset($data['tema'])    && is_string($data['tema'])    ? trim($data['tema'])    : '';
-$usuarioId     = isset($data['usuario_id'])    && is_int($data['usuario_id'])    ? $data['usuario_id']    : null;
-$nombreTemporal = isset($data['nombre_temporal']) && is_string($data['nombre_temporal']) ? trim($data['nombre_temporal']) : null;
+$puntos         = isset($data['puntos']) ? (int) $data['puntos'] : 0;
+$tema           = isset($data['tema'])   && is_string($data['tema']) ? trim($data['tema']) : '';
+$nombreTemporal = isset($data['nombre_temporal']) && is_string($data['nombre_temporal'])
+                    ? trim($data['nombre_temporal']) : null;
 
 if ($tema === '') {
     http_response_code(400);
@@ -83,24 +83,31 @@ if ($tema === '') {
     exit;
 }
 
-$dbPath = dirname(__DIR__) . '/database/clicka.db';
-if (!is_file($dbPath)) {
-    http_response_code(500);
-    echo json_encode(['error' => 'Database file not found'], JSON_UNESCAPED_UNICODE);
+// Always use the server-side session for identity — never trust the client body.
+// globals.php (loaded via db.php) already called session_start().
+$sessionUserId = isset($_SESSION['usuari_id']) ? (int) $_SESSION['usuari_id'] : null;
+
+/* ── Guest path: store in session for retroactive linking on login ── */
+if ($sessionUserId === null) {
+    $_SESSION['last_score'] = [
+        'puntos'          => $puntos,
+        'tema'            => $tema,
+        'nombre_temporal' => $nombreTemporal,
+    ];
+    echo json_encode(['id' => null, 'puntos' => $puntos], JSON_UNESCAPED_UNICODE);
     exit;
 }
 
-try {
-    $db = new SQLite3($dbPath);
-    $db->enableExceptions(true);
-    $db->exec('PRAGMA foreign_keys = ON;');
+/* ── Logged-in path: persist to DB ─────────────────────────────────── */
+require_once dirname(__DIR__) . '/includes/db.php';
 
+try {
     $stmt = $db->prepare(
         'INSERT INTO partidas (usuario_id, nombre_temporal, puntos, tema, fecha)
          VALUES (:uid, :nombre, :puntos, :tema, CURRENT_TIMESTAMP)'
     );
-    $stmt->bindValue(':uid',    $usuarioId,      $usuarioId === null      ? SQLITE3_NULL : SQLITE3_INTEGER);
-    $stmt->bindValue(':nombre', $nombreTemporal, $nombreTemporal === null  ? SQLITE3_NULL : SQLITE3_TEXT);
+    $stmt->bindValue(':uid',    $sessionUserId,  SQLITE3_INTEGER);
+    $stmt->bindValue(':nombre', $nombreTemporal, $nombreTemporal === null ? SQLITE3_NULL : SQLITE3_TEXT);
     $stmt->bindValue(':puntos', $puntos,         SQLITE3_INTEGER);
     $stmt->bindValue(':tema',   $tema,           SQLITE3_TEXT);
     $stmt->execute();

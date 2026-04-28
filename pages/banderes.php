@@ -59,33 +59,63 @@ $pageTitle = 'Banderas del Mundo';
         </span>
       </div>
 
-      <!-- Pistas -->
-      <div id="pistas-container" class="mb-4">
+      <!-- Pistas: 3D card deck -->
+      <div id="pistas-container" class="cartes-container mb-2">
 
-        <!-- Pista 1: bandera -->
-        <div class="pista-card pista-visible" id="pista-1">
-          <span class="pista-num">Pista 1 &mdash; Bandera</span>
-          <div class="text-center mt-2">
-            <img id="pista-1-img" src="" alt="Bandera del país a adivinar" class="bandera-img">
+        <!-- Pista 1: flag image on front face -->
+        <div class="carta" id="pista-1" title="Pista 1 — Bandera">
+          <div class="carta-inner">
+            <div class="carta-back">
+              <span class="carta-back-label">Bandera</span>
+              <span class="carta-back-icon">&#127988;</span>
+            </div>
+            <div class="carta-front" style="padding:.7rem .65rem;">
+              <span class="carta-num-badge">Bandera</span>
+              <img id="pista-1-img" src="" alt="Bandera del país a adivinar" class="carta-flag-img">
+            </div>
           </div>
         </div>
 
         <!-- Pista 2: región -->
-        <div class="pista-card pista-oculta" id="pista-2" hidden>
-          <span class="pista-num">Pista 2 &mdash; Región</span>
-          <p id="pista-2-text" class="mb-0"></p>
+        <div class="carta" id="pista-2" title="Haz clic para revelar la región">
+          <div class="carta-inner">
+            <div class="carta-back">
+              <span class="carta-back-label">Región</span>
+              <span class="carta-back-icon">?</span>
+            </div>
+            <div class="carta-front">
+              <span class="carta-num-badge">Región</span>
+              <p id="pista-2-text" class="carta-text"></p>
+            </div>
+          </div>
         </div>
 
         <!-- Pista 3: capital -->
-        <div class="pista-card pista-oculta" id="pista-3" hidden>
-          <span class="pista-num">Pista 3 &mdash; Capital</span>
-          <p id="pista-3-text" class="mb-0"></p>
+        <div class="carta" id="pista-3" title="Haz clic para revelar la capital">
+          <div class="carta-inner">
+            <div class="carta-back">
+              <span class="carta-back-label">Capital</span>
+              <span class="carta-back-icon">?</span>
+            </div>
+            <div class="carta-front">
+              <span class="carta-num-badge">Capital</span>
+              <p id="pista-3-text" class="carta-text"></p>
+            </div>
+          </div>
         </div>
 
         <!-- Pista extra: población -->
-        <div class="pista-card pista-extra" id="pista-extra" hidden>
-          <span class="pista-num">Pista extra &mdash; Población</span>
-          <p id="pista-extra-text" class="mb-0"></p>
+        <div class="carta carta-extra" id="pista-extra" title="Haz clic para revelar la población">
+          <div class="carta-inner">
+            <div class="carta-back">
+              <span class="carta-back-label">Población</span>
+              <span class="carta-back-icon">&#9733;</span>
+            </div>
+            <div class="carta-front">
+              <span class="carta-num-badge">Población</span>
+              <p id="pista-extra-text" class="carta-text"></p>
+            </div>
+          </div>
         </div>
 
       </div>

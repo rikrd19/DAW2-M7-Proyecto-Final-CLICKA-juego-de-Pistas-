@@ -452,6 +452,226 @@ footer a:hover { text-decoration: underline; }
   line-height: 1;
 }
 
+/* ══════════════════════════════════════════════════════════
+   CARTES DE PISTES — 3D card-flip UI
+   ══════════════════════════════════════════════════════════ */
+
+/* Container: centres the row of cards */
+.cartes-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 1rem;
+  padding: 1.75rem 0 2.25rem;
+  flex-wrap: wrap;
+}
+
+/* Disable flip transitions during question reset */
+.cartes-container.no-transition .carta-inner {
+  transition: none !important;
+  animation: none !important;
+}
+
+/* Flip animation — fires immediately when class is added, no reflow trick needed */
+@keyframes cartaFlip {
+  from { transform: rotateY(0deg); }
+  to   { transform: rotateY(180deg); }
+}
+
+/* ── Card wrapper (perspective host) ── */
+.carta {
+  perspective: 1100px;
+  width: 150px;
+  height: 210px;
+  flex-shrink: 0;
+  position: relative;
+  transition: transform 0.22s ease, filter 0.22s ease;
+}
+
+/* Lift unrevealed cards on hover → hint they're clickable */
+.carta:not(.revelada) {
+  cursor: pointer;
+}
+.carta:not(.revelada):hover {
+  transform: translateY(-8px) scale(1.03);
+  filter: drop-shadow(0 16px 24px rgba(255,140,87,0.35));
+}
+
+/* ── Inner (rotates on flip) ── */
+.carta-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1.0);
+  will-change: transform;
+}
+
+.carta.revelada .carta-inner {
+  transform: rotateY(180deg);
+  animation: cartaFlip 0.6s cubic-bezier(0.4, 0.0, 0.2, 1.0);
+}
+
+/* ── Both faces ── */
+.carta-front,
+.carta-back {
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  overflow: hidden;
+}
+
+/* ══ BACK FACE (face-down) ══ */
+.carta-back {
+  background: linear-gradient(145deg, #1b1b32 0%, #14213d 55%, #0d2b52 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  border: 1.5px solid rgba(255, 140, 87, 0.22);
+  box-shadow:
+    0 10px 32px rgba(0, 0, 0, 0.38),
+    0 2px 8px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* Inner border decoration */
+.carta-back::before {
+  content: '';
+  position: absolute;
+  inset: 9px;
+  border: 1px solid rgba(255, 140, 87, 0.15);
+  border-radius: 11px;
+  pointer-events: none;
+}
+
+/* Diagonal stripe pattern */
+.carta-back::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    rgba(255, 140, 87, 0.035) 0px,
+    rgba(255, 140, 87, 0.035) 1px,
+    transparent 1px,
+    transparent 14px
+  );
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.carta-back-label {
+  font-family: var(--font-heading);
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 140, 87, 0.65);
+  position: relative; /* above ::after */
+}
+
+.carta-back-icon {
+  font-size: 2.6rem;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.10);
+  font-family: var(--font-heading);
+  font-weight: 900;
+  position: relative;
+  user-select: none;
+}
+
+/* Hover: brighten border */
+.carta:not(.revelada):hover .carta-back {
+  border-color: rgba(255, 140, 87, 0.55);
+}
+
+/* ══ FRONT FACE (revealed) ══ */
+.carta-front {
+  background: var(--clika-card-bg);
+  transform: rotateY(180deg); /* hidden until flipped */
+  display: flex;
+  flex-direction: column;
+  padding: 0.85rem 0.8rem 0.8rem;
+  border: 1.5px solid var(--clika-border-strong);
+  box-shadow:
+    0 8px 28px rgba(255, 140, 87, 0.16),
+    0 2px 8px rgba(44, 44, 62, 0.08);
+}
+
+/* Colour bar at top */
+.carta-front::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  border-radius: 18px 18px 0 0;
+  background: linear-gradient(90deg, var(--clika-primary), var(--clika-accent));
+}
+
+/* Pista number chip */
+.carta-num-badge {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--clika-primary);
+  margin-bottom: 0.45rem;
+  margin-top: 0.1rem;
+}
+
+/* Clue text */
+.carta-text {
+  font-size: 0.8rem;
+  color: var(--clika-text);
+  line-height: 1.55;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+
+/* Flag image inside card (banderes game) */
+.carta-flag-img {
+  width: 100%;
+  flex: 1;
+  object-fit: contain;
+  border-radius: 6px;
+  margin-top: 0.3rem;
+}
+
+/* Extra card: golden top bar */
+.carta-extra .carta-front::before {
+  background: linear-gradient(90deg, #f5a623, #f8d347);
+}
+.carta-extra .carta-num-badge {
+  color: #c87d00;
+}
+.carta-extra .carta-back-icon {
+  color: rgba(255, 210, 80, 0.18);
+}
+.carta-extra .carta-back-label {
+  color: rgba(255, 200, 60, 0.65);
+}
+
+/* Locked extra card (no pista_extra for this question) */
+.carta.carta-bloqueada {
+  opacity: 0.22;
+  pointer-events: none;
+  filter: grayscale(1);
+}
+
+/* ── Responsive ── */
+@media (max-width: 575px) {
+  .carta { width: 115px; height: 162px; }
+  .carta-back-icon { font-size: 2rem; }
+  .carta-text { font-size: 0.72rem; }
+  .cartes-container { gap: 0.55rem; padding: 1.2rem 0 1.6rem; }
+}
+
 /* ── Banderas ────────────────────────────────────────────── */
 .bandera-img {
   max-width: 240px;

@@ -13,10 +13,14 @@ const banderesError       = document.getElementById('banderes-error');
 const preguntaNumEl       = document.getElementById('pregunta-num');
 const puntsEl             = document.getElementById('punts-total');
 
+// Card elements
+const pistesContainerEl   = document.getElementById('pistas-container');
 const pista1El            = document.getElementById('pista-1');
 const pista2El            = document.getElementById('pista-2');
 const pista3El            = document.getElementById('pista-3');
 const pistaExtraEl        = document.getElementById('pista-extra');
+
+// Content inside card fronts
 const pista1ImgEl         = document.getElementById('pista-1-img');
 const pista2Text          = document.getElementById('pista-2-text');
 const pista3Text          = document.getElementById('pista-3-text');
@@ -37,19 +41,44 @@ const puntsFinalsEl       = document.getElementById('punts-finals');
 const btnTornar           = document.getElementById('btn-tornar');
 
 /* ── State ──────────────────────────────────────────────────── */
-let paisos         = null;       // cached country array (single API call)
-let paisActual     = null;
-let numPregunta    = 0;
-let pistesVistes   = 1;
-const MAX_PISTES   = 4;          // flag + region + capital + population
-let puntsPartida   = 0;
+let paisos          = null;      // cached country array (single API call)
+let paisActual      = null;
+let numPregunta     = 0;
+let pistesVistes    = 1;
+const MAX_PISTES    = 4;         // flag + region + capital + population
+let puntsPartida    = 0;
 let respostaEnviada = false;
-let paisosUsats    = new Set();  // avoid repeating countries within a round
+let paisosUsats     = new Set(); // avoid repeating countries within a round
 
 /* ── Scoring ────────────────────────────────────────────────── */
 function scoreForClues(clues) {
     return clues === 1 ? 4 : clues === 2 ? 3 : clues === 3 ? 2 : 1;
 }
+
+/* ── Card reveal helper ─────────────────────────────────────── */
+function revelarCarta(el) {
+    el.classList.add('revelada');
+}
+
+/** Reset all cards to face-down instantly (no animation). */
+function resetCartes() {
+    pistesContainerEl.classList.add('no-transition');
+    pista1El.classList.remove('revelada');
+    pista2El.classList.remove('revelada');
+    pista3El.classList.remove('revelada');
+    pistaExtraEl.classList.remove('revelada');
+    void pistesContainerEl.offsetWidth; // force reflow
+    pistesContainerEl.classList.remove('no-transition');
+}
+
+/* ── Click on a face-down card → trigger next reveal ───────── */
+[pista2El, pista3El, pistaExtraEl].forEach(card => {
+    card.addEventListener('click', () => {
+        if (!card.classList.contains('revelada') && !btnSeguentPista.hidden) {
+            btnSeguentPista.click();
+        }
+    });
+});
 
 /* ── Start button ───────────────────────────────────────────── */
 document.getElementById('btn-iniciar').addEventListener('click', iniciarPartida);
@@ -64,14 +93,11 @@ async function iniciarPartida() {
     paisosUsats.clear();
 
     try {
-        // Cache countries once; reuse on subsequent rounds.
         if (!paisos) {
             const resp = await fetch(API_URL);
             if (!resp.ok) throw new Error('HTTP ' + resp.status);
             paisos = await resp.json();
-            if (!Array.isArray(paisos) || paisos.length === 0) {
-                throw new Error('empty response');
-            }
+            if (!Array.isArray(paisos) || paisos.length === 0) throw new Error('empty');
         }
         carregarPregunta();
     } catch (_) {
@@ -84,16 +110,16 @@ async function iniciarPartida() {
 /* ── Pick random unused country ─────────────────────────────── */
 function paisAleatori() {
     let pool = paisos.filter(p => !paisosUsats.has(p.cca2));
-    if (pool.length === 0) pool = paisos;   // safety fallback
+    if (pool.length === 0) pool = paisos;
     return pool[Math.floor(Math.random() * pool.length)];
 }
 
 /* ── Load question ──────────────────────────────────────────── */
 function carregarPregunta() {
-    respostaEnviada = false;
-    pistesVistes    = 1;
+    respostaEnviada    = false;
+    pistesVistes       = 1;
 
-    // Reset UI
+    // Reset UI controls
     respostaInput.value    = '';
     respostaInput.disabled = false;
     btnComprovar.disabled  = false;
@@ -101,42 +127,37 @@ function carregarPregunta() {
     feedbackEl.hidden      = true;
     feedbackEl.className   = 'feedback-box';
     resultatEl.hidden      = true;
+    btnSeguentPista.hidden = false;
 
-    pista2El.hidden        = true;
-    pista3El.hidden        = true;
-    pistaExtraEl.hidden    = true;
-    pista1El.className     = 'pista-card pista-visible';
-    pista2El.className     = 'pista-card pista-oculta';
-    pista3El.className     = 'pista-card pista-oculta';
-    pistaExtraEl.className = 'pista-card pista-extra';
-
-    btnSeguentPista.hidden    = false;
-    pistesMaxEl.textContent   = MAX_PISTES;
-    pistesNumEl.textContent   = '1';
+    pistesMaxEl.textContent = MAX_PISTES;
+    pistesNumEl.textContent = '1';
 
     numPregunta++;
     preguntaNumEl.textContent = `Pregunta ${numPregunta}/${TOTAL_PREGUNTES}`;
     puntsEl.textContent       = `${puntsPartida}`;
 
-    // Pick country
+    // Flip all cards back to face-down, then reveal the flag
+    resetCartes();
+
+    // Pick country and fill card fronts
     paisActual = paisAleatori();
     paisosUsats.add(paisActual.cca2);
 
-    // Pista 1 — flag image
     pista1ImgEl.src = paisActual.flags.png;
     pista1ImgEl.alt = 'Bandera del país a adivinar';
 
-    // Pista 2 — region
     pista2Text.textContent = paisActual.region || '—';
 
-    // Pista 3 — capital (API returns an array)
     const capital = Array.isArray(paisActual.capital) && paisActual.capital.length
         ? paisActual.capital[0]
         : '—';
     pista3Text.textContent = capital;
 
-    // Pista extra — population
     pistaExtraText.textContent = (paisActual.population ?? 0).toLocaleString();
+
+    // Synchronous context: double-rAF lets the browser commit the reset state
+    // before adding 'revelada', so the flip transition fires correctly.
+    requestAnimationFrame(() => requestAnimationFrame(() => revelarCarta(pista1El)));
 
     respostaInput.focus();
 }
@@ -149,14 +170,11 @@ btnSeguentPista.addEventListener('click', () => {
     pistesNumEl.textContent = pistesVistes;
 
     if (pistesVistes === 2) {
-        pista2El.hidden = false;
-        pista2El.classList.replace('pista-oculta', 'pista-visible');
+        revelarCarta(pista2El);
     } else if (pistesVistes === 3) {
-        pista3El.hidden = false;
-        pista3El.classList.replace('pista-oculta', 'pista-visible');
+        revelarCarta(pista3El);
     } else if (pistesVistes === 4) {
-        pistaExtraEl.hidden = false;
-        pistaExtraEl.classList.replace('pista-extra', 'pista-visible');
+        revelarCarta(pistaExtraEl);
     }
 
     if (pistesVistes >= MAX_PISTES) {
@@ -196,11 +214,10 @@ function comprovarResposta() {
         mostrarResultat(true, punts);
     } else {
         if (pistesVistes >= MAX_PISTES) {
-            // Clues exhausted — end question with 0 pts and reveal answer
             respostaEnviada = true;
             mostrarResultat(false, 0);
         } else {
-            mostrarFeedback('error', 'Incorrecto. Inténtalo de nuevo o pide otra pista.');
+            mostrarFeedback('error', 'Incorrecto. Inténtalo de nuevo o revela otra carta.');
             btnComprovar.disabled = false;
             respostaInput.select();
         }
@@ -272,12 +289,11 @@ async function acabarPartida() {
             body:    JSON.stringify({
                 puntos:          puntsPartida,
                 tema:            'Banderas',
-                usuario_id:      (typeof USUARI_ID !== 'undefined' ? USUARI_ID : null),
                 nombre_temporal: null,
             }),
         });
     } catch (_) {
-        // Silently ignore save errors — the game is still over
+        // Silently ignore
     }
 }
 
