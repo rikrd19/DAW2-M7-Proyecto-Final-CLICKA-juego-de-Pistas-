@@ -15,11 +15,11 @@ $pageTitle = 'Banderas del Mundo';
 
   <?php include '../includes/menu.php'; ?>
 
-  <main class="container py-5">
+  <main class="container-fluid game-layout py-3">
 
     <!-- ══ PASO 1: Intro / inicio ════════════════════════════════ -->
     <section id="tema-selector">
-      <div class="text-center mb-5">
+      <div class="text-center mb-3">
         <p class="section-eyebrow">Temática especial</p>
         <h1 class="h3 fw-bold" style="color:var(--clika-text)">
           &#127988; Banderas del Mundo
@@ -163,7 +163,7 @@ $pageTitle = 'Banderas del Mundo';
     </section>
 
     <!-- ══ PASO 3: Fin de la partida ═════════════════════════════ -->
-    <section id="fi-partida" class="text-center py-5" hidden>
+    <section id="fi-partida" class="text-center py-3" hidden>
       <div class="fi-partida-card mx-auto">
         <div class="tema-icon-wrap mx-auto mb-4">
           <span class="tema-icon" aria-hidden="true">&#127942;</span>

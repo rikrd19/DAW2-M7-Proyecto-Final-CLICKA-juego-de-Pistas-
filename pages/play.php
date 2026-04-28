@@ -31,11 +31,11 @@ if (is_file($dbPath)) {
 
   <?php include '../includes/menu.php'; ?>
 
-  <main class="container py-5">
+  <main class="container-fluid game-layout py-3">
 
     <!-- ══ PASO 1: Selector de tema ══════════════════════════════════ -->
     <section id="tema-selector">
-      <div class="text-center mb-5">
+      <div class="text-center mb-3">
         <p class="section-eyebrow">Antes de empezar</p>
         <h1 class="h3 fw-bold" style="color:var(--clika-text)">Elige una temática</h1>
         <p class="text-muted">Responde 5 preguntas y consigue la máxima puntuación.</p>
@@ -200,7 +200,7 @@ if (is_file($dbPath)) {
     </section>
 
     <!-- ══ PASO 3: Fin de la partida ═════════════════════════════════ -->
-    <section id="fi-partida" class="text-center py-5" hidden>
+    <section id="fi-partida" class="text-center py-3" hidden>
       <div class="fi-partida-card mx-auto">
         <div class="tema-icon-wrap mx-auto mb-4">
           <span class="tema-icon" aria-hidden="true">&#127942;</span>
