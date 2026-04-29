@@ -90,6 +90,7 @@ $temas[] = [
         <h2 class="h4 fw-bold" style="color:var(--clika-text)">¿De qué quieres demostrar que sabes?</h2>
       </div>
 
+      <div class="carrusel-outer">
       <div class="carrusel-wrapper">
         <!-- Botón anterior -->
         <button class="carrusel-btn carrusel-btn-prev" id="carrusel-prev" aria-label="Anterior">
@@ -137,6 +138,7 @@ $temas[] = [
           &#8250;
         </button>
       </div>
+      </div><!-- /carrusel-outer -->
 
       <!-- Indicadores de puntos -->
       <div class="carrusel-dots" id="carrusel-dots"></div>
@@ -240,85 +242,98 @@ $temas[] = [
       const btnPrev = document.getElementById('carrusel-prev');
       const btnNext = document.getElementById('carrusel-next');
       const dotsEl  = document.getElementById('carrusel-dots');
+      const items   = Array.from(track.querySelectorAll('.carrusel-item'));
+      const total   = items.length;
+      let current   = 0;
+      let autoTimer = null;
 
-      // Cuántas tarjetas se ven a la vez según el ancho
-      function visibles() {
+      function perPage() {
         if (window.innerWidth >= 992) return 4;
         if (window.innerWidth >= 576) return 2;
         return 1;
       }
 
-      const items     = track.querySelectorAll('.carrusel-item');
-      const total     = items.length;
-      let   current   = 0;
-
-      // Crear puntos
-      const numDots = Math.ceil(total / visibles());
-      for (let i = 0; i < numDots; i++) {
-        const d = document.createElement('button');
-        d.className   = 'carrusel-dot';
-        d.setAttribute('aria-label', `Página ${i + 1}`);
-        d.addEventListener('click', () => goTo(i));
-        dotsEl.appendChild(d);
+      function itemWidth() {
+        const gap = parseFloat(getComputedStyle(track).gap) || 20;
+        return items[0].offsetWidth + gap;
       }
 
-      function updateDots() {
-        dotsEl.querySelectorAll('.carrusel-dot').forEach((d, i) => {
-          d.classList.toggle('active', i === Math.round(current / visibles()));
-        });
+      /* ── Dots ── */
+      function buildDots() {
+        dotsEl.innerHTML = '';
+        const pages = Math.ceil(total / perPage());
+        for (let i = 0; i < pages; i++) {
+          const d = document.createElement('button');
+          d.className = 'carrusel-dot';
+          d.setAttribute('aria-label', `Página ${i + 1}`);
+          d.addEventListener('click', () => scrollToIndex(i * perPage()));
+          dotsEl.appendChild(d);
+        }
+        syncDots();
       }
 
-      function goTo(page) {
-        current = page * visibles();
-        if (current >= total) current = total - visibles();
-        if (current < 0)      current = 0;
-        const itemW = items[0].offsetWidth + parseInt(getComputedStyle(track).gap);
-        track.scrollTo({ left: current * itemW, behavior: 'smooth' });
-        updateDots();
+      function syncDots() {
+        const page = Math.round(current / perPage());
+        dotsEl.querySelectorAll('.carrusel-dot').forEach((d, i) =>
+          d.classList.toggle('active', i === page)
+        );
       }
 
+      /* ── Scroll ── */
+      function scrollToIndex(idx) {
+        current = Math.max(0, Math.min(idx, total - perPage()));
+        track.scrollTo({ left: current * itemWidth(), behavior: 'smooth' });
+        syncDots();
+      }
+
+      /* ── Navegación ── */
       btnPrev.addEventListener('click', () => {
-        current = Math.max(0, current - visibles());
-        const itemW = items[0].offsetWidth + parseInt(getComputedStyle(track).gap);
-        track.scrollTo({ left: current * itemW, behavior: 'smooth' });
-        updateDots();
+        stopAuto();
+        scrollToIndex(current - perPage());
+        startAuto();
       });
-
       btnNext.addEventListener('click', () => {
-        current = Math.min(total - visibles(), current + visibles());
-        const itemW = items[0].offsetWidth + parseInt(getComputedStyle(track).gap);
-        track.scrollTo({ left: current * itemW, behavior: 'smooth' });
-        updateDots();
+        stopAuto();
+        scrollToIndex(current + perPage());
+        startAuto();
       });
 
-      // Sincronizar dots al hacer scroll manual / touch
+      // Teclado: ← →
+      document.addEventListener('keydown', e => {
+        if (e.key === 'ArrowLeft')  { stopAuto(); scrollToIndex(current - perPage()); startAuto(); }
+        if (e.key === 'ArrowRight') { stopAuto(); scrollToIndex(current + perPage()); startAuto(); }
+      });
+
+      // Sincronizar al scroll manual / touch
       track.addEventListener('scroll', () => {
-        const itemW = items[0].offsetWidth + parseInt(getComputedStyle(track).gap);
-        current = Math.round(track.scrollLeft / itemW);
-        updateDots();
+        current = Math.round(track.scrollLeft / itemWidth());
+        syncDots();
       }, { passive: true });
 
-      // Auto-avance cada 4s (pausa al pasar el ratón)
-      let autoTimer = setInterval(() => {
-        const next = current + visibles() < total ? current + visibles() : 0;
-        current = next;
-        const itemW = items[0].offsetWidth + parseInt(getComputedStyle(track).gap);
-        track.scrollTo({ left: current * itemW, behavior: 'smooth' });
-        updateDots();
-      }, 4000);
+      /* ── Auto-avance cada 3.5 s ── */
+      function advance() {
+        const next = current + perPage() < total ? current + perPage() : 0;
+        scrollToIndex(next);
+      }
+      function startAuto() {
+        if (autoTimer) return;
+        autoTimer = setInterval(advance, 3500);
+      }
+      function stopAuto() {
+        clearInterval(autoTimer);
+        autoTimer = null;
+      }
 
-      track.addEventListener('mouseenter', () => clearInterval(autoTimer));
-      track.addEventListener('mouseleave', () => {
-        autoTimer = setInterval(() => {
-          const next = current + visibles() < total ? current + visibles() : 0;
-          current = next;
-          const itemW = items[0].offsetWidth + parseInt(getComputedStyle(track).gap);
-          track.scrollTo({ left: current * itemW, behavior: 'smooth' });
-          updateDots();
-        }, 4000);
-      });
+      track.addEventListener('mouseenter', stopAuto);
+      track.addEventListener('mouseleave', startAuto);
+      track.addEventListener('touchstart',  stopAuto, { passive: true });
+      track.addEventListener('touchend',    () => setTimeout(startAuto, 2000), { passive: true });
 
-      updateDots();
+      // Reconstruir dots al cambiar tamaño de ventana
+      window.addEventListener('resize', () => { buildDots(); });
+
+      buildDots();
+      startAuto();
     })();
   </script>
 
