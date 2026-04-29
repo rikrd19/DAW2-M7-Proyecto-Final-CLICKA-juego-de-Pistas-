@@ -3,6 +3,7 @@ require_once '../config/globals.php';
 require_once '../includes/auth.php';
 
 $pageTitle = 'Registro de Usuario';
+$backUrl = is_admin() ? 'users.php' : '../index.php';
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -53,7 +54,10 @@ $pageTitle = 'Registro de Usuario';
                     <input type="text" class="form-control bg-light" value="Jugador" disabled>
                     <div class="form-text">Las nuevas cuentas se crean como jugador.</div>
                 </div>
-                <button type="submit" class="btn btn-accent w-100 py-2 fw-bold">CREAR CUENTA</button>
+                <div class="d-flex gap-2">
+                    <a href="<?php echo htmlspecialchars($backUrl); ?>" class="btn btn-outline-accent w-50 py-2 fw-bold">VOLVER</a>
+                    <button type="submit" class="btn btn-accent w-50 py-2 fw-bold">CREAR CUENTA</button>
+                </div>
             </form>
         </div>
     </div>
