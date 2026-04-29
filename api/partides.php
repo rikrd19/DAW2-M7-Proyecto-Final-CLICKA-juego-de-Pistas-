@@ -3,8 +3,8 @@
 /**
  * Game rounds (partidas) API.
  *
- * GET  → returns ranking rows for registered users (one best score per user).
- *        Response: [ { id, usuario_id, nombre, puntos, tema, fecha }, … ]
+ * GET  → returns ranking rows for registered users (total points summed across all saved rounds).
+ *        tema lists distinct themes played (comma-separated). Response shape unchanged for clients.
  *
  * POST → saves a completed round.
  *        Body: { "puntos": <int>, "tema": "<string>", "usuario_id": <int|null>, "nombre_temporal": "<string|null>" }
@@ -18,27 +18,21 @@ header('Content-Type: application/json; charset=utf-8');
 
 $method = $_SERVER['REQUEST_METHOD'] ?? '';
 
-/* ── GET: ranking for registered users only (best score per user) ─────── */
+/* ── GET: ranking for registered users (sum of puntos, distinct temas listed) ─ */
 if ($method === 'GET') {
     require_once dirname(__DIR__) . '/includes/db.php';
     try {
         $result = $db->query(
-            "SELECT p.id,
+            "SELECT MIN(p.id) AS id,
                     p.usuario_id,
                     u.username AS nombre,
-                    p.puntos,
-                    p.tema,
-                    p.fecha
+                    SUM(p.puntos) AS puntos,
+                    GROUP_CONCAT(DISTINCT p.tema) AS tema,
+                    MAX(p.fecha) AS fecha
              FROM partidas p
              INNER JOIN usuarios u ON u.id = p.usuario_id
-             WHERE p.id = (
-                 SELECT p2.id
-                 FROM partidas p2
-                 WHERE p2.usuario_id = p.usuario_id
-                 ORDER BY p2.puntos DESC, p2.fecha ASC, p2.id ASC
-                 LIMIT 1
-             )
-             ORDER BY p.puntos DESC, p.fecha ASC, p.id ASC"
+             GROUP BY p.usuario_id, u.username
+             ORDER BY SUM(p.puntos) DESC, MAX(p.fecha) DESC, u.username COLLATE NOCASE ASC"
         );
         $rows = [];
         while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
