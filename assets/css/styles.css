@@ -847,6 +847,95 @@ footer a:hover { text-decoration: underline; }
 }
 
 /* ══════════════════════════════════════════════════════════
+   CARRUSEL DE TEMÁTICAS
+   ══════════════════════════════════════════════════════════ */
+
+.carrusel-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Track: scrollable, sin scrollbar visible */
+.carrusel-track {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 0.5rem 0.25rem 1.25rem;
+  flex: 1;
+}
+.carrusel-track::-webkit-scrollbar { display: none; }
+
+/* Cada tarjeta ocupa 1/4 del track en desktop */
+.carrusel-item {
+  flex: 0 0 calc(25% - 0.75rem);
+  scroll-snap-align: start;
+  min-width: 200px;
+}
+
+/* Botones de navegación */
+.carrusel-btn {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid var(--clika-border-strong);
+  background: var(--clika-card-bg);
+  color: var(--clika-primary);
+  font-size: 1.5rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 10px var(--clika-shadow-dark);
+  transition: background .2s, box-shadow .2s, transform .15s;
+  align-self: center;
+}
+.carrusel-btn:hover {
+  background: var(--clika-primary);
+  color: #fff;
+  box-shadow: 0 4px 16px var(--clika-shadow);
+  transform: scale(1.08);
+}
+
+/* Puntos indicadores */
+.carrusel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.45rem;
+  margin-top: 0.25rem;
+}
+.carrusel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: var(--clika-border-strong);
+  padding: 0;
+  cursor: pointer;
+  transition: background .25s, transform .25s;
+}
+.carrusel-dot.active {
+  background: var(--clika-primary);
+  transform: scale(1.35);
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+  .carrusel-item { flex: 0 0 calc(50% - 0.5rem); }
+}
+@media (max-width: 575px) {
+  .carrusel-item { flex: 0 0 85%; }
+  .carrusel-btn  { width: 34px; height: 34px; font-size: 1.2rem; }
+}
+
+/* ══════════════════════════════════════════════════════════
    MODAL INSTRUCCIONES — usa las mismas clases .carta del juego
    ══════════════════════════════════════════════════════════ */
 

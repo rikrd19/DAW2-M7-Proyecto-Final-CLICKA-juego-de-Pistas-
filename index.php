@@ -1,35 +1,55 @@
 <?php
-// Load global configuration and session
 require_once 'config/globals.php';
 
 $pageTitle = 'Inicio';
 
-$temas = [
-  [
-    'slug' => 'historia',
-    'titulo' => 'Historia',
-    'descripcion' => 'Viaja al pasado y resuelve misterios de civilizaciones antiguas.',
-    'icono' => '&#127963;',
-  ],
-  [
-    'slug' => 'ciencia',
-    'titulo' => 'Ciencia',
-    'descripcion' => 'Descifra enigmas del mundo científico y tecnológico.',
-    'icono' => '&#128300;',
-  ],
-  [
-    'slug' => 'cultura',
-    'titulo' => 'Cultura Popular',
-    'descripcion' => 'Demuestra cuánto sabes de cine, música, series y más.',
-    'icono' => '&#127916;',
-  ],
-  [
-    'slug' => 'banderas',
-    'titulo' => 'Banderas del Mundo',
-    'descripcion' => 'Adivina el país a partir de su bandera y otras pistas geográficas.',
-    'icono' => '&#127988;',
-    'href' => 'pages/banderes.php',
-  ],
+// Meta-info (icon + description) keyed by normalized first word
+$temaMeta = [
+  'adivinanzas' => ['icono' => '&#128161;', 'descripcion' => 'Resuelve acertijos y adivinanzas que pondrán a prueba tu ingenio.'],
+  'ciencia'     => ['icono' => '&#128300;', 'descripcion' => 'Descifra enigmas del mundo científico y tecnológico.'],
+  'cultura'     => ['icono' => '&#127917;', 'descripcion' => 'Demuestra cuánto sabes de cine, música, series y más.'],
+  'historia'    => ['icono' => '&#127963;', 'descripcion' => 'Viaja al pasado y resuelve misterios de civilizaciones antiguas.'],
+  'geografia'   => ['icono' => '&#127758;', 'descripcion' => 'Explora el mundo a través de pistas y claves geográficas.'],
+  'deportes'    => ['icono' => '&#9917;',   'descripcion' => 'Fútbol, baloncesto, atletismo y mucho más deporte.'],
+  'arte'        => ['icono' => '&#127912;', 'descripcion' => 'Descubre obras, artistas y movimientos del mundo del arte.'],
+  'musica'      => ['icono' => '&#127925;', 'descripcion' => 'Adivina canciones, artistas y géneros de todas las épocas.'],
+  'tecnologia'  => ['icono' => '&#128187;', 'descripcion' => 'Pon a prueba tus conocimientos sobre gadgets, software y tech.'],
+  'cine'        => ['icono' => '&#127916;', 'descripcion' => 'Actores, directores y películas icónicas del séptimo arte.'],
+  'naturaleza'  => ['icono' => '&#127807;', 'descripcion' => 'Animales, plantas y fenómenos naturales del planeta.'],
+];
+
+// Load themes from DB
+$temas = [];
+$dbPath = 'database/clicka.db';
+if (is_file($dbPath)) {
+  try {
+    $db     = new SQLite3($dbPath);
+    $result = $db->query('SELECT id, nombre FROM temas ORDER BY id');
+    while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+      $slug = mb_strtolower($row['nombre'], 'UTF-8');
+      $slug = str_replace(['á','é','í','ó','ú','ü','ñ'], ['a','e','i','o','u','u','n'], $slug);
+      $slug = strtok($slug, ' ');
+      $meta = $temaMeta[$slug] ?? ['icono' => '&#10067;', 'descripcion' => ''];
+      $temas[] = [
+        'slug'        => $slug,
+        'titulo'      => $row['nombre'],
+        'descripcion' => $meta['descripcion'],
+        'icono'       => $meta['icono'],
+        'href'        => 'pages/play.php?tema=' . urlencode($slug),
+      ];
+    }
+    $db->close();
+  } catch (Throwable) {}
+}
+
+// Add Banderas del Mundo as special entry
+$temas[] = [
+  'slug'        => 'banderas',
+  'titulo'      => 'Banderas del Mundo',
+  'descripcion' => 'Adivina el país a partir de su bandera y otras pistas geográficas.',
+  'icono'       => '&#127988;',
+  'href'        => 'pages/banderes.php',
+  'banderas'    => true,
 ];
 ?>
 <!DOCTYPE html>
@@ -57,57 +77,69 @@ $temas = [
           El juego de pistas que pondrá a prueba tus conocimientos.<br>
           Elige una temática y empieza a jugar.
         </p>
-        <a href="pages/play.php" class="btn btn-accent px-4 py-2 me-2">
-          Jugar ahora
-        </a>
         <a href="pages/ranking.php" class="btn btn-outline-accent px-4 py-2">
           Ver ranking
         </a>
       </div>
     </section>
 
-    <!-- Temáticas -->
+    <!-- Carrusel de temáticas -->
     <section class="temas-section container">
       <div class="text-center mb-4">
         <p class="section-eyebrow">Elige tu categoría</p>
-        <h2 class="h4 fw-bold" style="color:var(--clicka-text)">¿De qué quieres demostrar que sabes?</h2>
+        <h2 class="h4 fw-bold" style="color:var(--clika-text)">¿De qué quieres demostrar que sabes?</h2>
       </div>
 
-      <div class="row g-4 justify-content-center">
-        <?php foreach ($temas as $tema): ?>
-          <?php $href = isset($tema['href']) ? $tema['href'] : 'pages/play.php?tema=' . urlencode($tema['slug']); ?>
-          <?php $esBanderas = isset($tema['href']); ?>
-          <div class="col-10 col-sm-6 col-lg-3">
-            <article class="card tema-card h-100 border-0">
-              <div class="card-body d-flex flex-column align-items-center text-center py-4 px-3">
+      <div class="carrusel-wrapper">
+        <!-- Botón anterior -->
+        <button class="carrusel-btn carrusel-btn-prev" id="carrusel-prev" aria-label="Anterior">
+          &#8249;
+        </button>
 
-                <div class="tema-icon-wrap">
-                  <span class="tema-icon" aria-hidden="true"><?php echo $tema['icono']; ?></span>
+        <!-- Track deslizable -->
+        <div class="carrusel-track" id="carrusel-track">
+          <?php foreach ($temas as $tema): ?>
+            <?php $esBanderas = isset($tema['banderas']); ?>
+            <div class="carrusel-item">
+              <article class="card tema-card h-100 border-0">
+                <div class="card-body d-flex flex-column align-items-center text-center py-4 px-3">
+
+                  <div class="tema-icon-wrap">
+                    <span class="tema-icon" aria-hidden="true"><?php echo $tema['icono']; ?></span>
+                  </div>
+
+                  <h3 class="card-title mb-2">
+                    <?php echo htmlspecialchars($tema['titulo']); ?>
+                  </h3>
+
+                  <p class="card-text flex-grow-1 mb-4">
+                    <?php echo htmlspecialchars($tema['descripcion']); ?>
+                  </p>
+
+                  <button
+                    type="button"
+                    class="btn btn-primary w-100 btn-jugar-modal"
+                    data-dest="<?php echo htmlspecialchars($tema['href']); ?>"
+                    data-banderas="<?php echo $esBanderas ? '1' : '0'; ?>"
+                    data-bs-toggle="modal"
+                    data-bs-target="#modal-instruccions"
+                    aria-label="Jugar temática <?php echo htmlspecialchars($tema['titulo']); ?>">
+                    Jugar
+                  </button>
                 </div>
+              </article>
+            </div>
+          <?php endforeach; ?>
+        </div>
 
-                <h3 class="card-title mb-2">
-                  <?php echo htmlspecialchars($tema['titulo']); ?>
-                </h3>
-
-                <p class="card-text flex-grow-1 mb-4">
-                  <?php echo htmlspecialchars($tema['descripcion']); ?>
-                </p>
-
-                <button
-                  type="button"
-                  class="btn btn-primary w-100 btn-jugar-modal"
-                  data-dest="<?php echo htmlspecialchars($href); ?>"
-                  data-banderas="<?php echo $esBanderas ? '1' : '0'; ?>"
-                  data-bs-toggle="modal"
-                  data-bs-target="#modal-instruccions"
-                  aria-label="Jugar temática <?php echo htmlspecialchars($tema['titulo']); ?>">
-                  Jugar
-                </button>
-              </div>
-            </article>
-          </div>
-        <?php endforeach; ?>
+        <!-- Botón siguiente -->
+        <button class="carrusel-btn carrusel-btn-next" id="carrusel-next" aria-label="Siguiente">
+          &#8250;
+        </button>
       </div>
+
+      <!-- Indicadores de puntos -->
+      <div class="carrusel-dots" id="carrusel-dots"></div>
     </section>
 
   </main>
@@ -117,17 +149,14 @@ $temas = [
     <div class="modal-dialog modal-dialog-centered" style="max-width:440px">
       <div class="modal-content">
 
-        <!-- Carta XL: misma estructura que las cartas del juego -->
         <div class="carta carta-xl" id="modal-carta">
           <div class="carta-inner">
 
-            <!-- CARA TRASERA — idéntica al dorso de las cartas del juego -->
             <div class="carta-back">
               <span class="carta-back-label">Instrucciones</span>
               <span class="carta-back-icon" aria-hidden="true">&#127918;</span>
             </div>
 
-            <!-- CARA FRONTAL — contenido de instrucciones -->
             <div class="carta-front">
               <div class="carta-front-header">
                 <h5 class="carta-front-title" id="modal-instruccions-label">
@@ -168,10 +197,10 @@ $temas = [
                 <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
                 <a id="btn-modal-jugar" href="#" class="btn btn-primary px-4">&#9654; ¡Empezar!</a>
               </div>
-            </div><!-- /carta-front -->
+            </div>
 
-          </div><!-- /carta-inner -->
-        </div><!-- /carta -->
+          </div>
+        </div>
 
       </div>
     </div>
@@ -179,8 +208,9 @@ $temas = [
 
   <script>
     (function () {
-      const modalEl  = document.getElementById('modal-instruccions');
-      const modalCarta = document.getElementById('modal-carta'); // .carta — aquí va 'revelada'
+      /* ── Modal flip ── */
+      const modalEl    = document.getElementById('modal-instruccions');
+      const modalCarta = document.getElementById('modal-carta');
 
       modalEl.addEventListener('shown.bs.modal', () => {
         setTimeout(() => modalCarta.classList.add('revelada'), 60);
@@ -204,6 +234,91 @@ $temas = [
           document.getElementById('pista-label-4').textContent = esBanderas ? '+ Población'     : '4 pistas';
         });
       });
+
+      /* ── Carrusel ── */
+      const track   = document.getElementById('carrusel-track');
+      const btnPrev = document.getElementById('carrusel-prev');
+      const btnNext = document.getElementById('carrusel-next');
+      const dotsEl  = document.getElementById('carrusel-dots');
+
+      // Cuántas tarjetas se ven a la vez según el ancho
+      function visibles() {
+        if (window.innerWidth >= 992) return 4;
+        if (window.innerWidth >= 576) return 2;
+        return 1;
+      }
+
+      const items     = track.querySelectorAll('.carrusel-item');
+      const total     = items.length;
+      let   current   = 0;
+
+      // Crear puntos
+      const numDots = Math.ceil(total / visibles());
+      for (let i = 0; i < numDots; i++) {
+        const d = document.createElement('button');
+        d.className   = 'carrusel-dot';
+        d.setAttribute('aria-label', `Página ${i + 1}`);
+        d.addEventListener('click', () => goTo(i));
+        dotsEl.appendChild(d);
+      }
+
+      function updateDots() {
+        dotsEl.querySelectorAll('.carrusel-dot').forEach((d, i) => {
+          d.classList.toggle('active', i === Math.round(current / visibles()));
+        });
+      }
+
+      function goTo(page) {
+        current = page * visibles();
+        if (current >= total) current = total - visibles();
+        if (current < 0)      current = 0;
+        const itemW = items[0].offsetWidth + parseInt(getComputedStyle(track).gap);
+        track.scrollTo({ left: current * itemW, behavior: 'smooth' });
+        updateDots();
+      }
+
+      btnPrev.addEventListener('click', () => {
+        current = Math.max(0, current - visibles());
+        const itemW = items[0].offsetWidth + parseInt(getComputedStyle(track).gap);
+        track.scrollTo({ left: current * itemW, behavior: 'smooth' });
+        updateDots();
+      });
+
+      btnNext.addEventListener('click', () => {
+        current = Math.min(total - visibles(), current + visibles());
+        const itemW = items[0].offsetWidth + parseInt(getComputedStyle(track).gap);
+        track.scrollTo({ left: current * itemW, behavior: 'smooth' });
+        updateDots();
+      });
+
+      // Sincronizar dots al hacer scroll manual / touch
+      track.addEventListener('scroll', () => {
+        const itemW = items[0].offsetWidth + parseInt(getComputedStyle(track).gap);
+        current = Math.round(track.scrollLeft / itemW);
+        updateDots();
+      }, { passive: true });
+
+      // Auto-avance cada 4s (pausa al pasar el ratón)
+      let autoTimer = setInterval(() => {
+        const next = current + visibles() < total ? current + visibles() : 0;
+        current = next;
+        const itemW = items[0].offsetWidth + parseInt(getComputedStyle(track).gap);
+        track.scrollTo({ left: current * itemW, behavior: 'smooth' });
+        updateDots();
+      }, 4000);
+
+      track.addEventListener('mouseenter', () => clearInterval(autoTimer));
+      track.addEventListener('mouseleave', () => {
+        autoTimer = setInterval(() => {
+          const next = current + visibles() < total ? current + visibles() : 0;
+          current = next;
+          const itemW = items[0].offsetWidth + parseInt(getComputedStyle(track).gap);
+          track.scrollTo({ left: current * itemW, behavior: 'smooth' });
+          updateDots();
+        }, 4000);
+      });
+
+      updateDots();
     })();
   </script>
 
