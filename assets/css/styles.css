@@ -847,6 +847,133 @@ footer a:hover { text-decoration: underline; }
 }
 
 /* ══════════════════════════════════════════════════════════
+   CARRUSEL DE TEMÁTICAS
+   ══════════════════════════════════════════════════════════ */
+
+.carrusel-outer {
+  position: relative;
+}
+
+/* Degradados laterales que insinúan más contenido */
+.carrusel-outer::before,
+.carrusel-outer::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 1.5rem;
+  width: 60px;
+  z-index: 2;
+  pointer-events: none;
+}
+.carrusel-outer::before {
+  left: 44px;
+  background: linear-gradient(to right, var(--clika-bg) 0%, transparent 100%);
+}
+.carrusel-outer::after {
+  right: 44px;
+  background: linear-gradient(to left, var(--clika-bg) 0%, transparent 100%);
+}
+
+.carrusel-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Track: scrollable, sin scrollbar visible */
+.carrusel-track {
+  display: flex;
+  gap: 1.25rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 0.75rem 0.5rem 1.5rem;
+  flex: 1;
+}
+.carrusel-track::-webkit-scrollbar { display: none; }
+
+/* Tarjetas */
+.carrusel-item {
+  flex: 0 0 calc(25% - 0.95rem);
+  scroll-snap-align: start;
+  min-width: 195px;
+  transition: transform .3s ease, opacity .3s ease;
+}
+
+/* Botones de navegación — gradiente CLICKA */
+.carrusel-btn {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, var(--clika-primary), var(--clika-accent));
+  color: #fff;
+  font-size: 1.55rem;
+  font-weight: 700;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 16px var(--clika-shadow);
+  transition: filter .2s, transform .18s, box-shadow .2s;
+  align-self: center;
+  z-index: 3;
+}
+.carrusel-btn:hover {
+  filter: brightness(1.1);
+  transform: scale(1.1);
+  box-shadow: 0 6px 22px var(--clika-shadow);
+}
+.carrusel-btn:active {
+  transform: scale(0.96);
+}
+
+/* Puntos — se convierten en píldora cuando están activos */
+.carrusel-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.1rem;
+  padding-bottom: 0.5rem;
+}
+.carrusel-dot {
+  height: 8px;
+  width: 8px;
+  border-radius: 50px;
+  border: none;
+  background: var(--clika-border-strong);
+  padding: 0;
+  cursor: pointer;
+  transition: background .3s, width .3s cubic-bezier(.4,0,.2,1), opacity .3s;
+  opacity: .55;
+}
+.carrusel-dot.active {
+  background: linear-gradient(90deg, var(--clika-primary), var(--clika-accent));
+  width: 24px;
+  opacity: 1;
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+  .carrusel-item { flex: 0 0 calc(50% - 0.65rem); }
+  .carrusel-outer::before { left: 40px; }
+  .carrusel-outer::after  { right: 40px; }
+}
+@media (max-width: 575px) {
+  .carrusel-item  { flex: 0 0 82%; }
+  .carrusel-btn   { width: 36px; height: 36px; font-size: 1.25rem; }
+  .carrusel-outer::before,
+  .carrusel-outer::after { width: 36px; }
+  .carrusel-outer::before { left: 38px; }
+  .carrusel-outer::after  { right: 38px; }
+}
+
+/* ══════════════════════════════════════════════════════════
    MODAL INSTRUCCIONES — usa las mismas clases .carta del juego
    ══════════════════════════════════════════════════════════ */
 
