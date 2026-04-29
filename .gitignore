@@ -19,5 +19,10 @@
 .idea/
 *.swp
 
+# Python bytecode (generated locally when running/importing .py files — not needed in Git)
+__pycache__/
+*.py[cod]
+*$py.class
+
 # Claude Code / local assistant settings (not part of the web app)
 .claude/

@@ -47,6 +47,7 @@ let pistesVistes    = 1;   // clue counter: 1 = only pista1 revealed
 let maxPistes       = 3;   // 3 or 4 depending on pista_extra
 let puntsPartida    = 0;   // accumulated score for the round
 let respostaEnviada = false;
+let roundAnswers    = [];  // per-question analytics: clues_used + correctness
 
 /* ── Card reveal helper ─────────────────────────────────────── */
 function revelarCarta(el) {
@@ -80,6 +81,7 @@ function resetCartes() {
 function iniciarPartida() {
     numPregunta  = 0;
     puntsPartida = 0;
+    roundAnswers = [];
     temaSelector.hidden = true;
     gameArea.hidden     = false;
     fiPartida.hidden    = true;
@@ -243,6 +245,12 @@ function mostrarResultat(correct, punts) {
         resultatEl.className     = 'resultat-box resultat-error';
     }
 
+    roundAnswers.push({
+        question_id: preguntaActual && typeof preguntaActual.id === 'number' ? preguntaActual.id : null,
+        clues_used: pistesVistes,
+        correct: Boolean(correct),
+    });
+
     btnSegurentPregunta.textContent = numPregunta >= TOTAL_PREGUNTES
         ? 'Ver resultados'
         : 'Siguiente pregunta →';
@@ -273,6 +281,7 @@ async function acabarPartida() {
                 puntos:          puntsPartida,
                 tema:            temaNom,
                 nombre_temporal: null,
+                answers:         roundAnswers,
             }),
         });
         if (!resp.ok) {

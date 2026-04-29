@@ -49,6 +49,7 @@ const MAX_PISTES    = 4;         // flag + region + capital + population
 let puntsPartida    = 0;
 let respostaEnviada = false;
 let paisosUsats     = new Set(); // avoid repeating countries within a round
+let roundAnswers    = [];        // per-question analytics: clues_used + correctness
 
 /* ── Scoring ────────────────────────────────────────────────── */
 function scoreForClues(clues) {
@@ -92,6 +93,7 @@ async function iniciarPartida() {
     numPregunta          = 0;
     puntsPartida         = 0;
     paisosUsats.clear();
+    roundAnswers = [];
 
     try {
         if (!paisos) {
@@ -266,6 +268,12 @@ function mostrarResultat(correct, punts) {
         resultatEl.className = 'resultat-box resultat-error';
     }
 
+    roundAnswers.push({
+        question_id: null,
+        clues_used: pistesVistes,
+        correct: Boolean(correct),
+    });
+
     btnSegurentPregunta.textContent = numPregunta >= TOTAL_PREGUNTES
         ? 'Ver resultados'
         : 'Siguiente pregunta →';
@@ -309,6 +317,7 @@ async function acabarPartida() {
                 puntos:          puntsPartida,
                 tema:            'Banderas',
                 nombre_temporal: null,
+                answers:         roundAnswers,
             }),
         });
         if (!resp.ok) {
