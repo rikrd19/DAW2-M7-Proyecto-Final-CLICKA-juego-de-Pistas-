@@ -25,6 +25,13 @@ $pageTitle = 'Iniciar Sesión';
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
+
+        .login-register-cta {
+            border: 1px solid var(--clika-border);
+            background: var(--clika-surface);
+            border-radius: 12px;
+            padding: 0.9rem 1rem;
+        }
     </style>
 </head>
 
@@ -76,9 +83,11 @@ $pageTitle = 'Iniciar Sesión';
                     </form>
                 </div>
             </div>
-            <div class="text-center mt-3">
-                <p class="text-muted small">¿No tienes cuenta? <a href="register.php"
-                        class="text-accent text-decoration-none">Regístrate aquí</a></p>
+            <div class="login-register-cta text-center mt-3">
+                <p class="mb-2 fw-semibold">¿No tienes cuenta todavía?</p>
+                <a href="register.php" class="btn btn-outline-accent btn-sm px-3 fw-bold">
+                    Crear cuenta
+                </a>
             </div>
         </div>
     </div>
