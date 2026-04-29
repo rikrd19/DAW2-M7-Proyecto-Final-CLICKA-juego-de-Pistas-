@@ -70,6 +70,9 @@ if ($method !== 'POST') {
     exit;
 }
 
+// Must load session + DB before reading $_SESSION or using $db (fixes logged-in saves).
+require_once dirname(__DIR__) . '/includes/db.php';
+
 $raw  = file_get_contents('php://input') ?: '';
 $data = json_decode($raw, true);
 if (!is_array($data)) {
@@ -125,8 +128,6 @@ if ($sessionUserId === null) {
 }
 
 /* ── Logged-in path: persist to DB ─────────────────────────────────── */
-require_once dirname(__DIR__) . '/includes/db.php';
-
 try {
     // Backward-compatible analytics table creation for existing databases.
     $db->exec(
