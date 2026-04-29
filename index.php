@@ -18,16 +18,17 @@ $temas = [
     'icono' => '&#128300;',
   ],
   [
-    'slug' => 'geografia',
-    'titulo' => 'Geografía',
-    'descripcion' => 'Explora el mundo a través de pistas y claves geográficas.',
-    'icono' => '&#127758;',
-  ],
-  [
     'slug' => 'cultura',
     'titulo' => 'Cultura Popular',
     'descripcion' => 'Demuestra cuánto sabes de cine, música, series y más.',
     'icono' => '&#127916;',
+  ],
+  [
+    'slug' => 'banderas',
+    'titulo' => 'Banderas del Mundo',
+    'descripcion' => 'Adivina el país a partir de su bandera y otras pistas geográficas.',
+    'icono' => '&#127988;',
+    'href' => 'pages/banderes.php',
   ],
 ];
 ?>
@@ -74,6 +75,8 @@ $temas = [
 
       <div class="row g-4 justify-content-center">
         <?php foreach ($temas as $tema): ?>
+          <?php $href = isset($tema['href']) ? $tema['href'] : 'pages/play.php?tema=' . urlencode($tema['slug']); ?>
+          <?php $esBanderas = isset($tema['href']); ?>
           <div class="col-10 col-sm-6 col-lg-3">
             <article class="card tema-card h-100 border-0">
               <div class="card-body d-flex flex-column align-items-center text-center py-4 px-3">
@@ -90,11 +93,16 @@ $temas = [
                   <?php echo htmlspecialchars($tema['descripcion']); ?>
                 </p>
 
-                <a href="pages/play.php?tema=<?php echo urlencode($tema['slug']); ?>"
-                  class="btn btn-primary w-100 stretched-link"
+                <button
+                  type="button"
+                  class="btn btn-primary w-100 btn-jugar-modal"
+                  data-dest="<?php echo htmlspecialchars($href); ?>"
+                  data-banderas="<?php echo $esBanderas ? '1' : '0'; ?>"
+                  data-bs-toggle="modal"
+                  data-bs-target="#modal-instruccions"
                   aria-label="Jugar temática <?php echo htmlspecialchars($tema['titulo']); ?>">
                   Jugar
-                </a>
+                </button>
               </div>
             </article>
           </div>
@@ -103,5 +111,100 @@ $temas = [
     </section>
 
   </main>
+
+  <!-- ══ Modal instrucciones — misma animación .carta del juego ══ -->
+  <div class="modal fade" id="modal-instruccions" tabindex="-1" aria-labelledby="modal-instruccions-label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="max-width:440px">
+      <div class="modal-content">
+
+        <!-- Carta XL: misma estructura que las cartas del juego -->
+        <div class="carta carta-xl" id="modal-carta">
+          <div class="carta-inner">
+
+            <!-- CARA TRASERA — idéntica al dorso de las cartas del juego -->
+            <div class="carta-back">
+              <span class="carta-back-label">Instrucciones</span>
+              <span class="carta-back-icon" aria-hidden="true">&#127918;</span>
+            </div>
+
+            <!-- CARA FRONTAL — contenido de instrucciones -->
+            <div class="carta-front">
+              <div class="carta-front-header">
+                <h5 class="carta-front-title" id="modal-instruccions-label">
+                  &#127918; ¿Cómo se juega?
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+              </div>
+
+              <div class="carta-front-body">
+                <ol class="ps-3 mb-3" style="line-height:1.72;font-size:.88rem">
+                  <li>Se presentan <strong>5 preguntas</strong> sobre la temática elegida.</li>
+                  <li id="instruccio-pistes">Cada pregunta muestra <strong>hasta 4 pistas</strong> que puedes ir revelando una a una.</li>
+                  <li>Escribe tu respuesta y pulsa <strong>Comprobar</strong> (o Enter).</li>
+                  <li>Cuantas menos pistas uses, <strong>más puntos</strong> consigues.</li>
+                </ol>
+
+                <p class="fw-semibold mb-2" style="font-size:.85rem">&#9733; Puntuación por pregunta</p>
+                <table class="modal-scoring-table">
+                  <thead>
+                    <tr><th>Pistas usadas</th><th style="text-align:right">Puntos</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td id="pista-label-1">1 pista</td>  <td style="text-align:right;font-weight:700;color:#389e0d">4 pts</td></tr>
+                    <tr><td id="pista-label-2">2 pistas</td> <td style="text-align:right;font-weight:700;color:var(--clika-primary)">3 pts</td></tr>
+                    <tr><td id="pista-label-3">3 pistas</td> <td style="text-align:right;font-weight:700;color:#d48806">2 pts</td></tr>
+                    <tr><td id="pista-label-4">4 pistas</td> <td style="text-align:right;font-weight:700;color:var(--clika-muted)">1 pt</td></tr>
+                    <tr><td>Sin acertar</td>                 <td style="text-align:right;font-weight:700;color:#cf1322">0 pts</td></tr>
+                  </tbody>
+                </table>
+
+                <div style="background:var(--clika-surface);border:1px solid var(--clika-border);border-radius:10px;padding:.5rem .8rem;font-size:.78rem">
+                  &#127942; Máximo <strong>20 puntos</strong> por partida &nbsp;·&nbsp;
+                  Solo <strong>usuarios registrados</strong> aparecen en el ranking.
+                </div>
+              </div>
+
+              <div class="carta-front-footer">
+                <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
+                <a id="btn-modal-jugar" href="#" class="btn btn-primary px-4">&#9654; ¡Empezar!</a>
+              </div>
+            </div><!-- /carta-front -->
+
+          </div><!-- /carta-inner -->
+        </div><!-- /carta -->
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const modalEl  = document.getElementById('modal-instruccions');
+      const modalCarta = document.getElementById('modal-carta'); // .carta — aquí va 'revelada'
+
+      modalEl.addEventListener('shown.bs.modal', () => {
+        setTimeout(() => modalCarta.classList.add('revelada'), 60);
+      });
+      modalEl.addEventListener('hide.bs.modal', () => {
+        modalCarta.classList.remove('revelada');
+      });
+
+      document.querySelectorAll('.btn-jugar-modal').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const esBanderas = btn.dataset.banderas === '1';
+          document.getElementById('btn-modal-jugar').href = btn.dataset.dest;
+
+          document.getElementById('instruccio-pistes').innerHTML = esBanderas
+            ? 'Cada pregunta muestra una <strong>bandera</strong> y hasta 3 pistas más (región, capital, población).'
+            : 'Cada pregunta muestra <strong>hasta 4 pistas</strong> que puedes ir revelando una a una.';
+
+          document.getElementById('pista-label-1').textContent = esBanderas ? 'Solo la bandera' : '1 pista';
+          document.getElementById('pista-label-2').textContent = esBanderas ? '+ Región'        : '2 pistas';
+          document.getElementById('pista-label-3').textContent = esBanderas ? '+ Capital'       : '3 pistas';
+          document.getElementById('pista-label-4').textContent = esBanderas ? '+ Población'     : '4 pistas';
+        });
+      });
+    })();
+  </script>
 
   <?php include 'includes/foot.php'; ?>

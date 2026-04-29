@@ -77,15 +77,6 @@ function resetCartes() {
     });
 });
 
-/* ── Theme selection ────────────────────────────────────────── */
-document.querySelectorAll('.btn-tema').forEach(btn => {
-    btn.addEventListener('click', () => {
-        temaId  = parseInt(btn.dataset.temaId, 10);
-        temaNom = btn.dataset.temaNom;
-        iniciarPartida();
-    });
-});
-
 function iniciarPartida() {
     numPregunta  = 0;
     puntsPartida = 0;
@@ -300,6 +291,19 @@ async function acabarPartida() {
 
 /* ── Jugar otra vez ─────────────────────────────────────────── */
 btnTornar.addEventListener('click', () => {
-    fiPartida.hidden    = true;
-    temaSelector.hidden = false;
+    fiPartida.hidden = true;
+    if (typeof TEMA_PRESELECCIONAT !== 'undefined' && TEMA_PRESELECCIONAT !== null) {
+        // Came from index.php with a preselected tema → restart same tema
+        iniciarPartida();
+    } else {
+        temaSelector.hidden = false;
+    }
 });
+
+/* ── Auto-start when tema is preselected via URL ─────────── */
+if (typeof TEMA_PRESELECCIONAT !== 'undefined' && TEMA_PRESELECCIONAT !== null) {
+    const preBtn = document.querySelector(`.btn-tema[data-tema-id="${TEMA_PRESELECCIONAT}"]`);
+    temaId  = TEMA_PRESELECCIONAT;
+    temaNom = preBtn ? preBtn.dataset.temaNom : '';
+    iniciarPartida();
+}

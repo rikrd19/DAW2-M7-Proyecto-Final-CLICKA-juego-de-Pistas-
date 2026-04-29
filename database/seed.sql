@@ -1,9 +1,8 @@
 -- Create initial themes
 INSERT INTO temas (nombre) VALUES
-    ('adivinanzas'),
-    ('cine'),
-    ('banderas'),
-    ('dichos');
+    ('Historia'),
+    ('Ciencia'),
+    ('Cultura Popular');
 
 -- Initial Administrator (login email + password for local/demo only)
 -- password_hash('admin123', PASSWORD_DEFAULT) — login: admin@gmail.com / admin123

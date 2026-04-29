@@ -81,7 +81,8 @@ function resetCartes() {
 });
 
 /* ── Start button ───────────────────────────────────────────── */
-document.getElementById('btn-iniciar').addEventListener('click', iniciarPartida);
+// Auto-start: skip intro and begin immediately
+iniciarPartida();
 
 async function iniciarPartida() {
     banderesError.hidden = true;
@@ -325,7 +326,7 @@ async function acabarPartida() {
 
 /* ── Jugar otra vez ─────────────────────────────────────────── */
 btnTornar.addEventListener('click', () => {
-    fiPartida.hidden    = true;
-    temaSelector.hidden = false;
+    fiPartida.hidden = true;
     paisosUsats.clear();
+    iniciarPartida();
 });

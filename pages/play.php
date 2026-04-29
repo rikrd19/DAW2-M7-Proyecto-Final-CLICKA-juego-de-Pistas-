@@ -6,14 +6,27 @@ require_once dirname(__DIR__) . '/includes/auth.php';
 $basePath  = '../';
 $pageTitle = 'Jugar';
 
+// Meta-info for each DB theme (icon + description), keyed by normalized first word
+$temaMeta = [
+    'historia' => ['icono' => '&#127963;', 'descripcion' => 'Viaja al pasado y resuelve misterios de civilizaciones antiguas.'],
+    'ciencia'  => ['icono' => '&#128300;', 'descripcion' => 'Descifra enigmas del mundo científico y tecnológico.'],
+    'cultura'  => ['icono' => '&#127916;', 'descripcion' => 'Demuestra cuánto sabes de cine, música, series y más.'],
+];
+
 // Load available themes from DB for the selector
 $temas  = [];
 $dbPath = dirname(__DIR__) . '/database/clicka.db';
 if (is_file($dbPath)) {
     try {
         $db     = new SQLite3($dbPath);
-        $result = $db->query('SELECT id, nombre FROM temas ORDER BY nombre');
+        $result = $db->query('SELECT id, nombre FROM temas ORDER BY id');
         while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+            $slug = strtolower(str_replace(['á','é','í','ó','ú','ü','ñ'], ['a','e','i','o','u','u','n'],
+                mb_strtolower($row['nombre'], 'UTF-8')));
+            $slug = strtok($slug, ' ');
+            $row['slug']       = $slug;
+            $row['icono']      = $temaMeta[$slug]['icono']      ?? '&#10067;';
+            $row['descripcion']= $temaMeta[$slug]['descripcion'] ?? '';
             $temas[] = $row;
         }
         $db->close();
@@ -21,6 +34,19 @@ if (is_file($dbPath)) {
         // DB unavailable: theme selector will show an error message
     }
 }
+
+// Auto-start: detect ?tema= slug from index.php cards
+$temaPreseleccionat = null;
+$slugParam = trim($_GET['tema'] ?? '');
+if ($slugParam !== '' && !empty($temas)) {
+    foreach ($temas as $t) {
+        if ($t['slug'] === strtolower($slugParam)) {
+            $temaPreseleccionat = (int) $t['id'];
+            break;
+        }
+    }
+}
+$autoInicia = $temaPreseleccionat !== null;
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -34,58 +60,66 @@ if (is_file($dbPath)) {
   <main class="container-fluid game-layout py-3">
 
     <!-- ══ PASO 1: Selector de tema ══════════════════════════════════ -->
-    <section id="tema-selector">
+    <section id="tema-selector" <?php if ($autoInicia) echo 'hidden'; ?>>
       <div class="text-center mb-3">
         <p class="section-eyebrow">Antes de empezar</p>
         <h1 class="h3 fw-bold" style="color:var(--clika-text)">Elige una temática</h1>
         <p class="text-muted">Responde 5 preguntas y consigue la máxima puntuación.</p>
       </div>
 
-      <?php if (empty($temas)): ?>
-        <div class="alert alert-warning text-center">
-          No hay temáticas disponibles. Asegúrate de que la base de datos está inicializada.
-        </div>
-      <?php else: ?>
-        <div class="row g-4 justify-content-center">
-          <?php foreach ($temas as $tema): ?>
-          <div class="col-10 col-sm-6 col-md-4 col-lg-3">
-            <button
-              type="button"
-              class="btn-tema card tema-card h-100 border-0 w-100 text-start p-0"
-              data-tema-id="<?php echo (int) $tema['id']; ?>"
-              data-tema-nom="<?php echo htmlspecialchars($tema['nombre']); ?>"
-            >
-              <div class="card-body d-flex flex-column align-items-center text-center py-4 px-3">
-                <div class="tema-icon-wrap mb-3">
-                  <span class="tema-icon" aria-hidden="true">&#10067;</span>
-                </div>
-                <h2 class="card-title h5 mb-2 text-capitalize">
-                  <?php echo htmlspecialchars($tema['nombre']); ?>
-                </h2>
-                <span class="btn btn-primary w-100 mt-3">Jugar</span>
+      <div class="row g-4 justify-content-center">
+        <?php foreach ($temas as $tema): ?>
+        <div class="col-10 col-sm-6 col-lg-3">
+          <article class="card tema-card h-100 border-0">
+            <div class="card-body d-flex flex-column align-items-center text-center py-4 px-3">
+              <div class="tema-icon-wrap">
+                <span class="tema-icon" aria-hidden="true"><?php echo $tema['icono']; ?></span>
               </div>
-            </button>
-          </div>
-          <?php endforeach; ?>
-
-          <!-- Temática especial: Banderas del Mundo -->
-          <div class="col-10 col-sm-6 col-md-4 col-lg-3">
-            <a
-              href="<?php echo BASE_URL; ?>/pages/banderes.php"
-              class="card tema-card h-100 border-0 w-100 text-decoration-none p-0"
-            >
-              <div class="card-body d-flex flex-column align-items-center text-center py-4 px-3">
-                <div class="tema-icon-wrap mb-3">
-                  <span class="tema-icon" aria-hidden="true">&#127988;</span>
-                </div>
-                <h2 class="card-title h5 mb-2">Banderas del Mundo</h2>
-                <span class="btn btn-primary w-100 mt-3">Jugar</span>
-              </div>
-            </a>
-          </div>
-
+              <h3 class="card-title mb-2">
+                <?php echo htmlspecialchars($tema['nombre']); ?>
+              </h3>
+              <p class="card-text flex-grow-1 mb-4">
+                <?php echo htmlspecialchars($tema['descripcion']); ?>
+              </p>
+              <button
+                type="button"
+                class="btn btn-primary w-100 btn-jugar-modal"
+                data-dest="<?php echo BASE_URL; ?>/pages/play.php?tema=<?php echo urlencode($tema['slug']); ?>"
+                data-banderas="0"
+                data-bs-toggle="modal"
+                data-bs-target="#modal-instruccions">
+                Jugar
+              </button>
+            </div>
+          </article>
         </div>
-      <?php endif; ?>
+        <?php endforeach; ?>
+
+        <!-- Banderas del Mundo -->
+        <div class="col-10 col-sm-6 col-lg-3">
+          <article class="card tema-card h-100 border-0">
+            <div class="card-body d-flex flex-column align-items-center text-center py-4 px-3">
+              <div class="tema-icon-wrap">
+                <span class="tema-icon" aria-hidden="true">&#127988;</span>
+              </div>
+              <h3 class="card-title mb-2">Banderas del Mundo</h3>
+              <p class="card-text flex-grow-1 mb-4">
+                Adivina el país a partir de su bandera y otras pistas geográficas.
+              </p>
+              <button
+                type="button"
+                class="btn btn-primary w-100 btn-jugar-modal"
+                data-dest="<?php echo BASE_URL; ?>/pages/banderes.php"
+                data-banderas="1"
+                data-bs-toggle="modal"
+                data-bs-target="#modal-instruccions">
+                Jugar
+              </button>
+            </div>
+          </article>
+        </div>
+
+      </div>
     </section>
 
     <!-- ══ PASO 2: Pantalla de juego ═════════════════════════════════ -->
@@ -224,9 +258,103 @@ if (is_file($dbPath)) {
 
   </main>
 
+  <!-- ══ Modal instrucciones — misma animación .carta del juego ══ -->
+  <div class="modal fade" id="modal-instruccions" tabindex="-1" aria-labelledby="modal-instruccions-label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="max-width:440px">
+      <div class="modal-content">
+
+        <div class="carta carta-xl" id="modal-carta">
+          <div class="carta-inner">
+
+            <!-- CARA TRASERA -->
+            <div class="carta-back">
+              <span class="carta-back-label">Instrucciones</span>
+              <span class="carta-back-icon" aria-hidden="true">&#127918;</span>
+            </div>
+
+            <!-- CARA FRONTAL -->
+            <div class="carta-front">
+              <div class="carta-front-header">
+                <h5 class="carta-front-title" id="modal-instruccions-label">
+                  &#127918; ¿Cómo se juega?
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+              </div>
+
+              <div class="carta-front-body">
+                <ol class="ps-3 mb-3" style="line-height:1.72;font-size:.88rem">
+                  <li>Se presentan <strong>5 preguntas</strong> sobre la temática elegida.</li>
+                  <li id="instruccio-pistes">Cada pregunta muestra <strong>hasta 4 pistas</strong> que puedes ir revelando una a una.</li>
+                  <li>Escribe tu respuesta y pulsa <strong>Comprobar</strong> (o Enter).</li>
+                  <li>Cuantas menos pistas uses, <strong>más puntos</strong> consigues.</li>
+                </ol>
+
+                <p class="fw-semibold mb-2" style="font-size:.85rem">&#9733; Puntuación por pregunta</p>
+                <table class="modal-scoring-table">
+                  <thead>
+                    <tr><th>Pistas usadas</th><th style="text-align:right">Puntos</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td id="pista-label-1">1 pista</td>  <td style="text-align:right;font-weight:700;color:#389e0d">4 pts</td></tr>
+                    <tr><td id="pista-label-2">2 pistas</td> <td style="text-align:right;font-weight:700;color:var(--clika-primary)">3 pts</td></tr>
+                    <tr><td id="pista-label-3">3 pistas</td> <td style="text-align:right;font-weight:700;color:#d48806">2 pts</td></tr>
+                    <tr><td id="pista-label-4">4 pistas</td> <td style="text-align:right;font-weight:700;color:var(--clika-muted)">1 pt</td></tr>
+                    <tr><td>Sin acertar</td>                 <td style="text-align:right;font-weight:700;color:#cf1322">0 pts</td></tr>
+                  </tbody>
+                </table>
+
+                <div style="background:var(--clika-surface);border:1px solid var(--clika-border);border-radius:10px;padding:.5rem .8rem;font-size:.78rem">
+                  &#127942; Máximo <strong>20 puntos</strong> por partida &nbsp;·&nbsp;
+                  Solo <strong>usuarios registrados</strong> aparecen en el ranking.
+                </div>
+              </div>
+
+              <div class="carta-front-footer">
+                <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
+                <a id="btn-modal-jugar" href="#" class="btn btn-primary px-4">&#9654; ¡Empezar!</a>
+              </div>
+            </div><!-- /carta-front -->
+
+          </div><!-- /carta-inner -->
+        </div><!-- /carta -->
+
+      </div>
+    </div>
+  </div>
+
   <script>
-    const USUARI_ID = <?php echo is_logged_in() ? (int) $_SESSION['usuari_id'] : 'null'; ?>;
+    const USUARI_ID            = <?php echo is_logged_in() ? (int) $_SESSION['usuari_id'] : 'null'; ?>;
+    const TEMA_PRESELECCIONAT  = <?php echo $temaPreseleccionat !== null ? $temaPreseleccionat : 'null'; ?>;
   </script>
   <script src="../assets/js/joc.js"></script>
+  <script>
+    (function () {
+      const modalEl    = document.getElementById('modal-instruccions');
+      const modalCarta = document.getElementById('modal-carta'); // .carta — aquí va 'revelada'
+
+      modalEl.addEventListener('shown.bs.modal', () => {
+        setTimeout(() => modalCarta.classList.add('revelada'), 60);
+      });
+      modalEl.addEventListener('hide.bs.modal', () => {
+        modalCarta.classList.remove('revelada');
+      });
+
+      document.querySelectorAll('.btn-jugar-modal').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const esBanderas = btn.dataset.banderas === '1';
+          document.getElementById('btn-modal-jugar').href = btn.dataset.dest;
+
+          document.getElementById('instruccio-pistes').innerHTML = esBanderas
+            ? 'Cada pregunta muestra una <strong>bandera</strong> y hasta 3 pistas más (región, capital, población).'
+            : 'Cada pregunta muestra <strong>hasta 4 pistas</strong> que puedes ir revelando una a una.';
+
+          document.getElementById('pista-label-1').textContent = esBanderas ? 'Solo la bandera' : '1 pista';
+          document.getElementById('pista-label-2').textContent = esBanderas ? '+ Región'        : '2 pistas';
+          document.getElementById('pista-label-3').textContent = esBanderas ? '+ Capital'       : '3 pistas';
+          document.getElementById('pista-label-4').textContent = esBanderas ? '+ Población'     : '4 pistas';
+        });
+      });
+    })();
+  </script>
 
   <?php include '../includes/foot.php'; ?>

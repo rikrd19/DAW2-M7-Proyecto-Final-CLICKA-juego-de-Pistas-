@@ -18,7 +18,7 @@ $pageTitle = 'Banderas del Mundo';
   <main class="container-fluid game-layout py-3">
 
     <!-- ══ PASO 1: Intro / inicio ════════════════════════════════ -->
-    <section id="tema-selector">
+    <section id="tema-selector" hidden>
       <div class="text-center mb-3">
         <p class="section-eyebrow">Temática especial</p>
         <h1 class="h3 fw-bold" style="color:var(--clika-text)">
