@@ -111,16 +111,16 @@ Processes (login/register/delete)              Scripts Python (generator.py + se
 
 ### Capturas de funcionamiento API
 
-Rutas disponibles:
+Enlaces directos:
 
-- `assets/images/screenshot/validate_respuesta_correcta.png`
-- `assets/images/screenshot/validate_respuesta_incorrecta.png`
-- `assets/images/screenshot/validate_pregunta_no_existe.png`
-- `assets/images/screenshot/validate_pistas_usadas_invalido.png`
-- `assets/images/screenshot/validate_JSON_invalido.png`
-- `assets/images/screenshot/validate_metodo_incorrecto.png`
-- `assets/images/screenshot/rounds.png`
-- `assets/images/screenshot/rounds_guardar_partida_invitado.png`
+- [validate_respuesta_correcta](assets/images/screenshot/validate_respuesta_correcta.png)
+- [validate_respuesta_incorrecta](assets/images/screenshot/validate_respuesta_incorrecta.png)
+- [validate_pregunta_no_existe](assets/images/screenshot/validate_pregunta_no_existe.png)
+- [validate_pistas_usadas_invalido](assets/images/screenshot/validate_pistas_usadas_invalido.png)
+- [validate_JSON_invalido](assets/images/screenshot/validate_JSON_invalido.png)
+- [validate_metodo_incorrecto](assets/images/screenshot/validate_metodo_incorrecto.png)
+- [rounds](assets/images/screenshot/rounds.png)
+- [rounds_guardar_partida_invitado](assets/images/screenshot/rounds_guardar_partida_invitado.png)
 
 Analisis de vigencia con el estado actual del proyecto:
 
@@ -129,13 +129,13 @@ Analisis de vigencia con el estado actual del proyecto:
 
 ### Capturas de errores HTTP del frontend
 
-Rutas disponibles:
+Enlaces directos:
 
-- `assets/images/errors/error_400.png`
-- `assets/images/errors/error_401.png`
-- `assets/images/errors/error_403.png`
-- `assets/images/errors/error_404.png`
-- `assets/images/errors/error_500.png`
+- [error_400](assets/images/errors/error_400.png)
+- [error_401](assets/images/errors/error_401.png)
+- [error_403](assets/images/errors/error_403.png)
+- [error_404](assets/images/errors/error_404.png)
+- [error_500](assets/images/errors/error_500.png)
 
 Estas imagenes se utilizan en `error.php` para renderizar la pantalla de error segun el codigo HTTP (`?code=400`, `?code=401`, etc.).
 
