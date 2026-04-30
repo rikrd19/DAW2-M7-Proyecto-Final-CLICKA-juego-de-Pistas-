@@ -340,7 +340,7 @@ $autoInicia = $temaPreseleccionat !== null;
     const TEMA_PRESELECCIONAT  = <?php echo $temaPreseleccionat !== null ? $temaPreseleccionat : 'null'; ?>;
     const TEMA_NOM_PRESELECCIONAT = <?php echo json_encode($temaNomPreseleccionat, JSON_UNESCAPED_UNICODE); ?>;
   </script>
-  <script src="../assets/js/joc.js"></script>
+  <script src="../assets/js/joc.js?v=<?php echo (int) @filemtime(__DIR__ . '/../assets/js/joc.js'); ?>"></script>
   <script>
     (function () {
       const modalEl    = document.getElementById('modal-instruccions');

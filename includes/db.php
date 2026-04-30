@@ -11,7 +11,8 @@ require_once dirname(__DIR__) . '/config/globals.php';
 try {
     $db = new SQLite3(DB_PATH);
     $db->enableExceptions(true);
-    
+    $db->busyTimeout(60000);
+
     // Enforce foreign keys locally for this connection
     $db->exec('PRAGMA foreign_keys = ON;');
 } catch (Throwable $e) {

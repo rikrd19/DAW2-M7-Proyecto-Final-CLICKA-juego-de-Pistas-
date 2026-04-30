@@ -131,8 +131,9 @@ async function carregarPregunta(tema_id) {
     pista3Text.textContent = q.pista3;
 
     pistaExtraEl.classList.remove('carta-bloqueada');
-    if (q.pista_extra && q.pista_extra.trim() !== '') {
-        pistaExtraText.textContent = q.pista_extra;
+    const extraText = q.pista_extra != null ? String(q.pista_extra).trim() : '';
+    if (extraText !== '') {
+        pistaExtraText.textContent = extraText;
         maxPistes = 4;
     } else {
         pistaExtraEl.classList.add('carta-bloqueada');
@@ -186,6 +187,12 @@ async function comprovarResposta() {
         return;
     }
 
+    const preguntaId = Number(preguntaActual?.id);
+    if (!Number.isFinite(preguntaId) || preguntaId < 1) {
+        mostrarFeedback('error', 'La pregunta no esta lista. Recarga la pagina.');
+        return;
+    }
+
     btnComprovar.disabled = true;
     feedbackEl.hidden     = true;
 
@@ -194,13 +201,35 @@ async function comprovarResposta() {
             method:  'POST',
             headers: { 'Content-Type': 'application/json' },
             body:    JSON.stringify({
-                pregunta_id:   preguntaActual.id,
+                pregunta_id:   preguntaId,
                 respuesta:     resposta,
                 pistas_vistas: pistesVistes,
             }),
         });
 
-        const result = await resp.json();
+        const rawText = await resp.text();
+        let result = null;
+        try {
+            result = rawText ? JSON.parse(rawText) : null;
+        } catch (_) {
+            result = null;
+        }
+
+        if (!resp.ok) {
+            const msg =
+                result && typeof result.error === 'string'
+                    ? result.error
+                    : `Error del servidor (${resp.status}).`;
+            mostrarFeedback('error', msg);
+            btnComprovar.disabled = false;
+            return;
+        }
+
+        if (!result || typeof result.correcto !== 'boolean') {
+            mostrarFeedback('error', 'Respuesta invalida del servidor. Revisa la peticion validate.php en Red.');
+            btnComprovar.disabled = false;
+            return;
+        }
 
         if (result.correcto) {
             respostaEnviada = true;

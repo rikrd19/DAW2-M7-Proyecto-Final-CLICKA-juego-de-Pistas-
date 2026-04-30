@@ -62,7 +62,11 @@ require_once dirname(__DIR__) . '/includes/db.php';
  */
 function normalize_answer(string $value): string
 {
-    $value = trim(mb_strtolower($value, 'UTF-8'));
+    $value = trim($value);
+    // mbstring may be disabled on some PHP builds; avoid fatal TypeError on mb_strtolower.
+    $value = function_exists('mb_strtolower')
+        ? mb_strtolower($value, 'UTF-8')
+        : strtolower($value);
     // Make gameplay friendlier: answers with/without accents are treated as equal.
     $value = strtr(
         $value,
@@ -130,8 +134,13 @@ try {
         $payload['respuesta_correcta'] = trim((string) $row['respuesta']);
     }
 
-    echo json_encode($payload, JSON_UNESCAPED_UNICODE);
-} catch (Throwable) {
+    $json = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_INVALID_UTF8_SUBSTITUTE);
+    if ($json === false) {
+        throw new RuntimeException('json_encode failed for validate payload');
+    }
+    echo $json;
+} catch (Throwable $e) {
+    error_log('validate.php: ' . $e->getMessage());
     http_response_code(500);
     echo json_encode(['error' => 'Internal server error'], JSON_UNESCAPED_UNICODE);
 } finally {

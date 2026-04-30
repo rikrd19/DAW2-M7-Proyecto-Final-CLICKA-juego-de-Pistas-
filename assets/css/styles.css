@@ -16,9 +16,9 @@
   --clika-shadow:        rgba(255, 140, 87, 0.18);
   --clika-shadow-dark:   rgba(44, 44, 62, 0.08);
 
-  /* Fuentes */
-  --font-heading: 'Poppins', sans-serif;
-  --font-body:    'Nunito', sans-serif;
+  /* Fonts: system UI stack (no external requests; works offline / behind strict firewalls) */
+  --font-heading: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-body:    ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 
   /* Override Bootstrap */
   --bs-body-bg:     var(--clika-bg);
