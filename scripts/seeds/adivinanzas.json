@@ -2,55 +2,495 @@
   "tema_nombre": "Adivinanzas",
   "fuente": "python",
   "preguntas": [
-    {"pista1": "Vuelo sin tener alas", "pista2": "Lloro sin tener ojos", "pista3": "Soy blanca o gris en el cielo", "pista_extra": "De mi sale la lluvia", "respuesta": "nube"},
-    {"pista1": "Tiene agujas y no cose", "pista2": "Da vueltas todo el dia", "pista3": "A veces esta en tu muneca", "pista_extra": "Las doce en punto es su numero famoso", "respuesta": "reloj"},
-    {"pista1": "Tiene paginas pero no es internet", "pista2": "Tiene lomo pero no es animal", "pista3": "Lo abres para aprender o sonar", "pista_extra": "Editorial o cuento guardo", "respuesta": "libro"},
-    {"pista1": "Te sigue de dia cuando hay sol", "pista2": "Es negra como la tinta", "pista3": "No pesa ni un gramo", "pista_extra": "Al atardecer se alarga", "respuesta": "sombra"},
-    {"pista1": "Cuanto mas grande menos ves", "pista2": "Todo lo cubre en la noche", "pista3": "Sin estrellas es mas fuerte", "pista_extra": "La lampara la espanta", "respuesta": "oscuridad"},
-    {"pista1": "Repito tu voz sin boca", "pista2": "En el hueco de montanas vivo", "pista3": "Cuanto mas gritas mas te contesto", "pista_extra": "Sin sonido desaparezco", "respuesta": "eco"},
-    {"pista1": "Arde sin ser vivo", "pista2": "Sube sin tener pies", "pista3": "Si no la cuidas devora la casa", "pista_extra": "Del fosforo puede nacer", "respuesta": "fuego"},
-    {"pista1": "Corre siempre y no tiene piernas", "pista2": "No se puede coger con las manos", "pista3": "Todo lo bana en el mar", "pista_extra": "Del grifo puede salir", "respuesta": "agua"},
-    {"pista1": "Tiene dientes y no muerde", "pista2": "No es animal ni persona", "pista3": "Corta pan en la cocina", "pista_extra": "Acero afilado lleva", "respuesta": "cuchillo"},
-    {"pista1": "Redondo como una moneda", "pista2": "Blanco por dentro y cascaron fino", "pista3": "Me pelas para comerme", "pista_extra": "Del gallinero a menudo sale", "respuesta": "huevo"},
-    {"pista1": "Camino sin pies", "pista2": "En verano muchos me buscan", "pista3": "Mueve las hojas del arbol", "pista_extra": "Frío no soy pero refresco", "respuesta": "viento"},
-    {"pista1": "Subo y bajo sin moverme del sitio", "pista2": "Me ves en edificios altos", "pista3": "Te llevo de planta en planta", "pista_extra": "Puertas metalicas tengo", "respuesta": "ascensor"},
-    {"pista1": "Tengo teclas pero no abro puertas", "pista2": "Tengo espacio pero no habitaciones", "pista3": "Si me rompes ya no sueno igual", "pista_extra": "En conciertos me golpean", "respuesta": "piano"},
-    {"pista1": "Cuanto mas quitas mas grande me vuelvo", "pista2": "En la arena los ninos me hacen", "pista3": "Estoy vacio en el centro", "pista_extra": "El tiempo me borra en la orilla", "respuesta": "agujero"},
-    {"pista1": "Cuatro patas tiene", "pista2": "No corre ni camina", "pista3": "Te ayuda a cenar", "pista_extra": "Encima pones el plato", "respuesta": "mesa"},
-    {"pista1": "Nace grande y muere chico", "pista2": "Ilumina la oscuridad un rato", "pista3": "La cera es su vestido", "pista_extra": "Soplas y me apagas", "respuesta": "vela"},
-    {"pista1": "Tiene corona sin ser rey", "pista2": "Tiene escamas sin ser pez", "pista3": "Por dentro amarillo destello", "pista_extra": "Tropical fruto es", "respuesta": "piña"},
-    {"pista1": "Hijo del agua soy", "pista2": "Padre del frio dicen", "pista3": "Si no respira muero", "pista_extra": "Del cielo en copos caigo", "respuesta": "hielo"},
-    {"pista1": "Te protege del rayo en la tormenta", "pista2": "Abrir y cerrar es su baile", "pista3": "Cuando llueve sales conmigo", "pista_extra": "Varillas y tela o plastico", "respuesta": "paraguas"},
-    {"pista1": "Tiene ciudad pero no hay casas", "pista2": "Tiene bosques sin arboles", "pista3": "Tiene rios sin agua real", "pista_extra": "El mundo plano la muestra", "respuesta": "mapa"},
-    {"pista1": "Cuatro patas en el suelo", "pista2": "Espalda firme y recta", "pista3": "Libros o ropa me cargan", "pista_extra": "No habla y te sostiene", "respuesta": "silla"},
-    {"pista1": "Si me nombras desaparezco", "pista2": "Es la ausencia de ruido", "pista3": "En biblioteca me piden", "pista_extra": "Sin hablar te escuchas mejor", "respuesta": "silencio"},
-    {"pista1": "Verde me cortan los bosques", "pista2": "Negro escribo en el papel", "pista3": "Amarillo me pintan a veces", "pista_extra": "Mina o grafito llevo dentro", "respuesta": "lapiz"},
-    {"pista1": "Soy el ultimo en llegar", "pista2": "Y el primero en marcharse dicen", "pista3": "En coches me miran siempre", "pista_extra": "Verde amarillo rojo ordenan", "respuesta": "semaforo"},
-    {"pista1": "Oro no es", "pista2": "Plata no es", "pista3": "Abriendo la cortina veras", "pista_extra": "Tu cara devuelvo fiel", "respuesta": "espejo"},
-    {"pista1": "Rayos lanza sin tormenta", "pista2": "Ilumina fotos y salas", "pista3": "Tiene flash y disparador", "pista_extra": "Selfie captura con click", "respuesta": "camara"},
-    {"pista1": "Tiene ojos de vidrio", "pista2": "Ve todo sin parpadear", "pista3": "En la nariz o orejas vivo", "pista_extra": "Miope sin mi ayuda no ve", "respuesta": "gafas"},
-    {"pista1": "Soy ave sin plumas", "pista2": "En la web vuelo sin alas", "pista3": "Raton sin colmillos uso", "pista_extra": "Teclado y pantalla me acompanan", "respuesta": "ordenador"},
-    {"pista1": "Agujas musicales tengo", "pista2": "Arco me frota cantando", "pista3": "Cuatro cuerdas clasicas", "pista_extra": "Pequeno gigante de la orquesta", "respuesta": "violin"},
-    {"pista1": "Redondo y rebota", "pista2": "En cancha o parque ruedo", "pista3": "Baloncesto o futbol me quieren", "pista_extra": "Inflable o de goma soy", "respuesta": "pelota"},
-    {"pista1": "Transparente o de color", "pista2": "Liquidos guardo dentro", "pista3": "Tapon de corcho o rosca", "pista_extra": "Agua refresco en picnic", "respuesta": "botella"},
-    {"pista1": "Pequeno como una perla", "pista2": "Blanco masico mascas", "pista3": "En la boca revienta plop", "pista_extra": "Sabor fruta menta tiene", "respuesta": "chicle"},
-    {"pista1": "Un caballo sin patas corre", "pista2": "Veloz tinta derrama", "pista3": "Tapa clic en el bolsillo", "pista_extra": "Firma el papel en clase", "respuesta": "boligrafo"},
-    {"pista1": "Doce meses en cuadros", "pista2": "Numeros y dias ordeno", "pista3": "La pared o escritorio ocupo", "pista_extra": "Cada ano renuevo hoja", "respuesta": "calendario"},
-    {"pista1": "Capucha llevo en sudadera", "pista2": "Lluvia en cabeza evito", "pista3": "Cordones no soy zapato", "pista_extra": "Orejas tapo del frio", "respuesta": "capucha"},
-    {"pista1": "Dos padres dos hijos y un nieto", "pista2": "En total tres personas hay", "pista3": "Abuelo padre y nieto unidos", "pista_extra": "Raices del arbol familiar", "respuesta": "abuelo"},
-    {"pista1": "Curvo amarillo maduro", "pista2": "Pelaje facil de quitar", "pista3": "Potasio dicen que traigo", "pista_extra": "Mono si es cartoon come", "respuesta": "platano"},
-    {"pista1": "Siempre frio por dentro", "pista2": "Luz enciendo de noche", "pista3": "Leche y huevos guardo", "pista_extra": "Nevera me llaman tambien", "respuesta": "nevera"},
-    {"pista1": "Suena y vibra en el bolsillo", "pista2": "Numeros marcas para hablar", "pista3": "Pantalla o antenas tiene", "pista_extra": "WhatsApp en mi habita", "respuesta": "telefono"},
-    {"pista1": "Marco de casa sin retrato", "pista2": "La luz del dia filtro", "pista3": "Cristal que se abre", "pista_extra": "Cortina al lado a menudo", "respuesta": "ventana"},
-    {"pista1": "Gira en su eje sin salir", "pista2": "Sirve para entrar y salir", "pista3": "Picaporte o llave usa", "pista_extra": "Cerrada guarda secretos", "respuesta": "puerta"},
-    {"pista1": "Blanda para la cabeza", "pista2": "En la cama me aplastas", "pista3": "Sueno mejor conmigo", "pista_extra": "Fundas de algodon llevo", "respuesta": "almohada"},
-    {"pista1": "Cerda blanca en la mano", "pista2": "Pasta dental companera", "pista3": "Dientes limpia dos veces", "pista_extra": "Bano junto al lavabo", "respuesta": "cepillo"},
-    {"pista1": "Absorbo el agua del cuerpo", "pista2": "En gancho cuelgo humedo", "pista3": "Playa o ducha me usan", "pista_extra": "Algodon o rizo soy", "respuesta": "toalla"},
-    {"pista1": "Espuma hago en manos", "pista2": "Olores limpios dejo", "pista3": "Pastilla o liquido soy", "pista_extra": "Barra verde o azul ves", "respuesta": "jabon"},
-    {"pista1": "Transparente en la mesa", "pista2": "Bebes sin tocarme labios", "pista3": "Del lavavajillas salgo limpio", "pista_extra": "Cristal fino o plastico", "respuesta": "vaso"},
-    {"pista1": "Tres puntas pinchamenos", "pista2": "Al lado del plato vivo", "pista3": "Carne o pasta pincho", "pista_extra": "Cuchillo es mi hermano cortante", "respuesta": "tenedor"},
-    {"pista1": "Tablas y colchon acogen", "pista2": "Por la noche mil batallas", "pista3": "Sabanas me cubren", "pista_extra": "Descanso horizontal doy", "respuesta": "cama"},
-    {"pista1": "Redonda plateada en el cielo", "pista2": "Estrellas acompanan", "pista3": "Fases tiene como drama", "pista_extra": "Mareas mueve con el mar", "respuesta": "luna"},
-    {"pista1": "Rayos dorados envia", "pista2": "Centro del sistema cercano", "pista3": "Sin el verano quema", "pista_extra": "Nube tapa a veces", "respuesta": "sol"}
+    {
+      "pista1": "Vuelo sin tener alas",
+      "pista2": "Lloro sin tener ojos",
+      "pista3": "Soy blanca o gris en el cielo",
+      "pista_extra": "De mi sale la lluvia",
+      "respuesta": "nube"
+    },
+    {
+      "pista1": "Tiene agujas y no cose",
+      "pista2": "Da vueltas todo el dia",
+      "pista3": "A veces esta en tu muneca",
+      "pista_extra": "Las doce en punto es su numero famoso",
+      "respuesta": "reloj"
+    },
+    {
+      "pista1": "Tiene paginas pero no es internet",
+      "pista2": "Tiene lomo pero no es animal",
+      "pista3": "Lo abres para aprender o sonar",
+      "pista_extra": "Editorial o cuento guardo",
+      "respuesta": "libro"
+    },
+    {
+      "pista1": "Te sigue de dia cuando hay sol",
+      "pista2": "Es negra como la tinta",
+      "pista3": "No pesa ni un gramo",
+      "pista_extra": "Al atardecer se alarga",
+      "respuesta": "sombra"
+    },
+    {
+      "pista1": "Cuanto mas grande menos ves",
+      "pista2": "Todo lo cubre en la noche",
+      "pista3": "Sin estrellas es mas fuerte",
+      "pista_extra": "La lampara la espanta",
+      "respuesta": "oscuridad"
+    },
+    {
+      "pista1": "Repito tu voz sin boca",
+      "pista2": "En el hueco de montanas vivo",
+      "pista3": "Cuanto mas gritas mas te contesto",
+      "pista_extra": "Sin sonido desaparezco",
+      "respuesta": "eco"
+    },
+    {
+      "pista1": "Arde sin ser vivo",
+      "pista2": "Sube sin tener pies",
+      "pista3": "Si no la cuidas devora la casa",
+      "pista_extra": "Del fosforo puede nacer",
+      "respuesta": "fuego"
+    },
+    {
+      "pista1": "Corre siempre y no tiene piernas",
+      "pista2": "No se puede coger con las manos",
+      "pista3": "Todo lo bana en el mar",
+      "pista_extra": "Del grifo puede salir",
+      "respuesta": "agua"
+    },
+    {
+      "pista1": "Tiene dientes y no muerde",
+      "pista2": "No es animal ni persona",
+      "pista3": "Corta pan en la cocina",
+      "pista_extra": "Acero afilado lleva",
+      "respuesta": "cuchillo"
+    },
+    {
+      "pista1": "Redondo como una moneda",
+      "pista2": "Blanco por dentro y cascaron fino",
+      "pista3": "Me pelas para comerme",
+      "pista_extra": "Del gallinero a menudo sale",
+      "respuesta": "huevo"
+    },
+    {
+      "pista1": "Camino sin pies",
+      "pista2": "En verano muchos me buscan",
+      "pista3": "Mueve las hojas del arbol",
+      "pista_extra": "Frío no soy pero refresco",
+      "respuesta": "viento"
+    },
+    {
+      "pista1": "Subo y bajo sin moverme del sitio",
+      "pista2": "Me ves en edificios altos",
+      "pista3": "Te llevo de planta en planta",
+      "pista_extra": "Puertas metalicas tengo",
+      "respuesta": "ascensor"
+    },
+    {
+      "pista1": "Tengo teclas pero no abro puertas",
+      "pista2": "Tengo espacio pero no habitaciones",
+      "pista3": "Si me rompes ya no sueno igual",
+      "pista_extra": "En conciertos me golpean",
+      "respuesta": "piano"
+    },
+    {
+      "pista1": "Cuanto mas quitas mas grande me vuelvo",
+      "pista2": "En la arena los ninos me hacen",
+      "pista3": "Estoy vacio en el centro",
+      "pista_extra": "El tiempo me borra en la orilla",
+      "respuesta": "agujero"
+    },
+    {
+      "pista1": "Cuatro patas tiene",
+      "pista2": "No corre ni camina",
+      "pista3": "Te ayuda a cenar",
+      "pista_extra": "Encima pones el plato",
+      "respuesta": "mesa"
+    },
+    {
+      "pista1": "Nace grande y muere chico",
+      "pista2": "Ilumina la oscuridad un rato",
+      "pista3": "La cera es su vestido",
+      "pista_extra": "Soplas y me apagas",
+      "respuesta": "vela"
+    },
+    {
+      "pista1": "Tiene corona sin ser rey",
+      "pista2": "Tiene escamas sin ser pez",
+      "pista3": "Por dentro amarillo destello",
+      "pista_extra": "Tropical fruto es",
+      "respuesta": "piña"
+    },
+    {
+      "pista1": "Hijo del agua soy",
+      "pista2": "Padre del frio dicen",
+      "pista3": "Si no respira muero",
+      "pista_extra": "Del cielo en copos caigo",
+      "respuesta": "hielo"
+    },
+    {
+      "pista1": "Te protege del rayo en la tormenta",
+      "pista2": "Abrir y cerrar es su baile",
+      "pista3": "Cuando llueve sales conmigo",
+      "pista_extra": "Varillas y tela o plastico",
+      "respuesta": "paraguas"
+    },
+    {
+      "pista1": "Tiene ciudad pero no hay casas",
+      "pista2": "Tiene bosques sin arboles",
+      "pista3": "Tiene rios sin agua real",
+      "pista_extra": "El mundo plano la muestra",
+      "respuesta": "mapa"
+    },
+    {
+      "pista1": "Cuatro patas en el suelo",
+      "pista2": "Espalda firme y recta",
+      "pista3": "Libros o ropa me cargan",
+      "pista_extra": "No habla y te sostiene",
+      "respuesta": "silla"
+    },
+    {
+      "pista1": "Si me nombras desaparezco",
+      "pista2": "Es la ausencia de ruido",
+      "pista3": "En biblioteca me piden",
+      "pista_extra": "Sin hablar te escuchas mejor",
+      "respuesta": "silencio"
+    },
+    {
+      "pista1": "Verde me cortan los bosques",
+      "pista2": "Negro escribo en el papel",
+      "pista3": "Amarillo me pintan a veces",
+      "pista_extra": "Mina o grafito llevo dentro",
+      "respuesta": "lapiz"
+    },
+    {
+      "pista1": "Soy el ultimo en llegar",
+      "pista2": "Y el primero en marcharse dicen",
+      "pista3": "En coches me miran siempre",
+      "pista_extra": "Verde amarillo rojo ordenan",
+      "respuesta": "semaforo"
+    },
+    {
+      "pista1": "Oro no es",
+      "pista2": "Plata no es",
+      "pista3": "Abriendo la cortina veras",
+      "pista_extra": "Tu cara devuelvo fiel",
+      "respuesta": "espejo"
+    },
+    {
+      "pista1": "Rayos lanza sin tormenta",
+      "pista2": "Ilumina fotos y salas",
+      "pista3": "Tiene flash y disparador",
+      "pista_extra": "Selfie captura con click",
+      "respuesta": "camara"
+    },
+    {
+      "pista1": "Tiene ojos de vidrio",
+      "pista2": "Ve todo sin parpadear",
+      "pista3": "En la nariz o orejas vivo",
+      "pista_extra": "Miope sin mi ayuda no ve",
+      "respuesta": "gafas"
+    },
+    {
+      "pista1": "Soy ave sin plumas",
+      "pista2": "En la web vuelo sin alas",
+      "pista3": "Raton sin colmillos uso",
+      "pista_extra": "Teclado y pantalla me acompanan",
+      "respuesta": "ordenador"
+    },
+    {
+      "pista1": "Agujas musicales tengo",
+      "pista2": "Arco me frota cantando",
+      "pista3": "Cuatro cuerdas clasicas",
+      "pista_extra": "Pequeno gigante de la orquesta",
+      "respuesta": "violin"
+    },
+    {
+      "pista1": "Redondo y rebota",
+      "pista2": "En cancha o parque ruedo",
+      "pista3": "Baloncesto o futbol me quieren",
+      "pista_extra": "Inflable o de goma soy",
+      "respuesta": "pelota"
+    },
+    {
+      "pista1": "Transparente o de color",
+      "pista2": "Liquidos guardo dentro",
+      "pista3": "Tapon de corcho o rosca",
+      "pista_extra": "Agua refresco en picnic",
+      "respuesta": "botella"
+    },
+    {
+      "pista1": "Pequeno como una perla",
+      "pista2": "Blanco masico mascas",
+      "pista3": "En la boca revienta plop",
+      "pista_extra": "Sabor fruta menta tiene",
+      "respuesta": "chicle"
+    },
+    {
+      "pista1": "Un caballo sin patas corre",
+      "pista2": "Veloz tinta derrama",
+      "pista3": "Tapa clic en el bolsillo",
+      "pista_extra": "Firma el papel en clase",
+      "respuesta": "boligrafo"
+    },
+    {
+      "pista1": "Doce meses en cuadros",
+      "pista2": "Numeros y dias ordeno",
+      "pista3": "La pared o escritorio ocupo",
+      "pista_extra": "Cada ano renuevo hoja",
+      "respuesta": "calendario"
+    },
+    {
+      "pista1": "Capucha llevo en sudadera",
+      "pista2": "Lluvia en cabeza evito",
+      "pista3": "Cordones no soy zapato",
+      "pista_extra": "Orejas tapo del frio",
+      "respuesta": "capucha"
+    },
+    {
+      "pista1": "Dos padres dos hijos y un nieto",
+      "pista2": "En total tres personas hay",
+      "pista3": "Abuelo padre y nieto unidos",
+      "pista_extra": "Raices del arbol familiar",
+      "respuesta": "abuelo"
+    },
+    {
+      "pista1": "Curvo amarillo maduro",
+      "pista2": "Pelaje facil de quitar",
+      "pista3": "Potasio dicen que traigo",
+      "pista_extra": "Mono si es cartoon come",
+      "respuesta": "platano"
+    },
+    {
+      "pista1": "Siempre frio por dentro",
+      "pista2": "Luz enciendo de noche",
+      "pista3": "Leche y huevos guardo",
+      "pista_extra": "Nevera me llaman tambien",
+      "respuesta": "nevera"
+    },
+    {
+      "pista1": "Suena y vibra en el bolsillo",
+      "pista2": "Numeros marcas para hablar",
+      "pista3": "Pantalla o antenas tiene",
+      "pista_extra": "WhatsApp en mi habita",
+      "respuesta": "telefono"
+    },
+    {
+      "pista1": "Marco de casa sin retrato",
+      "pista2": "La luz del dia filtro",
+      "pista3": "Cristal que se abre",
+      "pista_extra": "Cortina al lado a menudo",
+      "respuesta": "ventana"
+    },
+    {
+      "pista1": "Gira en su eje sin salir",
+      "pista2": "Sirve para entrar y salir",
+      "pista3": "Picaporte o llave usa",
+      "pista_extra": "Cerrada guarda secretos",
+      "respuesta": "puerta"
+    },
+    {
+      "pista1": "Blanda para la cabeza",
+      "pista2": "En la cama me aplastas",
+      "pista3": "Sueno mejor conmigo",
+      "pista_extra": "Fundas de algodon llevo",
+      "respuesta": "almohada"
+    },
+    {
+      "pista1": "Cerda blanca en la mano",
+      "pista2": "Pasta dental companera",
+      "pista3": "Dientes limpia dos veces",
+      "pista_extra": "Bano junto al lavabo",
+      "respuesta": "cepillo"
+    },
+    {
+      "pista1": "Absorbo el agua del cuerpo",
+      "pista2": "En gancho cuelgo humedo",
+      "pista3": "Playa o ducha me usan",
+      "pista_extra": "Algodon o rizo soy",
+      "respuesta": "toalla"
+    },
+    {
+      "pista1": "Espuma hago en manos",
+      "pista2": "Olores limpios dejo",
+      "pista3": "Pastilla o liquido soy",
+      "pista_extra": "Barra verde o azul ves",
+      "respuesta": "jabon"
+    },
+    {
+      "pista1": "Transparente en la mesa",
+      "pista2": "Bebes sin tocarme labios",
+      "pista3": "Del lavavajillas salgo limpio",
+      "pista_extra": "Cristal fino o plastico",
+      "respuesta": "vaso"
+    },
+    {
+      "pista1": "Tres puntas pinchamenos",
+      "pista2": "Al lado del plato vivo",
+      "pista3": "Carne o pasta pincho",
+      "pista_extra": "Cuchillo es mi hermano cortante",
+      "respuesta": "tenedor"
+    },
+    {
+      "pista1": "Tablas y colchon acogen",
+      "pista2": "Por la noche mil batallas",
+      "pista3": "Sabanas me cubren",
+      "pista_extra": "Descanso horizontal doy",
+      "respuesta": "cama"
+    },
+    {
+      "pista1": "Redonda plateada en el cielo",
+      "pista2": "Estrellas acompanan",
+      "pista3": "Fases tiene como drama",
+      "pista_extra": "Mareas mueve con el mar",
+      "respuesta": "luna"
+    },
+    {
+      "pista1": "Rayos dorados envia",
+      "pista2": "Centro del sistema cercano",
+      "pista3": "Sin el verano quema",
+      "pista_extra": "Nube tapa a veces",
+      "respuesta": "sol"
+    },
+    {
+      "pista1": "No es ave pero nido tiene",
+      "pista2": "No es arbol pero sombra da",
+      "pista3": "En la calle a veces hueco soy",
+      "pista_extra": "De hormigon o ladrillo hablo",
+      "respuesta": "puente"
+    },
+    {
+      "pista1": "Oro no es pero tesoro guardo",
+      "pista2": "En la playa me buscas",
+      "pista3": "Casa espiral calcarea",
+      "pista_extra": "Caracol marino o de jardin",
+      "respuesta": "caracol"
+    },
+    {
+      "pista1": "Nace de nube y muere en tierra",
+      "pista2": "Rayo hermano mio a veces",
+      "pista3": "Arco iris me sigue a ratos",
+      "pista_extra": "Del cielo caigo en gotas",
+      "respuesta": "lluvia"
+    },
+    {
+      "pista1": "Tiene ojos y no ve",
+      "pista2": "Tiene agua y no bebe",
+      "pista3": "Tiene barba y no es hombre",
+      "pista_extra": "Verde me ves en el campo",
+      "respuesta": "lechuga"
+    },
+    {
+      "pista1": "Blanca por dentro verde por fuera",
+      "pista2": "Si no sabes espera",
+      "pista3": "Fruta que rima con espera",
+      "pista_extra": "En gazpacho a veces",
+      "respuesta": "pera"
+    },
+    {
+      "pista1": "Sube y baja y no se mueve",
+      "pista2": "Marca calor y frio",
+      "pista3": "En termometro me miras",
+      "pista_extra": "Liquido o columna roja",
+      "respuesta": "termometro"
+    },
+    {
+      "pista1": "Cuatro patas al mediodia",
+      "pista2": "Enigma de Edipo famoso",
+      "pista3": "Manana dos patas camina",
+      "pista_extra": "Esfinge lo dijo",
+      "respuesta": "hombre"
+    },
+    {
+      "pista1": "Si me nombras desaparezco",
+      "pista2": "Silencio es mi primo",
+      "pista3": "En biblioteca me buscan",
+      "pista_extra": "Sin sonido estoy",
+      "respuesta": "ruido"
+    },
+    {
+      "pista1": "Llena la casa y no toca techo",
+      "pista2": "Sin ventanas ni puertas entro",
+      "pista3": "Oxigeno invisible",
+      "pista_extra": "Respiro y soy",
+      "respuesta": "aire"
+    },
+    {
+      "pista1": "Caja sin cerradura ni bisagra ni tapa",
+      "pista2": "Dentro guardo blanco y yema",
+      "pista3": "Gallina me inventa",
+      "pista_extra": "Fragil cascaron",
+      "respuesta": "huevo"
+    },
+    {
+      "pista1": "Cien hermanos en fila",
+      "pista2": "Si uno tropieza el resto cae",
+      "pista3": "Juego de ninos en mesa",
+      "pista_extra": "Domino se llama",
+      "respuesta": "domino"
+    },
+    {
+      "pista1": "Agua pasa y deja huella",
+      "pista2": "Seca y desaparece",
+      "pista3": "En playa dibujas conmigo",
+      "pista_extra": "Ola me borra",
+      "respuesta": "arena"
+    },
+    {
+      "pista1": "Tiene dientes y no come",
+      "pista2": "Corta el viento en el mar",
+      "pista3": "Barco me lleva arriba",
+      "pista_extra": "Tela y mastiles",
+      "respuesta": "vela"
+    },
+    {
+      "pista1": "Verde por fuera roja por dentro",
+      "pista2": "Si sabes decirmelo pronto",
+      "pista3": "Verano fruta fresca",
+      "pista_extra": "Muchas pepitas negras",
+      "respuesta": "sandia"
+    },
+    {
+      "pista1": "Oro parece plata no es",
+      "pista2": "Abre la cortina y veras",
+      "pista3": "Amarillo redondo",
+      "pista_extra": "Arbol citrico",
+      "respuesta": "limon"
+    },
+    {
+      "pista1": "Papel blanco tinta negra",
+      "pista2": "Sabiduria guarda",
+      "pista3": "Hojas mil tiene",
+      "pista_extra": "Leer es su fin",
+      "respuesta": "libro"
+    },
+    {
+      "pista1": "Largo como serpiente",
+      "pista2": "Carga madera y arena",
+      "pista3": "Ruedas muchas y caballo ninguno",
+      "pista_extra": "Obra publica",
+      "respuesta": "tren"
+    },
+    {
+      "pista1": "Dos espejos miran sin cesar",
+      "pista2": "Entre ellos infinito fingen",
+      "pista3": "En ascensor a veces",
+      "pista_extra": "Te ves repetido",
+      "respuesta": "espejo"
+    },
+    {
+      "pista1": "Siempre quieto y siempre corre",
+      "pista2": "Nunca cansado",
+      "pista3": "Doce numeros en circulo",
+      "pista_extra": "Tic tac",
+      "respuesta": "reloj"
+    },
+    {
+      "pista1": "Luz antes que trueno",
+      "pista2": "Parto nubes en verano",
+      "pista3": "Franklin cometa",
+      "pista_extra": "Electrica descarga",
+      "respuesta": "rayo"
+    }
   ]
 }

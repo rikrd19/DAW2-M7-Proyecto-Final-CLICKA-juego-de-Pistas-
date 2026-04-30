@@ -2,41 +2,397 @@
   "tema_nombre": "Ciencia",
   "fuente": "python",
   "preguntas": [
-    {"pista1": "Planeta rojo del sistema solar", "pista2": "Curiosity y Perseverance lo visitaron", "pista3": "Tiene dos lunas diminutas llamadas Fobos y Deimos", "pista_extra": "El color se debe al óxido de hierro en su superficie", "respuesta": "marte"},
-    {"pista1": "Gas invisible que respiramos y las plantas liberan", "pista2": "Representa una O en la tabla periódica", "pista3": "El ozono en la estratosfera nos protege de rayos UV", "pista_extra": "Constituye cerca del 21 por ciento del aire seco", "respuesta": "oxigeno"},
-    {"pista1": "Partícula con carga negativa en un átomo", "pista2": "Orbita el núcleo en modelos clásicos", "pista3": "Su masa es mucho menor que la del protón", "pista_extra": "En metales buenos conductores de electricidad circulan libres", "respuesta": "electron"},
-    {"pista1": "Unidad de fuerza en el SI", "pista2": "Segunda ley relaciona masa aceleración y esta magnitud", "pista3": "Un kilogramo a un metro por segundo cuadrado", "pista_extra": "Lleva el nombre de un científico inglés del siglo XVII", "respuesta": "newton"},
-    {"pista1": "Órgano que bombea sangre por el cuerpo", "pista2": "Tiene cuatro cavidades en humanos", "pista3": "El electrocardiograma registra su actividad eléctrica", "pista_extra": "Está protegido por costillas y el esternón", "respuesta": "corazon"},
-    {"pista1": "Proceso por el que las plantas fabrican azúcares con luz", "pista2": "Absorbe dióxido de carbono y libera oxígeno", "pista3": "Ocurre principalmente en los cloroplastos", "pista_extra": "Pigmento verde clorofila captura fotones", "respuesta": "fotosintesis"},
-    {"pista1": "Planeta más grande del sistema solar", "pista2": "Es un gigante gaseoso sin superficie sólida clara", "pista3": "Tiene una gran mancha roja de tormentas", "pista_extra": "Lleva el nombre del rey de los dioses romanos", "respuesta": "jupiter"},
-    {"pista1": "Escala que mide la acidez o basicidad de una disolución", "pista2": "El agua pura suele estar alrededor de siete", "pista3": "Valores bajo siete son ácidos y altos son básicos", "pista_extra": "Se mide con papel tornasol o electrodos", "respuesta": "ph"},
-    {"pista1": "Ciencia que estudia los seres vivos y su interacción", "pista2": "Ramas como genética ecología y microbiología", "pista3": "La célula es unidad básica según la teoría celular", "pista_extra": "Darwin es clave en su historia con la evolución", "respuesta": "biologia"},
-    {"pista1": "Aceleración que experimentan los cuerpos cerca de la Tierra", "pista2": "Aproximadamente nueve coma ocho metros por segundo cuadrado", "pista3": "Newton la relacionó con la fuerza y la masa", "pista_extra": "Galileo estudió caída de cuerpos desde la Torre de Pisa según la leyenda", "respuesta": "gravedad"},
-    {"pista1": "Instrumento que amplifica imágenes de objetos muy pequeños", "pista2": "Usa lentes u objetivos y ocular", "pista3": "Leeuwenhoek observó microorganismos con uno primitivo", "pista_extra": "En laboratorio de instituto suele verse células", "respuesta": "microscopio"},
-    {"pista1": "Fuente de energía del Sol y de otras estrellas", "pista2": "Fusión de núcleos ligeros como el hidrógeno", "pista3": "En el núcleo solar el hidrógeno se fusiona en helio liberando energía", "pista_extra": "La bomba H se basa en este principio", "respuesta": "fusion"},
-    {"pista1": "Molécula que guarda la información hereditaria", "pista2": "Doble hélice descrita por Watson y Crick", "pista3": "Usa bases A T C G en su código", "pista_extra": "En cromosomas del núcleo celular se compacta", "respuesta": "adn"},
-    {"pista1": "Órganelo productor de energía en muchas células", "pista2": "Tiene membrana interna plegada en crestas", "pista3": "Aquí ocurre gran parte de la respiración celular", "pista_extra": "Su nombre viene del griego hilo y condros granulo", "respuesta": "mitocondria"},
-    {"pista1": "Planeta conocido por sus anillos de hielo y roca", "pista2": "Sexto planeta contando desde el Sol", "pista3": "Cassini-Huygens lo exploró en detalle", "pista_extra": "Titán es su luna más grande con atmósfera densa", "respuesta": "saturno"},
-    {"pista1": "Rama de la física que estudia calor temperatura y energía", "pista2": "Leyes cero primera segunda y tercera son famosas", "pista3": "La entropía suele aumentar en sistemas aislados", "pista_extra": "Máquinas térmicas y rendimiento de Carnot", "respuesta": "termodinamica"},
-    {"pista1": "Partícula sin carga en el núcleo atómico", "pista2": "Su masa es similar a la del protón", "pista3": "Isótopos difieren en su número en el núcleo", "pista_extra": "Chadwick confirmó su existencia en mil novecientos treinta y dos", "respuesta": "neutron"},
-    {"pista1": "Ciencia del cielo estrellas y galaxias", "pista2": "Telescopios ópticos y radiotelescopios la apoyan", "pista3": "Big Bang modelo del origen del universo observable", "pista_extra": "Unidades como año luz y pársec son típicas", "respuesta": "astronomia"},
-    {"pista1": "Capa gaseosa que rodea la Tierra", "pista2": "Contiene nitrógeno oxígeno y trazas de CO2", "pista3": "La presión disminuye con la altitud", "pista_extra": "Meteoros se desintegran al friccionar con ella", "respuesta": "atmosfera"},
-    {"pista1": "Unidad básica de la herencia en genética clásica", "pista2": "Ocupa un locus en un cromosoma", "pista3": "Puede ser dominante o recesivo en el fenotipo", "pista_extra": "Mendel los estudió en guisantes", "respuesta": "gen"},
-    {"pista1": "Velocidad de la luz en el vacío es constante", "pista2": "Relaciona energía masa y esta velocidad en famosa ecuación", "pista3": "Es un límite para la transmisión de información causal", "pista_extra": "Aproximadamente trescientos mil kilómetros por segundo", "respuesta": "luz"},
-    {"pista1": "Sustancia formada por un solo tipo de átomo", "pista2": "La tabla periódica los ordena por número atómico", "pista3": "Oro hierro y helio son ejemplos", "pista_extra": "No se puede descomponer por métodos químicos comunes", "respuesta": "elemento"},
-    {"pista1": "Estudio de las rocas minerales y procesos geológicos", "pista2": "Placas tectónicas y terremotos son parte de su campo", "pista3": "Los fósiles ayudan a datar capas sedimentarias", "pista_extra": "Campo y martillo son iconos de trabajo de campo", "respuesta": "geologia"},
-    {"pista1": "Partícula con carga positiva en el núcleo", "pista2": "Su número define el elemento químico", "pista3": "En átomo neutro iguala al número de electrones", "pista_extra": "Descubierto experimentalmente por canalones en tubos", "respuesta": "proton"},
-    {"pista1": "Órgano del sistema nervioso central en humanos", "pista2": "Controla lenguaje memoria y emociones en regiones especializadas", "pista3": "Protegido por el cráneo y líquido cefalorraquídeo", "pista_extra": "Neuronas y glía son sus células principales", "respuesta": "cerebro"},
-    {"pista1": "Fuerza que atrae masas entre sí", "pista2": "Newton la modelizó con ley del inverso del cuadrado", "pista3": "Einstein la reinterpretó como curvatura del espacio-tiempo", "pista_extra": "En la Tierra nos mantiene pegados al suelo", "respuesta": "gravitacion"},
-    {"pista1": "Estado del agua a temperatura y presión ambiente típicas", "pista2": "Fluye y toma la forma del recipiente", "pista3": "Su densidad máxima no está exactamente en cero grados Celsius", "pista_extra": "H2O en estado no sólido ni gaseoso a la vista", "respuesta": "liquido"},
-    {"pista1": "Cambio de estado de gas a líquido", "pista2": "Las gotas del rocío en la mañana lo ilustran", "pista3": "Libera calor latente al ocurrir", "pista_extra": "Opuesto a la vaporización", "respuesta": "condensacion"},
-    {"pista1": "Unidad de energía en el SI muy usada en física", "pista2": "Un watt por segundo", "pista3": "El trabajo de un newton por un metro", "pista_extra": "Lleva nombre de un físico británico", "respuesta": "julio"},
-    {"pista1": "Capas similares a láminas en el músculo esquelético", "pista2": "Actina y miosina deslizan filamentos", "pista3": "El sarcómero es unidad funcional repetida", "pista_extra": "Deriva del griego para cinta o banda", "respuesta": "sarcomero"},
-    {"pista1": "Planeta más cercano al Sol", "pista2": "Día solar largo comparado con su año", "pista3": "Sin atmósfera densa y con cráteres", "pista_extra": "Mercurio es su nombre en latín como el mensajero veloz", "respuesta": "mercurio"},
-    {"pista1": "Ciencia que estudia la composición y reacciones de la materia", "pista2": "Enlaces iónicos covalentes y metálicos son temas centrales", "pista3": "El mol cuenta partículas en cantidades macro", "pista_extra": "Laboratorio con matraces y probetas es su imagen típica", "respuesta": "quimica"},
-    {"pista1": "Cinturón de rocas entre Marte y Júpiter", "pista2": "Ceres orbita en esta región", "pista3": "Muchos cuerpos pequeños chocan y generan meteoritos", "pista_extra": "Película clásica de catástrofe espacial con taladro y Bruce Willis", "respuesta": "asteroide"},
-    {"pista1": "Teoría de la relatividad famosa de Einstein", "pista2": "Incluye la equivalencia masa-energía", "pista3": "Describe gravedad como geometría", "pista_extra": "No confundir solo con la especial de mil novecientos cinco", "respuesta": "relatividad"},
-    {"pista1": "Instrumento que mide la temperatura", "pista2": "Puede usar mercurio alcohol o sensor digital", "pista3": "Escalas Celsius Fahrenheit o Kelvin", "pista_extra": "Galileo construyó primigenios llamados termoscopios", "respuesta": "termometro"},
-    {"pista1": "Estructura proteica que acelera reacciones bioquímicas", "pista2": "Altamente específica para su sustrato", "pista3": "La amilasa en saliva rompe almidón", "pista_extra": "Muchas requieren cofactores como iones o vitaminas", "respuesta": "enzima"}
+    {
+      "pista1": "Planeta rojo del sistema solar",
+      "pista2": "Curiosity y Perseverance lo visitaron",
+      "pista3": "Tiene dos lunas diminutas llamadas Fobos y Deimos",
+      "pista_extra": "El color se debe al óxido de hierro en su superficie",
+      "respuesta": "marte"
+    },
+    {
+      "pista1": "Gas invisible que respiramos y las plantas liberan",
+      "pista2": "Representa una O en la tabla periódica",
+      "pista3": "El ozono en la estratosfera nos protege de rayos UV",
+      "pista_extra": "Constituye cerca del 21 por ciento del aire seco",
+      "respuesta": "oxigeno"
+    },
+    {
+      "pista1": "Partícula con carga negativa en un átomo",
+      "pista2": "Orbita el núcleo en modelos clásicos",
+      "pista3": "Su masa es mucho menor que la del protón",
+      "pista_extra": "En metales buenos conductores de electricidad circulan libres",
+      "respuesta": "electron"
+    },
+    {
+      "pista1": "Unidad de fuerza en el SI",
+      "pista2": "Segunda ley relaciona masa aceleración y esta magnitud",
+      "pista3": "Un kilogramo a un metro por segundo cuadrado",
+      "pista_extra": "Lleva el nombre de un científico inglés del siglo XVII",
+      "respuesta": "newton"
+    },
+    {
+      "pista1": "Órgano que bombea sangre por el cuerpo",
+      "pista2": "Tiene cuatro cavidades en humanos",
+      "pista3": "El electrocardiograma registra su actividad eléctrica",
+      "pista_extra": "Está protegido por costillas y el esternón",
+      "respuesta": "corazon"
+    },
+    {
+      "pista1": "Proceso por el que las plantas fabrican azúcares con luz",
+      "pista2": "Absorbe dióxido de carbono y libera oxígeno",
+      "pista3": "Ocurre principalmente en los cloroplastos",
+      "pista_extra": "Pigmento verde clorofila captura fotones",
+      "respuesta": "fotosintesis"
+    },
+    {
+      "pista1": "Planeta más grande del sistema solar",
+      "pista2": "Es un gigante gaseoso sin superficie sólida clara",
+      "pista3": "Tiene una gran mancha roja de tormentas",
+      "pista_extra": "Lleva el nombre del rey de los dioses romanos",
+      "respuesta": "jupiter"
+    },
+    {
+      "pista1": "Escala que mide la acidez o basicidad de una disolución",
+      "pista2": "El agua pura suele estar alrededor de siete",
+      "pista3": "Valores bajo siete son ácidos y altos son básicos",
+      "pista_extra": "Se mide con papel tornasol o electrodos",
+      "respuesta": "ph"
+    },
+    {
+      "pista1": "Ciencia que estudia los seres vivos y su interacción",
+      "pista2": "Ramas como genética ecología y microbiología",
+      "pista3": "La célula es unidad básica según la teoría celular",
+      "pista_extra": "Darwin es clave en su historia con la evolución",
+      "respuesta": "biologia"
+    },
+    {
+      "pista1": "Aceleración que experimentan los cuerpos cerca de la Tierra",
+      "pista2": "Aproximadamente nueve coma ocho metros por segundo cuadrado",
+      "pista3": "Newton la relacionó con la fuerza y la masa",
+      "pista_extra": "Galileo estudió caída de cuerpos desde la Torre de Pisa según la leyenda",
+      "respuesta": "gravedad"
+    },
+    {
+      "pista1": "Instrumento que amplifica imágenes de objetos muy pequeños",
+      "pista2": "Usa lentes u objetivos y ocular",
+      "pista3": "Leeuwenhoek observó microorganismos con uno primitivo",
+      "pista_extra": "En laboratorio de instituto suele verse células",
+      "respuesta": "microscopio"
+    },
+    {
+      "pista1": "Fuente de energía del Sol y de otras estrellas",
+      "pista2": "Fusión de núcleos ligeros como el hidrógeno",
+      "pista3": "En el núcleo solar el hidrógeno se fusiona en helio liberando energía",
+      "pista_extra": "La bomba H se basa en este principio",
+      "respuesta": "fusion"
+    },
+    {
+      "pista1": "Molécula que guarda la información hereditaria",
+      "pista2": "Doble hélice descrita por Watson y Crick",
+      "pista3": "Usa bases A T C G en su código",
+      "pista_extra": "En cromosomas del núcleo celular se compacta",
+      "respuesta": "adn"
+    },
+    {
+      "pista1": "Órganelo productor de energía en muchas células",
+      "pista2": "Tiene membrana interna plegada en crestas",
+      "pista3": "Aquí ocurre gran parte de la respiración celular",
+      "pista_extra": "Su nombre viene del griego hilo y condros granulo",
+      "respuesta": "mitocondria"
+    },
+    {
+      "pista1": "Planeta conocido por sus anillos de hielo y roca",
+      "pista2": "Sexto planeta contando desde el Sol",
+      "pista3": "Cassini-Huygens lo exploró en detalle",
+      "pista_extra": "Titán es su luna más grande con atmósfera densa",
+      "respuesta": "saturno"
+    },
+    {
+      "pista1": "Rama de la física que estudia calor temperatura y energía",
+      "pista2": "Leyes cero primera segunda y tercera son famosas",
+      "pista3": "La entropía suele aumentar en sistemas aislados",
+      "pista_extra": "Máquinas térmicas y rendimiento de Carnot",
+      "respuesta": "termodinamica"
+    },
+    {
+      "pista1": "Partícula sin carga en el núcleo atómico",
+      "pista2": "Su masa es similar a la del protón",
+      "pista3": "Isótopos difieren en su número en el núcleo",
+      "pista_extra": "Chadwick confirmó su existencia en mil novecientos treinta y dos",
+      "respuesta": "neutron"
+    },
+    {
+      "pista1": "Ciencia del cielo estrellas y galaxias",
+      "pista2": "Telescopios ópticos y radiotelescopios la apoyan",
+      "pista3": "Big Bang modelo del origen del universo observable",
+      "pista_extra": "Unidades como año luz y pársec son típicas",
+      "respuesta": "astronomia"
+    },
+    {
+      "pista1": "Capa gaseosa que rodea la Tierra",
+      "pista2": "Contiene nitrógeno oxígeno y trazas de CO2",
+      "pista3": "La presión disminuye con la altitud",
+      "pista_extra": "Meteoros se desintegran al friccionar con ella",
+      "respuesta": "atmosfera"
+    },
+    {
+      "pista1": "Unidad básica de la herencia en genética clásica",
+      "pista2": "Ocupa un locus en un cromosoma",
+      "pista3": "Puede ser dominante o recesivo en el fenotipo",
+      "pista_extra": "Mendel los estudió en guisantes",
+      "respuesta": "gen"
+    },
+    {
+      "pista1": "Velocidad de la luz en el vacío es constante",
+      "pista2": "Relaciona energía masa y esta velocidad en famosa ecuación",
+      "pista3": "Es un límite para la transmisión de información causal",
+      "pista_extra": "Aproximadamente trescientos mil kilómetros por segundo",
+      "respuesta": "luz"
+    },
+    {
+      "pista1": "Sustancia formada por un solo tipo de átomo",
+      "pista2": "La tabla periódica los ordena por número atómico",
+      "pista3": "Oro hierro y helio son ejemplos",
+      "pista_extra": "No se puede descomponer por métodos químicos comunes",
+      "respuesta": "elemento"
+    },
+    {
+      "pista1": "Estudio de las rocas minerales y procesos geológicos",
+      "pista2": "Placas tectónicas y terremotos son parte de su campo",
+      "pista3": "Los fósiles ayudan a datar capas sedimentarias",
+      "pista_extra": "Campo y martillo son iconos de trabajo de campo",
+      "respuesta": "geologia"
+    },
+    {
+      "pista1": "Partícula con carga positiva en el núcleo",
+      "pista2": "Su número define el elemento químico",
+      "pista3": "En átomo neutro iguala al número de electrones",
+      "pista_extra": "Descubierto experimentalmente por canalones en tubos",
+      "respuesta": "proton"
+    },
+    {
+      "pista1": "Órgano del sistema nervioso central en humanos",
+      "pista2": "Controla lenguaje memoria y emociones en regiones especializadas",
+      "pista3": "Protegido por el cráneo y líquido cefalorraquídeo",
+      "pista_extra": "Neuronas y glía son sus células principales",
+      "respuesta": "cerebro"
+    },
+    {
+      "pista1": "Fuerza que atrae masas entre sí",
+      "pista2": "Newton la modelizó con ley del inverso del cuadrado",
+      "pista3": "Einstein la reinterpretó como curvatura del espacio-tiempo",
+      "pista_extra": "En la Tierra nos mantiene pegados al suelo",
+      "respuesta": "gravitacion"
+    },
+    {
+      "pista1": "Estado del agua a temperatura y presión ambiente típicas",
+      "pista2": "Fluye y toma la forma del recipiente",
+      "pista3": "Su densidad máxima no está exactamente en cero grados Celsius",
+      "pista_extra": "H2O en estado no sólido ni gaseoso a la vista",
+      "respuesta": "liquido"
+    },
+    {
+      "pista1": "Cambio de estado de gas a líquido",
+      "pista2": "Las gotas del rocío en la mañana lo ilustran",
+      "pista3": "Libera calor latente al ocurrir",
+      "pista_extra": "Opuesto a la vaporización",
+      "respuesta": "condensacion"
+    },
+    {
+      "pista1": "Unidad de energía en el SI muy usada en física",
+      "pista2": "Un watt por segundo",
+      "pista3": "El trabajo de un newton por un metro",
+      "pista_extra": "Lleva nombre de un físico británico",
+      "respuesta": "julio"
+    },
+    {
+      "pista1": "Capas similares a láminas en el músculo esquelético",
+      "pista2": "Actina y miosina deslizan filamentos",
+      "pista3": "El sarcómero es unidad funcional repetida",
+      "pista_extra": "Deriva del griego para cinta o banda",
+      "respuesta": "sarcomero"
+    },
+    {
+      "pista1": "Planeta más cercano al Sol",
+      "pista2": "Día solar largo comparado con su año",
+      "pista3": "Sin atmósfera densa y con cráteres",
+      "pista_extra": "Mercurio es su nombre en latín como el mensajero veloz",
+      "respuesta": "mercurio"
+    },
+    {
+      "pista1": "Ciencia que estudia la composición y reacciones de la materia",
+      "pista2": "Enlaces iónicos covalentes y metálicos son temas centrales",
+      "pista3": "El mol cuenta partículas en cantidades macro",
+      "pista_extra": "Laboratorio con matraces y probetas es su imagen típica",
+      "respuesta": "quimica"
+    },
+    {
+      "pista1": "Cinturón de rocas entre Marte y Júpiter",
+      "pista2": "Ceres orbita en esta región",
+      "pista3": "Muchos cuerpos pequeños chocan y generan meteoritos",
+      "pista_extra": "Película clásica de catástrofe espacial con taladro y Bruce Willis",
+      "respuesta": "asteroide"
+    },
+    {
+      "pista1": "Teoría de la relatividad famosa de Einstein",
+      "pista2": "Incluye la equivalencia masa-energía",
+      "pista3": "Describe gravedad como geometría",
+      "pista_extra": "No confundir solo con la especial de mil novecientos cinco",
+      "respuesta": "relatividad"
+    },
+    {
+      "pista1": "Instrumento que mide la temperatura",
+      "pista2": "Puede usar mercurio alcohol o sensor digital",
+      "pista3": "Escalas Celsius Fahrenheit o Kelvin",
+      "pista_extra": "Galileo construyó primigenios llamados termoscopios",
+      "respuesta": "termometro"
+    },
+    {
+      "pista1": "Estructura proteica que acelera reacciones bioquímicas",
+      "pista2": "Altamente específica para su sustrato",
+      "pista3": "La amilasa en saliva rompe almidón",
+      "pista_extra": "Muchas requieren cofactores como iones o vitaminas",
+      "respuesta": "enzima"
+    },
+    {
+      "pista1": "Principio que no puedes conocir posicion e impulso exactos",
+      "pista2": "Fisico aleman con apellido de incertidumbre",
+      "pista3": "Delta x por delta p",
+      "pista_extra": "Apellido Heisenberg",
+      "respuesta": "heisenberg"
+    },
+    {
+      "pista1": "Constante minima de accion en cuantica",
+      "pista2": "Unidad con dimensiones de energia por tiempo",
+      "pista3": "Lleva nombre de fisico aleman",
+      "pista_extra": "Simbolo h barra",
+      "respuesta": "planck"
+    },
+    {
+      "pista1": "Particula mediadora de la fuerza debil",
+      "pista2": "Bosones masivos W y Z",
+      "pista3": "Teoria electroweak",
+      "pista_extra": "Glashow Salam Weinberg",
+      "respuesta": "boson w"
+    },
+    {
+      "pista1": "Particula sin carga electrica muy ligera",
+      "pista2": "Tres sabores en familia",
+      "pista3": "Detectores subterraneos",
+      "pista_extra": "Oscilaciones entre masas",
+      "respuesta": "neutrino"
+    },
+    {
+      "pista1": "Herramienta de edicion genetica CRISPR",
+      "pista2": "Arn guia y nuclease",
+      "pista3": "Bacterias defensivas",
+      "pista_extra": "Apellido Doudna Charpentier premio nobel",
+      "respuesta": "crispr"
+    },
+    {
+      "pista1": "Curvatura extrema invisible en galaxias",
+      "pista2": "Horizonte de sucesos",
+      "pista3": "Singularidad central",
+      "pista_extra": "Radio de Schwarzschild",
+      "respuesta": "agujero negro"
+    },
+    {
+      "pista1": "Cuantos de vibracion del campo electromagnetico",
+      "pista2": "Efecto fotoeléctrico los explica",
+      "pista3": "Sin masa en reposo",
+      "pista_extra": "Dualidad onda particula",
+      "respuesta": "foton"
+    },
+    {
+      "pista1": "Carga del quark mas ligero",
+      "pista2": "Proton tiene dos arriba uno abajo",
+      "pista3": "Confinamiento en hadrones",
+      "pista_extra": "Fraccion un tercio o dos tercios",
+      "respuesta": "quark"
+    },
+    {
+      "pista1": "Ley de enfriamiento proporcional a temperatura",
+      "pista2": "Sir Isaac no es esta ley",
+      "pista3": "Diferencia con ambiente",
+      "pista_extra": "Apellido Newton no es",
+      "respuesta": "newton enfriamiento"
+    },
+    {
+      "pista1": "Numero de Avogadro orden",
+      "pista2": "Mol de particulas",
+      "pista3": "Diez a la veintitres aprox",
+      "pista_extra": "Constante NA",
+      "respuesta": "avogadro"
+    },
+    {
+      "pista1": "Modelo atomo esfera positiva embebida",
+      "pista2": "Experimento pan de pasas",
+      "pista3": "Fisico neozelandes",
+      "pista_extra": "Ernest apellido",
+      "respuesta": "rutherford"
+    },
+    {
+      "pista1": "Principio exclusion dos fermiones mismo estado",
+      "pista2": "Spin semientero",
+      "pista3": "Apellido italiano fisico",
+      "pista_extra": "Nobel mil novecientos cuarenta y tres",
+      "respuesta": "pauli"
+    },
+    {
+      "pista1": "Efecto tunel cuantico barrera fina",
+      "pista2": "Microscopio de barrido usa sonda",
+      "pista3": "Decaimiento alfa relacion",
+      "pista_extra": "Probabilidad exponencial",
+      "respuesta": "tunel"
+    },
+    {
+      "pista1": "Unidad de presion SI",
+      "pista2": "Un newton sobre metro cuadrado",
+      "pista3": "Meteorologia la usa",
+      "pista_extra": "Apellido frances",
+      "respuesta": "pascal"
+    },
+    {
+      "pista1": "Teoria evolucion natural seleccion",
+      "pista2": "Viaje del Beagle",
+      "pista3": "Origen de las especies",
+      "pista_extra": "Charles apellido",
+      "respuesta": "darwin"
+    },
+    {
+      "pista1": "Celula nerviosa con axon y dendritas",
+      "pista2": "Impulso electrico",
+      "pista3": "Sinapsis con neurotransmisor",
+      "pista_extra": "Unidad del cerebro",
+      "respuesta": "neurona"
+    },
+    {
+      "pista1": "Capa lipidica bilayer celular",
+      "pista2": "Permeabilidad selectiva",
+      "pista3": "Canales ionicos",
+      "pista_extra": "Fluido mosaico modelo",
+      "respuesta": "membrana"
+    },
+    {
+      "pista1": "Acido desoxirribonucleico",
+      "pista2": "Doble helice",
+      "pista3": "Timina no en arn",
+      "pista_extra": "Genoma humano tres mil millones",
+      "respuesta": "adn"
+    },
+    {
+      "pista1": "Organelo verde plantas",
+      "pista2": "Fotosintesis",
+      "pista3": "Tilacoides y grana",
+      "pista_extra": "Clorofila dentro",
+      "respuesta": "cloroplasto"
+    },
+    {
+      "pista1": "Medida de desorden termodinamico",
+      "pista2": "Segunda ley aumenta en universo aislado",
+      "pista3": "Boltzmann y logaritmo de microestados",
+      "pista_extra": "Letra S en fisica",
+      "respuesta": "entropia"
+    }
   ]
 }
