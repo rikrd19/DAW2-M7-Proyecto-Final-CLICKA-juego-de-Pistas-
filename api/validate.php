@@ -63,6 +63,18 @@ require_once dirname(__DIR__) . '/includes/db.php';
 function normalize_answer(string $value): string
 {
     $value = trim(mb_strtolower($value, 'UTF-8'));
+    // Make gameplay friendlier: answers with/without accents are treated as equal.
+    $value = strtr(
+        $value,
+        [
+            'à' => 'a', 'á' => 'a', 'â' => 'a', 'ä' => 'a', 'ã' => 'a', 'å' => 'a',
+            'è' => 'e', 'é' => 'e', 'ê' => 'e', 'ë' => 'e',
+            'ì' => 'i', 'í' => 'i', 'î' => 'i', 'ï' => 'i',
+            'ò' => 'o', 'ó' => 'o', 'ô' => 'o', 'ö' => 'o', 'õ' => 'o',
+            'ù' => 'u', 'ú' => 'u', 'û' => 'u', 'ü' => 'u',
+            'ç' => 'c', 'ñ' => 'n',
+        ]
+    );
     return preg_replace('/\s+/', ' ', $value) ?? $value;
 }
 
