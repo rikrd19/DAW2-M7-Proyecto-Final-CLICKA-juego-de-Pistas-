@@ -40,5 +40,17 @@ CREATE TABLE IF NOT EXISTS partidas (
     FOREIGN KEY (usuario_id) REFERENCES usuarios (id) ON DELETE SET NULL
 );
 
+-- Per-question analytics for each round: enables clues_used distribution and correctness metrics.
+CREATE TABLE IF NOT EXISTS round_answers (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    partida_id INTEGER NOT NULL,
+    question_id INTEGER NULL,
+    clues_used INTEGER NOT NULL CHECK (clues_used BETWEEN 1 AND 4),
+    correct INTEGER NOT NULL CHECK (correct IN (0, 1)),
+    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (partida_id) REFERENCES partidas (id) ON DELETE CASCADE
+);
+
 CREATE INDEX IF NOT EXISTS idx_preguntas_tema ON preguntas (tema_id);
 CREATE INDEX IF NOT EXISTS idx_partidas_usuario ON partidas (usuario_id);
+CREATE INDEX IF NOT EXISTS idx_round_answers_partida ON round_answers (partida_id);

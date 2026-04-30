@@ -1,0 +1,26 @@
+{
+  "tema_nombre": "Arte",
+  "fuente": "python",
+  "preguntas": [
+    {"pista1": "Pintor neerlandes de la Noche estrellada", "pista2": "Se corto parte de una oreja", "pista3": "Postimpresionista del siglo XIX", "pista_extra": "Su nombre de pila era Vincent", "respuesta": "van gogh"},
+    {"pista1": "Autor de la Gioconda", "pista2": "Tambien diseno maquinas y estudios anatomicos", "pista3": "Vivio entre Florencia y Milan", "pista_extra": "Genio del Renacimiento italiano", "respuesta": "leonardo da vinci"},
+    {"pista1": "Museo parisino con piramide de cristal", "pista2": "Guarda la Mona Lisa", "pista3": "Fue palacio real", "pista_extra": "Su nombre empieza por l", "respuesta": "louvre"},
+    {"pista1": "Pintor malagueno creador del cubismo junto a Braque", "pista2": "Pinto Guernica", "pista3": "Tuvo periodos azul y rosa", "pista_extra": "Apellido muy conocido en Espana", "respuesta": "picasso"},
+    {"pista1": "Obra mural de Picasso sobre bombardeo", "pista2": "Esta en el Museo Reina Sofia", "pista3": "Predominan blancos negros y grises", "pista_extra": "Nombre de una ciudad vasca", "respuesta": "guernica"},
+    {"pista1": "Escultor renacentista de David y la Pieta", "pista2": "Pinto la Capilla Sixtina", "pista3": "Trabajaba el marmol como pocos", "pista_extra": "Su nombre empieza por michel", "respuesta": "miguel angel"},
+    {"pista1": "Tecnica de pintura con pigmento y agua", "pista2": "Se usa sobre papel", "pista3": "Permite transparencias suaves", "pista_extra": "Muy usada en paisajes", "respuesta": "acuarela"},
+    {"pista1": "Movimiento artistico de Dali y Magritte", "pista2": "Mezcla suenos y realidad", "pista3": "Influido por el psicoanalisis", "pista_extra": "Empieza por sur", "respuesta": "surrealismo"},
+    {"pista1": "Pintor espanol de relojes blandos", "pista2": "Bigote iconico", "pista3": "Relacion con el surrealismo", "pista_extra": "Nombre Salvador", "respuesta": "dali"},
+    {"pista1": "Museo madrileno con Velazquez y Goya", "pista2": "Una de las pinacotecas mas importantes", "pista3": "Esta en el paseo del arte", "pista_extra": "Nombre muy corto", "respuesta": "prado"},
+    {"pista1": "Tecnica de grabado japones famosa por Hokusai", "pista2": "La gran ola es ejemplo", "pista3": "Se talla sobre madera", "pista_extra": "Empieza por uki", "respuesta": "ukiyoe"},
+    {"pista1": "Obra de Velazquez con meninas e infanta", "pista2": "Esta en el Prado", "pista3": "Juego de espejos y perspectiva", "pista_extra": "Titulo en plural femenino", "respuesta": "las meninas"},
+    {"pista1": "Escultura antigua de la isla de Milo", "pista2": "Representa a Afrodita", "pista3": "Le faltan los brazos", "pista_extra": "Esta en el Louvre", "respuesta": "venus de milo"},
+    {"pista1": "Edificio modernista de Gaudi en Barcelona", "pista2": "Aun esta en construccion", "pista3": "Torres altas y fachadas organicas", "pista_extra": "Templo expiatorio muy famoso", "respuesta": "sagrada familia"},
+    {"pista1": "Movimiento de Monet y Renoir", "pista2": "Pincelada suelta y luz cambiante", "pista3": "Nace en Francia siglo XIX", "pista_extra": "Nombre relacionado con impresion", "respuesta": "impresionismo"},
+    {"pista1": "Pintora mexicana de autorretratos", "pista2": "Relacion sentimental con Diego Rivera", "pista3": "Icono de cejas unidas", "pista_extra": "Nombre Frida", "respuesta": "kahlo"},
+    {"pista1": "Tecnica de unir pequenas piezas de color", "pista2": "Muy vista en arte romano", "pista3": "Puede decorar suelos y muros", "pista_extra": "Tambien se hace con azulejos", "respuesta": "mosaico"},
+    {"pista1": "Arte urbano con aerosol en muros", "pista2": "Banksy es referencia global", "pista3": "A veces es ilegal", "pista_extra": "Empieza por graf", "respuesta": "graffiti"},
+    {"pista1": "Arquitecto de la Casa Batllo", "pista2": "Figura clave del modernismo catalan", "pista3": "Trabajo mucho en Barcelona", "pista_extra": "Su apellido empieza por ga", "respuesta": "gaudi"},
+    {"pista1": "Museo de Bilbao con arquitectura de titanio", "pista2": "Diseñado por Frank Gehry", "pista3": "Impulso turismo cultural vasco", "pista_extra": "Comparte nombre con una fundacion", "respuesta": "guggenheim"}
+  ]
+}

@@ -50,9 +50,12 @@ $pageTitle = 'Iniciar Sesión';
                             <?php
                             echo match ($_GET['error']) {
                                 'invalid_credentials' => 'Correo o contraseña incorrectos.',
+                                'user_not_found' => 'No existe ninguna cuenta con este correo. ¿Quieres crear una?',
+                                'wrong_password' => 'La contraseña no es correcta.',
                                 'invalid_email' => 'Introduce un correo electrónico válido.',
                                 'missing_fields' => 'Por favor, rellena todos los campos.',
                                 'unauthorized' => 'Debes iniciar sesión para acceder.',
+                                'system_error' => 'No se ha podido iniciar sesión. Inténtalo de nuevo.',
                                 default => 'Ha ocurrido un error en el sistema.'
                             };
                             ?>

@@ -3,8 +3,8 @@
 /**
  * Game rounds (partidas) API.
  *
- * GET  → returns ranking rows for registered users (one best score per user).
- *        Response: [ { id, usuario_id, nombre, puntos, tema, fecha }, … ]
+ * GET  → returns ranking rows for registered users (total points summed across all saved rounds).
+ *        tema lists distinct themes played (comma-separated). Response shape unchanged for clients.
  *
  * POST → saves a completed round.
  *        Body: { "puntos": <int>, "tema": "<string>", "usuario_id": <int|null>, "nombre_temporal": "<string|null>" }
@@ -18,27 +18,21 @@ header('Content-Type: application/json; charset=utf-8');
 
 $method = $_SERVER['REQUEST_METHOD'] ?? '';
 
-/* ── GET: ranking for registered users only (best score per user) ─────── */
+/* ── GET: ranking for registered users (sum of puntos, distinct temas listed) ─ */
 if ($method === 'GET') {
     require_once dirname(__DIR__) . '/includes/db.php';
     try {
         $result = $db->query(
-            "SELECT p.id,
+            "SELECT MIN(p.id) AS id,
                     p.usuario_id,
                     u.username AS nombre,
-                    p.puntos,
-                    p.tema,
-                    p.fecha
+                    SUM(p.puntos) AS puntos,
+                    GROUP_CONCAT(DISTINCT p.tema) AS tema,
+                    MAX(p.fecha) AS fecha
              FROM partidas p
              INNER JOIN usuarios u ON u.id = p.usuario_id
-             WHERE p.id = (
-                 SELECT p2.id
-                 FROM partidas p2
-                 WHERE p2.usuario_id = p.usuario_id
-                 ORDER BY p2.puntos DESC, p2.fecha ASC, p2.id ASC
-                 LIMIT 1
-             )
-             ORDER BY p.puntos DESC, p.fecha ASC, p.id ASC"
+             GROUP BY p.usuario_id, u.username
+             ORDER BY SUM(p.puntos) DESC, MAX(p.fecha) DESC, u.username COLLATE NOCASE ASC"
         );
         $rows = [];
         while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
@@ -70,6 +64,9 @@ if ($method !== 'POST') {
     exit;
 }
 
+// Must load session + DB before reading $_SESSION or using $db (fixes logged-in saves).
+require_once dirname(__DIR__) . '/includes/db.php';
+
 $raw  = file_get_contents('php://input') ?: '';
 $data = json_decode($raw, true);
 if (!is_array($data)) {
@@ -82,6 +79,7 @@ $puntos         = isset($data['puntos']) ? (int) $data['puntos'] : 0;
 $tema           = isset($data['tema'])   && is_string($data['tema']) ? trim($data['tema']) : '';
 $nombreTemporal = isset($data['nombre_temporal']) && is_string($data['nombre_temporal'])
                     ? trim($data['nombre_temporal']) : null;
+$answers        = isset($data['answers']) && is_array($data['answers']) ? $data['answers'] : [];
 
 if ($tema === '') {
     http_response_code(400);
@@ -124,9 +122,23 @@ if ($sessionUserId === null) {
 }
 
 /* ── Logged-in path: persist to DB ─────────────────────────────────── */
-require_once dirname(__DIR__) . '/includes/db.php';
-
 try {
+    // Backward-compatible analytics table creation for existing databases.
+    $db->exec(
+        'CREATE TABLE IF NOT EXISTS round_answers (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            partida_id INTEGER NOT NULL,
+            question_id INTEGER NULL,
+            clues_used INTEGER NOT NULL CHECK (clues_used BETWEEN 1 AND 4),
+            correct INTEGER NOT NULL CHECK (correct IN (0, 1)),
+            created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (partida_id) REFERENCES partidas (id) ON DELETE CASCADE
+        )'
+    );
+    $db->exec('CREATE INDEX IF NOT EXISTS idx_round_answers_partida ON round_answers (partida_id)');
+
+    $db->exec('BEGIN IMMEDIATE');
+
     $stmt = $db->prepare(
         'INSERT INTO partidas (usuario_id, nombre_temporal, puntos, tema, fecha)
          VALUES (:uid, :nombre, :puntos, :tema, CURRENT_TIMESTAMP)'
@@ -138,8 +150,42 @@ try {
     $stmt->execute();
 
     $id = $db->lastInsertRowID();
+
+    if (!empty($answers)) {
+        $insAnswer = $db->prepare(
+            'INSERT INTO round_answers (partida_id, question_id, clues_used, correct)
+             VALUES (:partida_id, :question_id, :clues_used, :correct)'
+        );
+
+        foreach ($answers as $answer) {
+            if (!is_array($answer)) {
+                continue;
+            }
+            $cluesUsed = isset($answer['clues_used']) ? (int) $answer['clues_used'] : 0;
+            $correct   = !empty($answer['correct']) ? 1 : 0;
+            $questionIdRaw = $answer['question_id'] ?? null;
+            $questionId = is_numeric($questionIdRaw) ? (int) $questionIdRaw : null;
+
+            if ($cluesUsed < 1 || $cluesUsed > 4) {
+                continue;
+            }
+
+            $insAnswer->bindValue(':partida_id', $id, SQLITE3_INTEGER);
+            $insAnswer->bindValue(':question_id', $questionId, $questionId === null ? SQLITE3_NULL : SQLITE3_INTEGER);
+            $insAnswer->bindValue(':clues_used', $cluesUsed, SQLITE3_INTEGER);
+            $insAnswer->bindValue(':correct', $correct, SQLITE3_INTEGER);
+            $insAnswer->execute();
+        }
+    }
+
+    $db->exec('COMMIT');
     echo json_encode(['id' => $id, 'puntos' => $puntos], JSON_UNESCAPED_UNICODE);
 } catch (Throwable) {
+    try {
+        $db->exec('ROLLBACK');
+    } catch (Throwable) {
+        // Ignore rollback errors when no transaction is active.
+    }
     http_response_code(500);
     echo json_encode(['error' => 'Internal server error'], JSON_UNESCAPED_UNICODE);
 } finally {

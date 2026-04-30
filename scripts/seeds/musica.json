@@ -1,0 +1,26 @@
+{
+  "tema_nombre": "Música",
+  "fuente": "python",
+  "preguntas": [
+    {"pista1": "Compositor aleman sordo en sus ultimos anos", "pista2": "Escribio nueve sinfonias", "pista3": "La novena incluye oda a la alegria", "pista_extra": "Su apellido empieza por bee", "respuesta": "beethoven"},
+    {"pista1": "Grupo britanico de Liverpool", "pista2": "John Paul George y Ringo", "pista3": "Revolucionaron el pop en los sesenta", "pista_extra": "Su nombre significa escarabajos", "respuesta": "beatles"},
+    {"pista1": "Instrumento de seis cuerdas muy popular", "pista2": "Puede ser acustica o electrica", "pista3": "Se toca rasgueando o punteando", "pista_extra": "Empieza por gui", "respuesta": "guitarra"},
+    {"pista1": "Genero nacido en Jamaica", "pista2": "Bob Marley es su gran icono", "pista3": "Ritmo relajado y mensaje social", "pista_extra": "Empieza por reg", "respuesta": "reggae"},
+    {"pista1": "Cantante conocida como reina del pop", "pista2": "Exito en los ochenta y noventa", "pista3": "Canciones como like a prayer", "pista_extra": "Nombre artistico de una sola palabra", "respuesta": "madonna"},
+    {"pista1": "Conjunto de percusion y platillos", "pista2": "Marca el pulso en una banda", "pista3": "Se toca con baquetas", "pista_extra": "Instrumento del baterista", "respuesta": "bateria"},
+    {"pista1": "Cantante de thriller y billie jean", "pista2": "Conocido como rey del pop", "pista3": "Moonwalk como paso famoso", "pista_extra": "Apellido jackson", "respuesta": "michael jackson"},
+    {"pista1": "Genero andaluz con cante toque y baile", "pista2": "Palmas y quejio caracteristicos", "pista3": "Patrimonio inmaterial de la humanidad", "pista_extra": "Camaron y paco de lucia referentes", "respuesta": "flamenco"},
+    {"pista1": "Instrumento de teclado con ochenta y ocho teclas", "pista2": "Puede ser de cola o vertical", "pista3": "Mozart y Chopin compusieron para el", "pista_extra": "Se toca con ambas manos", "respuesta": "piano"},
+    {"pista1": "Duo frances de musica electronica con cascos", "pista2": "Exito get lucky", "pista3": "Separacion anunciada en dos mil veintiuno", "pista_extra": "Nombre empieza por daft", "respuesta": "daft punk"},
+    {"pista1": "Genero urbano latino con base dembow", "pista2": "Popular en Puerto Rico", "pista3": "Daddy yankee y bad bunny son referentes", "pista_extra": "Empieza por regga", "respuesta": "reggaeton"},
+    {"pista1": "Concurso europeo de canciones anual", "pista2": "Cada pais envía un representante", "pista3": "Se reparten doce puntos", "pista_extra": "Muy visto en mayo", "respuesta": "eurovision"},
+    {"pista1": "Cantante de bohemian rhapsody", "pista2": "Lider de la banda Queen", "pista3": "Gran voz y presencia escenica", "pista_extra": "Nombre freddie", "respuesta": "mercury"},
+    {"pista1": "Instrumento de viento metal curvado", "pista2": "Muy usado en jazz", "pista3": "Tiene pistones y boquilla", "pista_extra": "Miles davis lo tocaba", "respuesta": "trompeta"},
+    {"pista1": "Genero afroamericano nacido en Nueva Orleans", "pista2": "Improvisacion clave", "pista3": "Saxofon y trompeta frecuentes", "pista_extra": "Empieza por jaz", "respuesta": "jazz"},
+    {"pista1": "Artista colombiana de hips dont lie", "pista2": "Tambien conocida por waka waka", "pista3": "Tiene fundacion pie descalzos", "pista_extra": "Su nombre empieza por sha", "respuesta": "shakira"},
+    {"pista1": "Banda irlandesa de bono como vocalista", "pista2": "Cancion with or without you", "pista3": "Muy activa en causas sociales", "pista_extra": "Nombre con letra y numero", "respuesta": "u2"},
+    {"pista1": "Genero surgido en estados unidos con rimas", "pista2": "Base ritmica marcada por beats", "pista3": "Freestyle en batallas", "pista_extra": "Tambien llamado hip hop", "respuesta": "rap"},
+    {"pista1": "Servicio de musica en streaming verde", "pista2": "Playlists y recomendaciones", "pista3": "Muy usado en movil", "pista_extra": "Nombre empieza por spot", "respuesta": "spotify"},
+    {"pista1": "Cantante britanica de hello", "pista2": "Voz potente y baladas emotivas", "pista3": "Albumes llamados por numeros", "pista_extra": "Su nombre artistico tiene cuatro letras", "respuesta": "adele"}
+  ]
+}

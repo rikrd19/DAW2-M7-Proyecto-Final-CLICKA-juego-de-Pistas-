@@ -49,6 +49,7 @@ const MAX_PISTES    = 4;         // flag + region + capital + population
 let puntsPartida    = 0;
 let respostaEnviada = false;
 let paisosUsats     = new Set(); // avoid repeating countries within a round
+let roundAnswers    = [];        // per-question analytics: clues_used + correctness
 
 /* ── Scoring ────────────────────────────────────────────────── */
 function scoreForClues(clues) {
@@ -92,6 +93,7 @@ async function iniciarPartida() {
     numPregunta          = 0;
     puntsPartida         = 0;
     paisosUsats.clear();
+    roundAnswers = [];
 
     try {
         if (!paisos) {
@@ -147,14 +149,14 @@ function carregarPregunta() {
     pista1ImgEl.src = paisActual.flags.png;
     pista1ImgEl.alt = 'Bandera del país a adivinar';
 
-    pista2Text.textContent = paisActual.region || '—';
+    pista2Text.textContent = regionPerMostrar(paisActual.region);
 
-    const capital = Array.isArray(paisActual.capital) && paisActual.capital.length
+    const capitalRaw = Array.isArray(paisActual.capital) && paisActual.capital.length
         ? paisActual.capital[0]
         : '—';
-    pista3Text.textContent = capital;
+    pista3Text.textContent = capitalPerMostrar(capitalRaw);
 
-    pistaExtraText.textContent = (paisActual.population ?? 0).toLocaleString();
+    pistaExtraText.textContent = (paisActual.population ?? 0).toLocaleString('es-ES');
 
     // Synchronous context: double-rAF lets the browser commit the reset state
     // before adding 'revelada', so the flip transition fires correctly.
@@ -195,6 +197,114 @@ function normalitzar(str) {
         .toLowerCase()
         .normalize('NFD')
         .replace(/[\u0300-\u036f]/g, '');
+}
+
+/** REST Countries returns `region` in English; map to Spanish for UI consistency. */
+const REGION_EN_A_ES = {
+    africa: 'África',
+    americas: 'América',
+    asia: 'Asia',
+    europe: 'Europa',
+    oceania: 'Oceanía',
+    antarctic: 'Antártida',
+};
+
+function regionPerMostrar(region) {
+    if (!region || typeof region !== 'string') return '—';
+    const key = normalitzar(region);
+    return REGION_EN_A_ES[key] || region;
+}
+
+/**
+ * Capitals from the API are often English exonyms; map common ones to Spanish labels for clues.
+ * Unknown capitals fall back to the API string.
+ */
+const CAPITAL_EN_A_ES = [
+    ['Mexico City', 'Ciudad de México'],
+    ['Washington, D.C.', 'Washington D. C.'],
+    ['Washington D.C.', 'Washington D. C.'],
+    ['New Delhi', 'Nueva Delhi'],
+    ['Rome', 'Roma'],
+    ['Athens', 'Atenas'],
+    ['Prague', 'Praga'],
+    ['Warsaw', 'Varsovia'],
+    ['Beijing', 'Pekín'],
+    ['Moscow', 'Moscú'],
+    ['Cairo', 'El Cairo'],
+    ['Hanoi', 'Hanói'],
+    ['Reykjavik', 'Reikiavik'],
+    ['Brussels', 'Bruselas'],
+    ['Vienna', 'Viena'],
+    ['Copenhagen', 'Copenhague'],
+    ['Stockholm', 'Estocolmo'],
+    ['Lisbon', 'Lisboa'],
+    ['Dublin', 'Dublín'],
+    ['London', 'Londres'],
+    ['Paris', 'París'],
+    ['Berlin', 'Berlín'],
+    ['Bern', 'Berna'],
+    ['Amsterdam', 'Ámsterdam'],
+    ['Bucharest', 'Bucarest'],
+    ['Sofia', 'Sofía'],
+    ['Tokyo', 'Tokio'],
+    ['Seoul', 'Seúl'],
+    ['Kyiv', 'Kiev'],
+    ['Kiev', 'Kiev'],
+    ['Bogota', 'Bogotá'],
+    ['Brasilia', 'Brasilia'],
+    ['Canberra', 'Camberra'],
+    ['Helsinki', 'Helsinki'],
+    ['Oslo', 'Oslo'],
+    ['Wellington', 'Wellington'],
+    ['Manila', 'Manila'],
+    ['Jakarta', 'Yakarta'],
+    ['Bangkok', 'Bangkok'],
+    ['Nairobi', 'Nairobi'],
+    ['Cape Town', 'Ciudad del Cabo'],
+    ['Pretoria', 'Pretoria'],
+    ['Bloemfontein', 'Bloemfontein'],
+    ['Jerusalem', 'Jerusalén'],
+    ['Tel Aviv', 'Tel Aviv'],
+    ['Ankara', 'Ankara'],
+    ['Damascus', 'Damasco'],
+    ['Baghdad', 'Bagdad'],
+    ['Tehran', 'Teherán'],
+    ['Riyadh', 'Riad'],
+    ['Abu Dhabi', 'Abu Dabi'],
+    ['Doha', 'Doha'],
+    ['Kuwait City', 'Kuwait'],
+    ['Manama', 'Manama'],
+    ['Muscat', 'Mascate'],
+    ['Sanaa', 'Saná'],
+    ['Islamabad', 'Islamabad'],
+    ['Kathmandu', 'Katmandú'],
+    ['Colombo', 'Colombo'],
+    ['Dhaka', 'Daca'],
+    ['Havana', 'La Habana'],
+    ['Santo Domingo', 'Santo Domingo'],
+    ['Port-au-Prince', 'Puerto Príncipe'],
+    ['Kingston', 'Kingston'],
+    ['Nassau', 'Nasáu'],
+    ['Ottawa', 'Ottawa'],
+];
+
+function capitalPerMostrar(capital) {
+    if (!capital || capital === '—') return capital;
+    const n = normalitzar(capital);
+    for (const [en, es] of CAPITAL_EN_A_ES) {
+        if (normalitzar(en) === n) return es;
+    }
+    return capital;
+}
+
+/** Country label for UI (Spanish first, matches answer validation). */
+function nomPaisPerMostrar(pais) {
+    const es = pais?.translations?.spa?.common;
+    const en = pais?.name?.common;
+    if (es && en && normalitzar(es) !== normalitzar(en)) {
+        return `${es} (${en})`;
+    }
+    return es || en || '—';
 }
 
 function respostesValidesPais(pais) {
@@ -262,9 +372,15 @@ function mostrarResultat(correct, punts) {
         resultatEl.className     = 'resultat-box resultat-correct';
     } else {
         resultatTextEl.innerHTML =
-            `<strong>&#10007; Incorrecto.</strong> Era: <em>${escapeHtml(paisActual.name.common)}</em>`;
+            `<strong>&#10007; Incorrecto.</strong> Era: <em>${escapeHtml(nomPaisPerMostrar(paisActual))}</em>`;
         resultatEl.className = 'resultat-box resultat-error';
     }
+
+    roundAnswers.push({
+        question_id: null,
+        clues_used: pistesVistes,
+        correct: Boolean(correct),
+    });
 
     btnSegurentPregunta.textContent = numPregunta >= TOTAL_PREGUNTES
         ? 'Ver resultados'
@@ -309,6 +425,7 @@ async function acabarPartida() {
                 puntos:          puntsPartida,
                 tema:            'Banderas',
                 nombre_temporal: null,
+                answers:         roundAnswers,
             }),
         });
         if (!resp.ok) {

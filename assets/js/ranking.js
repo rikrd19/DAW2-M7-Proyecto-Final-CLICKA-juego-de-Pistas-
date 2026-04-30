@@ -44,7 +44,7 @@ function renderRanking(rows) {
                 <br><small class="text-muted">${formatDate(row.fecha)}</small>
             </td>
             <td class="d-none d-sm-table-cell">
-                <span class="ranking-tema">${escapeHtml(row.tema)}</span>
+                <span class="ranking-tema text-break">${escapeHtml(row.tema)}</span>
             </td>
             <td class="text-end">
                 <span class="ranking-punts">${row.puntos}</span>

@@ -47,6 +47,7 @@ let pistesVistes    = 1;   // clue counter: 1 = only pista1 revealed
 let maxPistes       = 3;   // 3 or 4 depending on pista_extra
 let puntsPartida    = 0;   // accumulated score for the round
 let respostaEnviada = false;
+let roundAnswers    = [];  // per-question analytics: clues_used + correctness
 
 /* ── Card reveal helper ─────────────────────────────────────── */
 function revelarCarta(el) {
@@ -80,6 +81,7 @@ function resetCartes() {
 function iniciarPartida() {
     numPregunta  = 0;
     puntsPartida = 0;
+    roundAnswers = [];
     temaSelector.hidden = true;
     gameArea.hidden     = false;
     fiPartida.hidden    = true;
@@ -208,7 +210,11 @@ async function comprovarResposta() {
         } else {
             if (pistesVistes >= maxPistes) {
                 respostaEnviada = true;
-                mostrarResultat(false, 0);
+                const revelada =
+                    typeof result.respuesta_correcta === 'string' && result.respuesta_correcta.trim() !== ''
+                        ? result.respuesta_correcta.trim()
+                        : null;
+                mostrarResultat(false, 0, revelada);
             } else {
                 mostrarFeedback('error', 'Incorrecto. Inténtalo de nuevo o revela otra carta.');
                 btnComprovar.disabled = false;
@@ -228,7 +234,15 @@ function mostrarFeedback(tipo, texto) {
     feedbackEl.hidden      = false;
 }
 
-function mostrarResultat(correct, punts) {
+function escapeHtml(str) {
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+}
+
+function mostrarResultat(correct, punts, respuestaCorrecta = null) {
     feedbackEl.hidden        = true;
     btnSeguентPista.hidden   = true;
     respostaInput.disabled   = true;
@@ -238,10 +252,20 @@ function mostrarResultat(correct, punts) {
     if (correct) {
         resultatTextEl.innerHTML = `<strong>&#10003; ¡Correcto!</strong> +${punts} punto${punts !== 1 ? 's' : ''}`;
         resultatEl.className     = 'resultat-box resultat-correct';
+    } else if (respuestaCorrecta) {
+        resultatTextEl.innerHTML =
+            `<strong>&#10007; Incorrecto.</strong> La respuesta era: <em>${escapeHtml(respuestaCorrecta)}</em>`;
+        resultatEl.className = 'resultat-box resultat-error';
     } else {
         resultatTextEl.innerHTML = '<strong>&#10007; Incorrecto.</strong> 0 puntos';
         resultatEl.className     = 'resultat-box resultat-error';
     }
+
+    roundAnswers.push({
+        question_id: preguntaActual && typeof preguntaActual.id === 'number' ? preguntaActual.id : null,
+        clues_used: pistesVistes,
+        correct: Boolean(correct),
+    });
 
     btnSegurentPregunta.textContent = numPregunta >= TOTAL_PREGUNTES
         ? 'Ver resultados'
@@ -273,6 +297,7 @@ async function acabarPartida() {
                 puntos:          puntsPartida,
                 tema:            temaNom,
                 nombre_temporal: null,
+                answers:         roundAnswers,
             }),
         });
         if (!resp.ok) {
@@ -302,8 +327,11 @@ btnTornar.addEventListener('click', () => {
 
 /* ── Auto-start when tema is preselected via URL ─────────── */
 if (typeof TEMA_PRESELECCIONAT !== 'undefined' && TEMA_PRESELECCIONAT !== null) {
-    const preBtn = document.querySelector(`.btn-tema[data-tema-id="${TEMA_PRESELECCIONAT}"]`);
-    temaId  = TEMA_PRESELECCIONAT;
-    temaNom = preBtn ? preBtn.dataset.temaNom : '';
+    const preBtn = document.querySelector(`[data-tema-id="${TEMA_PRESELECCIONAT}"]`);
+    temaId = TEMA_PRESELECCIONAT;
+    const fromBtn = preBtn && preBtn.dataset.temaNom ? String(preBtn.dataset.temaNom).trim() : '';
+    const fromPhp =
+        typeof TEMA_NOM_PRESELECCIONAT === 'string' ? TEMA_NOM_PRESELECCIONAT.trim() : '';
+    temaNom = fromBtn || fromPhp;
     iniciarPartida();
 }

@@ -7,7 +7,9 @@
  *   { "pregunta_id": <int>, "respuesta": "<user text>", "pistas_vistas": <1-4> }
  *
  * Loads canonical answer from SQLite only on the server.
- * Response JSON never includes the stored answer — only outcome and points.
+ * Response JSON: always correcto + puntos. When the guess is wrong and every clue
+ * was already revealed, respuesta_correcta is included so the client can show it
+ * (same UX as Banderas after the last card).
  * Educational notes: php://input + json_decode (D12), prepared SELECT (D06).
  */
 
@@ -103,14 +105,20 @@ try {
 
     $points = $correct ? score_for_clues_used($effectiveClues) : 0;
 
-    // Never echo the canonical answer from DB — only boolean + points for the client.
-    echo json_encode(
-        [
-            'correcto' => $correct,
-            'puntos' => $points,
-        ],
-        JSON_UNESCAPED_UNICODE
-    );
+    $maxClues = $hasExtra ? 4 : 3;
+    $allCluesRevealed = $cluesUsed >= $maxClues;
+
+    $payload = [
+        'correcto' => $correct,
+        'puntos' => $points,
+    ];
+
+    // Reveal canonical answer only after a wrong attempt with all clues visible.
+    if (!$correct && $allCluesRevealed) {
+        $payload['respuesta_correcta'] = trim((string) $row['respuesta']);
+    }
+
+    echo json_encode($payload, JSON_UNESCAPED_UNICODE);
 } catch (Throwable) {
     http_response_code(500);
     echo json_encode(['error' => 'Internal server error'], JSON_UNESCAPED_UNICODE);

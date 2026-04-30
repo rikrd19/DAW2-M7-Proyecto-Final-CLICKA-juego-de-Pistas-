@@ -10,7 +10,8 @@ INSERT INTO temas (nombre) VALUES
     ('Música'),
     ('Tecnología'),
     ('Cine'),
-    ('Naturaleza');
+    ('Naturaleza'),
+    ('Catalán básico');
 
 -- Initial Administrator (login email + password for local/demo only)
 -- password_hash('admin123', PASSWORD_DEFAULT) — login: admin@gmail.com / admin123

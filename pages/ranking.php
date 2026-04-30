@@ -23,7 +23,7 @@ $pageTitle = 'Ranking';
       <h1 class="h3 fw-bold" style="color:var(--clika-text)">
         <i class="bi bi-trophy-fill me-2" style="color:var(--clika-primary)"></i>Ranking
       </h1>
-      <p class="text-muted">Ranking exclusivo para usuarios registrados (mejor puntuación por jugador).</p>
+      <p class="text-muted">Ranking exclusivo para usuarios registrados: puntos acumulados en todas las partidas guardadas.</p>
     </div>
 
     <?php if (!is_logged_in()): ?>
@@ -58,7 +58,7 @@ $pageTitle = 'Ranking';
             <tr>
               <th class="ranking-th" style="width:3.5rem">#</th>
               <th class="ranking-th">Jugador</th>
-              <th class="ranking-th d-none d-sm-table-cell">Temática</th>
+              <th class="ranking-th d-none d-sm-table-cell">Temáticas</th>
               <th class="ranking-th text-end">Puntos</th>
             </tr>
           </thead>
@@ -69,7 +69,7 @@ $pageTitle = 'Ranking';
       </div>
 
       <p class="text-muted small text-center mt-3">
-        Mostrando el ranking de usuarios registrados por mejor puntuación.
+        Cada fila suma todos los puntos de las partidas de ese jugador; la columna Temáticas lista en qué modos ha jugado.
       </p>
     </div>
 
