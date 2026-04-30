@@ -33,6 +33,11 @@ $pageTitle = 'Ranking';
       </div>
     <?php endif; ?>
 
+    <!-- Category filter pills -->
+    <div id="ranking-filters" class="ranking-filters mb-4" hidden>
+      <!-- filled by ranking.js -->
+    </div>
+
     <!-- Loading spinner -->
     <div id="ranking-loading" class="text-center py-5">
       <div class="spinner-border" style="color:var(--clika-primary)" role="status">
@@ -46,7 +51,7 @@ $pageTitle = 'Ranking';
         <span class="tema-icon" aria-hidden="true">&#127942;</span>
       </div>
       <h2 class="h5 fw-bold mb-2" style="color:var(--clika-text)">¡Sé el primero en el ranking!</h2>
-      <p class="text-muted mb-4">Aún no hay partidas registradas. Juega y consigue la máxima puntuación.</p>
+      <p class="text-muted mb-4" id="ranking-empty-msg">Aún no hay partidas registradas. Juega y consigue la máxima puntuación.</p>
       <a href="<?php echo BASE_URL; ?>/pages/play.php" class="btn btn-primary px-4">Jugar ahora</a>
     </div>
 
@@ -58,7 +63,7 @@ $pageTitle = 'Ranking';
             <tr>
               <th class="ranking-th" style="width:3.5rem">#</th>
               <th class="ranking-th">Jugador</th>
-              <th class="ranking-th d-none d-sm-table-cell">Temáticas</th>
+              <th class="ranking-th d-none d-sm-table-cell" id="ranking-th-tema">Temáticas</th>
               <th class="ranking-th text-end">Puntos</th>
             </tr>
           </thead>
@@ -68,7 +73,7 @@ $pageTitle = 'Ranking';
         </table>
       </div>
 
-      <p class="text-muted small text-center mt-3">
+      <p class="text-muted small text-center mt-3" id="ranking-caption">
         Cada fila suma todos los puntos de las partidas de ese jugador; la columna Temáticas lista en qué modos ha jugado.
       </p>
     </div>
