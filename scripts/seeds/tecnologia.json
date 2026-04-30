@@ -1,0 +1,26 @@
+{
+  "tema_nombre": "Tecnología",
+  "fuente": "python",
+  "preguntas": [
+    {"pista1": "Lenguaje creado por Guido van Rossum", "pista2": "Muy usado en ciencia de datos", "pista3": "Su nombre coincide con una serpiente", "pista_extra": "Empieza por py", "respuesta": "python"},
+    {"pista1": "Sistema operativo de codigo abierto con pinguino", "pista2": "Basado en kernel libre", "pista3": "Ubuntu y Debian son distribuciones", "pista_extra": "Nombre termina en ux", "respuesta": "linux"},
+    {"pista1": "Empresa que desarrolla windows", "pista2": "Fundada por bill gates y paul allen", "pista3": "Tambien creadora de azure", "pista_extra": "Su nombre empieza por micro", "respuesta": "microsoft"},
+    {"pista1": "Navegador web de google", "pista2": "Icono circular de colores", "pista3": "Basado en chromium", "pista_extra": "Nombre relacionado con cromo", "respuesta": "chrome"},
+    {"pista1": "Memoria volatil de acceso rapido", "pista2": "Se borra al apagar el equipo", "pista3": "Afecta multitarea y rendimiento", "pista_extra": "Sus siglas son tres letras", "respuesta": "ram"},
+    {"pista1": "Dispositivo que enruta trafico de red", "pista2": "Conecta casa a internet", "pista3": "Suele emitir wifi", "pista_extra": "Palabra comun en ingles tecnico", "respuesta": "router"},
+    {"pista1": "Tecnologia para alojar servicios remotos", "pista2": "Iaas paas saas son modelos", "pista3": "No depende de un solo servidor local", "pista_extra": "En espanol se llama la nube", "respuesta": "cloud"},
+    {"pista1": "Base de datos relacional muy popular", "pista2": "Usa lenguaje sql", "pista3": "Logo de delfin", "pista_extra": "Su nombre empieza por my", "respuesta": "mysql"},
+    {"pista1": "Sistema de control de versiones distribuido", "pista2": "Comandos commit branch merge", "pista3": "Linus torvalds participo en su creacion", "pista_extra": "Plataforma github lo utiliza", "respuesta": "git"},
+    {"pista1": "Lenguaje de marcado para paginas web", "pista2": "Define estructura con etiquetas", "pista3": "Se combina con css y javascript", "pista_extra": "Sus siglas empiezan por hypertext", "respuesta": "html"},
+    {"pista1": "Lenguaje que da estilo visual a la web", "pista2": "Controla colores margenes y tipografia", "pista3": "Se aplica sobre html", "pista_extra": "Tres letras", "respuesta": "css"},
+    {"pista1": "Lenguaje de programacion del navegador", "pista2": "Permite interactividad en paginas", "pista3": "Node.js lo ejecuta en servidor", "pista_extra": "Empieza por java pero no es java", "respuesta": "javascript"},
+    {"pista1": "Empresa de la manzana mordida", "pista2": "Creadora de iphone y mac", "pista3": "Fundada por steve jobs y steve wozniak", "pista_extra": "Nombre de una fruta", "respuesta": "apple"},
+    {"pista1": "Inteligencia artificial conversacional de openai", "pista2": "Genera texto y ayuda a programar", "pista3": "Se usa en chat", "pista_extra": "Nombre empieza por chat", "respuesta": "chatgpt"},
+    {"pista1": "Tecnologia de registro distribuido para criptomonedas", "pista2": "Bloques enlazados criptograficamente", "pista3": "Bitcoin la popularizo", "pista_extra": "Nombre en ingles de cadena de bloques", "respuesta": "blockchain"},
+    {"pista1": "Unidad central de procesamiento", "pista2": "Ejecuta instrucciones del sistema", "pista3": "Tambien se le llama procesador", "pista_extra": "Siglas de tres letras", "respuesta": "cpu"},
+    {"pista1": "Unidad de procesamiento grafico", "pista2": "Clave en videojuegos e ia", "pista3": "Nvidia y amd fabrican modelos", "pista_extra": "Siglas de tres letras", "respuesta": "gpu"},
+    {"pista1": "Sistema de nombres de dominio en internet", "pista2": "Traduce nombres a direcciones ip", "pista3": "Sin esto recordar ip seria dificil", "pista_extra": "Sus siglas son tres letras", "respuesta": "dns"},
+    {"pista1": "Protocolo seguro para navegar cifrado", "pista2": "Usa certificados tls", "pista3": "Aparece con candado en navegador", "pista_extra": "Empieza por http", "respuesta": "https"},
+    {"pista1": "Tecnologia de proximidad para conectar perifericos", "pista2": "Auriculares inalambricos la usan", "pista3": "Opera en dos coma cuatro ghz", "pista_extra": "Su icono es una runa azul", "respuesta": "bluetooth"}
+  ]
+}

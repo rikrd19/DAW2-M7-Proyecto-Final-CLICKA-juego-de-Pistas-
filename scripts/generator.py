@@ -12,6 +12,11 @@ Examples:
   python3 scripts/generator.py --seed scripts/seeds/historia.json
   python3 scripts/generator.py --seed scripts/seeds/geografia.json
   python3 scripts/generator.py --seed scripts/seeds/deportes.json
+  python3 scripts/generator.py --seed scripts/seeds/arte.json
+  python3 scripts/generator.py --seed scripts/seeds/musica.json
+  python3 scripts/generator.py --seed scripts/seeds/tecnologia.json
+  python3 scripts/generator.py --seed scripts/seeds/naturaleza.json
+  python3 scripts/generator.py --seed scripts/seeds/catalan_basico.json
   python3 scripts/generator.py --mode replace --seed scripts/seeds/adivinanzas.json
 
 Note: --mode replace deletes ALL rows with fuente='python' before inserting the current batch.

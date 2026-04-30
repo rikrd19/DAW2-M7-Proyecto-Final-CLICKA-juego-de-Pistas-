@@ -1,0 +1,26 @@
+{
+  "tema_nombre": "Naturaleza",
+  "fuente": "python",
+  "preguntas": [
+    {"pista1": "Mamifero terrestre mas grande", "pista2": "Tiene trompa larga", "pista3": "Vive en Africa y Asia", "pista_extra": "Sus colmillos son de marfil", "respuesta": "elefante"},
+    {"pista1": "Ave nocturna de gran vision", "pista2": "Gira mucho el cuello", "pista3": "Caza pequenos roedores", "pista_extra": "Su sonido clasico es uh uh", "respuesta": "buho"},
+    {"pista1": "Arbol simbolo de canada", "pista2": "Su hoja aparece en la bandera", "pista3": "Da sirope dulce", "pista_extra": "En ingles se llama maple", "respuesta": "arce"},
+    {"pista1": "Proceso por el que plantas crean alimento", "pista2": "Usa luz solar agua y co2", "pista3": "Libera oxigeno", "pista_extra": "Ocurre en cloroplastos", "respuesta": "fotosintesis"},
+    {"pista1": "Animal rayado de sabana africana", "pista2": "Pariente del caballo", "pista3": "Blanco y negro en su piel", "pista_extra": "Empieza por z", "respuesta": "cebra"},
+    {"pista1": "Capa gaseosa que rodea la tierra", "pista2": "Contiene nitrogeno y oxigeno", "pista3": "Filtra parte de radiacion solar", "pista_extra": "Sin ella no habria vida como la conocemos", "respuesta": "atmosfera"},
+    {"pista1": "Animal marino mas grande", "pista2": "Es un mamifero", "pista3": "Puede superar treinta metros", "pista_extra": "Su color da nombre", "respuesta": "ballena azul"},
+    {"pista1": "Bioma frio sin arboles altos", "pista2": "Suelos con permafrost", "pista3": "Hay en zonas polares", "pista_extra": "Empieza por t", "respuesta": "tundra"},
+    {"pista1": "Felino mas rapido en tierra", "pista2": "Acelera en pocos segundos", "pista3": "Vive en sabanas", "pista_extra": "Tambien llamado guepardo", "respuesta": "chita"},
+    {"pista1": "Gas de efecto invernadero principal por actividad humana", "pista2": "Se produce al quemar combustibles fosiles", "pista3": "Formula co2", "pista_extra": "Dioxido de ...", "respuesta": "carbono"},
+    {"pista1": "Gran ecosistema de arboles tropicales humedos", "pista2": "Alta biodiversidad", "pista3": "Suele estar cerca del ecuador", "pista_extra": "La amazonica es la mayor", "respuesta": "selva"},
+    {"pista1": "Roca fundida en el interior terrestre", "pista2": "Al salir se llama lava", "pista3": "Relacionada con volcanes", "pista_extra": "Empieza por m", "respuesta": "magma"},
+    {"pista1": "Animal que cambia de color para camuflarse", "pista2": "Tiene lengua larga pegajosa", "pista3": "Reptil de ojos moviles", "pista_extra": "Muy conocido en madagascar", "respuesta": "camaleon"},
+    {"pista1": "Proceso de convertir vapor en liquido", "pista2": "Forma gotas en nubes", "pista3": "Opuesto a evaporacion", "pista_extra": "Empieza por con", "respuesta": "condensacion"},
+    {"pista1": "Mamifero acuatico de rio muy jugueton", "pista2": "Tiene bigotes y cuerpo alargado", "pista3": "Gran nadador", "pista_extra": "En ingles otter", "respuesta": "nutria"},
+    {"pista1": "Capa de la atmosfera que contiene ozono", "pista2": "Absorbe radiacion ultravioleta", "pista3": "Esta sobre la troposfera", "pista_extra": "Empieza por estra", "respuesta": "estratosfera"},
+    {"pista1": "Planta carnivora famosa", "pista2": "Atrapa insectos con hojas trampa", "pista3": "Nombre de diosa romana en genero", "pista_extra": "Empieza por venus", "respuesta": "venus atrapamoscas"},
+    {"pista1": "Animal simbolo de australia que salta", "pista2": "Lleva cria en bolsa", "pista3": "Mamifero marsupial", "pista_extra": "Empieza por c", "respuesta": "canguro"},
+    {"pista1": "Corriente de agua subterranea que emerge", "pista2": "Puede formar oasis", "pista3": "A veces es termal", "pista_extra": "Tambien llamada manantial", "respuesta": "fuente"},
+    {"pista1": "Ciclo donde agua evapora condensa y precipita", "pista2": "Es vital para ecosistemas", "pista3": "Incluye infiltracion y escorrentia", "pista_extra": "Nombre de recurso h2o", "respuesta": "ciclo del agua"}
+  ]
+}
