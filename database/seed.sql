@@ -18,6 +18,15 @@ INSERT INTO temas (nombre) VALUES
 INSERT INTO usuarios (username, password_hash, rol) VALUES
     ('admin@gmail.com', '$2y$12$9ibvaXEmjB/iSa/xmE6A8eAXyjQrRhknH4ZUP30dg6OpA9E8W30MC', 'admin');
 
+-- Demo credentials (requested in README for tribunal quick testing)
+-- admin / admin123
+INSERT INTO usuarios (username, password_hash, rol) VALUES
+    ('admin', '$2y$12$tzh9WGFStRRZC9L.fJJJqeNP/eaNuVmF/lEaW1HgwUOCjetXRXjHW', 'admin');
+
+-- jugador / jugador123
+INSERT INTO usuarios (username, password_hash, rol) VALUES
+    ('jugador', '$2y$12$X8op7oGMV.4doOnjBoCcDOKTD1zA8wTrXeTjcHUWVpP7K/cF7LPxe', 'jugador');
+
 -- Sample questions for testing
 INSERT INTO preguntas (tema_id, pista1, pista2, pista3, pista_extra, respuesta) VALUES
     (1, 'Tengo agujas pero no coso', 'Doy vueltas todo el día', 'Mido el tiempo', 'Estoy en tu pared o muñeca', 'reloj'),
