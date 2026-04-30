@@ -702,6 +702,45 @@ footer a:hover { text-decoration: underline; }
 }
 
 /* ── Ranking ─────────────────────────────────────────────── */
+
+/* Category filter pills */
+.ranking-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+  justify-content: center;
+}
+
+.ranking-filter-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: .38rem .95rem;
+  border-radius: 50px;
+  border: 1.5px solid var(--clika-border-strong);
+  background: var(--clika-card-bg);
+  color: var(--clika-muted);
+  font-size: .8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .15s, border-color .15s, color .15s, box-shadow .15s, transform .12s;
+  white-space: nowrap;
+  line-height: 1.2;
+}
+.ranking-filter-pill:hover {
+  border-color: var(--clika-primary);
+  color: var(--clika-primary);
+  background: var(--clika-surface);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(255,140,87,.15);
+}
+.ranking-filter-pill.active {
+  background: var(--clika-primary);
+  border-color: var(--clika-primary);
+  color: #fff;
+  box-shadow: 0 3px 10px rgba(255,140,87,.4);
+  transform: translateY(-1px);
+}
+
 .ranking-table-container {
   background: var(--clika-card-bg);
   border: 1.5px solid var(--clika-border);

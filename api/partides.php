@@ -18,22 +18,47 @@ header('Content-Type: application/json; charset=utf-8');
 
 $method = $_SERVER['REQUEST_METHOD'] ?? '';
 
-/* ── GET: ranking for registered users (sum of puntos, distinct temas listed) ─ */
+/* ── GET: ranking for registered users ─────────────────────────────────────── */
+/* Optional ?tema=<name> filters to a single category ranking.                  */
+/* Without ?tema, returns global ranking (sum across all categories).           */
 if ($method === 'GET') {
     require_once dirname(__DIR__) . '/includes/db.php';
     try {
-        $result = $db->query(
-            "SELECT MIN(p.id) AS id,
-                    p.usuario_id,
-                    u.username AS nombre,
-                    SUM(p.puntos) AS puntos,
-                    GROUP_CONCAT(DISTINCT p.tema) AS tema,
-                    MAX(p.fecha) AS fecha
-             FROM partidas p
-             INNER JOIN usuarios u ON u.id = p.usuario_id
-             GROUP BY p.usuario_id, u.username
-             ORDER BY SUM(p.puntos) DESC, MAX(p.fecha) DESC, u.username COLLATE NOCASE ASC"
-        );
+        $temaFilter = isset($_GET['tema']) && is_string($_GET['tema']) ? trim($_GET['tema']) : '';
+
+        if ($temaFilter !== '') {
+            // Per-category ranking: aggregate only games in the requested category.
+            $stmt = $db->prepare(
+                "SELECT MIN(p.id) AS id,
+                        p.usuario_id,
+                        u.username AS nombre,
+                        SUM(p.puntos) AS puntos,
+                        p.tema,
+                        MAX(p.fecha) AS fecha
+                 FROM partidas p
+                 INNER JOIN usuarios u ON u.id = p.usuario_id
+                 WHERE p.tema = :tema
+                 GROUP BY p.usuario_id, u.username
+                 ORDER BY SUM(p.puntos) DESC, MAX(p.fecha) DESC, u.username COLLATE NOCASE ASC"
+            );
+            $stmt->bindValue(':tema', $temaFilter, SQLITE3_TEXT);
+            $result = $stmt->execute();
+        } else {
+            // Global ranking: sum points across all categories played.
+            $result = $db->query(
+                "SELECT MIN(p.id) AS id,
+                        p.usuario_id,
+                        u.username AS nombre,
+                        SUM(p.puntos) AS puntos,
+                        GROUP_CONCAT(DISTINCT p.tema) AS tema,
+                        MAX(p.fecha) AS fecha
+                 FROM partidas p
+                 INNER JOIN usuarios u ON u.id = p.usuario_id
+                 GROUP BY p.usuario_id, u.username
+                 ORDER BY SUM(p.puntos) DESC, MAX(p.fecha) DESC, u.username COLLATE NOCASE ASC"
+            );
+        }
+
         $rows = [];
         while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
             $rows[] = [
