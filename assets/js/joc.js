@@ -169,6 +169,8 @@ btnSeguентPista.addEventListener('click', () => {
 
     if (pistesVistes >= maxPistes) {
         btnSeguентPista.hidden = true;
+        // Let the player read the last clue and type before Comprobar / Enter (no auto-submit).
+        respostaInput.focus();
     }
 });
 
@@ -182,10 +184,17 @@ async function comprovarResposta() {
     if (respostaEnviada) return;
 
     const resposta = respostaInput.value.trim();
-    if (resposta === '') {
+    if (resposta === '' && pistesVistes < maxPistes) {
         respostaInput.focus();
         return;
     }
+
+    await submitAnswerValidation(resposta);
+}
+
+async function submitAnswerValidation(answerTrimmed) {
+    if (respostaEnviada) return;
+    if (answerTrimmed === '' && pistesVistes < maxPistes) return;
 
     const preguntaId = Number(preguntaActual?.id);
     if (!Number.isFinite(preguntaId) || preguntaId < 1) {
@@ -202,7 +211,7 @@ async function comprovarResposta() {
             headers: { 'Content-Type': 'application/json' },
             body:    JSON.stringify({
                 pregunta_id:   preguntaId,
-                respuesta:     resposta,
+                respuesta:     answerTrimmed,
                 pistas_vistas: pistesVistes,
             }),
         });

@@ -6,6 +6,10 @@
  * POST JSON body:
  *   { "pregunta_id": <int>, "respuesta": "<user text>", "pistas_vistas": <1-4> }
  *
+ * Empty "respuesta" is allowed only when every clue was revealed (server checks
+ * max clues from pista_extra), e.g. player taps Comprobar after the last card
+ * without typing to see the canonical answer.
+ *
  * Loads canonical answer from SQLite only on the server.
  * Response JSON: always correcto + puntos. When the guess is wrong and every clue
  * was already revealed, respuesta_correcta is included so the client can show it
@@ -39,12 +43,6 @@ $cluesUsed = isset($data['pistas_vistas']) ? (int) $data['pistas_vistas'] : 0;
 if ($preguntaId < 1) {
     http_response_code(400);
     echo json_encode(['error' => 'Missing or invalid pregunta_id'], JSON_UNESCAPED_UNICODE);
-    exit;
-}
-
-if ($userAnswer === '') {
-    http_response_code(400);
-    echo json_encode(['error' => 'Missing or invalid respuesta'], JSON_UNESCAPED_UNICODE);
     exit;
 }
 
@@ -108,12 +106,20 @@ try {
         exit;
     }
 
+    $hasExtra = isset($row['pista_extra']) && trim((string) $row['pista_extra']) !== '';
+    $maxClues = $hasExtra ? 4 : 3;
+    $trimmedGuess = trim($userAnswer);
+    if ($trimmedGuess === '' && $cluesUsed < $maxClues) {
+        http_response_code(400);
+        echo json_encode(['error' => 'Missing or invalid respuesta'], JSON_UNESCAPED_UNICODE);
+        exit;
+    }
+
     $canonical = normalize_answer((string) $row['respuesta']);
-    $guess = normalize_answer($userAnswer);
+    $guess = normalize_answer($trimmedGuess);
     $correct = ($canonical === $guess && $guess !== '');
 
     // If there is no extra clue, cap clue count at 3 for scoring.
-    $hasExtra = isset($row['pista_extra']) && trim((string) $row['pista_extra']) !== '';
     $effectiveClues = $cluesUsed;
     if (!$hasExtra && $effectiveClues > 3) {
         $effectiveClues = 3;
@@ -121,7 +127,6 @@ try {
 
     $points = $correct ? score_for_clues_used($effectiveClues) : 0;
 
-    $maxClues = $hasExtra ? 4 : 3;
     $allCluesRevealed = $cluesUsed >= $maxClues;
 
     $payload = [
