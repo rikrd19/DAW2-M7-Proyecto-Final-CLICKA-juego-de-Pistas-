@@ -278,7 +278,7 @@ $autoInicia = $temaPreseleccionat !== null;
           <button type="button" id="btn-fi-sortir" class="btn btn-outline-secondary px-4">
             Volver al menú
           </button>
-          <a href="<?php echo BASE_URL; ?>/pages/ranking.php" class="btn btn-outline-accent px-4">
+          <a id="btn-fi-ranking" href="<?php echo BASE_URL; ?>/pages/ranking.php" class="btn btn-outline-accent px-4">
             Ver ranking
           </a>
         </div>
