@@ -37,6 +37,16 @@ const btnSegurentPregunta = document.getElementById('btn-seguent-pregunta');
 
 const puntsFinalsEl    = document.getElementById('punts-finals');
 const btnTornar        = document.getElementById('btn-tornar');
+const btnSortirPartida = document.getElementById('btn-sortir-partida');
+const btnFiSortir      = document.getElementById('btn-fi-sortir');
+const modalExitEl      = document.getElementById('modal-exit-confirm');
+const modalFeedbackEl  = document.getElementById('modal-feedback');
+const exitConfirmBodyEl = document.getElementById('modal-exit-confirm-body');
+const feedbackCommentEl = document.getElementById('feedback-comment');
+const starRatingEl     = document.getElementById('star-rating');
+const btnFeedbackSkip  = document.getElementById('btn-feedback-skip');
+const btnFeedbackSend  = document.getElementById('btn-feedback-send');
+const btnExitLeave     = document.getElementById('btn-exit-leave');
 
 /* ── State ──────────────────────────────────────────────────── */
 let temaId          = null;
@@ -48,6 +58,8 @@ let maxPistes       = 3;   // 3 or 4 depending on pista_extra
 let puntsPartida    = 0;   // accumulated score for the round
 let respostaEnviada = false;
 let roundAnswers    = [];  // per-question analytics: clues_used + correctness
+let feedbackStars   = null; // 1-5 or null when opening rating modal
+let finalizeAfterFeedback = null; // runs once when #modal-feedback is hidden
 
 /* ── Card reveal helper ─────────────────────────────────────── */
 function revelarCarta(el) {
@@ -351,6 +363,168 @@ async function acabarPartida() {
         feedbackEl.hidden = false;
     }
 }
+
+/* ── Exit flow: confirm → optional rating → back to theme selector ───────── */
+function clearStarUi() {
+    feedbackStars = null;
+    if (!starRatingEl) return;
+    starRatingEl.querySelectorAll('.btn-star').forEach((b) => b.classList.remove('is-on'));
+}
+
+function setStarValue(n) {
+    feedbackStars = n;
+    if (!starRatingEl) return;
+    starRatingEl.querySelectorAll('.btn-star').forEach((b) => {
+        const v = Number(b.dataset.value);
+        b.classList.toggle('is-on', Number.isFinite(v) && v <= n);
+    });
+}
+
+function resetPartidaProgressUi() {
+    numPregunta     = 0;
+    puntsPartida    = 0;
+    roundAnswers    = [];
+    preguntaActual  = null;
+    respostaEnviada = false;
+    pistesVistes    = 1;
+    maxPistes       = 3;
+    if (feedbackEl) {
+        feedbackEl.hidden = true;
+        feedbackEl.textContent = '';
+    }
+    if (resultatEl) resultatEl.hidden = true;
+    if (respostaInput) {
+        respostaInput.value    = '';
+        respostaInput.disabled = false;
+    }
+    if (btnComprovar) {
+        btnComprovar.disabled = false;
+        btnComprovar.hidden    = false;
+    }
+}
+
+function scheduleFinalizeOnFeedbackClose(fn) {
+    if (!modalFeedbackEl || typeof fn !== 'function') {
+        fn();
+        return;
+    }
+    finalizeAfterFeedback = fn;
+}
+
+if (modalFeedbackEl) {
+    modalFeedbackEl.addEventListener('hidden.bs.modal', () => {
+        if (typeof finalizeAfterFeedback === 'function') {
+            const cb = finalizeAfterFeedback;
+            finalizeAfterFeedback = null;
+            cb();
+        }
+        clearStarUi();
+        if (feedbackCommentEl) feedbackCommentEl.value = '';
+    });
+}
+
+function finalizeExitToSelector() {
+    resetPartidaProgressUi();
+    if (gameArea) gameArea.hidden = true;
+    if (fiPartida) fiPartida.hidden = true;
+    if (temaSelector) temaSelector.hidden = false;
+    try {
+        if (typeof TEMA_PRESELECCIONAT !== 'undefined' && TEMA_PRESELECCIONAT !== null) {
+            const path = window.location.pathname;
+            window.history.replaceState({}, '', path);
+        }
+    } catch (_) {
+        /* ignore */
+    }
+}
+
+function openFeedbackModal() {
+    if (!modalFeedbackEl || typeof bootstrap === 'undefined') return;
+    clearStarUi();
+    if (feedbackCommentEl) feedbackCommentEl.value = '';
+    bootstrap.Modal.getOrCreateInstance(modalFeedbackEl).show();
+}
+
+function openExitConfirmModal(fromFinishedScreen) {
+    if (!modalExitEl || typeof bootstrap === 'undefined') return;
+    if (exitConfirmBodyEl) {
+        exitConfirmBodyEl.textContent = fromFinishedScreen
+            ? 'Volverás al menú de temas. ¿Seguro?'
+            : 'Si sales ahora perderás el progreso de esta partida.';
+    }
+    bootstrap.Modal.getOrCreateInstance(modalExitEl).show();
+}
+
+function wireExitAndRating() {
+    if (!modalExitEl || !modalFeedbackEl || typeof bootstrap === 'undefined') return;
+
+    const mExit = () => bootstrap.Modal.getOrCreateInstance(modalExitEl);
+
+    btnExitLeave?.addEventListener('click', () => {
+        mExit().hide();
+        modalExitEl.addEventListener(
+            'hidden.bs.modal',
+            () => {
+                scheduleFinalizeOnFeedbackClose(finalizeExitToSelector);
+                openFeedbackModal();
+            },
+            { once: true }
+        );
+    });
+
+    starRatingEl?.querySelectorAll('.btn-star').forEach((btn) => {
+        btn.addEventListener('click', () => {
+            const n = Number(btn.dataset.value);
+            if (!Number.isFinite(n) || n < 1 || n > 5) return;
+            setStarValue(n);
+        });
+    });
+
+    btnFeedbackSend?.addEventListener('click', async () => {
+        const text = feedbackCommentEl ? feedbackCommentEl.value.trim() : '';
+        if (feedbackStars === null && text === '') {
+            if (typeof mostrarFeedback === 'function') {
+                mostrarFeedback('error', 'Elige estrellas o escribe un comentario, u omite con el botón inferior.');
+                if (feedbackEl) feedbackEl.hidden = false;
+            }
+            return;
+        }
+        try {
+            const resp = await fetch('../api/feedback.php', {
+                method:  'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body:    JSON.stringify({
+                    estrellas: feedbackStars,
+                    comentario: text,
+                    tema:      typeof temaNom === 'string' ? temaNom : null,
+                }),
+            });
+            if (!resp.ok) {
+                const t = await resp.text();
+                throw new Error(t || `HTTP ${resp.status}`);
+            }
+        } catch (_) {
+            if (typeof mostrarFeedback === 'function') {
+                mostrarFeedback('error', 'No se pudo enviar la valoración. Puedes omitir y salir.');
+                if (feedbackEl) feedbackEl.hidden = false;
+            }
+            return;
+        }
+        if (feedbackEl) feedbackEl.hidden = true;
+        bootstrap.Modal.getOrCreateInstance(modalFeedbackEl).hide();
+    });
+}
+
+wireExitAndRating();
+
+btnSortirPartida?.addEventListener('click', () => {
+    if (gameArea?.hidden) return;
+    openExitConfirmModal(false);
+});
+
+btnFiSortir?.addEventListener('click', () => {
+    openExitConfirmModal(true);
+});
 
 /* ── Jugar otra vez ─────────────────────────────────────────── */
 btnTornar.addEventListener('click', () => {

@@ -103,7 +103,11 @@ $temas[] = [
           <?php foreach ($temas as $tema): ?>
             <?php $esBanderas = isset($tema['banderas']); ?>
             <div class="carrusel-item">
-              <article class="card tema-card h-100 border-0">
+              <article
+                class="card tema-card tema-card--clickable h-100 border-0"
+                tabindex="0"
+                role="button"
+                aria-label="Elegir temática <?php echo htmlspecialchars($tema['titulo']); ?>">
                 <div class="card-body d-flex flex-column align-items-center text-center py-4 px-3">
 
                   <div class="tema-icon-wrap">
@@ -235,6 +239,20 @@ $temas[] = [
           document.getElementById('pista-label-2').textContent = esBanderas ? '+ Región'        : '2 pistas';
           document.getElementById('pista-label-3').textContent = esBanderas ? '+ Capital'       : '3 pistas';
           document.getElementById('pista-label-4').textContent = esBanderas ? '+ Población'     : '4 pistas';
+        });
+      });
+
+      document.querySelectorAll('.tema-card--clickable').forEach(card => {
+        card.addEventListener('click', (e) => {
+          if (e.target.closest('button')) return;
+          const playBtn = card.querySelector('.btn-jugar-modal');
+          if (playBtn) playBtn.click();
+        });
+        card.addEventListener('keydown', (e) => {
+          if (e.key !== 'Enter' && e.key !== ' ') return;
+          e.preventDefault();
+          if (e.target.closest('button')) return;
+          card.querySelector('.btn-jugar-modal')?.click();
         });
       });
 
