@@ -1,10 +1,11 @@
 <?php
 
 /**
- * Optional app feedback (stars + comment). Guests and logged users allowed.
+ * Optional app feedback (stars + comment). Logged-in users only.
  *
  * POST JSON: { "estrellas": <1-5|null>, "comentario": "<string>", "tema": "<string|null>" }
  * At least one of estrellas or non-empty comentario is required (otherwise 400).
+ * 401 with code "login_required" when session is missing.
  */
 
 declare(strict_types=1);
@@ -12,13 +13,27 @@ ini_set('display_errors', '0');
 
 header('Content-Type: application/json; charset=utf-8');
 
-if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
+$method = $_SERVER['REQUEST_METHOD'] ?? '';
+if ($method !== 'POST') {
     http_response_code(405);
     echo json_encode(['error' => 'Method not allowed'], JSON_UNESCAPED_UNICODE);
     exit;
 }
 
 require_once dirname(__DIR__) . '/includes/db.php';
+require_once dirname(__DIR__) . '/includes/auth.php';
+
+if (!is_logged_in()) {
+    http_response_code(401);
+    echo json_encode(
+        [
+            'error' => 'You must be logged in to send feedback.',
+            'code'  => 'login_required',
+        ],
+        JSON_UNESCAPED_UNICODE
+    );
+    exit;
+}
 
 $raw  = file_get_contents('php://input') ?: '';
 $data = json_decode($raw, true);
@@ -59,9 +74,17 @@ if (strlen($comment) > 2000) {
     exit;
 }
 
-$sessionUserId = isset($_SESSION['usuari_id']) ? (int) $_SESSION['usuari_id'] : null;
+$sessionUserId = (int) $_SESSION['usuari_id'];
 if ($sessionUserId < 1) {
-    $sessionUserId = null;
+    http_response_code(401);
+    echo json_encode(
+        [
+            'error' => 'You must be logged in to send feedback.',
+            'code'  => 'login_required',
+        ],
+        JSON_UNESCAPED_UNICODE
+    );
+    exit;
 }
 
 try {
@@ -81,7 +104,7 @@ try {
         'INSERT INTO app_feedback (usuario_id, estrellas, comentario, tema)
          VALUES (:uid, :estrellas, :comentario, :tema)'
     );
-    $stmt->bindValue(':uid', $sessionUserId, $sessionUserId === null ? SQLITE3_NULL : SQLITE3_INTEGER);
+    $stmt->bindValue(':uid', $sessionUserId, SQLITE3_INTEGER);
     $stmt->bindValue(':estrellas', $stars, $stars === null ? SQLITE3_NULL : SQLITE3_INTEGER);
     $stmt->bindValue(':comentario', $comment === '' ? null : $comment, $comment === '' ? SQLITE3_NULL : SQLITE3_TEXT);
     $stmt->bindValue(':tema', $tema, $tema === null ? SQLITE3_NULL : SQLITE3_TEXT);

@@ -49,6 +49,15 @@ $pageTitle = 'Panel de Administración';
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 shadow-sm border-0">
+                            <div class="card-body text-center">
+                                <h3 class="h5">Opiniones y valoraciones</h3>
+                                <p class="small text-muted mb-0">Solo lectura: comentarios y estrellas enviados por jugadores.</p>
+                                <a href="<?php echo BASE_URL; ?>/pages/admin_feedback.php" class="btn btn-outline-primary mt-3">Ver opiniones</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

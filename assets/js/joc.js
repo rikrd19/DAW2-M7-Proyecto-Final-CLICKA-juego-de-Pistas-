@@ -48,6 +48,10 @@ const btnFeedbackSkip  = document.getElementById('btn-feedback-skip');
 const btnFeedbackSend  = document.getElementById('btn-feedback-send');
 const btnExitLeave     = document.getElementById('btn-exit-leave');
 
+// Declared in play.php before this file: CAN_SEND_FEEDBACK (logged-in only).
+const canSendFeedback =
+    typeof CAN_SEND_FEEDBACK !== 'undefined' && CAN_SEND_FEEDBACK === true;
+
 /* ── State ──────────────────────────────────────────────────── */
 let temaId          = null;
 let temaNom         = '';
@@ -442,6 +446,22 @@ function openFeedbackModal() {
     if (!modalFeedbackEl || typeof bootstrap === 'undefined') return;
     clearStarUi();
     if (feedbackCommentEl) feedbackCommentEl.value = '';
+    const lead         = document.getElementById('modal-feedback-lead');
+    const guestNotice  = document.getElementById('feedback-login-notice');
+    const loggedFields = document.getElementById('feedback-logged-fields');
+    if (canSendFeedback) {
+        if (lead) lead.hidden = false;
+        if (guestNotice) guestNotice.hidden = true;
+        if (loggedFields) loggedFields.hidden = false;
+        if (btnFeedbackSend) btnFeedbackSend.hidden = false;
+        if (btnFeedbackSkip) btnFeedbackSkip.textContent = 'Omitir';
+    } else {
+        if (lead) lead.hidden = true;
+        if (guestNotice) guestNotice.hidden = false;
+        if (loggedFields) loggedFields.hidden = true;
+        if (btnFeedbackSend) btnFeedbackSend.hidden = true;
+        if (btnFeedbackSkip) btnFeedbackSkip.textContent = 'Cerrar';
+    }
     bootstrap.Modal.getOrCreateInstance(modalFeedbackEl).show();
 }
 
@@ -465,8 +485,12 @@ function wireExitAndRating() {
         modalExitEl.addEventListener(
             'hidden.bs.modal',
             () => {
-                scheduleFinalizeOnFeedbackClose(finalizeExitToSelector);
-                openFeedbackModal();
+                if (canSendFeedback) {
+                    scheduleFinalizeOnFeedbackClose(finalizeExitToSelector);
+                    openFeedbackModal();
+                } else {
+                    finalizeExitToSelector();
+                }
             },
             { once: true }
         );
@@ -481,10 +505,11 @@ function wireExitAndRating() {
     });
 
     btnFeedbackSend?.addEventListener('click', async () => {
+        if (!canSendFeedback) return;
         const text = feedbackCommentEl ? feedbackCommentEl.value.trim() : '';
         if (feedbackStars === null && text === '') {
             if (typeof mostrarFeedback === 'function') {
-                mostrarFeedback('error', 'Elige estrellas o escribe un comentario, u omite con el botón inferior.');
+                mostrarFeedback('error', 'Elige estrellas o escribe algo breve, u omite con el botón inferior.');
                 if (feedbackEl) feedbackEl.hidden = false;
             }
             return;
@@ -499,13 +524,27 @@ function wireExitAndRating() {
                     tema:      typeof temaNom === 'string' ? temaNom : null,
                 }),
             });
+            const raw = await resp.text();
             if (!resp.ok) {
-                const t = await resp.text();
-                throw new Error(t || `HTTP ${resp.status}`);
+                let msg = raw || `HTTP ${resp.status}`;
+                try {
+                    const j = JSON.parse(raw);
+                    if (j && j.code === 'login_required') {
+                        msg = 'Sesión no válida. Inicia sesión de nuevo para enviar tu opinión.';
+                    } else if (j && j.error) {
+                        msg = j.error;
+                    }
+                } catch (_) {
+                    /* keep msg */
+                }
+                throw new Error(msg);
             }
-        } catch (_) {
+        } catch (err) {
             if (typeof mostrarFeedback === 'function') {
-                mostrarFeedback('error', 'No se pudo enviar la valoración. Puedes omitir y salir.');
+                mostrarFeedback(
+                    'error',
+                    err instanceof Error ? err.message : 'No se pudo enviar. Puedes omitir y salir.'
+                );
                 if (feedbackEl) feedbackEl.hidden = false;
             }
             return;
@@ -515,7 +554,18 @@ function wireExitAndRating() {
     });
 }
 
-wireExitAndRating();
+// Bootstrap bundle loads in foot.php after this file; defer wiring so Modal API exists.
+function scheduleWireExitAndRating() {
+    const run = () => {
+        wireExitAndRating();
+    };
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', run, { once: true });
+    } else {
+        run();
+    }
+}
+scheduleWireExitAndRating();
 
 btnSortirPartida?.addEventListener('click', () => {
     if (gameArea?.hidden) return;
@@ -523,7 +573,12 @@ btnSortirPartida?.addEventListener('click', () => {
 });
 
 btnFiSortir?.addEventListener('click', () => {
-    openExitConfirmModal(true);
+    if (canSendFeedback) {
+        scheduleFinalizeOnFeedbackClose(finalizeExitToSelector);
+        openFeedbackModal();
+    } else {
+        finalizeExitToSelector();
+    }
 });
 
 /* ── Jugar otra vez ─────────────────────────────────────────── */
