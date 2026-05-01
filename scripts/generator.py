@@ -16,6 +16,7 @@ Examples:
   python3 scripts/generator.py --seed scripts/seeds/musica.json
   python3 scripts/generator.py --seed scripts/seeds/tecnologia.json
   python3 scripts/generator.py --seed scripts/seeds/naturaleza.json
+  python3 scripts/generator.py --seed scripts/seeds/cine.json
   python3 scripts/generator.py --seed scripts/seeds/catalan_basico.json
   python3 scripts/generator.py --mode replace --seed scripts/seeds/adivinanzas.json
 

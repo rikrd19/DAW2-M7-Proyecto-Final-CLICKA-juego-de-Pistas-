@@ -2,25 +2,285 @@
   "tema_nombre": "Tecnología",
   "fuente": "python",
   "preguntas": [
-    {"pista1": "Lenguaje creado por Guido van Rossum", "pista2": "Muy usado en ciencia de datos", "pista3": "Su nombre coincide con una serpiente", "pista_extra": "Empieza por py", "respuesta": "python"},
-    {"pista1": "Sistema operativo de codigo abierto con pinguino", "pista2": "Basado en kernel libre", "pista3": "Ubuntu y Debian son distribuciones", "pista_extra": "Nombre termina en ux", "respuesta": "linux"},
-    {"pista1": "Empresa que desarrolla windows", "pista2": "Fundada por bill gates y paul allen", "pista3": "Tambien creadora de azure", "pista_extra": "Su nombre empieza por micro", "respuesta": "microsoft"},
-    {"pista1": "Navegador web de google", "pista2": "Icono circular de colores", "pista3": "Basado en chromium", "pista_extra": "Nombre relacionado con cromo", "respuesta": "chrome"},
-    {"pista1": "Memoria volatil de acceso rapido", "pista2": "Se borra al apagar el equipo", "pista3": "Afecta multitarea y rendimiento", "pista_extra": "Sus siglas son tres letras", "respuesta": "ram"},
-    {"pista1": "Dispositivo que enruta trafico de red", "pista2": "Conecta casa a internet", "pista3": "Suele emitir wifi", "pista_extra": "Palabra comun en ingles tecnico", "respuesta": "router"},
-    {"pista1": "Tecnologia para alojar servicios remotos", "pista2": "Iaas paas saas son modelos", "pista3": "No depende de un solo servidor local", "pista_extra": "En espanol se llama la nube", "respuesta": "cloud"},
-    {"pista1": "Base de datos relacional muy popular", "pista2": "Usa lenguaje sql", "pista3": "Logo de delfin", "pista_extra": "Su nombre empieza por my", "respuesta": "mysql"},
-    {"pista1": "Sistema de control de versiones distribuido", "pista2": "Comandos commit branch merge", "pista3": "Linus torvalds participo en su creacion", "pista_extra": "Plataforma github lo utiliza", "respuesta": "git"},
-    {"pista1": "Lenguaje de marcado para paginas web", "pista2": "Define estructura con etiquetas", "pista3": "Se combina con css y javascript", "pista_extra": "Sus siglas empiezan por hypertext", "respuesta": "html"},
-    {"pista1": "Lenguaje que da estilo visual a la web", "pista2": "Controla colores margenes y tipografia", "pista3": "Se aplica sobre html", "pista_extra": "Tres letras", "respuesta": "css"},
-    {"pista1": "Lenguaje de programacion del navegador", "pista2": "Permite interactividad en paginas", "pista3": "Node.js lo ejecuta en servidor", "pista_extra": "Empieza por java pero no es java", "respuesta": "javascript"},
-    {"pista1": "Empresa de la manzana mordida", "pista2": "Creadora de iphone y mac", "pista3": "Fundada por steve jobs y steve wozniak", "pista_extra": "Nombre de una fruta", "respuesta": "apple"},
-    {"pista1": "Inteligencia artificial conversacional de openai", "pista2": "Genera texto y ayuda a programar", "pista3": "Se usa en chat", "pista_extra": "Nombre empieza por chat", "respuesta": "chatgpt"},
-    {"pista1": "Tecnologia de registro distribuido para criptomonedas", "pista2": "Bloques enlazados criptograficamente", "pista3": "Bitcoin la popularizo", "pista_extra": "Nombre en ingles de cadena de bloques", "respuesta": "blockchain"},
-    {"pista1": "Unidad central de procesamiento", "pista2": "Ejecuta instrucciones del sistema", "pista3": "Tambien se le llama procesador", "pista_extra": "Siglas de tres letras", "respuesta": "cpu"},
-    {"pista1": "Unidad de procesamiento grafico", "pista2": "Clave en videojuegos e ia", "pista3": "Nvidia y amd fabrican modelos", "pista_extra": "Siglas de tres letras", "respuesta": "gpu"},
-    {"pista1": "Sistema de nombres de dominio en internet", "pista2": "Traduce nombres a direcciones ip", "pista3": "Sin esto recordar ip seria dificil", "pista_extra": "Sus siglas son tres letras", "respuesta": "dns"},
-    {"pista1": "Protocolo seguro para navegar cifrado", "pista2": "Usa certificados tls", "pista3": "Aparece con candado en navegador", "pista_extra": "Empieza por http", "respuesta": "https"},
-    {"pista1": "Tecnologia de proximidad para conectar perifericos", "pista2": "Auriculares inalambricos la usan", "pista3": "Opera en dos coma cuatro ghz", "pista_extra": "Su icono es una runa azul", "respuesta": "bluetooth"}
+    {
+      "pista1": "Lenguaje creado por Guido van Rossum",
+      "pista2": "Muy usado en ciencia de datos",
+      "pista3": "Su nombre coincide con una serpiente",
+      "pista_extra": "Empieza por py",
+      "respuesta": "python"
+    },
+    {
+      "pista1": "Sistema operativo de codigo abierto con pinguino",
+      "pista2": "Basado en kernel libre",
+      "pista3": "Ubuntu y Debian son distribuciones",
+      "pista_extra": "Nombre termina en ux",
+      "respuesta": "linux"
+    },
+    {
+      "pista1": "Empresa que desarrolla windows",
+      "pista2": "Fundada por bill gates y paul allen",
+      "pista3": "Tambien creadora de azure",
+      "pista_extra": "Su nombre empieza por micro",
+      "respuesta": "microsoft"
+    },
+    {
+      "pista1": "Navegador web de google",
+      "pista2": "Icono circular de colores",
+      "pista3": "Basado en chromium",
+      "pista_extra": "Nombre relacionado con cromo",
+      "respuesta": "chrome"
+    },
+    {
+      "pista1": "Memoria volatil de acceso rapido",
+      "pista2": "Se borra al apagar el equipo",
+      "pista3": "Afecta multitarea y rendimiento",
+      "pista_extra": "Sus siglas son tres letras",
+      "respuesta": "ram"
+    },
+    {
+      "pista1": "Dispositivo que enruta trafico de red",
+      "pista2": "Conecta casa a internet",
+      "pista3": "Suele emitir wifi",
+      "pista_extra": "Palabra comun en ingles tecnico",
+      "respuesta": "router"
+    },
+    {
+      "pista1": "Tecnologia para alojar servicios remotos",
+      "pista2": "Iaas paas saas son modelos",
+      "pista3": "No depende de un solo servidor local",
+      "pista_extra": "En espanol se llama la nube",
+      "respuesta": "cloud"
+    },
+    {
+      "pista1": "Base de datos relacional muy popular",
+      "pista2": "Usa lenguaje sql",
+      "pista3": "Logo de delfin",
+      "pista_extra": "Su nombre empieza por my",
+      "respuesta": "mysql"
+    },
+    {
+      "pista1": "Sistema de control de versiones distribuido",
+      "pista2": "Comandos commit branch merge",
+      "pista3": "Linus torvalds participo en su creacion",
+      "pista_extra": "Plataforma github lo utiliza",
+      "respuesta": "git"
+    },
+    {
+      "pista1": "Lenguaje de marcado para paginas web",
+      "pista2": "Define estructura con etiquetas",
+      "pista3": "Se combina con css y javascript",
+      "pista_extra": "Sus siglas empiezan por hypertext",
+      "respuesta": "html"
+    },
+    {
+      "pista1": "Lenguaje que da estilo visual a la web",
+      "pista2": "Controla colores margenes y tipografia",
+      "pista3": "Se aplica sobre html",
+      "pista_extra": "Tres letras",
+      "respuesta": "css"
+    },
+    {
+      "pista1": "Lenguaje de programacion del navegador",
+      "pista2": "Permite interactividad en paginas",
+      "pista3": "Node.js lo ejecuta en servidor",
+      "pista_extra": "Empieza por java pero no es java",
+      "respuesta": "javascript"
+    },
+    {
+      "pista1": "Empresa de la manzana mordida",
+      "pista2": "Creadora de iphone y mac",
+      "pista3": "Fundada por steve jobs y steve wozniak",
+      "pista_extra": "Nombre de una fruta",
+      "respuesta": "apple"
+    },
+    {
+      "pista1": "Inteligencia artificial conversacional de openai",
+      "pista2": "Genera texto y ayuda a programar",
+      "pista3": "Se usa en chat",
+      "pista_extra": "Nombre empieza por chat",
+      "respuesta": "chatgpt"
+    },
+    {
+      "pista1": "Tecnologia de registro distribuido para criptomonedas",
+      "pista2": "Bloques enlazados criptograficamente",
+      "pista3": "Bitcoin la popularizo",
+      "pista_extra": "Nombre en ingles de cadena de bloques",
+      "respuesta": "blockchain"
+    },
+    {
+      "pista1": "Unidad central de procesamiento",
+      "pista2": "Ejecuta instrucciones del sistema",
+      "pista3": "Tambien se le llama procesador",
+      "pista_extra": "Siglas de tres letras",
+      "respuesta": "cpu"
+    },
+    {
+      "pista1": "Unidad de procesamiento grafico",
+      "pista2": "Clave en videojuegos e ia",
+      "pista3": "Nvidia y amd fabrican modelos",
+      "pista_extra": "Siglas de tres letras",
+      "respuesta": "gpu"
+    },
+    {
+      "pista1": "Sistema de nombres de dominio en internet",
+      "pista2": "Traduce nombres a direcciones ip",
+      "pista3": "Sin esto recordar ip seria dificil",
+      "pista_extra": "Sus siglas son tres letras",
+      "respuesta": "dns"
+    },
+    {
+      "pista1": "Protocolo seguro para navegar cifrado",
+      "pista2": "Usa certificados tls",
+      "pista3": "Aparece con candado en navegador",
+      "pista_extra": "Empieza por http",
+      "respuesta": "https"
+    },
+    {
+      "pista1": "Tecnologia de proximidad para conectar perifericos",
+      "pista2": "Auriculares inalambricos la usan",
+      "pista3": "Opera en dos coma cuatro ghz",
+      "pista_extra": "Su icono es una runa azul",
+      "respuesta": "bluetooth"
+    },
+    {
+      "pista1": "Protocolo seguro web puerto cuatro cuatro tres",
+      "pista2": "TLS sucesor SSL",
+      "pista3": "Candado navegador",
+      "pista_extra": "HTTPS",
+      "respuesta": "https"
+    },
+    {
+      "pista1": "Siete capas OSI capa cuatro",
+      "pista2": "TCP UDP aqui",
+      "pista3": "Segmentos y datagramas",
+      "pista_extra": "Transporte",
+      "respuesta": "capa de transporte"
+    },
+    {
+      "pista1": "Algoritmo hash unidireccional bitcoint",
+      "pista2": "Doble SHA",
+      "pista3": "Salida fija doscientos cincuenta y seis bits",
+      "pista_extra": "SHA dos cinco seis",
+      "respuesta": "sha 256"
+    },
+    {
+      "pista1": "Patron creacional instancia unica",
+      "pista2": "Gang of four",
+      "pista3": "getInstance",
+      "pista_extra": "Singleton",
+      "respuesta": "singleton"
+    },
+    {
+      "pista1": "Complejidad n log n ordenamiento estable",
+      "pista2": "Divide venceras",
+      "pista3": "No in-place ideal",
+      "pista_extra": "Merge",
+      "respuesta": "mergesort"
+    },
+    {
+      "pista1": "Estructura LIFO",
+      "pista2": "Push pop",
+      "pista3": "Llamadas recursivas",
+      "pista_extra": "Pila",
+      "respuesta": "pila"
+    },
+    {
+      "pista1": "Estructura FIFO cola",
+      "pista2": "Enqueue dequeue",
+      "pista3": "Breadth first search",
+      "pista_extra": "Cola",
+      "respuesta": "cola"
+    },
+    {
+      "pista1": "Formato datos ligero javascript",
+      "pista2": "Llaves y corchetes",
+      "pista3": "Parse con JSON",
+      "pista_extra": "JavaScript object notation",
+      "respuesta": "json"
+    },
+    {
+      "pista1": "Sistema control versiones distribuido",
+      "pista2": "Linus torvalds",
+      "pista3": "Commit branch merge",
+      "pista_extra": "Git",
+      "respuesta": "git"
+    },
+    {
+      "pista1": "Contenedor linux ligero",
+      "pista2": "Docker imagen",
+      "pista3": "Kubernetes orquesta",
+      "pista_extra": "Contenedor",
+      "respuesta": "docker"
+    },
+    {
+      "pista1": "Lenguaje tipado microsoft dotnet",
+      "pista2": "Sharp en nombre",
+      "pista3": "Unity usa",
+      "pista_extra": "C sharp",
+      "respuesta": "csharp"
+    },
+    {
+      "pista1": "Paradigma basado en clases",
+      "pista2": "Herencia polimorfismo",
+      "pista3": "Encapsulacion",
+      "pista_extra": "POO",
+      "respuesta": "orientado a objetos"
+    },
+    {
+      "pista1": "Ataque inyeccion sql",
+      "pista2": "Comillas mal escapadas",
+      "pista3": "Prepared statements defienden",
+      "pista_extra": "SQL injection",
+      "respuesta": "sql injection"
+    },
+    {
+      "pista1": "Red neuronal capa oculta",
+      "pista2": "Backpropagation",
+      "pista3": "TensorFlow pytorch",
+      "pista_extra": "Deep learning",
+      "respuesta": "deep learning"
+    },
+    {
+      "pista1": "CPU cache mas rapida nivel uno",
+      "pista2": "Datos e instrucciones",
+      "pista3": "Cercana nucleos",
+      "pista_extra": "L1",
+      "respuesta": "cache l1"
+    },
+    {
+      "pista1": "Paradigma funcional inmutabilidad",
+      "pista2": "Haskell puro",
+      "pista3": "Map filter reduce",
+      "pista_extra": "Funcional",
+      "respuesta": "programacion funcional"
+    },
+    {
+      "pista1": "Protocolo correo recepcion",
+      "pista2": "Puerto ciento diez",
+      "pista3": "Deja mensajes en servidor",
+      "pista_extra": "POP o IMAP",
+      "respuesta": "imap"
+    },
+    {
+      "pista1": "Cifrado asimetrico par de claves",
+      "pista2": "RSA ejemplo",
+      "pista3": "Publica privada",
+      "pista_extra": "Criptografia",
+      "respuesta": "clave publica"
+    },
+    {
+      "pista1": "Formato binario google serializacion",
+      "pista2": "Mas compacto que JSON",
+      "pista3": "Archivo punto pb",
+      "pista_extra": "Protocol buffers",
+      "respuesta": "protobuf"
+    },
+    {
+      "pista1": "Metodo http idempotente lectura",
+      "pista2": "No debe tener efectos secundarios",
+      "pista3": "Navegador barra direccion",
+      "pista_extra": "GET",
+      "respuesta": "get"
+    }
   ]
 }

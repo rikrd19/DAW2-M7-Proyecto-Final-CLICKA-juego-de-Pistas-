@@ -2,42 +2,404 @@
   "tema_nombre": "Geografía",
   "fuente": "python",
   "preguntas": [
-    {"pista1": "Rio mas caudaloso del mundo por volumen", "pista2": "Nace en Peru y desemboca en Brasil", "pista3": "Selva amazonica lo atraviesa", "pista_extra": "Delfin rosado habita en sus aguas", "respuesta": "amazonas"},
-    {"pista1": "Monte mas alto del planeta sobre el nivel del mar", "pista2": "Cadena del Himalaya entre Nepal y Tibet", "pista3": "Ocho mil ochocientos cuarenta y ocho metros aproximados", "pista_extra": "Los sherpas son guias famosos aqui", "respuesta": "everest"},
-    {"pista1": "Desierto calido mas grande del mundo", "pista2": "Cubre gran parte del norte de Africa", "pista3": "Dunas ergs y registro rocoso hamada", "pista_extra": "Nombre arabe que significa desierto", "respuesta": "sahara"},
-    {"pista1": "Mar interior entre Europa Africa y Asia", "pista2": "Estrechos de Gibraltar y Bosforo lo conectan", "pista3": "Civilizaciones clasicas en sus costas", "pista_extra": "Color azul en mapas escolares", "respuesta": "mediterraneo"},
-    {"pista1": "Mar entre Africa y la peninsula arabiga", "pista2": "Canal de Suez lo une al Mediterraneo", "pista3": "Corales y buceo en Dahab o Sharm", "pista_extra": "Nombre del color en espanol", "respuesta": "mar rojo"},
-    {"pista1": "Corriente oceanica calida que sube por el Atlantico norte", "pista2": "Afecta clima templado de Europa occidental", "pista3": "Arrastra agua calida desde el golfo de Mexico", "pista_extra": "Nombre en espanol con palabra corriente", "respuesta": "corriente del golfo"},
-    {"pista1": "Pais mas grande del mundo por superficie", "pista2": "Once husos horarios internos", "pista3": "Moscu es su capital politica", "pista_extra": "Transiberiano cruza sus bosques", "respuesta": "rusia"},
-    {"pista1": "Pais mas poblado del mundo", "pista2": "Gran Muralla y rio Yangtse", "pista3": "Yuan o renminbi es su moneda", "pista_extra": "Pekin y Shanghai son megaciudades", "respuesta": "china"},
-    {"pista1": "Continente sin estado soberano propio", "pista2": "Hielo milenario y estaciones de investigacion", "pista3": "Polo Sur en su interior", "pista_extra": "Tratado internacional de uso pacifico", "respuesta": "antartida"},
-    {"pista1": "Lago mas grande de agua dulce por superficie", "pista2": "Compartido por Rusia Kazajistan y Azerbaijan", "pista3": "Peces como el esturion y caviar", "pista_extra": "Nivel bajo por riego del Volga", "respuesta": "mar caspio"},
-    {"pista1": "Capital de Australia no es Sidney", "pista2": "Ciudad planificada en el interior", "pista3": "Parlamento triangular y lago Burley Griffin", "pista_extra": "Letras A C T en su territorio federal", "respuesta": "canberra"},
-    {"pista1": "Rio que forma frontera entre Estados Unidos y Mexico", "pista2": "Desemboca en golfo de Mexico", "pista3": "En Mexico se le llama Bravo en parte del curso", "pista_extra": "Nombre en ingles Grande", "respuesta": "rio grande"},
-    {"pista1": "Istmo donde se construyo un canal interoceanico", "pista2": "Une Atlantico y Pacifico sin rodear America del Sur", "pista3": "Ciudad capital homonima al pais", "pista_extra": "Zona del Darien queda al este", "respuesta": "panama"},
-    {"pista1": "Cordillera mas larga del mundo en el oeste de America del Sur", "pista2": "Aconcagua es su pico maximo", "pista3": "Altiplano andino y llamas", "pista_extra": "Inka caminaban el qhapaq nan", "respuesta": "andes"},
-    {"pista1": "Pais en forma de bota en el sur de Europa", "pista2": "Roma Florencia y Venecia turisticas", "pista3": "Alpes al norte y Mediterraneo al sur", "pista_extra": "Pizza y pasta son estereotipos gastronomicos", "respuesta": "italia"},
-    {"pista1": "Archipielago volcanico en el Pacifico al este de Asia", "pista2": "Tokio Kioto y Osaka son ciudades clave", "pista3": "Sol naciente en su bandera simbolica", "pista_extra": "Anime y manga son exportacion cultural", "respuesta": "japon"},
-    {"pista1": "Pais doblemente sin litoral en America del Sur", "pista2": "La Paz y Sucre comparten capitalidad historica", "pista3": "Salar de Uyuni es salar gigante", "pista_extra": "Nombre del libertador en su moneda", "respuesta": "bolivia"},
-    {"pista1": "Estrecho entre Espana y Marruecos", "pista2": "Catorce kilometros en su parte mas estrecha", "pista3": "Une Mediterraneo y Atlantico", "pista_extra": "Pilar de Hercules mitologia", "respuesta": "gibraltar"},
-    {"pista1": "Desierto frio de Patagonia entre Argentina y Chile", "pista2": "Viento fuerte y estepa arbustiva", "pista3": "No es calido como el Sahara", "pista_extra": "Nombre comparte con region sur", "respuesta": "patagonia"},
-    {"pista1": "Pais con forma alargada en la costa oeste de Africa", "pista2": "Dakar es su capital economica clave", "pista3": "Sahel al norte y clima tropical al sur", "pista_extra": "Antigua colonia francesa de Africa occidental", "respuesta": "senegal"},
-    {"pista1": "Lago compartido por Peru y Bolivia en altiplano", "pista2": "Navegacion turistica en balsas de totora", "pista3": "Titicaca su nombre con rima repetida", "pista_extra": "Uno de los lagos navegables mas altos del mundo", "respuesta": "titicaca"},
-    {"pista1": "Pais insular del sudeste asiatico con muchas islas", "pista2": "Yakarta era capital en Java", "pista3": "Bali volcanes y playas turisticas", "pista_extra": "Mayor poblacion musulmana del mundo en numero", "respuesta": "indonesia"},
-    {"pista1": "Rio que cruza Paris de este a oeste", "pista2": "Islas y puentes famosos en su curso urbano", "pista3": "Desemboca en el canal de la Mancha", "pista_extra": "Nombre de diosa griega en frances", "respuesta": "senna"},
-    {"pista1": "Pais mas estrecho del mundo en su forma continental", "pista2": "Desierto de Atacama al norte", "pista3": "Santiago es su capital", "pista_extra": "Cobre y vino exporta mucho", "respuesta": "chile"},
-    {"pista1": "Gran barrera coralina frente a su costa noreste", "pista2": "Canberra como capital federada", "pista3": "Canguros y koalas iconos", "pista_extra": "Continente pais en un solo estado", "respuesta": "australia"},
-    {"pista1": "Mar del norte de Europa entre Gran Bretana y Noruega", "pista2": "Petróleo y gas desde plataformas offshore", "pista3": "Pesca del arenque historica", "pista_extra": "Nombre en ingles North Sea", "respuesta": "mar del norte"},
-    {"pista1": "Pais en los Balcanes con costa en el Adriatico", "pista2": "Dubrovnik aparece en series de fantasia", "pista3": "Zagreb es capital", "pista_extra": "Forma de media luna en el mapa", "respuesta": "croacia"},
-    {"pista1": "Desierto de Namibia en costa atlantica africana", "pista2": "Dunas naranjas junto al oceano", "pista3": "Pais homonimo al desierto", "pista_extra": "Skeleton Coast nombre turistico", "respuesta": "namibia"},
-    {"pista1": "Rio principal de Egipto que fertiliza el valle", "pista2": "Nace en grandes lagos africanos", "pista3": "Asuan tiene presa famosa", "pista_extra": "Herodoto lo estudio", "respuesta": "nilo"},
-    {"pista1": "Estrecho entre Alaska y Siberia", "pista2": "Puente terrestre en la ultima glaciacion", "pista3": "Dos letras del nombre recuerdan a un pueblo indigena", "pista_extra": "Linea internacional de cambio de fecha pasa cerca", "respuesta": "bering"},
-    {"pista1": "Pais en el Cuerno de Africa con costa en el Indico", "pista2": "Piratas y hambrunas noticias recientes", "pista3": "Mogadiscio es capital", "pista_extra": "Bandera azul con estrella blanca central", "respuesta": "somalia"},
-    {"pista1": "Meseta iberica ocupa la mayor parte de la Peninsula", "pista2": "Macizo herciniano antiguo", "pista3": "Meseta Norte y Sur en Espana", "pista_extra": "Altitud media elevada interior seca", "respuesta": "meseta"},
-    {"pista1": "Pais caribeno con Pico Duarte montana maxima del Caribe", "pista2": "Comparte isla La Espanola con Haiti", "pista3": "Samana ballenas jorobadas turismo", "pista_extra": "Merengue y bachata musicales", "respuesta": "republica dominicana"},
-    {"pista1": "Lago en la frontera entre Estados Unidos y Canada famoso por niebla", "pista2": "Ocho mil quinientos kilometros cuadrados aproximados", "pista3": "Nombre de un pez predador en ingles", "pista_extra": "Superior Huron Michigan Erie Ontario son familia", "respuesta": "lago superior"},
-    {"pista1": "Pais en Europa central sin salida al mar hasta el mar Negro", "pista2": "Danubio cruza Budapest su capital", "pista3": "Lengua unica no indoeuropea en la UE", "pista_extra": "Goulash y termas de Budapest", "respuesta": "hungria"},
-    {"pista1": "Region polar norte cubierta de hielo marino flotante", "pista2": "Oso polar y focas lo habitan", "pista3": "No es un continente", "pista_extra": "Calentamiento global reduce su extension", "respuesta": "artico"},
-    {"pista1": "Pais en forma de corazon en Europa del Este", "pista2": "Chernobyl y Kiev son nombres conocidos", "pista3": "Mar Negro al sur", "pista_extra": "Bandera azul y amarilla", "respuesta": "ucrania"}
+    {
+      "pista1": "Rio mas caudaloso del mundo por volumen",
+      "pista2": "Nace en Peru y desemboca en Brasil",
+      "pista3": "Selva amazonica lo atraviesa",
+      "pista_extra": "Delfin rosado habita en sus aguas",
+      "respuesta": "amazonas"
+    },
+    {
+      "pista1": "Monte mas alto del planeta sobre el nivel del mar",
+      "pista2": "Cadena del Himalaya entre Nepal y Tibet",
+      "pista3": "Ocho mil ochocientos cuarenta y ocho metros aproximados",
+      "pista_extra": "Los sherpas son guias famosos aqui",
+      "respuesta": "everest"
+    },
+    {
+      "pista1": "Desierto calido mas grande del mundo",
+      "pista2": "Cubre gran parte del norte de Africa",
+      "pista3": "Dunas ergs y registro rocoso hamada",
+      "pista_extra": "Nombre arabe que significa desierto",
+      "respuesta": "sahara"
+    },
+    {
+      "pista1": "Mar interior entre Europa Africa y Asia",
+      "pista2": "Estrechos de Gibraltar y Bosforo lo conectan",
+      "pista3": "Civilizaciones clasicas en sus costas",
+      "pista_extra": "Color azul en mapas escolares",
+      "respuesta": "mediterraneo"
+    },
+    {
+      "pista1": "Mar entre Africa y la peninsula arabiga",
+      "pista2": "Canal de Suez lo une al Mediterraneo",
+      "pista3": "Corales y buceo en Dahab o Sharm",
+      "pista_extra": "Nombre del color en espanol",
+      "respuesta": "mar rojo"
+    },
+    {
+      "pista1": "Corriente oceanica calida que sube por el Atlantico norte",
+      "pista2": "Afecta clima templado de Europa occidental",
+      "pista3": "Arrastra agua calida desde el golfo de Mexico",
+      "pista_extra": "Nombre en espanol con palabra corriente",
+      "respuesta": "corriente del golfo"
+    },
+    {
+      "pista1": "Pais mas grande del mundo por superficie",
+      "pista2": "Once husos horarios internos",
+      "pista3": "Moscu es su capital politica",
+      "pista_extra": "Transiberiano cruza sus bosques",
+      "respuesta": "rusia"
+    },
+    {
+      "pista1": "Pais mas poblado del mundo",
+      "pista2": "Gran Muralla y rio Yangtse",
+      "pista3": "Yuan o renminbi es su moneda",
+      "pista_extra": "Pekin y Shanghai son megaciudades",
+      "respuesta": "china"
+    },
+    {
+      "pista1": "Continente sin estado soberano propio",
+      "pista2": "Hielo milenario y estaciones de investigacion",
+      "pista3": "Polo Sur en su interior",
+      "pista_extra": "Tratado internacional de uso pacifico",
+      "respuesta": "antartida"
+    },
+    {
+      "pista1": "Lago mas grande de agua dulce por superficie",
+      "pista2": "Compartido por Rusia Kazajistan y Azerbaijan",
+      "pista3": "Peces como el esturion y caviar",
+      "pista_extra": "Nivel bajo por riego del Volga",
+      "respuesta": "mar caspio"
+    },
+    {
+      "pista1": "Capital de Australia no es Sidney",
+      "pista2": "Ciudad planificada en el interior",
+      "pista3": "Parlamento triangular y lago Burley Griffin",
+      "pista_extra": "Letras A C T en su territorio federal",
+      "respuesta": "canberra"
+    },
+    {
+      "pista1": "Rio que forma frontera entre Estados Unidos y Mexico",
+      "pista2": "Desemboca en golfo de Mexico",
+      "pista3": "En Mexico se le llama Bravo en parte del curso",
+      "pista_extra": "Nombre en ingles Grande",
+      "respuesta": "rio grande"
+    },
+    {
+      "pista1": "Istmo donde se construyo un canal interoceanico",
+      "pista2": "Une Atlantico y Pacifico sin rodear America del Sur",
+      "pista3": "Ciudad capital homonima al pais",
+      "pista_extra": "Zona del Darien queda al este",
+      "respuesta": "panama"
+    },
+    {
+      "pista1": "Cordillera mas larga del mundo en el oeste de America del Sur",
+      "pista2": "Aconcagua es su pico maximo",
+      "pista3": "Altiplano andino y llamas",
+      "pista_extra": "Inka caminaban el qhapaq nan",
+      "respuesta": "andes"
+    },
+    {
+      "pista1": "Pais en forma de bota en el sur de Europa",
+      "pista2": "Roma Florencia y Venecia turisticas",
+      "pista3": "Alpes al norte y Mediterraneo al sur",
+      "pista_extra": "Pizza y pasta son estereotipos gastronomicos",
+      "respuesta": "italia"
+    },
+    {
+      "pista1": "Archipielago volcanico en el Pacifico al este de Asia",
+      "pista2": "Tokio Kioto y Osaka son ciudades clave",
+      "pista3": "Sol naciente en su bandera simbolica",
+      "pista_extra": "Anime y manga son exportacion cultural",
+      "respuesta": "japon"
+    },
+    {
+      "pista1": "Pais doblemente sin litoral en America del Sur",
+      "pista2": "La Paz y Sucre comparten capitalidad historica",
+      "pista3": "Salar de Uyuni es salar gigante",
+      "pista_extra": "Nombre del libertador en su moneda",
+      "respuesta": "bolivia"
+    },
+    {
+      "pista1": "Estrecho entre Espana y Marruecos",
+      "pista2": "Catorce kilometros en su parte mas estrecha",
+      "pista3": "Une Mediterraneo y Atlantico",
+      "pista_extra": "Pilar de Hercules mitologia",
+      "respuesta": "gibraltar"
+    },
+    {
+      "pista1": "Desierto frio de Patagonia entre Argentina y Chile",
+      "pista2": "Viento fuerte y estepa arbustiva",
+      "pista3": "No es calido como el Sahara",
+      "pista_extra": "Nombre comparte con region sur",
+      "respuesta": "patagonia"
+    },
+    {
+      "pista1": "Pais con forma alargada en la costa oeste de Africa",
+      "pista2": "Dakar es su capital economica clave",
+      "pista3": "Sahel al norte y clima tropical al sur",
+      "pista_extra": "Antigua colonia francesa de Africa occidental",
+      "respuesta": "senegal"
+    },
+    {
+      "pista1": "Lago compartido por Peru y Bolivia en altiplano",
+      "pista2": "Navegacion turistica en balsas de totora",
+      "pista3": "Titicaca su nombre con rima repetida",
+      "pista_extra": "Uno de los lagos navegables mas altos del mundo",
+      "respuesta": "titicaca"
+    },
+    {
+      "pista1": "Pais insular del sudeste asiatico con muchas islas",
+      "pista2": "Yakarta era capital en Java",
+      "pista3": "Bali volcanes y playas turisticas",
+      "pista_extra": "Mayor poblacion musulmana del mundo en numero",
+      "respuesta": "indonesia"
+    },
+    {
+      "pista1": "Rio que cruza Paris de este a oeste",
+      "pista2": "Islas y puentes famosos en su curso urbano",
+      "pista3": "Desemboca en el canal de la Mancha",
+      "pista_extra": "Nombre de diosa griega en frances",
+      "respuesta": "senna"
+    },
+    {
+      "pista1": "Pais mas estrecho del mundo en su forma continental",
+      "pista2": "Desierto de Atacama al norte",
+      "pista3": "Santiago es su capital",
+      "pista_extra": "Cobre y vino exporta mucho",
+      "respuesta": "chile"
+    },
+    {
+      "pista1": "Gran barrera coralina frente a su costa noreste",
+      "pista2": "Canberra como capital federada",
+      "pista3": "Canguros y koalas iconos",
+      "pista_extra": "Continente pais en un solo estado",
+      "respuesta": "australia"
+    },
+    {
+      "pista1": "Mar del norte de Europa entre Gran Bretana y Noruega",
+      "pista2": "Petróleo y gas desde plataformas offshore",
+      "pista3": "Pesca del arenque historica",
+      "pista_extra": "Nombre en ingles North Sea",
+      "respuesta": "mar del norte"
+    },
+    {
+      "pista1": "Pais en los Balcanes con costa en el Adriatico",
+      "pista2": "Dubrovnik aparece en series de fantasia",
+      "pista3": "Zagreb es capital",
+      "pista_extra": "Forma de media luna en el mapa",
+      "respuesta": "croacia"
+    },
+    {
+      "pista1": "Desierto de Namibia en costa atlantica africana",
+      "pista2": "Dunas naranjas junto al oceano",
+      "pista3": "Pais homonimo al desierto",
+      "pista_extra": "Skeleton Coast nombre turistico",
+      "respuesta": "namibia"
+    },
+    {
+      "pista1": "Rio principal de Egipto que fertiliza el valle",
+      "pista2": "Nace en grandes lagos africanos",
+      "pista3": "Asuan tiene presa famosa",
+      "pista_extra": "Herodoto lo estudio",
+      "respuesta": "nilo"
+    },
+    {
+      "pista1": "Estrecho entre Alaska y Siberia",
+      "pista2": "Puente terrestre en la ultima glaciacion",
+      "pista3": "Dos letras del nombre recuerdan a un pueblo indigena",
+      "pista_extra": "Linea internacional de cambio de fecha pasa cerca",
+      "respuesta": "bering"
+    },
+    {
+      "pista1": "Pais en el Cuerno de Africa con costa en el Indico",
+      "pista2": "Piratas y hambrunas noticias recientes",
+      "pista3": "Mogadiscio es capital",
+      "pista_extra": "Bandera azul con estrella blanca central",
+      "respuesta": "somalia"
+    },
+    {
+      "pista1": "Meseta iberica ocupa la mayor parte de la Peninsula",
+      "pista2": "Macizo herciniano antiguo",
+      "pista3": "Meseta Norte y Sur en Espana",
+      "pista_extra": "Altitud media elevada interior seca",
+      "respuesta": "meseta"
+    },
+    {
+      "pista1": "Pais caribeno con Pico Duarte montana maxima del Caribe",
+      "pista2": "Comparte isla La Espanola con Haiti",
+      "pista3": "Samana ballenas jorobadas turismo",
+      "pista_extra": "Merengue y bachata musicales",
+      "respuesta": "republica dominicana"
+    },
+    {
+      "pista1": "Lago en la frontera entre Estados Unidos y Canada famoso por niebla",
+      "pista2": "Ocho mil quinientos kilometros cuadrados aproximados",
+      "pista3": "Nombre de un pez predador en ingles",
+      "pista_extra": "Superior Huron Michigan Erie Ontario son familia",
+      "respuesta": "lago superior"
+    },
+    {
+      "pista1": "Pais en Europa central sin salida al mar hasta el mar Negro",
+      "pista2": "Danubio cruza Budapest su capital",
+      "pista3": "Lengua unica no indoeuropea en la UE",
+      "pista_extra": "Goulash y termas de Budapest",
+      "respuesta": "hungria"
+    },
+    {
+      "pista1": "Region polar norte cubierta de hielo marino flotante",
+      "pista2": "Oso polar y focas lo habitan",
+      "pista3": "No es un continente",
+      "pista_extra": "Calentamiento global reduce su extension",
+      "respuesta": "artico"
+    },
+    {
+      "pista1": "Pais en forma de corazon en Europa del Este",
+      "pista2": "Chernobyl y Kiev son nombres conocidos",
+      "pista3": "Mar Negro al sur",
+      "pista_extra": "Bandera azul y amarilla",
+      "respuesta": "ucrania"
+    },
+    {
+      "pista1": "Capital de Kazajistan en la estepa",
+      "pista2": "Nombre oficial tras Nur-Sultan",
+      "pista3": "Central Asia ex sovietica",
+      "pista_extra": "Vuelve a llamarse asi desde dos mil veintidos",
+      "respuesta": "astana"
+    },
+    {
+      "pista1": "Estrecho entre Europa y Africa",
+      "pista2": "Une mediterraneo y atlantico",
+      "pista3": "Ceuta y Gibraltar cercanos",
+      "pista_extra": "Nombre de Hercules mito",
+      "respuesta": "gibraltar"
+    },
+    {
+      "pista1": "Lago salado Jordania Israel",
+      "pista2": "Mas bajo tierra emergida",
+      "pista3": "Flotar facil",
+      "pista_extra": "Mar muerto",
+      "respuesta": "mar muerto"
+    },
+    {
+      "pista1": "Capital de Butan",
+      "pista2": "Himalaya reino del trueno dragon",
+      "pista3": "Dzong arquitectura",
+      "pista_extra": "Su nombre empieza por Thim",
+      "respuesta": "thimphu"
+    },
+    {
+      "pista1": "Rio mas largo de Asia sur",
+      "pista2": "Delta en Bangladesh",
+      "pista3": "Ganges tributario mayor",
+      "pista_extra": "Nombre brahmaputra confusión",
+      "respuesta": "brahmaputra"
+    },
+    {
+      "pista1": "Desierto namibia costa",
+      "pista2": "Dunas rojas",
+      "pista3": "Skeleton coast",
+      "pista_extra": "Nombre del desierto",
+      "respuesta": "namib"
+    },
+    {
+      "pista1": "Monte mas alto Africa",
+      "pista2": "Tanzania volcan",
+      "pista3": "Nieve en ecuador",
+      "pista_extra": "Kilimanjaro",
+      "respuesta": "kilimanjaro"
+    },
+    {
+      "pista1": "Capital de Mongolia",
+      "pista2": "Gengis khan stepa",
+      "pista3": "Ulan en nombre viejo",
+      "pista_extra": "Ulan bator",
+      "respuesta": "ulan bator"
+    },
+    {
+      "pista1": "Pais sin salida al mar en Africa central",
+      "pista2": "Kivu y volcanes",
+      "pista3": "Coltan conflicto",
+      "pista_extra": "Kinshasa no es capital",
+      "respuesta": "ruanda"
+    },
+    {
+      "pista1": "Capital administrativa de Sri Lanka",
+      "pista2": "No es Colombo el distrito capital",
+      "pista3": "Isla indico",
+      "pista_extra": "Kotte en el nombre",
+      "respuesta": "sri jayawardenepura kotte"
+    },
+    {
+      "pista1": "Estrecho entre Sumatra y Malasia",
+      "pista2": "Piratas leyenda",
+      "pista3": "Ruta china india",
+      "pista_extra": "Malacca",
+      "respuesta": "estrecho de malaca"
+    },
+    {
+      "pista1": "Pais mas pequeno ONU europeo",
+      "pista2": "Ciudad estado Vaticano no miembro igual",
+      "pista3": "Monte Carlo casino",
+      "pista_extra": "Principado",
+      "respuesta": "monaco"
+    },
+    {
+      "pista1": "Capital de Letonia",
+      "pista2": "Baltico",
+      "pista3": "Art nouveau arquitectura",
+      "pista_extra": "Riga",
+      "respuesta": "riga"
+    },
+    {
+      "pista1": "Lago mas profundo mundo",
+      "pista2": "Siberia ruso",
+      "pista3": "Veinte por ciento agua dulce",
+      "pista_extra": "Baikal",
+      "respuesta": "baikal"
+    },
+    {
+      "pista1": "Cordillera entre Espana y Francia",
+      "pista2": "Aneto pico",
+      "pista3": "Camino de Santiago cruza",
+      "pista_extra": "Pirineos",
+      "respuesta": "pirineos"
+    },
+    {
+      "pista1": "Capital de Eritrea",
+      "pista2": "Cuerno de africa mar rojo",
+      "pista3": "Asmara",
+      "pista_extra": "Asmara",
+      "respuesta": "asmara"
+    },
+    {
+      "pista1": "Desierto sur Argentina chile",
+      "pista2": "Patagonia seco",
+      "pista3": "Avestruces no nativas",
+      "pista_extra": "Patagonia",
+      "respuesta": "patagonia"
+    },
+    {
+      "pista1": "Isla indonesia java",
+      "pista2": "Yakarta sur",
+      "pista3": "Volcan merapi",
+      "pista_extra": "Nombre isla",
+      "respuesta": "java"
+    },
+    {
+      "pista1": "Rio que cruza Paris",
+      "pista2": "Senna frances",
+      "pista3": "Notre Dame orilla",
+      "pista_extra": "Sen",
+      "respuesta": "sen"
+    },
+    {
+      "pista1": "Pais triple landlocked Asia",
+      "pista2": "Samarcanda seda",
+      "pista3": "Tashkent capital",
+      "pista_extra": "Uzbekistan",
+      "respuesta": "uzbekistan"
+    }
   ]
 }

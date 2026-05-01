@@ -6,6 +6,10 @@
  * POST JSON body:
  *   { "pregunta_id": <int>, "respuesta": "<user text>", "pistas_vistas": <1-4> }
  *
+ * Empty "respuesta" is allowed only when every clue was revealed (server checks
+ * max clues from pista_extra), e.g. player taps Comprobar after the last card
+ * without typing to see the canonical answer.
+ *
  * Loads canonical answer from SQLite only on the server.
  * Response JSON: always correcto + puntos. When the guess is wrong and every clue
  * was already revealed, respuesta_correcta is included so the client can show it
@@ -42,12 +46,6 @@ if ($preguntaId < 1) {
     exit;
 }
 
-if ($userAnswer === '') {
-    http_response_code(400);
-    echo json_encode(['error' => 'Missing or invalid respuesta'], JSON_UNESCAPED_UNICODE);
-    exit;
-}
-
 if ($cluesUsed < 1 || $cluesUsed > 4) {
     http_response_code(400);
     echo json_encode(['error' => 'pistas_vistas must be between 1 and 4'], JSON_UNESCAPED_UNICODE);
@@ -62,7 +60,11 @@ require_once dirname(__DIR__) . '/includes/db.php';
  */
 function normalize_answer(string $value): string
 {
-    $value = trim(mb_strtolower($value, 'UTF-8'));
+    $value = trim($value);
+    // mbstring may be disabled on some PHP builds; avoid fatal TypeError on mb_strtolower.
+    $value = function_exists('mb_strtolower')
+        ? mb_strtolower($value, 'UTF-8')
+        : strtolower($value);
     // Make gameplay friendlier: answers with/without accents are treated as equal.
     $value = strtr(
         $value,
@@ -104,12 +106,20 @@ try {
         exit;
     }
 
+    $hasExtra = isset($row['pista_extra']) && trim((string) $row['pista_extra']) !== '';
+    $maxClues = $hasExtra ? 4 : 3;
+    $trimmedGuess = trim($userAnswer);
+    if ($trimmedGuess === '' && $cluesUsed < $maxClues) {
+        http_response_code(400);
+        echo json_encode(['error' => 'Missing or invalid respuesta'], JSON_UNESCAPED_UNICODE);
+        exit;
+    }
+
     $canonical = normalize_answer((string) $row['respuesta']);
-    $guess = normalize_answer($userAnswer);
+    $guess = normalize_answer($trimmedGuess);
     $correct = ($canonical === $guess && $guess !== '');
 
     // If there is no extra clue, cap clue count at 3 for scoring.
-    $hasExtra = isset($row['pista_extra']) && trim((string) $row['pista_extra']) !== '';
     $effectiveClues = $cluesUsed;
     if (!$hasExtra && $effectiveClues > 3) {
         $effectiveClues = 3;
@@ -117,7 +127,6 @@ try {
 
     $points = $correct ? score_for_clues_used($effectiveClues) : 0;
 
-    $maxClues = $hasExtra ? 4 : 3;
     $allCluesRevealed = $cluesUsed >= $maxClues;
 
     $payload = [
@@ -130,8 +139,13 @@ try {
         $payload['respuesta_correcta'] = trim((string) $row['respuesta']);
     }
 
-    echo json_encode($payload, JSON_UNESCAPED_UNICODE);
-} catch (Throwable) {
+    $json = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_INVALID_UTF8_SUBSTITUTE);
+    if ($json === false) {
+        throw new RuntimeException('json_encode failed for validate payload');
+    }
+    echo $json;
+} catch (Throwable $e) {
+    error_log('validate.php: ' . $e->getMessage());
     http_response_code(500);
     echo json_encode(['error' => 'Internal server error'], JSON_UNESCAPED_UNICODE);
 } finally {

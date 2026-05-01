@@ -2,6 +2,7 @@
 require_once dirname(__DIR__) . '/config/globals.php';
 
 $currentPage = basename($_SERVER['PHP_SELF']);
+$communityActive = in_array($currentPage, ['ranking.php', 'opiniones.php'], true);
 ?>
 <nav class="navbar navbar-expand-lg navbar-clika sticky-top" aria-label="Navegación principal">
   <div class="container">
@@ -26,13 +27,28 @@ $currentPage = basename($_SERVER['PHP_SELF']);
           <a class="nav-link nav-pill <?php echo ($currentPage === 'play.php') ? 'active' : ''; ?>"
             href="<?php echo BASE_URL; ?>/pages/play.php">Jugar</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link nav-pill <?php echo ($currentPage === 'ranking.php') ? 'active' : ''; ?>"
-            href="<?php echo BASE_URL; ?>/pages/ranking.php">Ranking</a>
+        <li class="nav-item dropdown">
+          <a class="nav-link nav-pill dropdown-toggle <?php echo $communityActive ? 'active' : ''; ?>"
+            href="#"
+            id="navbar-community"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            aria-haspopup="true">Comunidad</a>
+          <ul class="dropdown-menu border-0 shadow-sm" aria-labelledby="navbar-community">
+            <li>
+              <a class="dropdown-item <?php echo ($currentPage === 'ranking.php') ? 'active' : ''; ?>"
+                href="<?php echo BASE_URL; ?>/pages/ranking.php">Ranking</a>
+            </li>
+            <li>
+              <a class="dropdown-item <?php echo ($currentPage === 'opiniones.php') ? 'active' : ''; ?>"
+                href="<?php echo BASE_URL; ?>/pages/opiniones.php">Opiniones</a>
+            </li>
+          </ul>
         </li>
         <?php if (!empty($_SESSION['usuari_id']) && $_SESSION['rol'] === 'admin'): ?>
           <li class="nav-item">
-            <a class="nav-link nav-pill fw-bold <?php echo in_array($currentPage, ['admin_config.php', 'users.php', 'themes.php', 'questions.php'], true) ? 'active' : ''; ?>"
+            <a class="nav-link nav-pill fw-bold <?php echo in_array($currentPage, ['admin_config.php', 'users.php', 'themes.php', 'questions.php', 'admin_feedback.php'], true) ? 'active' : ''; ?>"
               href="<?php echo BASE_URL; ?>/pages/admin_config.php">Panel Admin</a>
           </li>
         <?php endif; ?>

@@ -81,7 +81,11 @@ $autoInicia = $temaPreseleccionat !== null;
       <div class="row g-4 justify-content-center">
         <?php foreach ($temas as $tema): ?>
         <div class="col-10 col-sm-6 col-lg-3">
-          <article class="card tema-card h-100 border-0">
+          <article
+            class="card tema-card tema-card--clickable h-100 border-0"
+            tabindex="0"
+            role="button"
+            aria-label="Elegir temática <?php echo htmlspecialchars($tema['nombre']); ?>">
             <div class="card-body d-flex flex-column align-items-center text-center py-4 px-3">
               <div class="tema-icon-wrap">
                 <span class="tema-icon" aria-hidden="true"><?php echo $tema['icono']; ?></span>
@@ -110,7 +114,11 @@ $autoInicia = $temaPreseleccionat !== null;
 
         <!-- Banderas del Mundo -->
         <div class="col-10 col-sm-6 col-lg-3">
-          <article class="card tema-card h-100 border-0">
+          <article
+            class="card tema-card tema-card--clickable h-100 border-0"
+            tabindex="0"
+            role="button"
+            aria-label="Elegir Banderas del Mundo">
             <div class="card-body d-flex flex-column align-items-center text-center py-4 px-3">
               <div class="tema-icon-wrap">
                 <span class="tema-icon" aria-hidden="true">&#127988;</span>
@@ -139,13 +147,18 @@ $autoInicia = $temaPreseleccionat !== null;
     <section id="game-area" hidden>
 
       <!-- Cabecera de la partida -->
-      <div class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom">
+      <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4 pb-3 border-bottom">
         <span id="pregunta-num" class="fw-bold fs-5" style="color:var(--clika-primary)">
           Pregunta 1/5
         </span>
-        <span class="badge punts-badge fs-6 px-3 py-2">
-          &#9733; <span id="punts-total">0</span> pts
-        </span>
+        <div class="d-flex align-items-center gap-2 ms-auto">
+          <span class="badge punts-badge fs-6 px-3 py-2">
+            &#9733; <span id="punts-total">0</span> pts
+          </span>
+          <button type="button" id="btn-sortir-partida" class="btn btn-outline-secondary btn-sm">
+            Dejar de jugar
+          </button>
+        </div>
       </div>
 
       <!-- Pistas: 3D card deck -->
@@ -262,7 +275,10 @@ $autoInicia = $temaPreseleccionat !== null;
           <button type="button" id="btn-tornar" class="btn btn-primary px-4">
             Jugar otra vez
           </button>
-          <a href="<?php echo BASE_URL; ?>/pages/ranking.php" class="btn btn-outline-accent px-4">
+          <button type="button" id="btn-fi-sortir" class="btn btn-outline-secondary px-4">
+            Volver al menú
+          </button>
+          <a id="btn-fi-ranking" href="<?php echo BASE_URL; ?>/pages/ranking.php" class="btn btn-outline-accent px-4">
             Ver ranking
           </a>
         </div>
@@ -335,12 +351,67 @@ $autoInicia = $temaPreseleccionat !== null;
     </div>
   </div>
 
+  <!-- Exit confirm -->
+  <div class="modal fade" id="modal-exit-confirm" tabindex="-1" aria-labelledby="modal-exit-confirm-label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 shadow">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modal-exit-confirm-label">¿Salir?</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body text-muted" id="modal-exit-confirm-body">
+          Si sales ahora perderás el progreso de esta partida.
+        </div>
+        <div class="modal-footer flex-wrap gap-2">
+          <button type="button" class="btn btn-primary" id="btn-exit-continue" data-bs-dismiss="modal">Continuar jugando</button>
+          <button type="button" class="btn btn-outline-secondary" id="btn-exit-leave">Salir</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Optional rating -->
+  <div class="modal fade" id="modal-feedback" tabindex="-1" aria-labelledby="modal-feedback-label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 shadow">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modal-feedback-label">¿Qué tal esta temática?</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <p class="small text-muted mb-3" id="modal-feedback-lead">
+            Un segundo: tu opinión ayuda a mejorar las pistas y el juego. Puedes cerrar o <strong>Omitir</strong> sin enviar nada.
+          </p>
+          <p id="feedback-login-notice" class="small text-muted mb-0" hidden>
+            Para enviar estrellas o comentarios necesitas una sesión.
+            <a href="<?php echo BASE_URL; ?>/pages/login.php">Iniciar sesión</a>
+          </p>
+          <div id="feedback-logged-fields">
+            <p class="small fw-semibold mb-1">Estrellas</p>
+            <div class="star-rating mb-3" id="star-rating" role="group" aria-label="Valoración de 1 a 5">
+              <?php for ($s = 1; $s <= 5; $s++): ?>
+              <button type="button" class="btn-star" data-value="<?php echo $s; ?>" aria-label="<?php echo $s; ?> de 5">&#9733;</button>
+              <?php endfor; ?>
+            </div>
+            <label for="feedback-comment" class="form-label small mb-1">Comentario (opcional)</label>
+            <textarea id="feedback-comment" class="form-control" rows="3" maxlength="2000" placeholder="¿Qué te ha gustado o qué cambiarías?"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer flex-wrap gap-2">
+          <button type="button" class="btn btn-outline-secondary" id="btn-feedback-skip" data-bs-dismiss="modal">Omitir</button>
+          <button type="button" class="btn btn-primary" id="btn-feedback-send">Enviar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
     const USUARI_ID            = <?php echo is_logged_in() ? (int) $_SESSION['usuari_id'] : 'null'; ?>;
+    const CAN_SEND_FEEDBACK    = USUARI_ID !== null && USUARI_ID > 0;
     const TEMA_PRESELECCIONAT  = <?php echo $temaPreseleccionat !== null ? $temaPreseleccionat : 'null'; ?>;
     const TEMA_NOM_PRESELECCIONAT = <?php echo json_encode($temaNomPreseleccionat, JSON_UNESCAPED_UNICODE); ?>;
   </script>
-  <script src="../assets/js/joc.js"></script>
+  <script src="../assets/js/joc.js?v=<?php echo (int) @filemtime(__DIR__ . '/../assets/js/joc.js'); ?>"></script>
   <script>
     (function () {
       const modalEl    = document.getElementById('modal-instruccions');
@@ -366,6 +437,21 @@ $autoInicia = $temaPreseleccionat !== null;
           document.getElementById('pista-label-2').textContent = esBanderas ? '+ Región'        : '2 pistas';
           document.getElementById('pista-label-3').textContent = esBanderas ? '+ Capital'       : '3 pistas';
           document.getElementById('pista-label-4').textContent = esBanderas ? '+ Población'     : '4 pistas';
+        });
+      });
+
+      // Whole theme card opens the same flow as "Jugar" (not only the button).
+      document.querySelectorAll('#tema-selector .tema-card--clickable').forEach(card => {
+        card.addEventListener('click', (e) => {
+          if (e.target.closest('button')) return;
+          const playBtn = card.querySelector('.btn-jugar-modal');
+          if (playBtn) playBtn.click();
+        });
+        card.addEventListener('keydown', (e) => {
+          if (e.key !== 'Enter' && e.key !== ' ') return;
+          e.preventDefault();
+          if (e.target.closest('button')) return;
+          card.querySelector('.btn-jugar-modal')?.click();
         });
       });
     })();

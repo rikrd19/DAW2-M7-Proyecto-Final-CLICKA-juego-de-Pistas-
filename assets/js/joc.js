@@ -37,6 +37,21 @@ const btnSegurentPregunta = document.getElementById('btn-seguent-pregunta');
 
 const puntsFinalsEl    = document.getElementById('punts-finals');
 const btnTornar        = document.getElementById('btn-tornar');
+const btnSortirPartida = document.getElementById('btn-sortir-partida');
+const btnFiSortir      = document.getElementById('btn-fi-sortir');
+const btnFiRanking     = document.getElementById('btn-fi-ranking');
+const modalExitEl      = document.getElementById('modal-exit-confirm');
+const modalFeedbackEl  = document.getElementById('modal-feedback');
+const exitConfirmBodyEl = document.getElementById('modal-exit-confirm-body');
+const feedbackCommentEl = document.getElementById('feedback-comment');
+const starRatingEl     = document.getElementById('star-rating');
+const btnFeedbackSkip  = document.getElementById('btn-feedback-skip');
+const btnFeedbackSend  = document.getElementById('btn-feedback-send');
+const btnExitLeave     = document.getElementById('btn-exit-leave');
+
+// Declared in play.php before this file: CAN_SEND_FEEDBACK (logged-in only).
+const canSendFeedback =
+    typeof CAN_SEND_FEEDBACK !== 'undefined' && CAN_SEND_FEEDBACK === true;
 
 /* ── State ──────────────────────────────────────────────────── */
 let temaId          = null;
@@ -48,6 +63,8 @@ let maxPistes       = 3;   // 3 or 4 depending on pista_extra
 let puntsPartida    = 0;   // accumulated score for the round
 let respostaEnviada = false;
 let roundAnswers    = [];  // per-question analytics: clues_used + correctness
+let feedbackStars   = null; // 1-5 or null when opening rating modal
+let finalizeAfterFeedback = null; // runs once when #modal-feedback is hidden
 
 /* ── Card reveal helper ─────────────────────────────────────── */
 function revelarCarta(el) {
@@ -131,8 +148,9 @@ async function carregarPregunta(tema_id) {
     pista3Text.textContent = q.pista3;
 
     pistaExtraEl.classList.remove('carta-bloqueada');
-    if (q.pista_extra && q.pista_extra.trim() !== '') {
-        pistaExtraText.textContent = q.pista_extra;
+    const extraText = q.pista_extra != null ? String(q.pista_extra).trim() : '';
+    if (extraText !== '') {
+        pistaExtraText.textContent = extraText;
         maxPistes = 4;
     } else {
         pistaExtraEl.classList.add('carta-bloqueada');
@@ -168,6 +186,8 @@ btnSeguентPista.addEventListener('click', () => {
 
     if (pistesVistes >= maxPistes) {
         btnSeguентPista.hidden = true;
+        // Let the player read the last clue and type before Comprobar / Enter (no auto-submit).
+        respostaInput.focus();
     }
 });
 
@@ -181,8 +201,21 @@ async function comprovarResposta() {
     if (respostaEnviada) return;
 
     const resposta = respostaInput.value.trim();
-    if (resposta === '') {
+    if (resposta === '' && pistesVistes < maxPistes) {
         respostaInput.focus();
+        return;
+    }
+
+    await submitAnswerValidation(resposta);
+}
+
+async function submitAnswerValidation(answerTrimmed) {
+    if (respostaEnviada) return;
+    if (answerTrimmed === '' && pistesVistes < maxPistes) return;
+
+    const preguntaId = Number(preguntaActual?.id);
+    if (!Number.isFinite(preguntaId) || preguntaId < 1) {
+        mostrarFeedback('error', 'La pregunta no esta lista. Recarga la pagina.');
         return;
     }
 
@@ -194,13 +227,35 @@ async function comprovarResposta() {
             method:  'POST',
             headers: { 'Content-Type': 'application/json' },
             body:    JSON.stringify({
-                pregunta_id:   preguntaActual.id,
-                respuesta:     resposta,
+                pregunta_id:   preguntaId,
+                respuesta:     answerTrimmed,
                 pistas_vistas: pistesVistes,
             }),
         });
 
-        const result = await resp.json();
+        const rawText = await resp.text();
+        let result = null;
+        try {
+            result = rawText ? JSON.parse(rawText) : null;
+        } catch (_) {
+            result = null;
+        }
+
+        if (!resp.ok) {
+            const msg =
+                result && typeof result.error === 'string'
+                    ? result.error
+                    : `Error del servidor (${resp.status}).`;
+            mostrarFeedback('error', msg);
+            btnComprovar.disabled = false;
+            return;
+        }
+
+        if (!result || typeof result.correcto !== 'boolean') {
+            mostrarFeedback('error', 'Respuesta invalida del servidor. Revisa la peticion validate.php en Red.');
+            btnComprovar.disabled = false;
+            return;
+        }
 
         if (result.correcto) {
             respostaEnviada = true;
@@ -313,6 +368,231 @@ async function acabarPartida() {
         feedbackEl.hidden = false;
     }
 }
+
+/* ── Exit flow: confirm → optional rating → back to theme selector ───────── */
+function clearStarUi() {
+    feedbackStars = null;
+    if (!starRatingEl) return;
+    starRatingEl.querySelectorAll('.btn-star').forEach((b) => b.classList.remove('is-on'));
+}
+
+function setStarValue(n) {
+    feedbackStars = n;
+    if (!starRatingEl) return;
+    starRatingEl.querySelectorAll('.btn-star').forEach((b) => {
+        const v = Number(b.dataset.value);
+        b.classList.toggle('is-on', Number.isFinite(v) && v <= n);
+    });
+}
+
+function resetPartidaProgressUi() {
+    numPregunta     = 0;
+    puntsPartida    = 0;
+    roundAnswers    = [];
+    preguntaActual  = null;
+    respostaEnviada = false;
+    pistesVistes    = 1;
+    maxPistes       = 3;
+    if (feedbackEl) {
+        feedbackEl.hidden = true;
+        feedbackEl.textContent = '';
+    }
+    if (resultatEl) resultatEl.hidden = true;
+    if (respostaInput) {
+        respostaInput.value    = '';
+        respostaInput.disabled = false;
+    }
+    if (btnComprovar) {
+        btnComprovar.disabled = false;
+        btnComprovar.hidden    = false;
+    }
+}
+
+function scheduleFinalizeOnFeedbackClose(fn) {
+    if (!modalFeedbackEl || typeof fn !== 'function') {
+        fn();
+        return;
+    }
+    finalizeAfterFeedback = fn;
+}
+
+if (modalFeedbackEl) {
+    modalFeedbackEl.addEventListener('hidden.bs.modal', () => {
+        if (typeof finalizeAfterFeedback === 'function') {
+            const cb = finalizeAfterFeedback;
+            finalizeAfterFeedback = null;
+            cb();
+        }
+        clearStarUi();
+        if (feedbackCommentEl) feedbackCommentEl.value = '';
+    });
+}
+
+function finalizeExitToSelector() {
+    resetPartidaProgressUi();
+    if (gameArea) gameArea.hidden = true;
+    if (fiPartida) fiPartida.hidden = true;
+    if (temaSelector) temaSelector.hidden = false;
+    try {
+        if (typeof TEMA_PRESELECCIONAT !== 'undefined' && TEMA_PRESELECCIONAT !== null) {
+            const path = window.location.pathname;
+            window.history.replaceState({}, '', path);
+        }
+    } catch (_) {
+        /* ignore */
+    }
+}
+
+function openFeedbackModal() {
+    if (!modalFeedbackEl || typeof bootstrap === 'undefined') return;
+    clearStarUi();
+    if (feedbackCommentEl) feedbackCommentEl.value = '';
+    const lead         = document.getElementById('modal-feedback-lead');
+    const guestNotice  = document.getElementById('feedback-login-notice');
+    const loggedFields = document.getElementById('feedback-logged-fields');
+    if (canSendFeedback) {
+        if (lead) lead.hidden = false;
+        if (guestNotice) guestNotice.hidden = true;
+        if (loggedFields) loggedFields.hidden = false;
+        if (btnFeedbackSend) btnFeedbackSend.hidden = false;
+        if (btnFeedbackSkip) btnFeedbackSkip.textContent = 'Omitir';
+    } else {
+        if (lead) lead.hidden = true;
+        if (guestNotice) guestNotice.hidden = false;
+        if (loggedFields) loggedFields.hidden = true;
+        if (btnFeedbackSend) btnFeedbackSend.hidden = true;
+        if (btnFeedbackSkip) btnFeedbackSkip.textContent = 'Cerrar';
+    }
+    bootstrap.Modal.getOrCreateInstance(modalFeedbackEl).show();
+}
+
+function openExitConfirmModal(fromFinishedScreen) {
+    if (!modalExitEl || typeof bootstrap === 'undefined') return;
+    if (exitConfirmBodyEl) {
+        exitConfirmBodyEl.textContent = fromFinishedScreen
+            ? 'Volverás al menú de temas. ¿Seguro?'
+            : 'Si sales ahora perderás el progreso de esta partida.';
+    }
+    bootstrap.Modal.getOrCreateInstance(modalExitEl).show();
+}
+
+function wireExitAndRating() {
+    if (!modalExitEl || !modalFeedbackEl || typeof bootstrap === 'undefined') return;
+
+    const mExit = () => bootstrap.Modal.getOrCreateInstance(modalExitEl);
+
+    btnExitLeave?.addEventListener('click', () => {
+        mExit().hide();
+        modalExitEl.addEventListener(
+            'hidden.bs.modal',
+            () => {
+                if (canSendFeedback) {
+                    scheduleFinalizeOnFeedbackClose(finalizeExitToSelector);
+                    openFeedbackModal();
+                } else {
+                    finalizeExitToSelector();
+                }
+            },
+            { once: true }
+        );
+    });
+
+    starRatingEl?.querySelectorAll('.btn-star').forEach((btn) => {
+        btn.addEventListener('click', () => {
+            const n = Number(btn.dataset.value);
+            if (!Number.isFinite(n) || n < 1 || n > 5) return;
+            setStarValue(n);
+        });
+    });
+
+    btnFeedbackSend?.addEventListener('click', async () => {
+        if (!canSendFeedback) return;
+        const text = feedbackCommentEl ? feedbackCommentEl.value.trim() : '';
+        if (feedbackStars === null && text === '') {
+            if (typeof mostrarFeedback === 'function') {
+                mostrarFeedback('error', 'Elige estrellas o escribe algo breve, u omite con el botón inferior.');
+                if (feedbackEl) feedbackEl.hidden = false;
+            }
+            return;
+        }
+        try {
+            const resp = await fetch('../api/feedback.php', {
+                method:  'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body:    JSON.stringify({
+                    estrellas: feedbackStars,
+                    comentario: text,
+                    tema:      typeof temaNom === 'string' ? temaNom : null,
+                }),
+            });
+            const raw = await resp.text();
+            if (!resp.ok) {
+                let msg = raw || `HTTP ${resp.status}`;
+                try {
+                    const j = JSON.parse(raw);
+                    if (j && j.code === 'login_required') {
+                        msg = 'Sesión no válida. Inicia sesión de nuevo para enviar tu opinión.';
+                    } else if (j && j.error) {
+                        msg = j.error;
+                    }
+                } catch (_) {
+                    /* keep msg */
+                }
+                throw new Error(msg);
+            }
+        } catch (err) {
+            if (typeof mostrarFeedback === 'function') {
+                mostrarFeedback(
+                    'error',
+                    err instanceof Error ? err.message : 'No se pudo enviar. Puedes omitir y salir.'
+                );
+                if (feedbackEl) feedbackEl.hidden = false;
+            }
+            return;
+        }
+        if (feedbackEl) feedbackEl.hidden = true;
+        bootstrap.Modal.getOrCreateInstance(modalFeedbackEl).hide();
+    });
+}
+
+// Bootstrap bundle loads in foot.php after this file; defer wiring so Modal API exists.
+function scheduleWireExitAndRating() {
+    const run = () => {
+        wireExitAndRating();
+    };
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', run, { once: true });
+    } else {
+        run();
+    }
+}
+scheduleWireExitAndRating();
+
+btnSortirPartida?.addEventListener('click', () => {
+    if (gameArea?.hidden) return;
+    openExitConfirmModal(false);
+});
+
+btnFiSortir?.addEventListener('click', () => {
+    if (canSendFeedback) {
+        scheduleFinalizeOnFeedbackClose(finalizeExitToSelector);
+        openFeedbackModal();
+    } else {
+        finalizeExitToSelector();
+    }
+});
+
+/** After end screen: optional rating, then open ranking (logged-in only). Guests follow the link normally. */
+btnFiRanking?.addEventListener('click', (ev) => {
+    if (!canSendFeedback) return;
+    const url = btnFiRanking.getAttribute('href');
+    if (!url) return;
+    ev.preventDefault();
+    scheduleFinalizeOnFeedbackClose(() => {
+        window.location.assign(url);
+    });
+    openFeedbackModal();
+});
 
 /* ── Jugar otra vez ─────────────────────────────────────────── */
 btnTornar.addEventListener('click', () => {
