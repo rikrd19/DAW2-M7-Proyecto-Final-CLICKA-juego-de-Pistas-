@@ -236,29 +236,40 @@ $temas[] = [
         });
       });
 
-      document.querySelectorAll('.tema-card--clickable').forEach(card => {
-        card.addEventListener('click', (e) => {
-          if (e.target.closest('button')) return;
-          const playBtn = card.querySelector('.btn-jugar-modal');
-          if (playBtn) playBtn.click();
-        });
-        card.addEventListener('keydown', (e) => {
-          if (e.key !== 'Enter' && e.key !== ' ') return;
-          e.preventDefault();
-          if (e.target.closest('button')) return;
-          card.querySelector('.btn-jugar-modal')?.click();
-        });
-      });
-
-      /* ── Carrusel ── */
+      /* ── Carrusel (infinite: duplicate slide strip + instant scroll reposition) ── */
       const track   = document.getElementById('carrusel-track');
       const btnPrev = document.getElementById('carrusel-prev');
       const btnNext = document.getElementById('carrusel-next');
       const dotsEl  = document.getElementById('carrusel-dots');
-      const items   = Array.from(track.querySelectorAll('.carrusel-item'));
-      const total   = items.length;
-      let current   = 0;
+      const originalSlides = Array.from(track.querySelectorAll('.carrusel-item'));
+      const originalTotal  = originalSlides.length;
+
+      if (originalTotal > 0) {
+        originalSlides.forEach((el) => track.appendChild(el.cloneNode(true)));
+      }
+
+      const firstCard = originalSlides[0];
+
+      // Delegation so cloned slides open the same modal flow as originals
+      track.addEventListener('click', (e) => {
+        const card = e.target.closest('.tema-card--clickable');
+        if (!card || !track.contains(card)) return;
+        if (e.target.closest('button')) return;
+        card.querySelector('.btn-jugar-modal')?.click();
+      });
+      track.addEventListener('keydown', (e) => {
+        const card = e.target.closest('.tema-card--clickable');
+        if (!card || !track.contains(card)) return;
+        if (e.key !== 'Enter' && e.key !== ' ') return;
+        e.preventDefault();
+        if (e.target.closest('button')) return;
+        card.querySelector('.btn-jugar-modal')?.click();
+      });
+
+      let current = 0;
       let autoTimer = null;
+      let normalizeLock = false;
+      const AUTO_ADVANCE_MS = 6000;
 
       function perPage() {
         if (window.innerWidth >= 992) return 4;
@@ -267,14 +278,39 @@ $temas[] = [
       }
 
       function itemWidth() {
+        if (!firstCard) return 1;
         const gap = parseFloat(getComputedStyle(track).gap) || 20;
-        return items[0].offsetWidth + gap;
+        return firstCard.offsetWidth + gap;
       }
 
-      /* ── Dots ── */
+      function getLoopWidth() {
+        if (!originalTotal) return 0;
+        const half = track.scrollWidth / 2;
+        return half > 10 ? half : 0;
+      }
+
+      function normalizeInfiniteScroll() {
+        const lw = getLoopWidth();
+        if (lw < 10) return;
+        if (track.scrollLeft >= lw - 2) {
+          normalizeLock = true;
+          track.scrollLeft -= lw;
+          normalizeLock = false;
+        }
+      }
+
+      function syncCurrentFromScroll() {
+        const iw = itemWidth();
+        if (iw < 1 || !originalTotal) return;
+        let idx = Math.round(track.scrollLeft / iw);
+        idx = Math.max(0, idx);
+        current = ((idx % originalTotal) + originalTotal) % originalTotal;
+      }
+
       function buildDots() {
         dotsEl.innerHTML = '';
-        const pages = Math.ceil(total / perPage());
+        if (!originalTotal) return;
+        const pages = Math.ceil(originalTotal / perPage());
         for (let i = 0; i < pages; i++) {
           const d = document.createElement('button');
           d.className = 'carrusel-dot';
@@ -286,51 +322,80 @@ $temas[] = [
       }
 
       function syncDots() {
-        const page = Math.round(current / perPage());
+        const step = perPage();
+        const page = Math.floor(current / step + 1e-6);
         dotsEl.querySelectorAll('.carrusel-dot').forEach((d, i) =>
           d.classList.toggle('active', i === page)
         );
       }
 
-      /* ── Scroll ── */
-      function scrollToIndex(idx) {
-        current = Math.max(0, Math.min(idx, total - perPage()));
-        track.scrollTo({ left: current * itemWidth(), behavior: 'smooth' });
+      function scrollToIndex(idx, instant = false) {
+        const step = perPage();
+        const iw = itemWidth();
+        const maxStart = Math.max(0, originalTotal - step);
+        const clamped = Math.max(0, Math.min(idx, maxStart));
+        current = clamped;
+        track.scrollTo({
+          left: clamped * iw,
+          behavior: instant ? 'auto' : 'smooth',
+        });
         syncDots();
       }
 
-      /* ── Navegación ── */
+      function scrollByPages(deltaPages) {
+        if (!originalTotal) return;
+        const step = perPage();
+        const iw = itemWidth();
+        const lw = getLoopWidth();
+        let rawIdx = Math.round(track.scrollLeft / iw);
+        let nextRaw = rawIdx + deltaPages * step;
+        if (nextRaw < 0 && lw > 0) {
+          normalizeLock = true;
+          track.scrollLeft += lw;
+          normalizeLock = false;
+          rawIdx = Math.round(track.scrollLeft / iw);
+          nextRaw = rawIdx + deltaPages * step;
+        }
+        track.scrollTo({ left: nextRaw * iw, behavior: 'smooth' });
+      }
+
       btnPrev.addEventListener('click', () => {
         stopAuto();
-        scrollToIndex(current - perPage());
+        scrollByPages(-1);
         startAuto();
       });
       btnNext.addEventListener('click', () => {
         stopAuto();
-        scrollToIndex(current + perPage());
+        scrollByPages(1);
         startAuto();
       });
 
-      // Teclado: ← →
-      document.addEventListener('keydown', e => {
-        if (e.key === 'ArrowLeft')  { stopAuto(); scrollToIndex(current - perPage()); startAuto(); }
-        if (e.key === 'ArrowRight') { stopAuto(); scrollToIndex(current + perPage()); startAuto(); }
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') {
+          stopAuto();
+          scrollByPages(-1);
+          startAuto();
+        }
+        if (e.key === 'ArrowRight') {
+          stopAuto();
+          scrollByPages(1);
+          startAuto();
+        }
       });
 
-      // Sincronizar al scroll manual / touch
       track.addEventListener('scroll', () => {
-        current = Math.round(track.scrollLeft / itemWidth());
+        if (!normalizeLock) normalizeInfiniteScroll();
+        syncCurrentFromScroll();
         syncDots();
       }, { passive: true });
 
-      /* ── Auto-avance cada 3.5 s ── */
       function advance() {
-        const next = current + perPage() < total ? current + perPage() : 0;
-        scrollToIndex(next);
+        scrollByPages(1);
       }
+
       function startAuto() {
-        if (autoTimer) return;
-        autoTimer = setInterval(advance, 3500);
+        if (autoTimer || !originalTotal) return;
+        autoTimer = setInterval(advance, AUTO_ADVANCE_MS);
       }
       function stopAuto() {
         clearInterval(autoTimer);
@@ -339,11 +404,14 @@ $temas[] = [
 
       track.addEventListener('mouseenter', stopAuto);
       track.addEventListener('mouseleave', startAuto);
-      track.addEventListener('touchstart',  stopAuto, { passive: true });
-      track.addEventListener('touchend',    () => setTimeout(startAuto, 2000), { passive: true });
+      track.addEventListener('touchstart', stopAuto, { passive: true });
+      track.addEventListener('touchend', () => setTimeout(startAuto, 2000), { passive: true });
 
-      // Reconstruir dots al cambiar tamaño de ventana
-      window.addEventListener('resize', () => { buildDots(); });
+      window.addEventListener('resize', () => {
+        const saved = current;
+        buildDots();
+        scrollToIndex(saved, true);
+      });
 
       buildDots();
       startAuto();
