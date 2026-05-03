@@ -39,7 +39,6 @@ const puntsFinalsEl    = document.getElementById('punts-finals');
 const btnTornar        = document.getElementById('btn-tornar');
 const btnSortirPartida = document.getElementById('btn-sortir-partida');
 const btnFiSortir      = document.getElementById('btn-fi-sortir');
-const btnFiRanking     = document.getElementById('btn-fi-ranking');
 const modalExitEl      = document.getElementById('modal-exit-confirm');
 const modalFeedbackEl  = document.getElementById('modal-feedback');
 const exitConfirmBodyEl = document.getElementById('modal-exit-confirm-body');
@@ -580,18 +579,6 @@ btnFiSortir?.addEventListener('click', () => {
     } else {
         finalizeExitToSelector();
     }
-});
-
-/** After end screen: optional rating, then open ranking (logged-in only). Guests follow the link normally. */
-btnFiRanking?.addEventListener('click', (ev) => {
-    if (!canSendFeedback) return;
-    const url = btnFiRanking.getAttribute('href');
-    if (!url) return;
-    ev.preventDefault();
-    scheduleFinalizeOnFeedbackClose(() => {
-        window.location.assign(url);
-    });
-    openFeedbackModal();
 });
 
 /* ── Jugar otra vez ─────────────────────────────────────────── */

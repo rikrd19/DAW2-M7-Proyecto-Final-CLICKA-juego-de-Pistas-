@@ -108,6 +108,37 @@ h1, h2, h3, h4, h5, h6, .navbar-brand {
   box-shadow: 0 4px 16px var(--clika-shadow) !important;
 }
 
+/* Comunidad dropdown items — match nav-pill palette for cohesive UX */
+.navbar-clika.navbar-expand-lg .dropdown-menu {
+  border-radius: 12px !important;
+  border: 1px solid var(--clika-border) !important;
+  background: var(--clika-card-bg) !important;
+  padding: 0.35rem !important;
+  margin-top: 0.35rem !important;
+  box-shadow: 0 4px 18px var(--clika-shadow-dark) !important;
+}
+
+.navbar-clika.navbar-expand-lg .dropdown-menu .dropdown-item {
+  color: var(--clika-primary) !important;
+  font-weight: 600 !important;
+  font-size: 0.9rem !important;
+  letter-spacing: 0.02em !important;
+  border-radius: 9px !important;
+  padding: 0.45rem 0.85rem !important;
+}
+
+.navbar-clika.navbar-expand-lg .dropdown-menu .dropdown-item:hover,
+.navbar-clika.navbar-expand-lg .dropdown-menu .dropdown-item:focus {
+  color: var(--clika-primary-hover) !important;
+  background: var(--clika-surface) !important;
+}
+
+.navbar-clika.navbar-expand-lg .dropdown-menu .dropdown-item.active,
+.navbar-clika.navbar-expand-lg .dropdown-menu .dropdown-item:active {
+  color: #fff !important;
+  background: linear-gradient(135deg, var(--clika-primary), var(--clika-accent)) !important;
+}
+
 /* DiceBear gallery trigger: no Bootstrap .btn* classes (they override background). */
 button.avatar-dicebear-more {
   width: 50px;

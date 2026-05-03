@@ -69,26 +69,20 @@ $temas[] = [
     <!-- Hero -->
     <section class="hero-section">
       <div class="container">
-        <p class="hero-badge">Juego de Pistas</p>
         <h1 class="mb-3">
           Bienvenido a&nbsp;<span
             style="background:linear-gradient(135deg,#5C7CFA,#FF4D8D);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">CLICKA</span>
         </h1>
-        <p class="lead mb-4">
-          El juego de pistas que pondrá a prueba tus conocimientos.<br>
-          Elige una temática y empieza a jugar.
+        <p class="lead mb-4 mb-lg-5">
+          El juego de pistas que pondrá a prueba tus conocimientos.
         </p>
-        <a href="pages/ranking.php" class="btn btn-outline-accent px-4 py-2">
-          Ver ranking
-        </a>
       </div>
     </section>
 
     <!-- Carrusel de temáticas -->
     <section class="temas-section container">
       <div class="text-center mb-4">
-        <p class="section-eyebrow">Elige tu categoría</p>
-        <h2 class="h4 fw-bold" style="color:var(--clika-text)">¿De qué quieres demostrar que sabes?</h2>
+        <h2 class="h4 fw-bold mb-0" style="color:var(--clika-text)">Elige una categoría y demuestra lo que sabes</h2>
       </div>
 
       <div class="carrusel-outer">
