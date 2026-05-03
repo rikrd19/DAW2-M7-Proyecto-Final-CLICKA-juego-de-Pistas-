@@ -246,7 +246,7 @@ button.avatar-dicebear-more:focus-visible {
 
 /* ── Hero ────────────────────────────────────────────────── */
 .hero-section {
-  padding: 5.5rem 0 3.5rem;
+  padding: 1.75rem 0 1rem;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -291,7 +291,7 @@ button.avatar-dicebear-more:focus-visible {
 }
 
 .hero-section h1 {
-  font-size: clamp(2rem, 5.5vw, 3.4rem);
+  font-size: clamp(1.65rem, 4.5vw, 2.85rem);
   font-weight: 800;
   color: var(--clika-text);
   letter-spacing: -.02em;
@@ -368,7 +368,10 @@ button.avatar-dicebear-more:focus-visible {
 .tema-icon { font-size: 2.1rem; line-height: 1; }
 
 /* ── Sección de temáticas ────────────────────────────────── */
-.temas-section { padding-bottom: 4.5rem; }
+.temas-section {
+  padding-top: 0.25rem;
+  padding-bottom: 2rem;
+}
 
 .section-eyebrow {
   font-size: .75rem;
@@ -911,7 +914,7 @@ footer a:hover { text-decoration: underline; }
   .tema-card      { border-radius: 13px; }
   .tema-icon      { font-size: 1.8rem; }
   .tema-icon-wrap { width: 56px; height: 56px; border-radius: 14px; }
-  .hero-section   { padding: 3.5rem 0 2rem; }
+  .hero-section   { padding: 1.25rem 0 0.75rem; }
   .fi-partida-card { padding: 1.75rem 1.25rem; }
   .punts-finals-num { font-size: 3rem; }
 }
@@ -929,7 +932,7 @@ footer a:hover { text-decoration: underline; }
 .carrusel-outer::after {
   content: '';
   position: absolute;
-  top: 0; bottom: 1.5rem;
+  top: 0; bottom: 0.75rem;
   width: 60px;
   z-index: 2;
   pointer-events: none;
@@ -959,7 +962,7 @@ footer a:hover { text-decoration: underline; }
   scroll-behavior: smooth;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  padding: 0.75rem 0.5rem 1.5rem;
+  padding: 0.5rem 0.5rem 0.85rem;
   flex: 1;
 }
 .carrusel-track::-webkit-scrollbar { display: none; }
@@ -1008,8 +1011,8 @@ footer a:hover { text-decoration: underline; }
   justify-content: center;
   align-items: center;
   gap: 0.4rem;
-  margin-top: 0.1rem;
-  padding-bottom: 0.5rem;
+  margin-top: 0;
+  padding-bottom: 0.25rem;
 }
 .carrusel-dot {
   height: 8px;
