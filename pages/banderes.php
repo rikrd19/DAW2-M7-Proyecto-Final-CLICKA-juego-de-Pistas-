@@ -72,6 +72,7 @@ $pageTitle = 'Banderas del Mundo';
             <div class="carta-front" style="padding:.7rem .65rem;">
               <span class="carta-num-badge">Bandera</span>
               <img id="pista-1-img" src="" alt="Bandera del país a adivinar" class="carta-flag-img">
+              <span class="carta-punts-chip carta-punts-chip--front" title="Máximo si aciertas solo con la bandera">4 puntos</span>
             </div>
           </div>
         </div>
@@ -86,6 +87,7 @@ $pageTitle = 'Banderas del Mundo';
             <div class="carta-front">
               <span class="carta-num-badge">Región</span>
               <p id="pista-2-text" class="carta-text"></p>
+              <span class="carta-punts-chip carta-punts-chip--front" title="Máximo si aciertas con bandera y región">3 puntos</span>
             </div>
           </div>
         </div>
@@ -100,6 +102,7 @@ $pageTitle = 'Banderas del Mundo';
             <div class="carta-front">
               <span class="carta-num-badge">Capital</span>
               <p id="pista-3-text" class="carta-text"></p>
+              <span class="carta-punts-chip carta-punts-chip--front" title="Máximo si aciertas hasta la capital">2 puntos</span>
             </div>
           </div>
         </div>
@@ -114,6 +117,7 @@ $pageTitle = 'Banderas del Mundo';
             <div class="carta-front">
               <span class="carta-num-badge">Población</span>
               <p id="pista-extra-text" class="carta-text"></p>
+              <span class="carta-punts-chip carta-punts-chip--front" title="Máximo si aciertas con todas las pistas">1 punto</span>
             </div>
           </div>
         </div>

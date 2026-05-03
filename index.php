@@ -116,16 +116,12 @@ $temas[] = [
                     <?php echo htmlspecialchars($tema['descripcion']); ?>
                   </p>
 
-                  <button
-                    type="button"
-                    class="btn btn-primary w-100 btn-jugar-modal"
-                    data-dest="<?php echo htmlspecialchars($tema['href']); ?>"
-                    data-banderas="<?php echo $esBanderas ? '1' : '0'; ?>"
-                    data-bs-toggle="modal"
-                    data-bs-target="#modal-instruccions"
+                  <a
+                    href="<?php echo htmlspecialchars($tema['href']); ?>"
+                    class="btn btn-primary w-100 btn-play-tema text-decoration-none"
                     aria-label="Jugar temática <?php echo htmlspecialchars($tema['titulo']); ?>">
                     Jugar
-                  </button>
+                  </a>
                 </div>
               </article>
             </div>
@@ -145,97 +141,8 @@ $temas[] = [
 
   </main>
 
-  <!-- ══ Modal instrucciones — misma animación .carta del juego ══ -->
-  <div class="modal fade" id="modal-instruccions" tabindex="-1" aria-labelledby="modal-instruccions-label" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" style="max-width:440px">
-      <div class="modal-content">
-
-        <div class="carta carta-xl" id="modal-carta">
-          <div class="carta-inner">
-
-            <div class="carta-back">
-              <span class="carta-back-label">Instrucciones</span>
-              <span class="carta-back-icon" aria-hidden="true">&#127918;</span>
-            </div>
-
-            <div class="carta-front">
-              <div class="carta-front-header">
-                <h5 class="carta-front-title" id="modal-instruccions-label">
-                  &#127918; ¿Cómo se juega?
-                </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-              </div>
-
-              <div class="carta-front-body">
-                <ol class="ps-3 mb-3" style="line-height:1.72;font-size:.88rem">
-                  <li>Se presentan <strong>5 preguntas</strong> sobre la temática elegida.</li>
-                  <li id="instruccio-pistes">Cada pregunta muestra <strong>hasta 4 pistas</strong> que puedes ir revelando una a una.</li>
-                  <li>Escribe tu respuesta y pulsa <strong>Comprobar</strong> (o Enter).</li>
-                  <li>Cuantas menos pistas uses, <strong>más puntos</strong> consigues.</li>
-                </ol>
-
-                <p class="fw-semibold mb-2" style="font-size:.85rem">&#9733; Puntuación por pregunta</p>
-                <table class="modal-scoring-table">
-                  <thead>
-                    <tr><th>Pistas usadas</th><th style="text-align:right">Puntos</th></tr>
-                  </thead>
-                  <tbody>
-                    <tr><td id="pista-label-1">1 pista</td>  <td style="text-align:right;font-weight:700;color:#389e0d">4 pts</td></tr>
-                    <tr><td id="pista-label-2">2 pistas</td> <td style="text-align:right;font-weight:700;color:var(--clika-primary)">3 pts</td></tr>
-                    <tr><td id="pista-label-3">3 pistas</td> <td style="text-align:right;font-weight:700;color:#d48806">2 pts</td></tr>
-                    <tr><td id="pista-label-4">4 pistas</td> <td style="text-align:right;font-weight:700;color:var(--clika-muted)">1 pt</td></tr>
-                    <tr><td>Sin acertar</td>                 <td style="text-align:right;font-weight:700;color:#cf1322">0 pts</td></tr>
-                  </tbody>
-                </table>
-
-                <div style="background:var(--clika-surface);border:1px solid var(--clika-border);border-radius:10px;padding:.5rem .8rem;font-size:.78rem">
-                  &#127942; Máximo <strong>20 puntos</strong> por partida &nbsp;·&nbsp;
-                  Solo <strong>usuarios registrados</strong> aparecen en el ranking.
-                </div>
-              </div>
-
-              <div class="carta-front-footer">
-                <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
-                <a id="btn-modal-jugar" href="#" class="btn btn-primary px-4">&#9654; ¡Empezar!</a>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
   <script>
     (function () {
-      /* ── Modal flip ── */
-      const modalEl    = document.getElementById('modal-instruccions');
-      const modalCarta = document.getElementById('modal-carta');
-
-      modalEl.addEventListener('shown.bs.modal', () => {
-        setTimeout(() => modalCarta.classList.add('revelada'), 60);
-      });
-      modalEl.addEventListener('hide.bs.modal', () => {
-        modalCarta.classList.remove('revelada');
-      });
-
-      document.querySelectorAll('.btn-jugar-modal').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const esBanderas = btn.dataset.banderas === '1';
-          document.getElementById('btn-modal-jugar').href = btn.dataset.dest;
-
-          document.getElementById('instruccio-pistes').innerHTML = esBanderas
-            ? 'Cada pregunta muestra una <strong>bandera</strong> y hasta 3 pistas más (región, capital, población).'
-            : 'Cada pregunta muestra <strong>hasta 4 pistas</strong> que puedes ir revelando una a una.';
-
-          document.getElementById('pista-label-1').textContent = esBanderas ? 'Solo la bandera' : '1 pista';
-          document.getElementById('pista-label-2').textContent = esBanderas ? '+ Región'        : '2 pistas';
-          document.getElementById('pista-label-3').textContent = esBanderas ? '+ Capital'       : '3 pistas';
-          document.getElementById('pista-label-4').textContent = esBanderas ? '+ Población'     : '4 pistas';
-        });
-      });
-
       /* ── Carrusel (infinite: duplicate slide strip + instant scroll reposition) ── */
       const track   = document.getElementById('carrusel-track');
       const btnPrev = document.getElementById('carrusel-prev');
@@ -250,20 +157,19 @@ $temas[] = [
 
       const firstCard = originalSlides[0];
 
-      // Delegation so cloned slides open the same modal flow as originals
       track.addEventListener('click', (e) => {
         const card = e.target.closest('.tema-card--clickable');
         if (!card || !track.contains(card)) return;
-        if (e.target.closest('button')) return;
-        card.querySelector('.btn-jugar-modal')?.click();
+        if (e.target.closest('a')) return;
+        card.querySelector('a.btn-play-tema')?.click();
       });
       track.addEventListener('keydown', (e) => {
         const card = e.target.closest('.tema-card--clickable');
         if (!card || !track.contains(card)) return;
         if (e.key !== 'Enter' && e.key !== ' ') return;
         e.preventDefault();
-        if (e.target.closest('button')) return;
-        card.querySelector('.btn-jugar-modal')?.click();
+        if (e.target.closest('a')) return;
+        card.querySelector('a.btn-play-tema')?.click();
       });
 
       let current = 0;
