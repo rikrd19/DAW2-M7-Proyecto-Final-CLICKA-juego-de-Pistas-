@@ -979,8 +979,16 @@ a.ranking-filter-pill.active:focus-visible {
   background: var(--clika-card-bg);
   border: 1.5px solid var(--clika-border);
   border-radius: 18px;
-  overflow: hidden;
+  overflow: auto;
   box-shadow: 0 4px 24px var(--clika-shadow-dark);
+  max-height: min(52vh, 26rem);
+}
+
+.ranking-table-container thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  box-shadow: 0 1px 0 var(--clika-border);
 }
 
 .ranking-th {
@@ -991,7 +999,7 @@ a.ranking-filter-pill.active:focus-visible {
   letter-spacing: .1em;
   text-transform: uppercase;
   border-bottom: 1.5px solid var(--clika-border) !important;
-  padding: .85rem 1rem;
+  padding: .65rem .85rem;
 }
 
 .ranking-row {
@@ -1003,7 +1011,7 @@ a.ranking-filter-pill.active:focus-visible {
 }
 
 .ranking-row td {
-  padding: .85rem 1rem;
+  padding: .65rem .85rem;
   border-bottom: 1px solid var(--clika-border);
   vertical-align: middle;
 }

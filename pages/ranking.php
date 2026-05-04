@@ -34,20 +34,21 @@ $rankingPageHref  = BASE_URL . '/pages/ranking.php';
 
   <?php include '../includes/menu.php'; ?>
 
-  <main class="container py-5">
+  <main class="container py-4 ranking-page-main">
 
     <!-- Header -->
-    <div class="text-center mb-4">
+    <div class="text-center mb-2 mb-md-3">
       <p class="section-eyebrow" id="ranking-eyebrow">Clasificación global</p>
-      <h1 class="h3 fw-bold" style="color:var(--clika-text)">
+      <h1 class="h3 fw-bold mb-2" style="color:var(--clika-text)">
         <i class="bi bi-trophy-fill me-2" style="color:var(--clika-primary)"></i>Ranking
       </h1>
-      <p class="text-muted mb-0" id="ranking-lead">
-        Ranking exclusivo para usuarios registrados (mejor puntuación por jugador).
+      <p class="text-muted mb-0 small" id="ranking-lead">
+        Solo usuarios registrados.
       </p>
     </div>
 
-    <nav class="ranking-filters mb-4" id="ranking-filters" aria-label="Filtrar ranking por temática">
+    <?php if ($rankingTemaParam !== ''): ?>
+    <nav class="ranking-filters mb-3" id="ranking-filters" aria-label="Filtrar ranking por categoría">
       <a
         class="ranking-filter-pill<?php echo $rankingTemaParam === '' ? ' active' : ''; ?>"
         href="<?php echo htmlspecialchars($rankingPageHref, ENT_QUOTES, 'UTF-8'); ?>"
@@ -71,23 +72,24 @@ $rankingPageHref  = BASE_URL . '/pages/ranking.php';
         href="<?php echo htmlspecialchars($hrefBand, ENT_QUOTES, 'UTF-8'); ?>"
         data-tema-filter="Banderas">Banderas del Mundo</a>
     </nav>
+    <?php endif; ?>
 
     <?php if (!is_logged_in()): ?>
-      <div class="alert alert-info d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-2 mb-4" role="alert">
+      <div class="alert alert-info d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-2 mb-3" role="alert">
         <span>¿Jugaste como invitado? Regístrate para guardar tu progreso y aparecer en el ranking.</span>
         <a href="<?php echo BASE_URL; ?>/pages/register.php" class="btn btn-sm btn-primary">Crear cuenta</a>
       </div>
     <?php endif; ?>
 
     <!-- Loading spinner -->
-    <div id="ranking-loading" class="text-center py-5">
+    <div id="ranking-loading" class="text-center py-4">
       <div class="spinner-border" style="color:var(--clika-primary)" role="status">
         <span class="visually-hidden">Cargando…</span>
       </div>
     </div>
 
     <!-- Empty state -->
-    <div id="ranking-empty" class="text-center py-5" hidden>
+    <div id="ranking-empty" class="text-center py-4" hidden>
       <div class="tema-icon-wrap mx-auto mb-4">
         <span class="tema-icon" aria-hidden="true">&#127942;</span>
       </div>
@@ -104,7 +106,9 @@ $rankingPageHref  = BASE_URL . '/pages/ranking.php';
             <tr>
               <th class="ranking-th" style="width:3.5rem">#</th>
               <th class="ranking-th">Jugador</th>
-              <th class="ranking-th d-none d-sm-table-cell">Temática</th>
+              <?php if ($rankingTemaParam !== ''): ?>
+              <th class="ranking-th ranking-th-tema d-none d-sm-table-cell">Categoría</th>
+              <?php endif; ?>
               <th class="ranking-th text-end">Puntos</th>
             </tr>
           </thead>
@@ -113,10 +117,6 @@ $rankingPageHref  = BASE_URL . '/pages/ranking.php';
           </tbody>
         </table>
       </div>
-
-      <p class="text-muted small text-center mt-3" id="ranking-footnote">
-        Mostrando el ranking de usuarios registrados por mejor puntuación.
-      </p>
     </div>
 
   </main>
