@@ -118,6 +118,22 @@ h1, h2, h3, h4, h5, h6, .navbar-brand {
   box-shadow: 0 4px 18px var(--clika-shadow-dark) !important;
 }
 
+/* Desktop: dropdown panel same width as "Comunidad" toggle (better alignment) */
+@media (min-width: 992px) {
+  .navbar-clika.navbar-expand-lg .navbar-nav > .nav-item.dropdown {
+    width: max-content;
+  }
+
+  .navbar-clika.navbar-expand-lg .navbar-nav > .nav-item.dropdown > .dropdown-menu {
+    min-width: 100%;
+    width: 100%;
+  }
+
+  .navbar-clika.navbar-expand-lg .navbar-nav > .nav-item.dropdown > .dropdown-menu .dropdown-item {
+    text-align: center;
+  }
+}
+
 .navbar-clika.navbar-expand-lg .dropdown-menu .dropdown-item {
   color: var(--clika-primary) !important;
   font-weight: 600 !important;
