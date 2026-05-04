@@ -249,7 +249,7 @@ if ($temaPreseleccionat !== null) {
 
       <!-- Input de resposta + botón Comprobar -->
       <div id="resposta-area" class="mb-3">
-        <div class="input-group input-group-lg">
+        <div class="input-group resposta-input-group">
           <input
             type="text"
             id="resposta-input"

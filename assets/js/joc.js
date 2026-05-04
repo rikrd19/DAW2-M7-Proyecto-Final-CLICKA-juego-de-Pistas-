@@ -183,7 +183,7 @@ async function carregarPregunta(tema_id) {
     resetCartes();
     setTimeout(() => revelarCarta(pista1El), 0);
 
-    respostaInput.focus();
+    focusNoScroll(respostaInput);
 }
 
 /* ── Ver siguiente pista ────────────────────────────────────── */
@@ -204,7 +204,7 @@ btnSeguентPista.addEventListener('click', () => {
     if (pistesVistes >= maxPistes) {
         btnSeguентPista.hidden = true;
         // Let the player read the last clue and type before Comprobar / Enter (no auto-submit).
-        respostaInput.focus();
+        focusNoScroll(respostaInput);
     }
 });
 
@@ -219,7 +219,7 @@ async function comprovarResposta() {
 
     const resposta = respostaInput.value.trim();
     if (resposta === '' && pistesVistes < maxPistes) {
-        respostaInput.focus();
+        focusNoScroll(respostaInput);
         return;
     }
 
@@ -290,6 +290,7 @@ async function submitAnswerValidation(answerTrimmed) {
             } else {
                 mostrarFeedback('error', 'Incorrecto. Inténtalo de nuevo o revela otra carta.');
                 btnComprovar.disabled = false;
+                focusNoScroll(respostaInput);
                 respostaInput.select();
             }
         }
@@ -304,6 +305,16 @@ function mostrarFeedback(tipo, texto) {
     feedbackEl.textContent = texto;
     feedbackEl.className   = `feedback-box feedback-${tipo}`;
     feedbackEl.hidden      = false;
+}
+
+/** Keeps keyboard focus without scrolling the page (avoids jump when feedback/result appears). */
+function focusNoScroll(el) {
+    if (!el || typeof el.focus !== 'function') return;
+    try {
+        el.focus({ preventScroll: true });
+    } catch (_) {
+        el.focus();
+    }
 }
 
 function escapeHtml(str) {
@@ -344,7 +355,7 @@ function mostrarResultat(correct, punts, respuestaCorrecta = null) {
         : 'Siguiente pregunta →';
 
     resultatEl.hidden = false;
-    btnSegurentPregunta.focus();
+    focusNoScroll(btnSegurentPregunta);
 }
 
 /* ── Enter advances same as "Siguiente pregunta" while result panel is open ── */
