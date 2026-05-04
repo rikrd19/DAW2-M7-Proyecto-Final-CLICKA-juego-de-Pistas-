@@ -439,6 +439,12 @@ async function acabarPartida() {
         mostrarFeedback('error', 'No se pudo guardar tu puntuación en el ranking. Verifica tu sesión e inténtalo de nuevo.');
         feedbackEl.hidden = false;
     }
+
+    window.setTimeout(() => {
+        if (typeof showPostGameFeedbackModal === 'function') {
+            showPostGameFeedbackModal('Banderas del Mundo', 'Banderas');
+        }
+    }, 500);
 }
 
 /* ── Jugar otra vez ─────────────────────────────────────────── */

@@ -78,7 +78,10 @@ $communityActive = in_array($currentPage, ['ranking.php', 'opiniones.php'], true
             </a>
           </li>
         <?php else: ?>
-          <li class="nav-item">
+          <li class="nav-item d-flex flex-wrap gap-2 align-items-center justify-content-end">
+            <a class="btn btn-outline-accent btn-sm px-3" href="<?php echo BASE_URL; ?>/pages/register.php">
+              Registrarse
+            </a>
             <a class="btn btn-accent btn-sm px-3" href="<?php echo BASE_URL; ?>/pages/login.php">
               Iniciar sesión
             </a>

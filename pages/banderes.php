@@ -191,9 +191,13 @@ $pageTitle = 'Banderas del Mundo';
 
   </main>
 
+  <?php include dirname(__DIR__) . '/includes/feedback_modal.php'; ?>
+
   <script>
     const USUARI_ID = <?php echo is_logged_in() ? (int) $_SESSION['usuari_id'] : 'null'; ?>;
+    const CAN_SEND_FEEDBACK = USUARI_ID !== null && USUARI_ID > 0;
   </script>
+  <script src="../assets/js/postgame_feedback.js?v=<?php echo (int) @filemtime(__DIR__ . '/../assets/js/postgame_feedback.js'); ?>"></script>
   <script src="../assets/js/banderes.js"></script>
 
   <?php include '../includes/foot.php'; ?>

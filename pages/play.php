@@ -148,14 +148,9 @@ if ($temaNomPreseleccionat !== '') {
         <span id="pregunta-num" class="fw-bold fs-5" style="color:var(--clika-primary)">
           Pregunta 1/5
         </span>
-        <div class="d-flex align-items-center gap-2 ms-auto">
-          <span class="badge punts-badge fs-6 px-3 py-2">
-            &#9733; <span id="punts-total">0</span> pts
-          </span>
-          <button type="button" id="btn-sortir-partida" class="btn btn-outline-secondary btn-sm">
-            Dejar de jugar
-          </button>
-        </div>
+        <span class="badge punts-badge fs-6 px-3 py-2">
+          &#9733; <span id="punts-total">0</span> pts
+        </span>
       </div>
 
       <!-- Pistas: 3D card deck -->
@@ -288,59 +283,7 @@ if ($temaNomPreseleccionat !== '') {
 
   </main>
 
-  <!-- Exit confirm -->
-  <div class="modal fade" id="modal-exit-confirm" tabindex="-1" aria-labelledby="modal-exit-confirm-label" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content border-0 shadow">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modal-exit-confirm-label">¿Salir?</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-        </div>
-        <div class="modal-body text-muted" id="modal-exit-confirm-body">
-          Si sales ahora perderás el progreso de esta partida.
-        </div>
-        <div class="modal-footer flex-wrap gap-2">
-          <button type="button" class="btn btn-primary" id="btn-exit-continue" data-bs-dismiss="modal">Continuar jugando</button>
-          <button type="button" class="btn btn-outline-secondary" id="btn-exit-leave">Salir</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Optional rating -->
-  <div class="modal fade" id="modal-feedback" tabindex="-1" aria-labelledby="modal-feedback-label" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content border-0 shadow">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modal-feedback-label">¿Qué tal esta temática?</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-        </div>
-        <div class="modal-body">
-          <p class="small text-muted mb-3" id="modal-feedback-lead">
-            Un segundo: tu opinión ayuda a mejorar las pistas y el juego. Puedes cerrar o <strong>Omitir</strong> sin enviar nada.
-          </p>
-          <p id="feedback-login-notice" class="small text-muted mb-0" hidden>
-            Para enviar estrellas o comentarios necesitas una sesión.
-            <a href="<?php echo BASE_URL; ?>/pages/login.php">Iniciar sesión</a>
-          </p>
-          <div id="feedback-logged-fields">
-            <p class="small fw-semibold mb-1">Estrellas</p>
-            <div class="star-rating mb-3" id="star-rating" role="group" aria-label="Valoración de 1 a 5">
-              <?php for ($s = 1; $s <= 5; $s++): ?>
-              <button type="button" class="btn-star" data-value="<?php echo $s; ?>" aria-label="<?php echo $s; ?> de 5">&#9733;</button>
-              <?php endfor; ?>
-            </div>
-            <label for="feedback-comment" class="form-label small mb-1">Comentario (opcional)</label>
-            <textarea id="feedback-comment" class="form-control" rows="3" maxlength="2000" placeholder="¿Qué te ha gustado o qué cambiarías?"></textarea>
-          </div>
-        </div>
-        <div class="modal-footer flex-wrap gap-2">
-          <button type="button" class="btn btn-outline-secondary" id="btn-feedback-skip" data-bs-dismiss="modal">Omitir</button>
-          <button type="button" class="btn btn-primary" id="btn-feedback-send">Enviar</button>
-        </div>
-      </div>
-    </div>
-  </div>
+  <?php include dirname(__DIR__) . '/includes/feedback_modal.php'; ?>
 
   <script>
     const USUARI_ID            = <?php echo is_logged_in() ? (int) $_SESSION['usuari_id'] : 'null'; ?>;
@@ -348,6 +291,7 @@ if ($temaNomPreseleccionat !== '') {
     const TEMA_PRESELECCIONAT  = <?php echo $temaPreseleccionat !== null ? $temaPreseleccionat : 'null'; ?>;
     const TEMA_NOM_PRESELECCIONAT = <?php echo json_encode($temaNomPreseleccionat, JSON_UNESCAPED_UNICODE); ?>;
   </script>
+  <script src="../assets/js/postgame_feedback.js?v=<?php echo (int) @filemtime(__DIR__ . '/../assets/js/postgame_feedback.js'); ?>"></script>
   <script src="../assets/js/joc.js?v=<?php echo (int) @filemtime(__DIR__ . '/../assets/js/joc.js'); ?>"></script>
   <script>
     (function () {

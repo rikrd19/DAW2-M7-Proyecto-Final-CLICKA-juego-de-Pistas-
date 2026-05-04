@@ -37,20 +37,7 @@ const btnSegurentPregunta = document.getElementById('btn-seguent-pregunta');
 
 const puntsFinalsEl    = document.getElementById('punts-finals');
 const btnTornar        = document.getElementById('btn-tornar');
-const btnSortirPartida = document.getElementById('btn-sortir-partida');
 const btnFiSortir      = document.getElementById('btn-fi-sortir');
-const modalExitEl      = document.getElementById('modal-exit-confirm');
-const modalFeedbackEl  = document.getElementById('modal-feedback');
-const exitConfirmBodyEl = document.getElementById('modal-exit-confirm-body');
-const feedbackCommentEl = document.getElementById('feedback-comment');
-const starRatingEl     = document.getElementById('star-rating');
-const btnFeedbackSkip  = document.getElementById('btn-feedback-skip');
-const btnFeedbackSend  = document.getElementById('btn-feedback-send');
-const btnExitLeave     = document.getElementById('btn-exit-leave');
-
-// Declared in play.php before this file: CAN_SEND_FEEDBACK (logged-in only).
-const canSendFeedback =
-    typeof CAN_SEND_FEEDBACK !== 'undefined' && CAN_SEND_FEEDBACK === true;
 
 /* ── State ──────────────────────────────────────────────────── */
 let temaId          = null;
@@ -62,8 +49,6 @@ let maxPistes       = 3;   // 3 or 4 depending on pista_extra
 let puntsPartida    = 0;   // accumulated score for the round
 let respostaEnviada = false;
 let roundAnswers    = [];  // per-question analytics: clues_used + correctness
-let feedbackStars   = null; // 1-5 or null when opening rating modal
-let finalizeAfterFeedback = null; // runs once when #modal-feedback is hidden
 
 /* ── Card reveal helper ─────────────────────────────────────── */
 function revelarCarta(el) {
@@ -371,6 +356,13 @@ async function acabarPartida() {
         mostrarFeedback('error', 'No se pudo guardar tu puntuación en el ranking. Verifica tu sesión e inténtalo de nuevo.');
         feedbackEl.hidden = false;
     }
+
+    window.setTimeout(() => {
+        const tn = typeof temaNom === 'string' ? temaNom.trim() : '';
+        if (typeof showPostGameFeedbackModal === 'function') {
+            showPostGameFeedbackModal(tn || 'esta temática', tn || null);
+        }
+    }, 500);
 }
 
 /* ── Jugar otra vez ─────────────────────────────────────────── */
@@ -383,6 +375,12 @@ btnTornar.addEventListener('click', () => {
         temaSelector.hidden = false;
     }
 });
+
+if (btnFiSortir) {
+    btnFiSortir.addEventListener('click', () => {
+        window.location.assign('../index.php');
+    });
+}
 
 /* ── Auto-start when tema is preselected via URL ─────────── */
 if (typeof TEMA_PRESELECCIONAT !== 'undefined' && TEMA_PRESELECCIONAT !== null) {
