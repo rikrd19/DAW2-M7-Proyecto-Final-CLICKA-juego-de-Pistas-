@@ -411,6 +411,47 @@ button.avatar-dicebear-more:focus-visible {
 
 .tema-icon { font-size: 2.1rem; line-height: 1; }
 
+/* Active theme banner above clue cards (play round) */
+.tema-round-banner {
+  max-width: 28rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tema-round-name {
+  color: var(--clika-text);
+  font-family: var(--font-heading);
+  letter-spacing: 0.02em;
+}
+
+.tema-round-icon-wrap {
+  width: 108px;
+  height: 108px;
+  background: var(--clika-surface);
+  border: 1.5px solid var(--clika-border);
+  border-radius: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 22px var(--clika-shadow-dark);
+}
+
+.tema-round-icon {
+  font-size: 3.65rem;
+  line-height: 1;
+}
+
+@media (max-width: 575px) {
+  .tema-round-icon-wrap {
+    width: 92px;
+    height: 92px;
+    border-radius: 18px;
+  }
+  .tema-round-icon {
+    font-size: 3rem;
+  }
+}
+
 /* ── Sección de temáticas ────────────────────────────────── */
 .temas-section {
   padding-top: 0.25rem;

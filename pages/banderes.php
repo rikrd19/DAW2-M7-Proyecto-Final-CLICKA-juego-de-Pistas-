@@ -50,7 +50,7 @@ $pageTitle = 'Banderas del Mundo';
     <section id="game-area" hidden>
 
       <!-- Cabecera -->
-      <div class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom">
+      <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
         <span id="pregunta-num" class="fw-bold fs-5" style="color:var(--clika-primary)">
           Pregunta 1/5
         </span>

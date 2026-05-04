@@ -39,9 +39,14 @@ const puntsFinalsEl    = document.getElementById('punts-finals');
 const btnTornar        = document.getElementById('btn-tornar');
 const btnFiSortir      = document.getElementById('btn-fi-sortir');
 
+const temaRoundBanner  = document.getElementById('tema-round-banner');
+const temaRoundNameEl  = document.getElementById('tema-round-name');
+const temaRoundIconEl  = document.getElementById('tema-round-icon');
+
 /* ── State ──────────────────────────────────────────────────── */
 let temaId          = null;
 let temaNom         = '';
+let temaSlug        = '';
 let preguntaActual  = null;
 let numPregunta     = 0;
 let pistesVistes    = 1;   // clue counter: 1 = only pista1 revealed
@@ -79,6 +84,21 @@ function resetCartes() {
     });
 });
 
+function refreshTemaRoundBanner() {
+    if (!temaRoundBanner || !temaRoundNameEl || !temaRoundIconEl) return;
+    const nom = typeof temaNom === 'string' ? temaNom.trim() : '';
+    if (nom === '') {
+        temaRoundBanner.hidden = true;
+        return;
+    }
+    temaRoundNameEl.textContent = nom;
+    const slug = typeof temaSlug === 'string' ? temaSlug.trim() : '';
+    const map  = typeof TEMA_ICON_BY_SLUG === 'object' && TEMA_ICON_BY_SLUG !== null ? TEMA_ICON_BY_SLUG : {};
+    const ch   = slug && map[slug] ? map[slug] : '\u2753';
+    temaRoundIconEl.textContent = ch;
+    temaRoundBanner.hidden = false;
+}
+
 function iniciarPartida() {
     numPregunta  = 0;
     puntsPartida = 0;
@@ -86,6 +106,7 @@ function iniciarPartida() {
     temaSelector.hidden = true;
     gameArea.hidden     = false;
     fiPartida.hidden    = true;
+    refreshTemaRoundBanner();
     carregarPregunta(temaId);
 }
 
@@ -407,11 +428,15 @@ if (btnFiSortir) {
 
 /* ── Auto-start when tema is preselected via URL ─────────── */
 if (typeof TEMA_PRESELECCIONAT !== 'undefined' && TEMA_PRESELECCIONAT !== null) {
-    const preBtn = document.querySelector(`[data-tema-id="${TEMA_PRESELECCIONAT}"]`);
+    const preBtn = document.querySelector(`a.btn-play-tema[data-tema-id="${TEMA_PRESELECCIONAT}"]`);
     temaId = TEMA_PRESELECCIONAT;
     const fromBtn = preBtn && preBtn.dataset.temaNom ? String(preBtn.dataset.temaNom).trim() : '';
     const fromPhp =
         typeof TEMA_NOM_PRESELECCIONAT === 'string' ? TEMA_NOM_PRESELECCIONAT.trim() : '';
     temaNom = fromBtn || fromPhp;
+    const fromBtnSlug = preBtn && preBtn.dataset.temaSlug ? String(preBtn.dataset.temaSlug).trim() : '';
+    const fromPhpSlug =
+        typeof TEMA_SLUG_PRESELECCIONAT === 'string' ? TEMA_SLUG_PRESELECCIONAT.trim() : '';
+    temaSlug = fromBtnSlug || fromPhpSlug;
     iniciarPartida();
 }
