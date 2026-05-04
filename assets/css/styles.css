@@ -1056,6 +1056,21 @@ a.ranking-filter-pill.active:focus-visible {
   color: var(--clika-text);
 }
 
+.ranking-player {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.ranking-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--clika-border);
+  flex-shrink: 0;
+}
+
 .ranking-tema {
   display: inline-block;
   background: var(--clika-surface);

@@ -67,7 +67,11 @@ $communityActive = in_array($currentPage, ['ranking.php', 'opiniones.php'], true
               <img src="<?php echo $finalPhotoUrl; ?>" alt="Perfil" class="rounded-circle border border-primary"
                 style="width: 32px; height: 32px; object-fit: cover;">
               <span class="ms-2 fw-semibold text-primary d-none d-xl-inline">
-                <?php echo htmlspecialchars($_SESSION['username']); ?>
+                <?php
+                $navName = $_SESSION['nombre_usuario']
+                    ?? ($_SESSION['user_email'] ?? ($_SESSION['username'] ?? ''));
+                echo htmlspecialchars((string) $navName);
+                ?>
               </span>
             </a>
           </li>

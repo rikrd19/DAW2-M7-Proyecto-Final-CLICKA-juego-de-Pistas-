@@ -5,7 +5,7 @@
  *
  * GET  → returns ranking rows for registered users (one best score per user).
  *        Optional query: ?tema=<string> → same logic but only partidas with that tema label.
- *        Response: [ { id, usuario_id, nombre, puntos, tema, fecha }, … ]
+ *        Response: [ { id, usuario_id, nombre, foto, puntos, tema, fecha }, … ]
  *
  * POST → saves a completed round.
  *        Body: { "puntos": <int>, "tema": "<string>", "usuario_id": <int|null>, "nombre_temporal": "<string|null>" }
@@ -32,7 +32,8 @@ if ($method === 'GET') {
             $result = $db->query(
                 "SELECT p.id,
                         p.usuario_id,
-                        u.username AS nombre,
+                        u.nombre_usuario AS nombre,
+                        u.foto AS foto,
                         p.puntos,
                         p.tema,
                         p.fecha
@@ -51,7 +52,8 @@ if ($method === 'GET') {
             $stmt = $db->prepare(
                 'SELECT p.id,
                         p.usuario_id,
-                        u.username AS nombre,
+                        u.nombre_usuario AS nombre,
+                        u.foto AS foto,
                         p.puntos,
                         p.tema,
                         p.fecha
@@ -76,6 +78,7 @@ if ($method === 'GET') {
                 'id'         => (int) $row['id'],
                 'usuario_id' => $row['usuario_id'] !== null ? (int) $row['usuario_id'] : null,
                 'nombre'     => $row['nombre'],
+                'foto'       => $row['foto'] ?? 'default.png',
                 'puntos'     => (int) $row['puntos'],
                 'tema'       => $row['tema'],
                 'fecha'      => $row['fecha'],
@@ -127,10 +130,12 @@ if ($tema === '') {
 // globals.php (loaded via db.php) already called session_start().
 $sessionUserId = isset($_SESSION['usuari_id']) ? (int) $_SESSION['usuari_id'] : null;
 
-// Defensive fallback: if usuari_id is missing but username exists in session,
+// Defensive fallback: if usuari_id is missing but email exists in session,
 // resolve and restore usuari_id so scores are persisted for logged users.
-if ($sessionUserId === null && isset($_SESSION['username']) && is_string($_SESSION['username'])) {
-    $sessionUsername = strtolower(trim($_SESSION['username']));
+$legacyEmail = $_SESSION['user_email']
+    ?? ($_SESSION['username'] ?? null);
+if ($sessionUserId === null && is_string($legacyEmail) && $legacyEmail !== '') {
+    $sessionUsername = strtolower(trim($legacyEmail));
     if ($sessionUsername !== '') {
         try {
             $lookup = $db->prepare('SELECT id FROM usuarios WHERE LOWER(username) = :u LIMIT 1');

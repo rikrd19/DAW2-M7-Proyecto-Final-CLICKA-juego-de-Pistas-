@@ -122,6 +122,7 @@ $rankingPageHref  = BASE_URL . '/pages/ranking.php';
   </main>
 
   <script>
+    const CLICKA_BASE = <?php echo json_encode(BASE_URL, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT); ?>;
     const USUARI_ID = <?php echo is_logged_in() ? (int) $_SESSION['usuari_id'] : 'null'; ?>;
   </script>
   <script src="../assets/js/ranking.js"></script>

@@ -50,3 +50,28 @@ function check_admin(): void
         exit;
     }
 }
+
+/**
+ * Normalizes public display name (trim + lowercase). Stored value for uniqueness checks.
+ */
+function clicka_normalize_public_username(string $raw): string
+{
+    return strtolower(trim($raw));
+}
+
+/**
+ * Returns null if valid; otherwise a short error key: empty, length, chars.
+ */
+function clicka_validate_public_username_key(string $normalized): ?string
+{
+    if ($normalized === '') {
+        return 'empty';
+    }
+    if (strlen($normalized) < 3 || strlen($normalized) > 24) {
+        return 'length';
+    }
+    if (!preg_match('/^[a-z0-9_]+$/', $normalized)) {
+        return 'chars';
+    }
+    return null;
+}

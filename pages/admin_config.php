@@ -21,7 +21,11 @@ $pageTitle = 'Panel de Administración';
         <div class="row">
             <div class="col-12">
                 <h1 class="mb-4">Dashboard de Administración</h1>
-                <p class="lead">Bienvenido, <?php echo htmlspecialchars($_SESSION['username']); ?>. Aquí podrás
+                <p class="lead">Bienvenido, <?php
+                $admHello = $_SESSION['nombre_usuario']
+                    ?? ($_SESSION['user_email'] ?? ($_SESSION['username'] ?? ''));
+                echo htmlspecialchars((string) $admHello);
+                ?>. Aquí podrás
                     gestionar los temas y las preguntas.</p>
 
                 <div class="row g-4 mt-2">

@@ -60,7 +60,7 @@ if ($targetId < 1) {
 }
 
 try {
-    $stmt = $db->prepare('SELECT username FROM usuarios WHERE id = :id');
+    $stmt = $db->prepare('SELECT id FROM usuarios WHERE id = :id');
     $stmt->bindValue(':id', $targetId, SQLITE3_INTEGER);
     $result = $stmt->execute();
     if (!$result instanceof SQLite3Result) {
@@ -80,7 +80,7 @@ try {
     $items = [];
 
     foreach (dicebear_gallery_styles() as $style) {
-        $seed = $user['username'] . '|' . $style . '|' . $roll;
+        $seed = (string) ((int) ($user['id'] ?? 0)) . '|' . $style . '|' . $roll;
         $items[] = [
             'style' => $style,
             'url' => dicebear_avatar_url($style, $seed, ['cb' => $bust]),

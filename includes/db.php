@@ -15,6 +15,8 @@ try {
 
     // Enforce foreign keys locally for this connection
     $db->exec('PRAGMA foreign_keys = ON;');
+
+    clicka_migrate_usuarios_public_name($db);
 } catch (Throwable $e) {
     // In "old school" PHP, we might just die() or log, 
     // but for an API we should return a 500 JSON if possible.
@@ -26,4 +28,59 @@ try {
         exit;
     }
     die("Error de conexión a la base de datos.");
+}
+
+/**
+ * One-time migration: add unique public nombre_usuario, wipe user-related rows, seed admin.
+ * English comments: keeps legacy `username` column as login email.
+ */
+function clicka_migrate_usuarios_public_name(SQLite3 $db): void
+{
+    $hasColumn = false;
+    $info = $db->query('PRAGMA table_info(usuarios)');
+    while ($row = $info->fetchArray(SQLITE3_ASSOC)) {
+        if (($row['name'] ?? '') === 'nombre_usuario') {
+            $hasColumn = true;
+            break;
+        }
+    }
+    if ($hasColumn) {
+        return;
+    }
+
+    $db->exec('BEGIN IMMEDIATE');
+    try {
+        $db->exec('DELETE FROM partidas');
+        $db->exec('DELETE FROM app_feedback');
+        $db->exec('DELETE FROM usuarios');
+
+        $db->exec('ALTER TABLE usuarios ADD COLUMN nombre_usuario TEXT NOT NULL');
+        $db->exec('CREATE UNIQUE INDEX IF NOT EXISTS idx_usuarios_nombre_usuario ON usuarios (nombre_usuario)');
+
+        // Initial admin after one-time wipe (rotate password in profile / production config).
+        $seedEmail = 'admin@clicka.local';
+        $seedName = 'admin';
+        $seedPassPlain = 'ClickaAdmin2026!';
+        $hash = password_hash($seedPassPlain, PASSWORD_DEFAULT);
+        $ins = $db->prepare(
+            'INSERT INTO usuarios (username, password_hash, rol, foto, nombre_usuario, puntos)
+             VALUES (:em, :pw, :rol, :foto, :nom, 0)'
+        );
+        $ins->bindValue(':em', $seedEmail, SQLITE3_TEXT);
+        $ins->bindValue(':pw', $hash, SQLITE3_TEXT);
+        $ins->bindValue(':rol', 'admin', SQLITE3_TEXT);
+        $ins->bindValue(':foto', 'default.png', SQLITE3_TEXT);
+        $ins->bindValue(':nom', $seedName, SQLITE3_TEXT);
+        $ins->execute();
+
+        $db->exec('COMMIT');
+    } catch (Throwable $e) {
+        try {
+            $db->exec('ROLLBACK');
+        } catch (Throwable) {
+            // Ignore when nothing to roll back.
+        }
+        error_log('[clicka_migrate_usuarios_public_name] ' . $e->getMessage());
+        throw $e;
+    }
 }

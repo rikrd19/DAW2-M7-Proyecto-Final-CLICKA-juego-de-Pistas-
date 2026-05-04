@@ -67,6 +67,19 @@ function getTemaFilterFromUrl() {
     return raw && raw.trim() !== '' ? raw.trim() : '';
 }
 
+function rankingPhotoUrl(foto) {
+    const base = typeof CLICKA_BASE === 'string' ? CLICKA_BASE : '';
+    const fallback = `${base}/assets/images/social_media/profile.svg`;
+    if (!foto || foto === 'default.png') {
+        return fallback;
+    }
+    const s = String(foto);
+    if (s.startsWith('http')) {
+        return s;
+    }
+    return `${base}/storage/uploads/${s}`;
+}
+
 /* ── Render rows ──────────────────────────────────────────── */
 function renderRanking(rows, temaFilter) {
     const currentUserId = typeof USUARI_ID !== 'undefined' ? USUARI_ID : null;
@@ -84,11 +97,20 @@ function renderRanking(rows, temaFilter) {
             </td>`
             : '';
 
+        const photoSrc = rankingPhotoUrl(row.foto);
+        const fallbackSrc = rankingPhotoUrl('default.png');
+
         return `<tr class="${rowClass}">
             <td class="ranking-pos-cell">${positionCell(pos)}</td>
             <td>
-                <span class="ranking-name">${escapeHtml(row.nombre)}</span>${youBadge}
-                <br><small class="text-muted">${formatDate(row.fecha)}</small>
+                <div class="ranking-player">
+                    <img class="ranking-avatar" src="${escapeHtml(photoSrc)}" alt="" width="40" height="40" loading="lazy"
+                        onerror="this.onerror=null;this.src='${escapeHtml(fallbackSrc)}'">
+                    <div>
+                        <span class="ranking-name">${escapeHtml(row.nombre)}</span>${youBadge}
+                        <br><small class="text-muted">${formatDate(row.fecha)}</small>
+                    </div>
+                </div>
             </td>
             ${temaTd}
             <td class="text-end">

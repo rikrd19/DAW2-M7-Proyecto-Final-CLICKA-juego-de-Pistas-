@@ -35,7 +35,8 @@ try {
         ksort($byTema, SORT_NATURAL | SORT_FLAG_CASE);
 
         $res2 = $db->query(
-            "SELECT f.id, f.tema, f.estrellas, f.comentario, f.created_at, u.username
+            "SELECT f.id, f.tema, f.estrellas, f.comentario, f.created_at,
+                    u.username AS user_email, u.nombre_usuario AS nombre_usuario
              FROM app_feedback f
              LEFT JOIN usuarios u ON u.id = f.usuario_id
              ORDER BY f.id DESC
@@ -149,7 +150,19 @@ try {
               <tr>
                 <td><?php echo (int) $r['id']; ?></td>
                 <td class="text-nowrap small"><?php echo htmlspecialchars($fechaSoloDia); ?></td>
-                <td><?php echo htmlspecialchars((string) ($r['username'] ?? '—')); ?></td>
+                <td class="small">
+                  <?php
+                  $nom = (string) ($r['nombre_usuario'] ?? '');
+                  $em  = (string) ($r['user_email'] ?? '');
+                  if ($nom !== '') {
+                      echo '<span class="fw-semibold">' . htmlspecialchars($nom) . '</span>';
+                      if ($em !== '') {
+                          echo '<br>';
+                      }
+                  }
+                  echo $em !== '' ? '<span class="text-muted">' . htmlspecialchars($em) . '</span>' : '—';
+                  ?>
+                </td>
                 <td><?php echo htmlspecialchars((string) ($r['tema'] ?? '')); ?></td>
                 <td><?php echo $r['estrellas'] !== null && $r['estrellas'] !== '' ? (int) $r['estrellas'] : '—'; ?></td>
                 <td class="small"><?php echo $r['comentario'] !== null && $r['comentario'] !== ''

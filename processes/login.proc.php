@@ -30,7 +30,10 @@ if (!filter_var($loginId, FILTER_VALIDATE_EMAIL)) {
 }
 
 try {
-    $stmt = $db->prepare('SELECT id, username, password_hash, rol, foto FROM usuarios WHERE LOWER(username) = :user');
+    $stmt = $db->prepare(
+        'SELECT id, username, password_hash, rol, foto, nombre_usuario
+         FROM usuarios WHERE LOWER(username) = :user'
+    );
     $stmt->bindValue(':user', $loginId, SQLITE3_TEXT);
     $result = $stmt->execute();
     $user = $result->fetchArray(SQLITE3_ASSOC);
@@ -50,7 +53,8 @@ try {
 
     // 4. Store user data in session (Keys matching the checklist)
     $_SESSION['usuari_id'] = $user['id'];
-    $_SESSION['username'] = $user['username'];
+    $_SESSION['user_email'] = $user['username'];
+    $_SESSION['nombre_usuario'] = (string) ($user['nombre_usuario'] ?? '');
     $_SESSION['rol'] = $user['rol'];
     $_SESSION['foto'] = $user['foto'] ?? 'default.png';
 
