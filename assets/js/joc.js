@@ -343,6 +343,11 @@ async function acabarPartida() {
     fiPartida.hidden          = false;
     puntsFinalsEl.textContent = puntsPartida;
 
+    const lr = document.getElementById('link-fi-ranking');
+    if (lr && typeof temaNom === 'string' && temaNom.trim() !== '') {
+        lr.setAttribute('href', `../pages/ranking.php?tema=${encodeURIComponent(temaNom.trim())}`);
+    }
+
     try {
         const resp = await fetch('../api/partides.php', {
             method:  'POST',

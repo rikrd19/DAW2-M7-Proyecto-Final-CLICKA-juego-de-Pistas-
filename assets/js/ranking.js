@@ -1,10 +1,14 @@
 'use strict';
 
 /* ── DOM refs ─────────────────────────────────────────────── */
-const loadingEl   = document.getElementById('ranking-loading');
-const emptyEl     = document.getElementById('ranking-empty');
-const tableWrapEl = document.getElementById('ranking-table-wrap');
-const tbodyEl     = document.getElementById('ranking-tbody');
+const loadingEl    = document.getElementById('ranking-loading');
+const emptyEl      = document.getElementById('ranking-empty');
+const tableWrapEl  = document.getElementById('ranking-table-wrap');
+const tbodyEl      = document.getElementById('ranking-tbody');
+const filtersEl    = document.getElementById('ranking-filters');
+const eyebrowEl    = document.getElementById('ranking-eyebrow');
+const leadEl       = document.getElementById('ranking-lead');
+const footnoteEl   = document.getElementById('ranking-footnote');
 
 /* ── Medal helpers ────────────────────────────────────────── */
 const MEDALS = ['🥇', '🥈', '🥉'];
@@ -18,24 +22,70 @@ function positionCell(pos) {
 
 /* ── Date formatting ──────────────────────────────────────── */
 function formatDate(raw) {
-    // SQLite CURRENT_TIMESTAMP → "YYYY-MM-DD HH:MM:SS"
     if (!raw) return '';
     const [datePart] = raw.split(' ');
     const [y, m, d] = datePart.split('-');
     return `${d}/${m}/${y}`;
 }
 
+function pillTemaValue(el) {
+    return (el.getAttribute('data-tema-filter') ?? '').trim();
+}
+
+function pillLabelForFilter(filterRaw) {
+    if (!filterRaw || !filtersEl) return filterRaw || '';
+    let label = '';
+    filtersEl.querySelectorAll('.ranking-filter-pill').forEach(pill => {
+        if (pillTemaValue(pill) === filterRaw) {
+            label = pill.textContent.trim();
+        }
+    });
+    return label || filterRaw;
+}
+
+function updateContextCopy(temaFilter) {
+    if (!eyebrowEl || !leadEl) return;
+    if (!temaFilter) {
+        eyebrowEl.textContent = 'Clasificación global';
+        leadEl.textContent =
+            'Ranking exclusivo para usuarios registrados (mejor puntuación por jugador).';
+        if (footnoteEl) {
+            footnoteEl.textContent =
+                'Mostrando el ranking de usuarios registrados por mejor puntuación.';
+        }
+        return;
+    }
+    const label = pillLabelForFilter(temaFilter);
+    eyebrowEl.textContent = 'Por temática';
+    leadEl.textContent = `Mejor puntuación por jugador en: ${label}`;
+    if (footnoteEl) {
+        footnoteEl.textContent =
+            'Solo cuentan partidas guardadas en esta temática (usuarios registrados).';
+    }
+}
+
+function setActivePill(temaFilter) {
+    if (!filtersEl) return;
+    filtersEl.querySelectorAll('.ranking-filter-pill').forEach(pill => {
+        const v = pillTemaValue(pill);
+        pill.classList.toggle('active', v === temaFilter);
+    });
+}
+
+function getTemaFilterFromUrl() {
+    const raw = new URLSearchParams(window.location.search).get('tema');
+    return raw && raw.trim() !== '' ? raw.trim() : '';
+}
+
 /* ── Render rows ──────────────────────────────────────────── */
 function renderRanking(rows) {
-    const currentUserId = (typeof USUARI_ID !== 'undefined') ? USUARI_ID : null;
+    const currentUserId = typeof USUARI_ID !== 'undefined' ? USUARI_ID : null;
 
     tbodyEl.innerHTML = rows.map((row, i) => {
         const pos       = i + 1;
         const isMe      = currentUserId !== null && row.usuario_id === currentUserId;
         const rowClass  = isMe ? 'ranking-row ranking-row-me' : 'ranking-row';
-        const youBadge  = isMe
-            ? ' <span class="badge ranking-you-badge ms-1">Tú</span>'
-            : '';
+        const youBadge  = isMe ? ' <span class="badge ranking-you-badge ms-1">Tú</span>' : '';
 
         return `<tr class="${rowClass}">
             <td class="ranking-pos-cell">${positionCell(pos)}</td>
@@ -54,7 +104,6 @@ function renderRanking(rows) {
     }).join('');
 }
 
-/* ── XSS-safe escape ──────────────────────────────────────── */
 function escapeHtml(str) {
     return String(str)
         .replace(/&/g, '&amp;')
@@ -63,10 +112,29 @@ function escapeHtml(str) {
         .replace(/"/g, '&quot;');
 }
 
-/* ── Fetch ────────────────────────────────────────────────── */
+function buildRankingUrl(temaFilter) {
+    const base = '../api/partides.php';
+    if (!temaFilter) return base;
+    return `${base}?tema=${encodeURIComponent(temaFilter)}`;
+}
+
 async function carregarRanking() {
+    const temaFilter = getTemaFilterFromUrl();
+
+    const hDefault = emptyEl.querySelector('h2');
+    const pDefault = emptyEl.querySelector('p');
+    if (hDefault) hDefault.textContent = '¡Sé el primero en el ranking!';
+    if (pDefault) {
+        pDefault.textContent =
+            'Aún no hay partidas registradas. Juega y consigue la máxima puntuación.';
+    }
+
+    loadingEl.hidden    = false;
+    emptyEl.hidden      = true;
+    tableWrapEl.hidden  = true;
+
     try {
-        const resp = await fetch('../api/partides.php');
+        const resp = await fetch(buildRankingUrl(temaFilter));
         if (!resp.ok) throw new Error('HTTP ' + resp.status);
         const rows = await resp.json();
 
@@ -74,15 +142,24 @@ async function carregarRanking() {
 
         if (!Array.isArray(rows) || rows.length === 0) {
             emptyEl.hidden = false;
+            const h = emptyEl.querySelector('h2');
+            const p = emptyEl.querySelector('p');
+            if (temaFilter && h && p) {
+                h.textContent = 'Sin datos en esta temática';
+                p.textContent = 'Aún no hay partidas registradas para este filtro.';
+            } else if (h && p) {
+                h.textContent = '¡Sé el primero en el ranking!';
+                p.textContent =
+                    'Aún no hay partidas registradas. Juega y consigue la máxima puntuación.';
+            }
             return;
         }
 
         renderRanking(rows);
         tableWrapEl.hidden = false;
     } catch (_) {
-        loadingEl.hidden    = true;
-        emptyEl.hidden      = false;
-        // Replace empty-state text with a generic error message.
+        loadingEl.hidden = true;
+        emptyEl.hidden   = false;
         const h = emptyEl.querySelector('h2');
         const p = emptyEl.querySelector('p');
         if (h) h.textContent = 'No se pudo cargar el ranking.';
@@ -90,4 +167,9 @@ async function carregarRanking() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', carregarRanking);
+document.addEventListener('DOMContentLoaded', () => {
+    const initial = getTemaFilterFromUrl();
+    setActivePill(initial);
+    updateContextCopy(initial);
+    carregarRanking();
+});
