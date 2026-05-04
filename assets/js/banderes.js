@@ -387,7 +387,18 @@ function mostrarResultat(correct, punts) {
         : 'Siguiente pregunta →';
 
     resultatEl.hidden = false;
+    btnSegurentPregunta.focus();
 }
+
+/* ── Enter advances same as "Siguiente pregunta" while result panel is open ── */
+document.addEventListener('keydown', e => {
+    if (e.key !== 'Enter' || e.repeat) return;
+    if (gameArea.hidden || resultatEl.hidden) return;
+    if (document.querySelector('.modal.show')) return;
+    if (e.target === btnSegurentPregunta) return;
+    e.preventDefault();
+    btnSegurentPregunta.click();
+});
 
 function escapeHtml(str) {
     return String(str)
