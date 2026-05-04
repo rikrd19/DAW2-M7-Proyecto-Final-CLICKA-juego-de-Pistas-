@@ -794,6 +794,23 @@ footer a:hover { text-decoration: underline; }
   transform: translateY(-1px);
 }
 
+/* Pills are real links: kill default anchor styling */
+a.ranking-filter-pill {
+  text-decoration: none;
+}
+a.ranking-filter-pill,
+a.ranking-filter-pill:visited {
+  color: var(--clika-muted);
+}
+a.ranking-filter-pill.active,
+a.ranking-filter-pill.active:visited {
+  color: #fff;
+}
+a.ranking-filter-pill.active:hover,
+a.ranking-filter-pill.active:focus-visible {
+  color: #fff;
+}
+
 .ranking-table-container {
   background: var(--clika-card-bg);
   border: 1.5px solid var(--clika-border);

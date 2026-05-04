@@ -58,6 +58,11 @@ if ($slugParam !== '' && !empty($temas)) {
     }
 }
 $autoInicia = $temaPreseleccionat !== null;
+
+$rankingFiHref = BASE_URL . '/pages/ranking.php';
+if ($temaNomPreseleccionat !== '') {
+    $rankingFiHref .= '?tema=' . rawurlencode($temaNomPreseleccionat);
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -271,6 +276,9 @@ $autoInicia = $temaPreseleccionat !== null;
           <button type="button" id="btn-tornar" class="btn btn-primary px-4">
             Jugar otra vez
           </button>
+          <a href="<?php echo htmlspecialchars($rankingFiHref, ENT_QUOTES, 'UTF-8'); ?>" class="btn btn-outline-accent px-4" id="link-fi-ranking">
+            Ver ranking
+          </a>
           <button type="button" id="btn-fi-sortir" class="btn btn-outline-secondary px-4">
             Volver al menú
           </button>

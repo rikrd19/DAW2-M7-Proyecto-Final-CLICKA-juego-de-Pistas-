@@ -4,6 +4,7 @@
  * Game rounds (partidas) API.
  *
  * GET  → returns ranking rows for registered users (one best score per user).
+ *        Optional query: ?tema=<string> → same logic but only partidas with that tema label.
  *        Response: [ { id, usuario_id, nombre, puntos, tema, fecha }, … ]
  *
  * POST → saves a completed round.
@@ -21,25 +22,54 @@ $method = $_SERVER['REQUEST_METHOD'] ?? '';
 /* ── GET: ranking for registered users only (best score per user) ─────── */
 if ($method === 'GET') {
     require_once dirname(__DIR__) . '/includes/db.php';
+    $temaFilter = isset($_GET['tema']) && is_string($_GET['tema']) ? trim($_GET['tema']) : '';
+    if ($temaFilter !== '' && strlen($temaFilter) > 128) {
+        $temaFilter = substr($temaFilter, 0, 128);
+    }
+
     try {
-        $result = $db->query(
-            "SELECT p.id,
-                    p.usuario_id,
-                    u.username AS nombre,
-                    p.puntos,
-                    p.tema,
-                    p.fecha
-             FROM partidas p
-             INNER JOIN usuarios u ON u.id = p.usuario_id
-             WHERE p.id = (
-                 SELECT p2.id
-                 FROM partidas p2
-                 WHERE p2.usuario_id = p.usuario_id
-                 ORDER BY p2.puntos DESC, p2.fecha ASC, p2.id ASC
-                 LIMIT 1
-             )
-             ORDER BY p.puntos DESC, p.fecha ASC, p.id ASC"
-        );
+        if ($temaFilter === '') {
+            $result = $db->query(
+                "SELECT p.id,
+                        p.usuario_id,
+                        u.username AS nombre,
+                        p.puntos,
+                        p.tema,
+                        p.fecha
+                 FROM partidas p
+                 INNER JOIN usuarios u ON u.id = p.usuario_id
+                 WHERE p.id = (
+                     SELECT p2.id
+                     FROM partidas p2
+                     WHERE p2.usuario_id = p.usuario_id
+                     ORDER BY p2.puntos DESC, p2.fecha ASC, p2.id ASC
+                     LIMIT 1
+                 )
+                 ORDER BY p.puntos DESC, p.fecha ASC, p.id ASC"
+            );
+        } else {
+            $stmt = $db->prepare(
+                'SELECT p.id,
+                        p.usuario_id,
+                        u.username AS nombre,
+                        p.puntos,
+                        p.tema,
+                        p.fecha
+                 FROM partidas p
+                 INNER JOIN usuarios u ON u.id = p.usuario_id
+                 WHERE p.id = (
+                     SELECT p2.id
+                     FROM partidas p2
+                     WHERE p2.usuario_id = p.usuario_id AND p2.tema = :tema
+                     ORDER BY p2.puntos DESC, p2.fecha ASC, p2.id ASC
+                     LIMIT 1
+                 )
+                 AND p.tema = :tema
+                 ORDER BY p.puntos DESC, p.fecha ASC, p.id ASC'
+            );
+            $stmt->bindValue(':tema', $temaFilter, SQLITE3_TEXT);
+            $result = $stmt->execute();
+        }
         $rows = [];
         while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
             $rows[] = [
