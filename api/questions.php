@@ -38,6 +38,17 @@ if ($temaId < 1) {
 // Load centralized DB connection and globals
 require_once dirname(__DIR__) . '/includes/db.php';
 
+/** Same rule as validate.php — NBSP-only counts as empty (matches JS String.trim). */
+function clue_extra_nonempty(mixed $raw): bool
+{
+    if ($raw === null) {
+        return false;
+    }
+    $s = str_replace("\xc2\xa0", ' ', (string) $raw);
+
+    return trim($s) !== '';
+}
+
 try {
 
     // Never concatenate user input into SQL — use placeholders + bindValue (RA6 / SQL injection).
@@ -59,14 +70,20 @@ try {
         exit;
     }
 
+    // Must match validate.php logic so empty submit after last card works on every theme.
+    $extraRaw       = $row['pista_extra'] ?? null;
+    $hasExtraClue   = clue_extra_nonempty($extraRaw);
+    $maxCluesPublic = $hasExtraClue ? 4 : 3;
+
     // Do not expose respuesta here — validation must happen on the server in a separate endpoint.
     echo json_encode(
         [
-            'id' => (int) $row['id'],
-            'pista1' => $row['pista1'],
-            'pista2' => $row['pista2'],
-            'pista3' => $row['pista3'],
+            'id'          => (int) $row['id'],
+            'pista1'      => $row['pista1'],
+            'pista2'      => $row['pista2'],
+            'pista3'      => $row['pista3'],
             'pista_extra' => $row['pista_extra'],
+            'max_clues'   => $maxCluesPublic,
         ],
         JSON_UNESCAPED_UNICODE
     );

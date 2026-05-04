@@ -131,14 +131,26 @@ async function carregarPregunta(tema_id) {
     pista2Text.textContent = q.pista2;
     pista3Text.textContent = q.pista3;
 
+    // Server-authoritative count — keeps empty-submit-after-last-card in sync with validate.php.
+    const mcApi = Number(q.max_clues);
+    if (Number.isFinite(mcApi) && mcApi >= 3 && mcApi <= 4) {
+        maxPistes = mcApi;
+    } else {
+        const extraLegacy =
+            q.pista_extra != null && q.pista_extra !== ''
+                ? String(q.pista_extra).replace(/\u00a0/g, ' ').trim()
+                : '';
+        maxPistes = extraLegacy !== '' ? 4 : 3;
+    }
+
     pistaExtraEl.classList.remove('carta-bloqueada');
-    const extraText = q.pista_extra != null ? String(q.pista_extra).trim() : '';
-    if (extraText !== '') {
-        pistaExtraText.textContent = extraText;
-        maxPistes = 4;
+    if (maxPistes === 4) {
+        const extraDisplay =
+            q.pista_extra != null ? String(q.pista_extra).replace(/\u00a0/g, ' ').trim() : '';
+        pistaExtraText.textContent = extraDisplay;
     } else {
         pistaExtraEl.classList.add('carta-bloqueada');
-        maxPistes = 3;
+        pistaExtraText.textContent = '';
     }
 
     pistesMaxEl.textContent = maxPistes;

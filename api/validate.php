@@ -55,6 +55,17 @@ if ($cluesUsed < 1 || $cluesUsed > 4) {
 // Load centralized DB connection and globals
 require_once dirname(__DIR__) . '/includes/db.php';
 
+/** Same rule as questions.php — keep client/server max clue count aligned. */
+function clue_extra_nonempty(mixed $raw): bool
+{
+    if ($raw === null) {
+        return false;
+    }
+    $s = str_replace("\xc2\xa0", ' ', (string) $raw);
+
+    return trim($s) !== '';
+}
+
 /**
  * Normalize text for safe comparison.
  */
@@ -106,7 +117,7 @@ try {
         exit;
     }
 
-    $hasExtra = isset($row['pista_extra']) && trim((string) $row['pista_extra']) !== '';
+    $hasExtra = clue_extra_nonempty($row['pista_extra'] ?? null);
     $maxClues = $hasExtra ? 4 : 3;
     $trimmedGuess = trim($userAnswer);
     if ($trimmedGuess === '' && $cluesUsed < $maxClues) {
