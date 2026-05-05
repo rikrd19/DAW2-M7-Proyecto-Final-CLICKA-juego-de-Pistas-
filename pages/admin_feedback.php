@@ -1,6 +1,6 @@
 <?php
 /**
- * Admin read-only list of feedback with user linkage. No create/update actions.
+ * Admin feedback moderation page (read + delete offensive comments).
  */
 require_once dirname(__DIR__) . '/config/globals.php';
 require_once dirname(__DIR__) . '/includes/auth.php';
@@ -73,10 +73,27 @@ try {
     <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-4">
       <div>
         <h1 class="h3 fw-bold mb-1">Valoraciones y comentarios</h1>
-        <p class="text-muted small mb-0">Solo lectura. Los jugadores envían esto desde el juego con sesión iniciada.</p>
+        <p class="text-muted small mb-0">Los jugadores envían esto desde el juego con sesión iniciada. El admin puede moderar comentarios ofensivos.</p>
       </div>
       <a href="admin_config.php" class="btn btn-outline-secondary btn-sm">Volver al panel</a>
     </div>
+
+    <?php if (isset($_GET['msg']) && $_GET['msg'] === 'deleted'): ?>
+      <div class="alert alert-success">Comentario eliminado correctamente.</div>
+    <?php endif; ?>
+    <?php if (isset($_GET['error'])): ?>
+      <?php
+      $errMsg = match ((string) $_GET['error']) {
+          'invalid_feedback' => 'Solicitud inválida.',
+          'not_found' => 'Comentario no encontrado.',
+          'db_error' => 'No se pudo eliminar el comentario.',
+          default => '',
+      };
+      ?>
+      <?php if ($errMsg !== ''): ?>
+        <div class="alert alert-danger"><?php echo htmlspecialchars($errMsg); ?></div>
+      <?php endif; ?>
+    <?php endif; ?>
 
     <?php if ($error !== ''): ?>
       <div class="alert alert-danger"><?php echo htmlspecialchars($error); ?></div>
@@ -134,6 +151,7 @@ try {
               <th>Tema</th>
               <th>★</th>
               <th>Comentario</th>
+              <th class="text-center">Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -168,6 +186,16 @@ try {
                 <td class="small"><?php echo $r['comentario'] !== null && $r['comentario'] !== ''
                     ? nl2br(htmlspecialchars((string) $r['comentario']))
                     : '—'; ?></td>
+                <td class="text-center">
+                  <button
+                    type="button"
+                    class="btn btn-sm btn-outline-danger js-delete-feedback-open"
+                    title="Eliminar comentario ofensivo"
+                    aria-label="Eliminar comentario ofensivo"
+                    data-bs-toggle="modal"
+                    data-bs-target="#deleteFeedbackModal"
+                    data-delete-url="<?php echo htmlspecialchars('../processes/delete_feedback.proc.php?id=' . (int) $r['id'], ENT_QUOTES, 'UTF-8'); ?>">&#128465;</button>
+                </td>
               </tr>
             <?php endforeach; ?>
           </tbody>
@@ -175,6 +203,43 @@ try {
       </div>
     <?php endif; ?>
   </main>
+
+  <div class="modal fade" id="deleteFeedbackModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 shadow">
+        <div class="modal-header border-0 pb-0">
+          <h5 class="modal-title fw-bold">¿Eliminar comentario?</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body text-center py-4">
+          <p class="text-muted mb-0">Este comentario se eliminará por contenido ofensivo y no podrá recuperarse.</p>
+        </div>
+        <div class="modal-footer border-0 pt-0">
+          <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancelar</button>
+          <a id="confirmDeleteFeedbackBtn" href="#" class="btn btn-danger fw-bold">Eliminar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var confirmLink = document.getElementById('confirmDeleteFeedbackBtn');
+      var modalEl = document.getElementById('deleteFeedbackModal');
+      if (!confirmLink || !modalEl) return;
+
+      document.addEventListener('click', function (ev) {
+        var btn = ev.target.closest('button.js-delete-feedback-open[data-delete-url]');
+        if (!btn) return;
+        var url = btn.getAttribute('data-delete-url');
+        if (url) confirmLink.href = url;
+      }, true);
+
+      modalEl.addEventListener('hidden.bs.modal', function () {
+        confirmLink.setAttribute('href', '#');
+      });
+    })();
+  </script>
 
   <?php include '../includes/foot.php'; ?>
 </body>
