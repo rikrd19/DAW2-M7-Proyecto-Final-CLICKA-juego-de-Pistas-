@@ -36,19 +36,6 @@
         }
     }
 
-    function configureModal() {
-        if (!loginNoticeEl || !loggedFieldsEl || !btnSend) return;
-        if (canSend) {
-            loginNoticeEl.hidden = true;
-            loggedFieldsEl.hidden = false;
-            btnSend.hidden = false;
-        } else {
-            loginNoticeEl.hidden = false;
-            loggedFieldsEl.hidden = true;
-            btnSend.hidden = true;
-        }
-    }
-
     function escapeHtml(str) {
         return String(str)
             .replace(/&/g, '&amp;')
@@ -57,15 +44,29 @@
             .replace(/"/g, '&quot;');
     }
 
+    function configureModal() {
+        if (!loginNoticeEl || !loggedFieldsEl || !btnSend || !leadEl) return;
+        if (canSend) {
+            leadEl.hidden = false;
+            loginNoticeEl.hidden = true;
+            loggedFieldsEl.hidden = false;
+            btnSend.hidden = false;
+        } else {
+            leadEl.hidden = true;
+            loginNoticeEl.hidden = false;
+            loggedFieldsEl.hidden = true;
+            btnSend.hidden = true;
+        }
+    }
+
     window.showPostGameFeedbackModal = function (labelForUi, temaForApi) {
         if (!modalEl || typeof bootstrap === 'undefined' || !bootstrap.Modal) return;
         resetForm();
         configureModal();
         const label = (labelForUi && String(labelForUi).trim()) || 'esta temática';
-        if (leadEl) {
+        if (leadEl && canSend) {
             leadEl.innerHTML =
-                `Un segundo: tu opinión sobre <strong>${escapeHtml(label)}</strong> ayuda a mejorar las pistas y el juego. ` +
-                'Puedes cerrar u <strong>Omitir</strong> sin enviar nada.';
+                `Tu opinión sobre <strong>${escapeHtml(label)}</strong> nos ayuda a mejorar las pistas.`;
         }
         const temaTrim =
             temaForApi != null && String(temaForApi).trim() !== '' ? String(temaForApi).trim() : '';
