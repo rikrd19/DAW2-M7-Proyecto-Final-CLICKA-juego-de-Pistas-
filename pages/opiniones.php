@@ -34,10 +34,11 @@ try {
         ksort($byTema, SORT_NATURAL | SORT_FLAG_CASE);
 
         $res2 = $db->query(
-            "SELECT tema, comentario, created_at
-             FROM app_feedback
-             WHERE comentario IS NOT NULL AND LENGTH(TRIM(comentario)) > 0
-             ORDER BY id DESC
+            "SELECT f.tema, f.comentario, f.created_at, u.nombre_usuario
+             FROM app_feedback f
+             LEFT JOIN usuarios u ON u.id = f.usuario_id
+             WHERE f.comentario IS NOT NULL AND LENGTH(TRIM(f.comentario)) > 0
+             ORDER BY f.id DESC
              LIMIT 40"
         );
         while ($row = $res2->fetchArray(SQLITE3_ASSOC)) {
@@ -68,7 +69,7 @@ try {
       <h1 class="h3 fw-bold" style="color:var(--clika-text)">
         <i class="bi bi-chat-heart me-2" style="color:var(--clika-primary)"></i>Opiniones por temática
       </h1>
-      <p class="text-muted mb-0">Distribución de estrellas (5 a 1) según la categoría jugada. Los comentarios son anónimos en esta vista.</p>
+      <p class="text-muted mb-0">Distribución de estrellas (5 a 1) según la categoría jugada y comentarios recientes de la comunidad.</p>
     </div>
 
     <?php if ($tableMissing): ?>
@@ -127,6 +128,9 @@ try {
                     ?>
                     · <time datetime="<?php echo htmlspecialchars($isoDate); ?>"><?php echo $label; ?></time>
                   <?php endif; ?>
+                </p>
+                <p class="small fw-semibold text-primary mb-1">
+                  <?php echo htmlspecialchars((string) ($r['nombre_usuario'] ?? 'Jugador')); ?>
                 </p>
                 <p class="mb-0"><?php echo nl2br(htmlspecialchars((string) $r['comentario'])); ?></p>
               </div>
