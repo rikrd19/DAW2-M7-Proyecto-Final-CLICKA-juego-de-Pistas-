@@ -19,7 +19,7 @@
     {
       "pista1": "Empresa que desarrolla windows",
       "pista2": "Fundada por bill gates y paul allen",
-      "pista3": "Tambien creadora de azure",
+      "pista3": "También creadora de azure",
       "pista_extra": "Su nombre empieza por micro",
       "respuesta": "microsoft"
     },
@@ -31,7 +31,7 @@
       "respuesta": "chrome"
     },
     {
-      "pista1": "Memoria volatil de acceso rapido",
+      "pista1": "Memoria volatil de acceso rápido",
       "pista2": "Se borra al apagar el equipo",
       "pista3": "Afecta multitarea y rendimiento",
       "pista_extra": "Sus siglas son tres letras",
@@ -41,11 +41,11 @@
       "pista1": "Dispositivo que enruta trafico de red",
       "pista2": "Conecta casa a internet",
       "pista3": "Suele emitir wifi",
-      "pista_extra": "Palabra comun en ingles tecnico",
+      "pista_extra": "Palabra comun en inglés tecnico",
       "respuesta": "router"
     },
     {
-      "pista1": "Tecnologia para alojar servicios remotos",
+      "pista1": "Tecnología para alojar servicios remotos",
       "pista2": "Iaas paas saas son modelos",
       "pista3": "No depende de un solo servidor local",
       "pista_extra": "En espanol se llama la nube",
@@ -62,7 +62,7 @@
       "pista1": "Sistema de control de versiones distribuido",
       "pista2": "Comandos commit branch merge",
       "pista3": "Linus torvalds participo en su creacion",
-      "pista_extra": "Plataforma github lo utiliza",
+      "pista_extra": "Empieza por g y tiene 3 letras.",
       "respuesta": "git"
     },
     {
@@ -101,16 +101,16 @@
       "respuesta": "chatgpt"
     },
     {
-      "pista1": "Tecnologia de registro distribuido para criptomonedas",
+      "pista1": "Tecnología de registro distribuido para criptomonedas",
       "pista2": "Bloques enlazados criptograficamente",
       "pista3": "Bitcoin la popularizo",
-      "pista_extra": "Nombre en ingles de cadena de bloques",
+      "pista_extra": "Nombre en inglés de cadena de bloques",
       "respuesta": "blockchain"
     },
     {
       "pista1": "Unidad central de procesamiento",
       "pista2": "Ejecuta instrucciones del sistema",
-      "pista3": "Tambien se le llama procesador",
+      "pista3": "También se le llama procesador",
       "pista_extra": "Siglas de tres letras",
       "respuesta": "cpu"
     },
@@ -136,7 +136,7 @@
       "respuesta": "https"
     },
     {
-      "pista1": "Tecnologia de proximidad para conectar perifericos",
+      "pista1": "Tecnología de proximidad para conectar perifericos",
       "pista2": "Auriculares inalambricos la usan",
       "pista3": "Opera en dos coma cuatro ghz",
       "pista_extra": "Su icono es una runa azul",
@@ -146,7 +146,7 @@
       "pista1": "Protocolo seguro web puerto cuatro cuatro tres",
       "pista2": "TLS sucesor SSL",
       "pista3": "Candado navegador",
-      "pista_extra": "HTTPS",
+      "pista_extra": "Empieza por h y tiene 5 letras.",
       "respuesta": "https"
     },
     {
@@ -167,7 +167,7 @@
       "pista1": "Patron creacional instancia unica",
       "pista2": "Gang of four",
       "pista3": "getInstance",
-      "pista_extra": "Singleton",
+      "pista_extra": "Empieza por s y tiene 9 letras.",
       "respuesta": "singleton"
     },
     {
@@ -181,33 +181,33 @@
       "pista1": "Estructura LIFO",
       "pista2": "Push pop",
       "pista3": "Llamadas recursivas",
-      "pista_extra": "Pila",
+      "pista_extra": "Empieza por p y tiene 4 letras.",
       "respuesta": "pila"
     },
     {
-      "pista1": "Estructura FIFO cola",
+      "pista1": "Pista con chispa: Enqueue dequeue",
       "pista2": "Enqueue dequeue",
       "pista3": "Breadth first search",
-      "pista_extra": "Cola",
+      "pista_extra": "Tiene 1 palabra.",
       "respuesta": "cola"
     },
     {
       "pista1": "Formato datos ligero javascript",
       "pista2": "Llaves y corchetes",
-      "pista3": "Parse con JSON",
-      "pista_extra": "JavaScript object notation",
+      "pista3": "JavaScript object notation",
+      "pista_extra": "piensa en tecnología y en la pista anterior.",
       "respuesta": "json"
     },
     {
       "pista1": "Sistema control versiones distribuido",
       "pista2": "Linus torvalds",
       "pista3": "Commit branch merge",
-      "pista_extra": "Git",
+      "pista_extra": "Empieza por g y tiene 3 letras.",
       "respuesta": "git"
     },
     {
       "pista1": "Contenedor linux ligero",
-      "pista2": "Docker imagen",
+      "pista2": "Va otra: Kubernetes orquesta",
       "pista3": "Kubernetes orquesta",
       "pista_extra": "Contenedor",
       "respuesta": "docker"
@@ -230,18 +230,18 @@
       "pista1": "Ataque inyeccion sql",
       "pista2": "Comillas mal escapadas",
       "pista3": "Prepared statements defienden",
-      "pista_extra": "SQL injection",
+      "pista_extra": "Empieza por s y tiene 12 letras.",
       "respuesta": "sql injection"
     },
     {
       "pista1": "Red neuronal capa oculta",
       "pista2": "Backpropagation",
       "pista3": "TensorFlow pytorch",
-      "pista_extra": "Deep learning",
+      "pista_extra": "Empieza por d y tiene 12 letras.",
       "respuesta": "deep learning"
     },
     {
-      "pista1": "CPU cache mas rapida nivel uno",
+      "pista1": "CPU cache más rapida nivel uno",
       "pista2": "Datos e instrucciones",
       "pista3": "Cercana nucleos",
       "pista_extra": "L1",
@@ -258,7 +258,7 @@
       "pista1": "Protocolo correo recepcion",
       "pista2": "Puerto ciento diez",
       "pista3": "Deja mensajes en servidor",
-      "pista_extra": "POP o IMAP",
+      "pista_extra": "Empieza por i y tiene 4 letras.",
       "respuesta": "imap"
     },
     {
@@ -270,7 +270,7 @@
     },
     {
       "pista1": "Formato binario google serializacion",
-      "pista2": "Mas compacto que JSON",
+      "pista2": "Más compacto que JSON",
       "pista3": "Archivo punto pb",
       "pista_extra": "Protocol buffers",
       "respuesta": "protobuf"
@@ -279,7 +279,7 @@
       "pista1": "Metodo http idempotente lectura",
       "pista2": "No debe tener efectos secundarios",
       "pista3": "Navegador barra direccion",
-      "pista_extra": "GET",
+      "pista_extra": "Empieza por g y tiene 3 letras.",
       "respuesta": "get"
     }
   ]

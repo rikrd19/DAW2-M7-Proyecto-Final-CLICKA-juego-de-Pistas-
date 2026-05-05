@@ -60,7 +60,7 @@
     },
     {
       "pista1": "Ciencia que estudia los seres vivos y su interacción",
-      "pista2": "Ramas como genética ecología y microbiología",
+      "pista2": "Va otra: La célula es unidad básica según la teoría celular",
       "pista3": "La célula es unidad básica según la teoría celular",
       "pista_extra": "Darwin es clave en su historia con la evolución",
       "respuesta": "biologia"
@@ -81,8 +81,8 @@
     },
     {
       "pista1": "Fuente de energía del Sol y de otras estrellas",
-      "pista2": "Fusión de núcleos ligeros como el hidrógeno",
-      "pista3": "En el núcleo solar el hidrógeno se fusiona en helio liberando energía",
+      "pista2": "Va otra: La bomba H se basa en este principio",
+      "pista3": "Empieza por f y tiene 6 letras.",
       "pista_extra": "La bomba H se basa en este principio",
       "respuesta": "fusion"
     },
@@ -136,14 +136,14 @@
       "respuesta": "atmosfera"
     },
     {
-      "pista1": "Unidad básica de la herencia en genética clásica",
+      "pista1": "Pista con chispa: Ocupa un locus en un cromosoma",
       "pista2": "Ocupa un locus en un cromosoma",
       "pista3": "Puede ser dominante o recesivo en el fenotipo",
       "pista_extra": "Mendel los estudió en guisantes",
       "respuesta": "gen"
     },
     {
-      "pista1": "Velocidad de la luz en el vacío es constante",
+      "pista1": "Pista con chispa: Relaciona energía masa y esta velocidad en famosa ecuación",
       "pista2": "Relaciona energía masa y esta velocidad en famosa ecuación",
       "pista3": "Es un límite para la transmisión de información causal",
       "pista_extra": "Aproximadamente trescientos mil kilómetros por segundo",
@@ -208,15 +208,15 @@
     {
       "pista1": "Capas similares a láminas en el músculo esquelético",
       "pista2": "Actina y miosina deslizan filamentos",
-      "pista3": "El sarcómero es unidad funcional repetida",
-      "pista_extra": "Deriva del griego para cinta o banda",
+      "pista3": "Deriva del griego para cinta o banda",
+      "pista_extra": "Extra amable: piensa en ciencia y en la pista anterior.",
       "respuesta": "sarcomero"
     },
     {
       "pista1": "Planeta más cercano al Sol",
       "pista2": "Día solar largo comparado con su año",
       "pista3": "Sin atmósfera densa y con cráteres",
-      "pista_extra": "Mercurio es su nombre en latín como el mensajero veloz",
+      "pista_extra": "Extra amable: Empieza por m y tiene 8 letras.",
       "respuesta": "mercurio"
     },
     {
@@ -234,7 +234,7 @@
       "respuesta": "asteroide"
     },
     {
-      "pista1": "Teoría de la relatividad famosa de Einstein",
+      "pista1": "Pista con chispa: Incluye la equivalencia masa-energía",
       "pista2": "Incluye la equivalencia masa-energía",
       "pista3": "Describe gravedad como geometría",
       "pista_extra": "No confundir solo con la especial de mil novecientos cinco",
@@ -256,15 +256,15 @@
     },
     {
       "pista1": "Principio que no puedes conocir posicion e impulso exactos",
-      "pista2": "Fisico aleman con apellido de incertidumbre",
+      "pista2": "Fisico alemán con apellido de incertidumbre",
       "pista3": "Delta x por delta p",
-      "pista_extra": "Apellido Heisenberg",
+      "pista_extra": "Extra amable: Empieza por h y tiene 10 letras.",
       "respuesta": "heisenberg"
     },
     {
       "pista1": "Constante minima de accion en cuantica",
       "pista2": "Unidad con dimensiones de energia por tiempo",
-      "pista3": "Lleva nombre de fisico aleman",
+      "pista3": "Lleva nombre de fisico alemán",
       "pista_extra": "Simbolo h barra",
       "respuesta": "planck"
     },
@@ -276,14 +276,14 @@
       "respuesta": "boson w"
     },
     {
-      "pista1": "Particula sin carga electrica muy ligera",
+      "pista1": "Particula sin carga eléctrica muy ligera",
       "pista2": "Tres sabores en familia",
       "pista3": "Detectores subterraneos",
       "pista_extra": "Oscilaciones entre masas",
       "respuesta": "neutrino"
     },
     {
-      "pista1": "Herramienta de edicion genetica CRISPR",
+      "pista1": "Pista con chispa: Arn guia y nuclease",
       "pista2": "Arn guia y nuclease",
       "pista3": "Bacterias defensivas",
       "pista_extra": "Apellido Doudna Charpentier premio nobel",
@@ -304,7 +304,7 @@
       "respuesta": "foton"
     },
     {
-      "pista1": "Carga del quark mas ligero",
+      "pista1": "Pista con chispa: Proton tiene dos arriba uno abajo",
       "pista2": "Proton tiene dos arriba uno abajo",
       "pista3": "Confinamiento en hadrones",
       "pista_extra": "Fraccion un tercio o dos tercios",
@@ -318,7 +318,7 @@
       "respuesta": "newton enfriamiento"
     },
     {
-      "pista1": "Numero de Avogadro orden",
+      "pista1": "Pista con chispa: Mol de particulas",
       "pista2": "Mol de particulas",
       "pista3": "Diez a la veintitres aprox",
       "pista_extra": "Constante NA",
@@ -339,7 +339,7 @@
       "respuesta": "pauli"
     },
     {
-      "pista1": "Efecto tunel cuantico barrera fina",
+      "pista1": "Pista con chispa: Microscopio de barrido usa sonda",
       "pista2": "Microscopio de barrido usa sonda",
       "pista3": "Decaimiento alfa relacion",
       "pista_extra": "Probabilidad exponencial",
@@ -349,11 +349,11 @@
       "pista1": "Unidad de presion SI",
       "pista2": "Un newton sobre metro cuadrado",
       "pista3": "Meteorologia la usa",
-      "pista_extra": "Apellido frances",
+      "pista_extra": "Apellido francés",
       "respuesta": "pascal"
     },
     {
-      "pista1": "Teoria evolucion natural seleccion",
+      "pista1": "Teoria evolución natural seleccion",
       "pista2": "Viaje del Beagle",
       "pista3": "Origen de las especies",
       "pista_extra": "Charles apellido",
@@ -391,7 +391,7 @@
       "pista1": "Medida de desorden termodinamico",
       "pista2": "Segunda ley aumenta en universo aislado",
       "pista3": "Boltzmann y logaritmo de microestados",
-      "pista_extra": "Letra S en fisica",
+      "pista_extra": "Letra S en física",
       "respuesta": "entropia"
     }
   ]

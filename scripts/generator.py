@@ -149,6 +149,8 @@ def seed_questions(mode: str, seed_path: str) -> None:
         rows_to_insert = load_rows_from_json(cur, path)
         print(f"Loaded {len(rows_to_insert)} question(s) from {path}")
 
+        conn.execute("BEGIN IMMEDIATE")
+
         deleted = 0
         if mode == "replace":
             cur.execute("DELETE FROM preguntas WHERE fuente = 'python'")
@@ -157,8 +159,6 @@ def seed_questions(mode: str, seed_path: str) -> None:
 
         inserted = 0
         skipped = 0
-
-        conn.execute("BEGIN IMMEDIATE")
 
         for (
             tema_id,

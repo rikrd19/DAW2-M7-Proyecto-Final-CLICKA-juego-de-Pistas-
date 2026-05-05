@@ -3,745 +3,745 @@
   "fuente": "python",
   "preguntas": [
     {
-      "pista1": "En catalan, como se dice 'hola'",
+      "pista1": "En catalán, cómo se dice 'hola'",
       "pista2": "Saludo corto de uso diario",
       "pista3": "Empieza por b",
       "pista_extra": "Muy comun en Barcelona",
       "respuesta": "bon dia"
     },
     {
-      "pista1": "En catalan, como se dice 'adios'",
+      "pista1": "En catalán, cómo se dice 'adiós'",
       "pista2": "Despedida habitual",
       "pista3": "Dos palabras",
       "pista_extra": "La primera es a",
       "respuesta": "adeu"
     },
     {
-      "pista1": "En catalan, como se dice 'gracias'",
+      "pista1": "En catalán, cómo se dice 'gracias'",
       "pista2": "Palabra de cortesía",
       "pista3": "Empieza por g",
       "pista_extra": "Acaba en cies",
-      "respuesta": "gracies"
+      "respuesta": "gràcies"
     },
     {
-      "pista1": "En catalan, como se dice 'por favor'",
-      "pista2": "Expresion para pedir algo",
+      "pista1": "En catalán, cómo se dice 'por favor'",
+      "pista2": "Expresión para pedir algo",
       "pista3": "Dos palabras",
       "pista_extra": "La segunda es plau",
       "respuesta": "si us plau"
     },
     {
-      "pista1": "En catalan, como se dice 'si'",
-      "pista2": "Afirmacion",
+      "pista1": "En catalán, afirmación breve de dos letras.",
+      "pista2": "Afirmación",
       "pista3": "Dos letras",
       "pista_extra": "Igual que en castellano",
-      "respuesta": "si"
+      "respuesta": "sí"
     },
     {
-      "pista1": "En catalan, como se dice 'no'",
-      "pista2": "Negacion",
+      "pista1": "En catalán, negación breve de dos letras.",
+      "pista2": "Negación",
       "pista3": "Dos letras",
-      "pista_extra": "Igual que en castellano",
+      "pista_extra": "Extra amable: Empieza por n y tiene 2 letras.",
       "respuesta": "no"
     },
     {
-      "pista1": "En catalan, como se dice 'casa'",
+      "pista1": "En catalán, lugar donde vive una familia.",
       "pista2": "Lugar donde vives",
       "pista3": "Empieza por c",
       "pista_extra": "Acaba en a",
       "respuesta": "casa"
     },
     {
-      "pista1": "En catalan, como se dice 'coche'",
-      "pista2": "Vehiculo de cuatro ruedas",
+      "pista1": "En catalán, cómo se dice 'coche'",
+      "pista2": "Vehículo de cuatro ruedas",
       "pista3": "Empieza por c",
       "pista_extra": "Acaba en xe",
       "respuesta": "cotxe"
     },
     {
-      "pista1": "En catalan, como se dice 'calle'",
+      "pista1": "En catalán, cómo se dice 'calle'",
       "pista2": "Via urbana",
       "pista3": "Empieza por c",
       "pista_extra": "Acaba en er",
       "respuesta": "carrer"
     },
     {
-      "pista1": "En catalan, como se dice 'escuela'",
+      "pista1": "En catalán, cómo se dice 'escuela'",
       "pista2": "Lugar para estudiar",
       "pista3": "Empieza por e",
       "pista_extra": "Acaba en a",
       "respuesta": "escola"
     },
     {
-      "pista1": "En catalan, como se dice 'libro'",
+      "pista1": "En catalán, cómo se dice 'libro'",
       "pista2": "Objeto para leer",
       "pista3": "Empieza por l",
       "pista_extra": "Acaba en re",
       "respuesta": "llibre"
     },
     {
-      "pista1": "En catalan, como se dice 'mesa'",
+      "pista1": "En catalán, cómo se dice 'mesa'",
       "pista2": "Mueble para comer o trabajar",
       "pista3": "Empieza por t",
       "pista_extra": "Acaba en a",
       "respuesta": "taula"
     },
     {
-      "pista1": "En catalan, como se dice 'silla'",
+      "pista1": "En catalán, cómo se dice 'silla'",
       "pista2": "Mueble para sentarse",
       "pista3": "Empieza por c",
       "pista_extra": "Acaba en a",
       "respuesta": "cadira"
     },
     {
-      "pista1": "En catalan, como se dice 'puerta'",
+      "pista1": "En catalán, cómo se dice 'puerta'",
       "pista2": "Se abre para entrar",
       "pista3": "Empieza por p",
       "pista_extra": "Acaba en a",
       "respuesta": "porta"
     },
     {
-      "pista1": "En catalan, como se dice 'ventana'",
+      "pista1": "En catalán, cómo se dice 'ventana'",
       "pista2": "Entrada de luz",
       "pista3": "Empieza por f",
       "pista_extra": "Acaba en tra",
       "respuesta": "finestra"
     },
     {
-      "pista1": "En catalan, como se dice 'agua'",
+      "pista1": "En catalán, cómo se dice 'agua'",
       "pista2": "Liquido esencial",
       "pista3": "Empieza por a",
       "pista_extra": "Acaba en a",
       "respuesta": "aigua"
     },
     {
-      "pista1": "En catalan, como se dice 'pan'",
-      "pista2": "Alimento basico",
+      "pista1": "En catalán, alimento básico hecho de harina.",
+      "pista2": "Alimento básico",
       "pista3": "Empieza por p",
       "pista_extra": "Acaba en a",
       "respuesta": "pa"
     },
     {
-      "pista1": "En catalan, como se dice 'leche'",
+      "pista1": "En catalán, cómo se dice 'leche'",
       "pista2": "Bebida blanca",
       "pista3": "Empieza por l",
       "pista_extra": "Acaba en let",
       "respuesta": "llet"
     },
     {
-      "pista1": "En catalan, como se dice 'queso'",
-      "pista2": "Derivado lacteo",
+      "pista1": "En catalán, cómo se dice 'queso'",
+      "pista2": "Derivado lácteo",
       "pista3": "Empieza por f",
       "pista_extra": "Acaba en ge",
       "respuesta": "formatge"
     },
     {
-      "pista1": "En catalan, como se dice 'huevo'",
+      "pista1": "En catalán, cómo se dice 'huevo'",
       "pista2": "Lo pone la gallina",
       "pista3": "Empieza por o",
       "pista_extra": "Acaba en u",
       "respuesta": "ou"
     },
     {
-      "pista1": "En catalan, como se dice 'manzana'",
+      "pista1": "En catalán, cómo se dice 'manzana'",
       "pista2": "Fruta roja o verde",
       "pista3": "Empieza por p",
       "pista_extra": "Acaba en oma",
       "respuesta": "poma"
     },
     {
-      "pista1": "En catalan, como se dice 'naranja'",
+      "pista1": "En catalán, cómo se dice 'naranja'",
       "pista2": "Fruta citrica",
       "pista3": "Empieza por t",
       "pista_extra": "Acaba en ja",
       "respuesta": "taronja"
     },
     {
-      "pista1": "En catalan, como se dice 'platano'",
+      "pista1": "En catalán, fruta amarilla y alargada.",
       "pista2": "Fruta amarilla",
       "pista3": "Empieza por p",
       "pista_extra": "Acaba en tan",
-      "respuesta": "platan"
+      "respuesta": "plàtan"
     },
     {
-      "pista1": "En catalan, como se dice 'perro'",
+      "pista1": "En catalán, cómo se dice 'perro'",
       "pista2": "Animal domestico",
       "pista3": "Empieza por g",
       "pista_extra": "Acaba en os",
       "respuesta": "gos"
     },
     {
-      "pista1": "En catalan, como se dice 'gato'",
+      "pista1": "En catalán, felino doméstico que maúlla.",
       "pista2": "Animal que maulla",
       "pista3": "Empieza por g",
       "pista_extra": "Acaba en at",
       "respuesta": "gat"
     },
     {
-      "pista1": "En catalan, como se dice 'pajaro'",
+      "pista1": "En catalán, cómo se dice 'pájaro'",
       "pista2": "Animal que vuela",
       "pista3": "Empieza por o",
       "pista_extra": "Acaba en ell",
       "respuesta": "ocell"
     },
     {
-      "pista1": "En catalan, como se dice 'pez'",
+      "pista1": "En catalán, cómo se dice 'pez'",
       "pista2": "Vive en el agua",
       "pista3": "Empieza por p",
       "pista_extra": "Acaba en ix",
       "respuesta": "peix"
     },
     {
-      "pista1": "En catalan, como se dice 'sol'",
+      "pista1": "En catalán, estrella que ilumina de día.",
       "pista2": "Estrella de nuestro sistema",
       "pista3": "Empieza por s",
       "pista_extra": "Tres letras",
       "respuesta": "sol"
     },
     {
-      "pista1": "En catalan, como se dice 'luna'",
-      "pista2": "Satelite natural de la tierra",
+      "pista1": "En catalán, cómo se dice 'luna'",
+      "pista2": "Satélite natural de la tierra",
       "pista3": "Empieza por l",
       "pista_extra": "Cuatro letras",
       "respuesta": "lluna"
     },
     {
-      "pista1": "En catalan, como se dice 'cielo'",
+      "pista1": "En catalán, cómo se dice 'cielo'",
       "pista2": "Lo ves sobre tu cabeza",
       "pista3": "Empieza por c",
       "pista_extra": "Acaba en el",
       "respuesta": "cel"
     },
     {
-      "pista1": "En catalan, como se dice 'mar'",
+      "pista1": "En catalán, gran masa de agua salada.",
       "pista2": "Agua salada",
       "pista3": "Empieza por m",
       "pista_extra": "Tres letras",
       "respuesta": "mar"
     },
     {
-      "pista1": "En catalan, como se dice 'montaña'",
+      "pista1": "En catalán, cómo se dice 'montaña'",
       "pista2": "Elevacion natural del terreno",
       "pista3": "Empieza por m",
       "pista_extra": "Acaba en anya",
       "respuesta": "muntanya"
     },
     {
-      "pista1": "En catalan, como se dice 'rio'",
+      "pista1": "En catalán, cómo se dice 'río'",
       "pista2": "Corriente de agua",
       "pista3": "Empieza por r",
       "pista_extra": "Cuatro letras",
       "respuesta": "riu"
     },
     {
-      "pista1": "En catalan, como se dice 'arbol'",
+      "pista1": "En catalán, cómo se dice 'árbol'",
       "pista2": "Planta de tronco leñoso",
       "pista3": "Empieza por a",
       "pista_extra": "Acaba en bre",
       "respuesta": "arbre"
     },
     {
-      "pista1": "En catalan, como se dice 'flor'",
+      "pista1": "En catalán, parte vistosa de una planta.",
       "pista2": "Parte vistosa de una planta",
       "pista3": "Empieza por f",
       "pista_extra": "Cuatro letras",
       "respuesta": "flor"
     },
     {
-      "pista1": "En catalan, como se dice 'rojo'",
+      "pista1": "En catalán, cómo se dice 'rojo'",
       "pista2": "Color intenso",
       "pista3": "Empieza por v",
       "pista_extra": "Acaba en ell",
       "respuesta": "vermell"
     },
     {
-      "pista1": "En catalan, como se dice 'azul'",
+      "pista1": "En catalán, cómo se dice 'azul'",
       "pista2": "Color del cielo despejado",
       "pista3": "Empieza por b",
       "pista_extra": "Acaba en lau",
       "respuesta": "blau"
     },
     {
-      "pista1": "En catalan, como se dice 'verde'",
+      "pista1": "En catalán, color de la naturaleza y del césped.",
       "pista2": "Color de la naturaleza",
       "pista3": "Empieza por v",
       "pista_extra": "Acaba en erd",
       "respuesta": "verd"
     },
     {
-      "pista1": "En catalan, como se dice 'blanco'",
+      "pista1": "En catalán, color de la nieve.",
       "pista2": "Color de la nieve",
       "pista3": "Empieza por b",
       "pista_extra": "Acaba en anc",
       "respuesta": "blanc"
     },
     {
-      "pista1": "En catalan, como se dice 'negro'",
+      "pista1": "En catalán, cómo se dice 'negro'",
       "pista2": "Color oscuro",
       "pista3": "Empieza por n",
       "pista_extra": "Acaba en egre",
       "respuesta": "negre"
     },
     {
-      "pista1": "En catalan, como se dice 'grande'",
+      "pista1": "Pista con chispa: Lo contrario de pequeno",
       "pista2": "Lo contrario de pequeno",
       "pista3": "Empieza por g",
       "pista_extra": "Acaba en ran",
       "respuesta": "gran"
     },
     {
-      "pista1": "En catalan, como se dice 'pequeno'",
+      "pista1": "En catalán, cómo se dice 'pequeno'",
       "pista2": "Lo contrario de grande",
       "pista3": "Empieza por p",
       "pista_extra": "Acaba en etit",
       "respuesta": "petit"
     },
     {
-      "pista1": "En catalan, como se dice 'bueno'",
+      "pista1": "En catalán, cómo se dice 'bueno'",
       "pista2": "Cualidad positiva",
       "pista3": "Empieza por b",
       "pista_extra": "Acaba en o",
       "respuesta": "bo"
     },
     {
-      "pista1": "En catalan, como se dice 'malo'",
+      "pista1": "En catalán, cómo se dice 'malo'",
       "pista2": "Lo contrario de bueno",
       "pista3": "Empieza por d",
       "pista_extra": "Acaba en olent",
       "respuesta": "dolent"
     },
     {
-      "pista1": "En catalan, como se dice 'rapido'",
+      "pista1": "En catalán, adjetivo para quien va a mucha velocidad.",
       "pista2": "Se mueve con velocidad",
       "pista3": "Empieza por r",
       "pista_extra": "Acaba en apid",
-      "respuesta": "rapid"
+      "respuesta": "ràpid"
     },
     {
-      "pista1": "En catalan, como se dice 'lento'",
+      "pista1": "En catalán, adjetivo para quien se mueve despacio.",
       "pista2": "Se mueve despacio",
       "pista3": "Empieza por l",
       "pista_extra": "Acaba en ent",
       "respuesta": "lent"
     },
     {
-      "pista1": "En catalan, como se dice 'caliente'",
+      "pista1": "En catalán, cómo se dice 'caliente'",
       "pista2": "Con mucha temperatura",
       "pista3": "Empieza por c",
       "pista_extra": "Acaba en alent",
       "respuesta": "calent"
     },
     {
-      "pista1": "En catalan, como se dice 'frio'",
+      "pista1": "En catalán, cómo se dice 'frío'",
       "pista2": "Con poca temperatura",
       "pista3": "Empieza por f",
       "pista_extra": "Acaba en red",
       "respuesta": "fred"
     },
     {
-      "pista1": "En catalan, como se dice 'dia'",
-      "pista2": "Periodo con luz",
+      "pista1": "En catalán, período con luz solar.",
+      "pista2": "Período con luz",
       "pista3": "Empieza por d",
       "pista_extra": "Tres letras",
       "respuesta": "dia"
     },
     {
-      "pista1": "En catalan, como se dice 'noche'",
-      "pista2": "Periodo sin sol",
+      "pista1": "En catalán, cómo se dice 'noche'",
+      "pista2": "Período sin sol",
       "pista3": "Empieza por n",
       "pista_extra": "Acaba en it",
       "respuesta": "nit"
     },
     {
-      "pista1": "En catalan, como se dice 'mañana' (morning)",
-      "pista2": "Parte inicial del dia",
+      "pista1": "En catalán, cómo se dice 'mañana' (morning)",
+      "pista2": "Parte inicial del día",
       "pista3": "Empieza por m",
       "pista_extra": "Acaba en ati",
-      "respuesta": "mati"
+      "respuesta": "matí"
     },
     {
-      "pista1": "En catalan, como se dice 'tarde' (afternoon)",
-      "pista2": "Parte final del dia",
+      "pista1": "En catalán, cómo se dice 'tarde' (afternoon)",
+      "pista2": "Parte final del día",
       "pista3": "Empieza por t",
       "pista_extra": "Acaba en arda",
       "respuesta": "tarda"
     },
     {
-      "pista1": "En catalan, como se dice 'hoy'",
-      "pista2": "Dia actual",
+      "pista1": "En catalán, cómo se dice 'hoy'",
+      "pista2": "Día actual",
       "pista3": "Empieza por a",
       "pista_extra": "Quatre letras",
       "respuesta": "avui"
     },
     {
-      "pista1": "En catalan, como se dice 'ayer'",
-      "pista2": "Dia anterior",
+      "pista1": "En catalán, cómo se dice 'ayer'",
+      "pista2": "Día anterior",
       "pista3": "Empieza por a",
       "pista_extra": "Acaba en ir",
       "respuesta": "ahir"
     },
     {
-      "pista1": "En catalan, como se dice 'mañana' (tomorrow)",
-      "pista2": "Dia siguiente",
+      "pista1": "En catalán, cómo se dice 'mañana' (tomorrow)",
+      "pista2": "Día siguiente",
       "pista3": "Empieza por d",
       "pista_extra": "Acaba en ema",
-      "respuesta": "dema"
+      "respuesta": "demà"
     },
     {
-      "pista1": "En catalan, como se dice 'uno'",
-      "pista2": "Primer numero",
+      "pista1": "En catalán, primer número cardinal.",
+      "pista2": "Primer número",
       "pista3": "Empieza por u",
       "pista_extra": "Tres letras",
       "respuesta": "un"
     },
     {
-      "pista1": "En catalan, como se dice 'dos'",
-      "pista2": "Numero despues de uno",
+      "pista1": "En catalán, número que va después del uno.",
+      "pista2": "Número despues de uno",
       "pista3": "Empieza por d",
       "pista_extra": "Tres letras",
       "respuesta": "dos"
     },
     {
-      "pista1": "En catalan, como se dice 'tres'",
-      "pista2": "Numero despues de dos",
+      "pista1": "En catalán, número que va después del dos.",
+      "pista2": "Número despues de dos",
       "pista3": "Empieza por t",
       "pista_extra": "Cuatro letras",
       "respuesta": "tres"
     },
     {
-      "pista1": "En catalan, como se dice 'cuatro'",
-      "pista2": "Numero despues de tres",
+      "pista1": "En catalán, cómo se dice 'cuatro'",
+      "pista2": "Número despues de tres",
       "pista3": "Empieza por q",
       "pista_extra": "Acaba en atre",
       "respuesta": "quatre"
     },
     {
-      "pista1": "En catalan, como se dice 'cinco'",
-      "pista2": "Numero despues de cuatro",
+      "pista1": "En catalán, número que va después del cuatro.",
+      "pista2": "Número despues de cuatro",
       "pista3": "Empieza por c",
       "pista_extra": "Acaba en inc",
       "respuesta": "cinc"
     },
     {
-      "pista1": "En catalan, como se dice 'seis'",
-      "pista2": "Numero despues de cinco",
+      "pista1": "En catalán, cómo se dice 'seis'",
+      "pista2": "Número despues de cinco",
       "pista3": "Empieza por s",
       "pista_extra": "Acaba en is",
       "respuesta": "sis"
     },
     {
-      "pista1": "En catalan, como se dice 'siete'",
-      "pista2": "Numero despues de seis",
+      "pista1": "En catalán, cómo se dice 'siete'",
+      "pista2": "Número despues de seis",
       "pista3": "Empieza por s",
       "pista_extra": "Acaba en et",
       "respuesta": "set"
     },
     {
-      "pista1": "En catalan, como se dice 'ocho'",
-      "pista2": "Numero despues de siete",
+      "pista1": "En catalán, cómo se dice 'ocho'",
+      "pista2": "Número despues de siete",
       "pista3": "Empieza por v",
       "pista_extra": "Acaba en uit",
       "respuesta": "vuit"
     },
     {
-      "pista1": "En catalan, como se dice 'nueve'",
-      "pista2": "Numero despues de ocho",
+      "pista1": "En catalán, cómo se dice 'nueve'",
+      "pista2": "Número despues de ocho",
       "pista3": "Empieza por n",
       "pista_extra": "Acaba en ou",
       "respuesta": "nou"
     },
     {
-      "pista1": "En catalan, como se dice 'diez'",
-      "pista2": "Numero despues de nueve",
+      "pista1": "En catalán, cómo se dice 'diez'",
+      "pista2": "Número despues de nueve",
       "pista3": "Empieza por d",
       "pista_extra": "Tres letras",
       "respuesta": "deu"
     },
     {
-      "pista1": "En catalan, como se dice 'hombre'",
+      "pista1": "En catalán, cómo se dice 'hombre'",
       "pista2": "Adulto masculino",
       "pista3": "Empieza por h",
       "pista_extra": "Acaba en ome",
       "respuesta": "home"
     },
     {
-      "pista1": "En catalan, como se dice 'mujer'",
-      "pista2": "Adulto femenino",
+      "pista1": "En catalán, cómo se dice 'mujer'",
+      "pista2": "Adulto femeníno",
       "pista3": "Empieza por d",
       "pista_extra": "Acaba en ona",
       "respuesta": "dona"
     },
     {
-      "pista1": "En catalan, como se dice 'niño'",
+      "pista1": "En catalán, cómo se dice 'niño'",
       "pista2": "Persona joven",
       "pista3": "Empieza por n",
       "pista_extra": "Acaba en en",
       "respuesta": "nen"
     },
     {
-      "pista1": "En catalan, como se dice 'niña'",
-      "pista2": "Persona joven femenina",
+      "pista1": "En catalán, cómo se dice 'niña'",
+      "pista2": "Persona joven femenína",
       "pista3": "Empieza por n",
       "pista_extra": "Acaba en ena",
       "respuesta": "nena"
     },
     {
-      "pista1": "En catalan, como se dice 'amigo'",
+      "pista1": "En catalán, cómo se dice 'amigo'",
       "pista2": "Persona cercana",
       "pista3": "Empieza por a",
       "pista_extra": "Acaba en ic",
       "respuesta": "amic"
     },
     {
-      "pista1": "En catalan, como se dice 'familia'",
+      "pista1": "En catalán, conjunto de padres, hijos y parientes.",
       "pista2": "Padres, hijos y parientes",
       "pista3": "Empieza por f",
       "pista_extra": "Acaba en ia",
       "respuesta": "familia"
     },
     {
-      "pista1": "En catalan, como se dice 'madre'",
-      "pista2": "Progenitora femenina",
+      "pista1": "En catalán, cómo se dice 'madre'",
+      "pista2": "Progenitora femenína",
       "pista3": "Empieza por m",
       "pista_extra": "Acaba en are",
       "respuesta": "mare"
     },
     {
-      "pista1": "En catalan, como se dice 'padre'",
+      "pista1": "En catalán, cómo se dice 'padre'",
       "pista2": "Progenitor masculino",
       "pista3": "Empieza por p",
       "pista_extra": "Acaba en are",
       "respuesta": "pare"
     },
     {
-      "pista1": "En catalan, como se dice 'hermano'",
+      "pista1": "En catalán, cómo se dice 'hermano'",
       "pista2": "Hijo de tus mismos padres",
       "pista3": "Empieza por g",
       "pista_extra": "Acaba en erma",
-      "respuesta": "germa"
+      "respuesta": "germà"
     },
     {
-      "pista1": "En catalan, como se dice 'trabajo'",
+      "pista1": "En catalán, cómo se dice 'trabajo'",
       "pista2": "Actividad laboral",
       "pista3": "Empieza por f",
       "pista_extra": "Acaba en eina",
       "respuesta": "feina"
     },
     {
-      "pista1": "En catalan, como se dice 'dinero'",
+      "pista1": "En catalán, cómo se dice 'dinero'",
       "pista2": "Sirve para pagar",
       "pista3": "Empieza por d",
       "pista_extra": "Acaba en ers",
       "respuesta": "diners"
     },
     {
-      "pista1": "En catalan, como se dice 'tienda'",
+      "pista1": "En catalán, cómo se dice 'tienda'",
       "pista2": "Lugar para comprar",
       "pista3": "Empieza por b",
       "pista_extra": "Acaba en otiga",
       "respuesta": "botiga"
     },
     {
-      "pista1": "En catalan, como se dice 'mercado'",
+      "pista1": "En catalán, cómo se dice 'mercado'",
       "pista2": "Lugar de puestos y ventas",
       "pista3": "Empieza por m",
       "pista_extra": "Acaba en ercat",
       "respuesta": "mercat"
     },
     {
-      "pista1": "En catalan, como se dice 'hospital'",
+      "pista1": "En catalán, centro de salud para urgencias y tratamientos.",
       "pista2": "Centro de salud",
       "pista3": "Empieza por h",
       "pista_extra": "Acaba en al",
       "respuesta": "hospital"
     },
     {
-      "pista1": "En catalan, como se dice 'farmacia'",
+      "pista1": "En catalán, establecimiento donde compras medicamentos.",
       "pista2": "Donde compras medicinas",
       "pista3": "Empieza por f",
       "pista_extra": "Acaba en acia",
       "respuesta": "farmacia"
     },
     {
-      "pista1": "En catalan, como se dice 'estacion' (de tren)",
+      "pista1": "En catalán, lugar de llegada y salida de trenes.",
       "pista2": "Lugar de salida y llegada",
       "pista3": "Empieza por e",
       "pista_extra": "Acaba en acio",
-      "respuesta": "estacio"
+      "respuesta": "estació"
     },
     {
-      "pista1": "En catalan, como se dice 'tren'",
+      "pista1": "En catalán, transporte que circula por vías.",
       "pista2": "Transporte sobre vias",
       "pista3": "Empieza por t",
       "pista_extra": "Cuatro letras",
       "respuesta": "tren"
     },
     {
-      "pista1": "En catalan, como se dice 'autobus'",
+      "pista1": "En catalán, transporte urbano colectivo de carretera.",
       "pista2": "Transporte urbano",
       "pista3": "Empieza por a",
       "pista_extra": "Acaba en bus",
-      "respuesta": "autobus"
+      "respuesta": "autobús"
     },
     {
-      "pista1": "En catalan, como se dice 'bicicleta'",
-      "pista2": "Vehiculo de dos ruedas sin motor",
+      "pista1": "En catalán, vehículo de dos ruedas sin motor.",
+      "pista2": "Vehículo de dos ruedas sin motor",
       "pista3": "Empieza por b",
       "pista_extra": "Acaba en leta",
       "respuesta": "bicicleta"
     },
     {
-      "pista1": "En catalan, como se dice 'pregunta'",
+      "pista1": "En catalán, frase que se formula para obtener información.",
       "pista2": "Se formula para obtener respuesta",
       "pista3": "Empieza por p",
       "pista_extra": "Acaba en egunta",
       "respuesta": "pregunta"
     },
     {
-      "pista1": "En catalan, como se dice 'respuesta'",
+      "pista1": "En catalán, cómo se dice 'respuesta'",
       "pista2": "Contestas a una pregunta",
       "pista3": "Empieza por r",
       "pista_extra": "Acaba en esposta",
       "respuesta": "resposta"
     },
     {
-      "pista1": "Com es diu en catala escriptor",
-      "pista2": "Persona que escriu llibres",
-      "pista3": "Masculi singular",
-      "pista_extra": "Comenca per escri",
+      "pista1": "En catalán, palabra para quien escribe libros o textos.",
+      "pista2": "Profesión literaria en masculino singular.",
+      "pista3": "Empieza por e y termina en -tor.",
+      "pista_extra": "Tiene nueve letras.",
       "respuesta": "escriptor"
     },
     {
-      "pista1": "Com es diu en catala finestra petita al sostre",
-      "pista2": "Deixa passar la llum",
-      "pista3": "En angles skylight",
-      "pista_extra": "Mot compost clar",
+      "pista1": "En catalán, ventana en el techo que deja pasar luz.",
+      "pista2": "Se usa en áticos o buhardillas.",
+      "pista3": "Empieza por c.",
+      "pista_extra": "Termina en -boia.",
       "respuesta": "claraboia"
     },
     {
-      "pista1": "Com es diu en catala banc public",
-      "pista2": "On et seues al parc",
-      "pista3": "De fusta o metall",
-      "pista_extra": "Mot femeni",
+      "pista1": "En catalán, asiento público típico de parques.",
+      "pista2": "Suele ser de madera o metal.",
+      "pista3": "Palabra corta de cuatro letras.",
+      "pista_extra": "Empieza por b.",
       "respuesta": "banc"
     },
     {
-      "pista1": "Com es diu en catala poma verinosa",
-      "pista2": "Blancaneus la va mossegar",
-      "pista3": "Fruit vermell",
-      "pista_extra": "Tres lletres si poses article no",
+      "pista1": "En catalán, fruta roja o verde muy común.",
+      "pista2": "La de Blancanieves era famosa en cuentos.",
+      "pista3": "Empieza por p.",
+      "pista_extra": "Tiene cuatro letras.",
       "respuesta": "poma"
     },
     {
-      "pista1": "Com es diu en catala avui a la tarda",
-      "pista2": "Expressio de temps",
-      "pista3": "Sinonim de vespre",
-      "pista_extra": "Dos mots cap i vespre",
+      "pista1": "En catalán, expresión de tiempo para el final de la tarde.",
+      "pista2": "Se usa como franja horaria antes de la noche.",
+      "pista3": "Son dos palabras.",
+      "pista_extra": "Empieza por cap.",
       "respuesta": "cap vespre"
     },
     {
-      "pista1": "Com es diu en catala esmorzar",
-      "pista2": "Primers aliments del dia",
-      "pista3": "Verb relacionat",
-      "pista_extra": "Esmorzar com a nom",
+      "pista1": "En catalán, comida de la mañana.",
+      "pista2": "Primera comida del día.",
+      "pista3": "Empieza por e.",
+      "pista_extra": "Termina en -zar.",
       "respuesta": "esmorzar"
     },
     {
-      "pista1": "Com es diu en catala dutxa",
-      "pista2": "Aigua que cau sobre tu",
-      "pista3": "Sala de bany",
-      "pista_extra": "Femeni",
+      "pista1": "En catalán, instalación del baño por donde cae agua.",
+      "pista2": "Sirve para asearse rápidamente.",
+      "pista3": "Empieza por d.",
+      "pista_extra": "Termina en -xa.",
       "respuesta": "dutxa"
     },
     {
-      "pista1": "Com es diu en catala clau de casa",
-      "pista2": "Obre la porta",
-      "pista3": "Metall petit",
-      "pista_extra": "Mot femeni plural claus",
+      "pista1": "En catalán, objeto metálico para abrir la puerta de casa.",
+      "pista2": "Sin ella no puedes entrar.",
+      "pista3": "Palabra de cuatro letras.",
+      "pista_extra": "Empieza por c.",
       "respuesta": "clau"
     },
     {
-      "pista1": "Com es diu en catala paret",
-      "pista2": "Separa habitacions",
-      "pista3": "Maons o guix",
-      "pista_extra": "Femeni singular",
+      "pista1": "En catalán, superficie vertical que separa habitaciones.",
+      "pista2": "Puede ser de ladrillo o yeso.",
+      "pista3": "Empieza por p.",
+      "pista_extra": "Termina en -et.",
       "respuesta": "paret"
     },
     {
-      "pista1": "Com es diu en catala escala mecanica",
-      "pista2": "Puja gent en centre comercial",
-      "pista3": "No es ascensor",
-      "pista_extra": "Dos mots",
+      "pista1": "En catalán, estructura mecánica para subir entre plantas.",
+      "pista2": "No es ascensor, va en escalones.",
+      "pista3": "Son dos palabras.",
+      "pista_extra": "La segunda es mecànica.",
       "respuesta": "escala mecanica"
     },
     {
-      "pista1": "Com es diu en catala paraigua",
-      "pista2": "Quan plou",
-      "pista3": "Objecte de tela",
-      "pista_extra": "Mot compost",
+      "pista1": "En catalán, objeto que te protege cuando llueve.",
+      "pista2": "Se abre y se cierra.",
+      "pista3": "Empieza por p.",
+      "pista_extra": "Tiene ocho letras.",
       "respuesta": "paraigua"
     },
     {
-      "pista1": "Com es diu en catala bossa de plastic",
-      "pista2": "Per comprar",
-      "pista3": "De un sol us a vegades",
-      "pista_extra": "Mot femeni bossa",
+      "pista1": "En catalán, bolsa que usas para guardar compras.",
+      "pista2": "Puede ser de tela o plástico.",
+      "pista3": "Empieza por b.",
+      "pista_extra": "Palabra de cinco letras.",
       "respuesta": "bossa"
     },
     {
-      "pista1": "Com es diu en catala enrere",
-      "pista2": "Direccio oposada endavant",
-      "pista3": "Adverbi",
-      "pista_extra": "Sense accents especials",
+      "pista1": "En catalán, dirección contraria a avanzar.",
+      "pista2": "Sinónimo de hacia atrás.",
+      "pista3": "Empieza por e.",
+      "pista_extra": "Termina en -ere.",
       "respuesta": "enrere"
     },
     {
-      "pista1": "Com es diu en catala dema",
-      "pista2": "El dia seguent",
-      "pista3": "Avui mes un",
-      "pista_extra": "Una sola paraula",
-      "respuesta": "dema"
+      "pista1": "En catalán, el día posterior a hoy.",
+      "pista2": "No es ayer, es el siguiente.",
+      "pista3": "Empieza por d y lleva acento abierto.",
+      "pista_extra": "Tiene cuatro letras.",
+      "respuesta": "demà"
     },
     {
-      "pista1": "Com es diu en catala ahir",
-      "pista2": "El dia anterior",
-      "pista3": "Temps passat recent",
-      "pista_extra": "Quatre lletres",
+      "pista1": "En catalán, el día anterior al actual.",
+      "pista2": "Tiempo pasado muy cercano.",
+      "pista3": "Empieza por a.",
+      "pista_extra": "Tiene cuatro letras.",
       "respuesta": "ahir"
     },
     {
-      "pista1": "Com es diu en catala setmana",
-      "pista2": "Set dies",
-      "pista3": "Calendari",
-      "pista_extra": "Femeni",
+      "pista1": "En catalán, conjunto de siete días.",
+      "pista2": "Unidad habitual del calendario.",
+      "pista3": "Empieza por s.",
+      "pista_extra": "Termina en -mana.",
       "respuesta": "setmana"
     },
     {
-      "pista1": "Com es diu en catala any",
-      "pista2": "Dotze mesos",
-      "pista3": "Temps llarg",
-      "pista_extra": "Masculi",
+      "pista1": "En catalán, periodo de doce meses.",
+      "pista2": "Medida larga de tiempo.",
+      "pista3": "Palabra corta de tres letras.",
+      "pista_extra": "Empieza por a y termina en y.",
       "respuesta": "any"
     },
     {
-      "pista1": "Com es diu en catala tard",
-      "pista2": "Contrari de dhora",
-      "pista3": "Arribar mes tard",
-      "pista_extra": "Adverbi o nom",
+      "pista1": "En catalán, contrario de temprano.",
+      "pista2": "Se usa cuando llegas fuera de hora.",
+      "pista3": "Palabra breve de cuatro letras.",
+      "pista_extra": "Empieza por t.",
       "respuesta": "tard"
     },
     {
-      "pista1": "Com es diu en catala mati",
-      "pista2": "Abans del migdia",
-      "pista3": "Bon dia es al",
-      "pista_extra": "Mot masculi",
-      "respuesta": "mati"
+      "pista1": "En catalán, parte del día antes del mediodía.",
+      "pista2": "Franja horaria de la mañana.",
+      "pista3": "Empieza por m y lleva acento cerrado.",
+      "pista_extra": "Tiene cuatro letras.",
+      "respuesta": "matí"
     },
     {
-      "pista1": "Com es diu en catala nit",
-      "pista2": "Quan el sol es pon",
-      "pista3": "Bona nit",
-      "pista_extra": "Femeni",
+      "pista1": "En catalán, periodo del día sin sol.",
+      "pista2": "Se usa en el saludo de despedida nocturno.",
+      "pista3": "Palabra corta de tres letras.",
+      "pista_extra": "Empieza por n.",
       "respuesta": "nit"
     }
   ]

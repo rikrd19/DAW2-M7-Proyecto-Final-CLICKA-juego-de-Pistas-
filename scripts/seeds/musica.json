@@ -3,7 +3,7 @@
   "fuente": "python",
   "preguntas": [
     {
-      "pista1": "Compositor aleman sordo en sus ultimos anos",
+      "pista1": "Compositor alemán sordo en sus ultimos años",
       "pista2": "Escribio nueve sinfonias",
       "pista3": "La novena incluye oda a la alegria",
       "pista_extra": "Su apellido empieza por bee",
@@ -18,7 +18,7 @@
     },
     {
       "pista1": "Instrumento de seis cuerdas muy popular",
-      "pista2": "Puede ser acustica o electrica",
+      "pista2": "Puede ser acústica o eléctrica",
       "pista3": "Se toca rasgueando o punteando",
       "pista_extra": "Empieza por gui",
       "respuesta": "guitarra"
@@ -66,7 +66,7 @@
       "respuesta": "piano"
     },
     {
-      "pista1": "Duo frances de musica electronica con cascos",
+      "pista1": "Duo francés de música electronica con cascos",
       "pista2": "Exito get lucky",
       "pista3": "Separacion anunciada en dos mil veintiuno",
       "pista_extra": "Nombre empieza por daft",
@@ -109,36 +109,36 @@
     },
     {
       "pista1": "Artista colombiana de hips dont lie",
-      "pista2": "Tambien conocida por waka waka",
+      "pista2": "También conocida por waka waka",
       "pista3": "Tiene fundacion pie descalzos",
       "pista_extra": "Su nombre empieza por sha",
       "respuesta": "shakira"
     },
     {
       "pista1": "Banda irlandesa de bono como vocalista",
-      "pista2": "Cancion with or without you",
+      "pista2": "Canción with or without you",
       "pista3": "Muy activa en causas sociales",
-      "pista_extra": "Nombre con letra y numero",
+      "pista_extra": "Nombre con letra y número",
       "respuesta": "u2"
     },
     {
       "pista1": "Genero surgido en estados unidos con rimas",
       "pista2": "Base ritmica marcada por beats",
       "pista3": "Freestyle en batallas",
-      "pista_extra": "Tambien llamado hip hop",
+      "pista_extra": "También llamado hip hop",
       "respuesta": "rap"
     },
     {
-      "pista1": "Servicio de musica en streaming verde",
+      "pista1": "Servicio de música en streaming verde",
       "pista2": "Playlists y recomendaciones",
       "pista3": "Muy usado en movil",
       "pista_extra": "Nombre empieza por spot",
       "respuesta": "spotify"
     },
     {
-      "pista1": "Cantante britanica de hello",
+      "pista1": "Cantante británica de hello",
       "pista2": "Voz potente y baladas emotivas",
-      "pista3": "Albumes llamados por numeros",
+      "pista3": "Albumes llamados por números",
       "pista_extra": "Su nombre artistico tiene cuatro letras",
       "respuesta": "adele"
     },
@@ -166,12 +166,12 @@
     {
       "pista1": "Compositor impresionista mer",
       "pista2": "Clair de lune",
-      "pista3": "Frances fin siglo diecinueve",
-      "pista_extra": "Debussy",
+      "pista3": "Francés fin siglo diecinueve",
+      "pista_extra": "Empieza por d y tiene 7 letras.",
       "respuesta": "debussy"
     },
     {
-      "pista1": "Banda britanica dark side of the moon",
+      "pista1": "Banda británica dark side of the moon",
       "pista2": "Roger waters",
       "pista3": "The wall",
       "pista_extra": "Pink",
@@ -214,7 +214,7 @@
     },
     {
       "pista1": "Metal noruego black corpse paint",
-      "pista2": "Mayhem historia oscura",
+      "pista2": "Va otra: Burzum vecino",
       "pista3": "Burzum vecino",
       "pista_extra": "Escena noruega",
       "respuesta": "mayhem"
@@ -229,12 +229,12 @@
     {
       "pista1": "Hip hop west coast compton",
       "pista2": "Straight outta",
-      "pista3": "NWA grupo",
-      "pista_extra": "Dr dre ice cube",
+      "pista3": "Dr dre ice cube",
+      "pista_extra": "piensa en música y en la pista anterior.",
       "respuesta": "nwa"
     },
     {
-      "pista1": "Bossa nova garota de ipanema",
+      "pista1": "Pista con chispa: Tom jobim",
       "pista2": "Tom jobim",
       "pista3": "Rio sesenta",
       "pista_extra": "Joao gilberto",
@@ -278,8 +278,8 @@
     {
       "pista1": "Cumbia colombiana accordion",
       "pista2": "Carlos vives la gota fria",
-      "pista3": "Vallenato tradicion",
-      "pista_extra": "Atlantico costa",
+      "pista3": "Atlántico costa",
+      "pista_extra": "piensa en música y en la pista anterior.",
       "respuesta": "vallenato"
     }
   ]
