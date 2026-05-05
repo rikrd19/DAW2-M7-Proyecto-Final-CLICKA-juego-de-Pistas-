@@ -1,7 +1,7 @@
 <?php
 /**
  * Delete User Process.
- * Deletes related partidas rows, then the user row; removes local upload files only.
+ * Deletes user traces (partidas + feedback), then user row; removes local upload files.
  */
 require_once dirname(__DIR__) . '/includes/db.php';
 require_once dirname(__DIR__) . '/includes/auth.php';
@@ -33,6 +33,12 @@ try {
     }
 
     $db->exec('BEGIN IMMEDIATE');
+
+    // Remove user feedback/comments first (table has no FK with ON DELETE cascade).
+    $delFeedback = $db->prepare('DELETE FROM app_feedback WHERE usuario_id = :id');
+    $delFeedback->bindValue(':id', $targetId, SQLITE3_INTEGER);
+    $delFeedback->execute();
+
     $delParts = $db->prepare('DELETE FROM partidas WHERE usuario_id = :id');
     $delParts->bindValue(':id', $targetId, SQLITE3_INTEGER);
     $delParts->execute();
