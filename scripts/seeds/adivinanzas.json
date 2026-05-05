@@ -11,9 +11,9 @@
     },
     {
       "pista1": "Tiene agujas y no cose",
-      "pista2": "Da vueltas todo el dia",
+      "pista2": "Da vueltas todo el día",
       "pista3": "A veces esta en tu muneca",
-      "pista_extra": "Las doce en punto es su numero famoso",
+      "pista_extra": "Las doce en punto es su número famoso",
       "respuesta": "reloj"
     },
     {
@@ -24,23 +24,23 @@
       "respuesta": "libro"
     },
     {
-      "pista1": "Te sigue de dia cuando hay sol",
+      "pista1": "Te sigue de día cuando hay sol",
       "pista2": "Es negra como la tinta",
       "pista3": "No pesa ni un gramo",
       "pista_extra": "Al atardecer se alarga",
       "respuesta": "sombra"
     },
     {
-      "pista1": "Cuanto mas grande menos ves",
+      "pista1": "Cuanto más grande menos ves",
       "pista2": "Todo lo cubre en la noche",
-      "pista3": "Sin estrellas es mas fuerte",
+      "pista3": "Sin estrellas es más fuerte",
       "pista_extra": "La lampara la espanta",
       "respuesta": "oscuridad"
     },
     {
       "pista1": "Repito tu voz sin boca",
-      "pista2": "En el hueco de montanas vivo",
-      "pista3": "Cuanto mas gritas mas te contesto",
+      "pista2": "Va otra: Cuanto más gritas más te contesto",
+      "pista3": "Cuanto más gritas más te contesto",
       "pista_extra": "Sin sonido desaparezco",
       "respuesta": "eco"
     },
@@ -89,13 +89,13 @@
     {
       "pista1": "Tengo teclas pero no abro puertas",
       "pista2": "Tengo espacio pero no habitaciones",
-      "pista3": "Si me rompes ya no sueno igual",
+      "pista3": "Si me rompes ya no sueño igual",
       "pista_extra": "En conciertos me golpean",
       "respuesta": "piano"
     },
     {
-      "pista1": "Cuanto mas quitas mas grande me vuelvo",
-      "pista2": "En la arena los ninos me hacen",
+      "pista1": "Cuanto más quitas más grande me vuelvo",
+      "pista2": "En la arena los niños me hacen",
       "pista3": "Estoy vacio en el centro",
       "pista_extra": "El tiempo me borra en la orilla",
       "respuesta": "agujero"
@@ -123,7 +123,7 @@
     },
     {
       "pista1": "Hijo del agua soy",
-      "pista2": "Padre del frio dicen",
+      "pista2": "Padre del frío dicen",
       "pista3": "Si no respira muero",
       "pista_extra": "Del cielo en copos caigo",
       "respuesta": "hielo"
@@ -235,23 +235,23 @@
     },
     {
       "pista1": "Doce meses en cuadros",
-      "pista2": "Numeros y dias ordeno",
+      "pista2": "Números y días ordeno",
       "pista3": "La pared o escritorio ocupo",
-      "pista_extra": "Cada ano renuevo hoja",
+      "pista_extra": "Cada año renuevo hoja",
       "respuesta": "calendario"
     },
     {
-      "pista1": "Capucha llevo en sudadera",
+      "pista1": "Pista con chispa: Lluvia en cabeza evito",
       "pista2": "Lluvia en cabeza evito",
       "pista3": "Cordones no soy zapato",
-      "pista_extra": "Orejas tapo del frio",
+      "pista_extra": "Orejas tapo del frío",
       "respuesta": "capucha"
     },
     {
       "pista1": "Dos padres dos hijos y un nieto",
       "pista2": "En total tres personas hay",
-      "pista3": "Abuelo padre y nieto unidos",
-      "pista_extra": "Raices del arbol familiar",
+      "pista3": "Raices del arbol familiar",
+      "pista_extra": "Extra amable: piensa en adivinanzas y en la pista anterior.",
       "respuesta": "abuelo"
     },
     {
@@ -262,22 +262,22 @@
       "respuesta": "platano"
     },
     {
-      "pista1": "Siempre frio por dentro",
+      "pista1": "Siempre frío por dentro",
       "pista2": "Luz enciendo de noche",
       "pista3": "Leche y huevos guardo",
-      "pista_extra": "Nevera me llaman tambien",
+      "pista_extra": "Extra amable: Empieza por n y tiene 6 letras.",
       "respuesta": "nevera"
     },
     {
       "pista1": "Suena y vibra en el bolsillo",
-      "pista2": "Numeros marcas para hablar",
+      "pista2": "Números marcas para hablar",
       "pista3": "Pantalla o antenas tiene",
       "pista_extra": "WhatsApp en mi habita",
       "respuesta": "telefono"
     },
     {
       "pista1": "Marco de casa sin retrato",
-      "pista2": "La luz del dia filtro",
+      "pista2": "La luz del día filtro",
       "pista3": "Cristal que se abre",
       "pista_extra": "Cortina al lado a menudo",
       "respuesta": "ventana"
@@ -292,7 +292,7 @@
     {
       "pista1": "Blanda para la cabeza",
       "pista2": "En la cama me aplastas",
-      "pista3": "Sueno mejor conmigo",
+      "pista3": "Sueño mejor conmigo",
       "pista_extra": "Fundas de algodon llevo",
       "respuesta": "almohada"
     },
@@ -363,7 +363,7 @@
       "pista1": "Oro no es pero tesoro guardo",
       "pista2": "En la playa me buscas",
       "pista3": "Casa espiral calcarea",
-      "pista_extra": "Caracol marino o de jardin",
+      "pista_extra": "Extra amable: Empieza por c y tiene 7 letras.",
       "respuesta": "caracol"
     },
     {
@@ -382,16 +382,16 @@
     },
     {
       "pista1": "Blanca por dentro verde por fuera",
-      "pista2": "Si no sabes espera",
-      "pista3": "Fruta que rima con espera",
+      "pista2": "Va otra: En gazpacho a veces",
+      "pista3": "Empieza por p y tiene 4 letras.",
       "pista_extra": "En gazpacho a veces",
       "respuesta": "pera"
     },
     {
       "pista1": "Sube y baja y no se mueve",
-      "pista2": "Marca calor y frio",
-      "pista3": "En termometro me miras",
-      "pista_extra": "Liquido o columna roja",
+      "pista2": "Marca calor y frío",
+      "pista3": "Liquido o columna roja",
+      "pista_extra": "Extra amable: piensa en adivinanzas y en la pista anterior.",
       "respuesta": "termometro"
     },
     {
@@ -425,8 +425,8 @@
     {
       "pista1": "Cien hermanos en fila",
       "pista2": "Si uno tropieza el resto cae",
-      "pista3": "Juego de ninos en mesa",
-      "pista_extra": "Domino se llama",
+      "pista3": "Juego de niños en mesa",
+      "pista_extra": "Extra amable: Empieza por d y tiene 6 letras.",
       "respuesta": "domino"
     },
     {
@@ -472,7 +472,7 @@
       "respuesta": "tren"
     },
     {
-      "pista1": "Dos espejos miran sin cesar",
+      "pista1": "Pista con chispa: Entre ellos infinito fingen",
       "pista2": "Entre ellos infinito fingen",
       "pista3": "En ascensor a veces",
       "pista_extra": "Te ves repetido",
@@ -481,7 +481,7 @@
     {
       "pista1": "Siempre quieto y siempre corre",
       "pista2": "Nunca cansado",
-      "pista3": "Doce numeros en circulo",
+      "pista3": "Doce números en circulo",
       "pista_extra": "Tic tac",
       "respuesta": "reloj"
     },
@@ -489,7 +489,7 @@
       "pista1": "Luz antes que trueno",
       "pista2": "Parto nubes en verano",
       "pista3": "Franklin cometa",
-      "pista_extra": "Electrica descarga",
+      "pista_extra": "Eléctrica descarga",
       "respuesta": "rayo"
     }
   ]

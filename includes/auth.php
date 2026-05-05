@@ -52,26 +52,24 @@ function check_admin(): void
 }
 
 /**
- * Normalizes public display name (trim + lowercase). Stored value for uniqueness checks.
+ * Normalizes public display name (trim only; preserve case as entered by the user).
  */
 function clicka_normalize_public_username(string $raw): string
 {
-    return strtolower(trim($raw));
+    return trim($raw);
 }
 
 /**
- * Returns null if valid; otherwise a short error key: empty, length, chars.
+ * Returns null if valid; otherwise a short error key: empty, length.
  */
 function clicka_validate_public_username_key(string $normalized): ?string
 {
     if ($normalized === '') {
         return 'empty';
     }
-    if (strlen($normalized) < 3 || strlen($normalized) > 24) {
+    $length = function_exists('mb_strlen') ? mb_strlen($normalized) : strlen($normalized);
+    if ($length < 3 || $length > 20) {
         return 'length';
-    }
-    if (!preg_match('/^[a-z0-9_]+$/', $normalized)) {
-        return 'chars';
     }
     return null;
 }

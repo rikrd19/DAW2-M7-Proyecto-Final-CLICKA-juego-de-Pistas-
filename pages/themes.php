@@ -32,11 +32,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $id = (int) ($_POST['tema_id'] ?? 0);
         if ($id > 0) {
             try {
-                $stmt = $db->prepare('DELETE FROM temas WHERE id = :id');
-                $stmt->bindValue(':id', $id, SQLITE3_INTEGER);
-                $stmt->execute();
-                $msg = 'Tema eliminado.';
+                $nameStmt = $db->prepare('SELECT nombre FROM temas WHERE id = :id LIMIT 1');
+                $nameStmt->bindValue(':id', $id, SQLITE3_INTEGER);
+                $temaRow = $nameStmt->execute()->fetchArray(SQLITE3_ASSOC);
+                if (!$temaRow) {
+                    $err = 'Tema no encontrado.';
+                } else {
+                    $temaNombre = (string) $temaRow['nombre'];
+
+                    $db->exec('BEGIN IMMEDIATE');
+
+                    // Remove score traces of that theme so it disappears from global and filtered rankings.
+                    $delParts = $db->prepare('DELETE FROM partidas WHERE tema = :tema COLLATE NOCASE');
+                    $delParts->bindValue(':tema', $temaNombre, SQLITE3_TEXT);
+                    $delParts->execute();
+
+                    // Remove feedback rows linked to the deleted theme.
+                    $delFeedback = $db->prepare('DELETE FROM app_feedback WHERE tema = :tema COLLATE NOCASE');
+                    $delFeedback->bindValue(':tema', $temaNombre, SQLITE3_TEXT);
+                    $delFeedback->execute();
+
+                    // Finally remove the theme (preguntas are removed by FK ON DELETE CASCADE).
+                    $stmt = $db->prepare('DELETE FROM temas WHERE id = :id');
+                    $stmt->bindValue(':id', $id, SQLITE3_INTEGER);
+                    $stmt->execute();
+
+                    $db->exec('COMMIT');
+                    $msg = 'Tema eliminado junto con sus partidas, comentarios y preguntas asociadas.';
+                }
             } catch (Throwable) {
+                try {
+                    $db->exec('ROLLBACK');
+                } catch (Throwable) {
+                    // Ignore rollback issues when transaction was not active.
+                }
                 $err = 'No se pudo eliminar el tema.';
             }
         }
@@ -111,11 +140,13 @@ while ($row = $res->fetchArray(SQLITE3_ASSOC)) {
                       </span>
                     </td>
                     <td class="px-4 py-3 text-center">
-                      <form method="POST" onsubmit="return confirm('¿Eliminar tema y sus preguntas?');">
-                        <input type="hidden" name="action" value="delete">
-                        <input type="hidden" name="tema_id" value="<?php echo (int) $t['id']; ?>">
-                        <button type="submit" class="btn btn-sm btn-outline-danger">&#128465;</button>
-                      </form>
+                      <button type="button"
+                              class="btn btn-sm btn-outline-danger js-delete-theme-open"
+                              data-bs-toggle="modal"
+                              data-bs-target="#deleteThemeModal"
+                              data-theme-id="<?php echo (int) $t['id']; ?>"
+                              data-theme-name="<?php echo htmlspecialchars((string) $t['nombre'], ENT_QUOTES, 'UTF-8'); ?>"
+                              title="Eliminar tema">&#128465;</button>
                     </td>
                   </tr>
                   <?php endforeach; ?>
@@ -153,6 +184,45 @@ while ($row = $res->fetchArray(SQLITE3_ASSOC)) {
 
     </div>
   </main>
+
+  <div class="modal fade" id="deleteThemeModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 shadow">
+        <div class="modal-header border-0 pb-0">
+          <h5 class="modal-title fw-bold">¿Eliminar temática?</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body text-center py-4">
+          <p class="text-muted mb-2">Se eliminará esta temática y todo su rastro:</p>
+          <p class="mb-0 small text-muted">preguntas, partidas, ranking y comentarios asociados.</p>
+          <p class="fw-semibold mt-3 mb-0" id="deleteThemeName">—</p>
+        </div>
+        <div class="modal-footer border-0 pt-0">
+          <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancelar</button>
+          <form method="POST" class="m-0">
+            <input type="hidden" name="action" value="delete">
+            <input type="hidden" name="tema_id" id="deleteThemeId" value="">
+            <button type="submit" class="btn btn-danger fw-bold">Eliminar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var deleteIdInput = document.getElementById('deleteThemeId');
+      var deleteNameEl = document.getElementById('deleteThemeName');
+      if (!deleteIdInput || !deleteNameEl) return;
+
+      document.addEventListener('click', function (ev) {
+        var btn = ev.target.closest('button.js-delete-theme-open[data-theme-id]');
+        if (!btn) return;
+        deleteIdInput.value = btn.getAttribute('data-theme-id') || '';
+        deleteNameEl.textContent = btn.getAttribute('data-theme-name') || '—';
+      }, true);
+    })();
+  </script>
 
   <?php include '../includes/foot.php'; ?>
 </body>

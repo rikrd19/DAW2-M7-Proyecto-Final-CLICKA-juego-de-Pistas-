@@ -4,21 +4,21 @@
   "preguntas": [
     {
       "pista1": "Deporte once contra once con porteria y fuera de juego",
-      "pista2": "Copa del Mundo cada cuatro anos",
+      "pista2": "Copa del Mundo cada cuatro años",
       "pista3": "Balon redondo y tarjetas amarillas",
       "pista_extra": "Messi y Ronaldo son iconos recientes",
       "respuesta": "futbol"
     },
     {
       "pista1": "Cinco jugadores por equipo canasta a tres metros cero cinco",
-      "pista2": "NBA es su liga mas famosa",
+      "pista2": "NBA es su liga más famosa",
       "pista3": "Triple y mate son jugadas",
       "pista_extra": "Pelota naranja con lineas negras",
       "respuesta": "baloncesto"
     },
     {
       "pista1": "Pista rectangular red partida por red individuales o dobles",
-      "pista2": "Wimbledon hierba clasica",
+      "pista2": "Wimbledon hierba clásica",
       "pista3": "Love quince treinta cuarenta",
       "pista_extra": "Raquetas y pelota de fieltro",
       "respuesta": "tenis"
@@ -45,17 +45,17 @@
       "respuesta": "atletismo"
     },
     {
-      "pista1": "Maraton distancia clasica cuarenta y dos coma cero noventa y cinco kilometros",
-      "pista2": "Origen legendario en Grecia antigua",
-      "pista3": "Medio maraton es la mitad",
+      "pista1": "Origen legendario en Grecia antigua",
+      "pista2": "Tiene 1 palabra.",
+      "pista3": "Empieza por m y tiene 7 letras.",
       "pista_extra": "Nombre de ciudad griega en la historia",
       "respuesta": "maraton"
     },
     {
-      "pista1": "Cada cuatro anos Juegos Olimpicos de verano e invierno alternan",
+      "pista1": "Cada cuatro años Juegos Olimpicos de verano e invierno alternan",
       "pista2": "Aros entrelazados simbolo",
       "pista3": "Llama y antorcha en la ceremonia",
-      "pista_extra": "CID en siglas en frances",
+      "pista_extra": "CID en siglas en francés",
       "respuesta": "olimpiadas"
     },
     {
@@ -73,8 +73,8 @@
       "respuesta": "futbol americano"
     },
     {
-      "pista1": "Piscina waterpolo siete por equipo y porteria flotante",
-      "pista2": "Cuatro periodos de ocho minutos",
+      "pista1": "Cuatro periodos de ocho minutos",
+      "pista2": "Tiene 1 palabra.",
       "pista3": "Exclusion veinte segundos",
       "pista_extra": "Pelota amarilla acuatica",
       "respuesta": "waterpolo"
@@ -87,121 +87,121 @@
       "respuesta": "tour de francia"
     },
     {
-      "pista1": "Golf dieciocho hoyos palos y handicap",
-      "pista2": "Birdie eagle y bogey",
+      "pista1": "Birdie eagle y bogey",
+      "pista2": "Tiene 1 palabra.",
       "pista3": "Green cesped cortisimo",
       "pista_extra": "Masters de Augusta torneo famoso",
       "respuesta": "golf"
     },
     {
-      "pista1": "Boxeo ring cuatro esquinas y rounds de tres minutos",
-      "pista2": "Knockout y clinch",
+      "pista1": "Knockout y clinch",
+      "pista2": "Tiene 1 palabra.",
       "pista3": "Guantes acolchados y categorias por peso",
       "pista_extra": "Ali Tyson son leyendas",
       "respuesta": "boxeo"
     },
     {
-      "pista1": "Voleibol red alta seis por bando y remate",
-      "pista2": "Toque maximo tres por equipo",
+      "pista1": "Toque maximo tres por equipo",
+      "pista2": "Tiene 1 palabra.",
       "pista3": "Saques rotativos",
       "pista_extra": "Playa o sala variantes",
       "respuesta": "voleibol"
     },
     {
-      "pista1": "Rugby oval ensayo y conversion",
-      "pista2": "Melé y scrum",
+      "pista1": "Melé y scrum",
+      "pista2": "Tiene 1 palabra.",
       "pista3": "Seis naciones torneo europeo",
-      "pista_extra": "Sin cascos en rugby league a veces",
+      "pista_extra": "Extra amable: Tiene 1 palabra.",
       "respuesta": "rugby"
     },
     {
-      "pista1": "Natacion estilos braza espalda mariposa y crol",
-      "pista2": "Piscina cincuenta metros olimpica",
+      "pista1": "Piscina cincuenta metros olimpica",
+      "pista2": "Tiene 1 palabra.",
       "pista3": "Salida desde bloque",
-      "pista_extra": "Phelps es nadador historico",
+      "pista_extra": "Phelps es nadador histórico",
       "respuesta": "natacion"
     },
     {
-      "pista1": "Esgrima florete espada y sable",
-      "pista2": "Pista metalica y mascara de malla",
+      "pista1": "Pista metalica y mascara de malla",
+      "pista2": "Tiene 1 palabra.",
       "pista3": "Toque valido con electronica",
       "pista_extra": "Deporte olimpico de duelo",
       "respuesta": "esgrima"
     },
     {
-      "pista1": "Balonmano siete por equipo y portero",
-      "pista2": "Pista interior cuarenta metros",
+      "pista1": "Pista interior cuarenta metros",
+      "pista2": "Tiene 1 palabra.",
       "pista3": "Tres pasos con balon antes de soltar",
       "pista_extra": "Espana ha ganado mundiales",
       "respuesta": "balonmano"
     },
     {
-      "pista1": "Surf tabla y ola oceano",
-      "pista2": "Pipeline Hawaii ola mitica",
+      "pista1": "Pipeline Hawaii ola mitica",
+      "pista2": "Tiene 1 palabra.",
       "pista3": "Levantarse en take off",
       "pista_extra": "Puntuacion por maniobras en competicion",
       "respuesta": "surf"
     },
     {
-      "pista1": "Escalada deportiva en roco o muro artificial",
-      "pista2": "Magnesio y presas de colores",
+      "pista1": "Magnesio y presas de colores",
+      "pista2": "Tiene 1 palabra.",
       "pista3": "Cuerda y asegurador en modos seguros",
       "pista_extra": "Boulder sin cuerda en bloques bajos",
       "respuesta": "escalada"
     },
     {
-      "pista1": "Formula Uno monoplazas y circuitos",
-      "pista2": "Neumaticos slicks o intermedios",
+      "pista1": "Neumaticos slicks o intermedios",
+      "pista2": "Tiene 2 palabras.",
       "pista3": "Ayrton Senna leyenda",
       "pista_extra": "Gran Premio de Monaco curva casino",
       "respuesta": "formula uno"
     },
     {
-      "pista1": "Motociclismo velocidad en circuito MotoGP",
-      "pista2": "Rossi numero cuarenta y seis famoso",
+      "pista1": "Rossi número cuarenta y seis famoso",
+      "pista2": "Tiene 1 palabra.",
       "pista3": "Rodillas al asfalto en curvas",
       "pista_extra": "Dos ruedas sin pedales",
       "respuesta": "motociclismo"
     },
     {
-      "pista1": "Badminton volante y red alta en interior",
-      "pista2": "Smash y drop",
-      "pista3": "Juego rapido punteria fina",
+      "pista1": "Smash y drop",
+      "pista2": "Tiene 1 palabra.",
+      "pista3": "Juego rápido punteria fina",
       "pista_extra": "Deporte olimpico no es tenis",
       "respuesta": "badminton"
     },
     {
-      "pista1": "Triatlon natacion ciclismo y carrera en serie",
-      "pista2": "Ironman distancia maxima popular",
+      "pista1": "Ironman distancia maxima popular",
+      "pista2": "Tiene 1 palabra.",
       "pista3": "Transiciones T1 y T2",
       "pista_extra": "Hawaii Kona evento famoso",
       "respuesta": "triatlon"
     },
     {
-      "pista1": "Esqui alpino slalom y descenso",
-      "pista2": "Bastones y fijaciones botas rigidas",
+      "pista1": "Bastones y fijaciones botas rigidas",
+      "pista2": "Tiene 1 palabra.",
       "pista3": "Copa del Mundo en invierno",
       "pista_extra": "Nieve y montana",
       "respuesta": "esqui"
     },
     {
-      "pista1": "Patinaje artistico sobre hielo",
-      "pista2": "Saltos axel y triple lutz",
-      "pista3": "Musica y notas de componentes",
+      "pista1": "Saltos axel y triple lutz",
+      "pista2": "Tiene 2 palabras.",
+      "pista3": "Música y notas de componentes",
       "pista_extra": "Parejas y individual olimpico",
       "respuesta": "patinaje artistico"
     },
     {
-      "pista1": "Lucha grecorromana y libre en tapiz",
-      "pista2": "Categorias por peso olimpico",
+      "pista1": "Categorias por peso olimpico",
+      "pista2": "Tiene 1 palabra.",
       "pista3": "Pin ambos hombros al suelo",
       "pista_extra": "Antiguo olimpico griego",
       "respuesta": "lucha"
     },
     {
-      "pista1": "Tiro con arco diana a setenta metros en olimpiada",
-      "pista2": "Arco recurvo moderno",
-      "pista3": "Robin Hood es mito ingles",
+      "pista1": "Arco recurvo moderno",
+      "pista2": "Tiene 3 palabras.",
+      "pista3": "Robin Hood es mito inglés",
       "pista_extra": "Flecha y plumas",
       "respuesta": "tiro con arco"
     },
@@ -213,71 +213,71 @@
       "respuesta": "equitacion"
     },
     {
-      "pista1": "Remo banco deslizante y timonel",
-      "pista2": "Ocho mas uno bote largo",
+      "pista1": "Ocho más uno bote largo",
+      "pista2": "Tiene 1 palabra.",
       "pista3": "Pista mil doscientos metros recta",
       "pista_extra": "Copa del Mundo en Lucerna",
       "respuesta": "remo"
     },
     {
-      "pista1": "BMX bicicleta en circuito corto con saltos",
-      "pista2": "X Games disciplina radical",
+      "pista1": "X Games disciplina radical",
+      "pista2": "Tiene 1 palabra.",
       "pista3": "Ruedas pequenas y manillar alto",
       "pista_extra": "Abreviatura de bicycle motocross",
       "respuesta": "bmx"
     },
     {
-      "pista1": "Karate kumite y kata olimpico",
-      "pista2": "Cinturon negro maestro",
+      "pista1": "Cinturon negro maestro",
+      "pista2": "Tiene 1 palabra.",
       "pista3": "Golpes con control de distancia",
-      "pista_extra": "Arte marcial japones",
+      "pista_extra": "Arte marcial japonés",
       "respuesta": "karate"
     },
     {
-      "pista1": "Judo tatami y ippon",
-      "pista2": "Kimono blanco o azul",
+      "pista1": "Kimono blanco o azul",
+      "pista2": "Tiene 1 palabra.",
       "pista3": "Proyecciones y llaves en suelo",
       "pista_extra": "Jigoro Kano fundador",
       "respuesta": "judo"
     },
     {
-      "pista1": "Curling hielo piedras y escoba",
-      "pista2": "Casa y hogar zonas en la pista",
+      "pista1": "Casa y hogar zonas en la pista",
+      "pista2": "Tiene 1 palabra.",
       "pista3": "Deporte olimpico de invierno tranquilo",
       "pista_extra": "Canada y Escandinavia dominan",
       "respuesta": "curling"
     },
     {
-      "pista1": "Skateboard trucos ollie y halfpipe",
-      "pista2": "Debut olimpico reciente en Tokyo",
+      "pista1": "Debut olimpico reciente en Tokyo",
+      "pista2": "Tiene 1 palabra.",
       "pista3": "Tabla con trucks y ruedas",
       "pista_extra": "Tony Hawk nombre legendario",
       "respuesta": "skateboard"
     },
     {
-      "pista1": "Maraton clasico cuarenta y dos kilometros",
-      "pista2": "Grecia origen leyenda",
+      "pista1": "Grecia origen leyenda",
+      "pista2": "Tiene 1 palabra.",
       "pista3": "Fidelidad de Pheidippides mito",
       "pista_extra": "Ciudad atica",
       "respuesta": "maraton"
     },
     {
-      "pista1": "Decatlon diez pruebas",
-      "pista2": "Daley Thompson icono",
+      "pista1": "Daley Thompson icono",
+      "pista2": "Tiene 1 palabra.",
       "pista3": "Juegos olimpicos",
       "pista_extra": "Atletismo combinado",
       "respuesta": "decatlon"
     },
     {
-      "pista1": "Regla fuera de juego futbol",
-      "pista2": "Linea defensiva ultimo defensor",
+      "pista1": "Linea defensiva ultimo defensor",
+      "pista2": "Tiene 3 palabras.",
       "pista3": "VAR revisa",
-      "pista_extra": "Ingles offside",
+      "pista_extra": "Inglés offside",
       "respuesta": "fuera de juego"
     },
     {
-      "pista1": "Grand slam tenis masculino",
-      "pista2": "Wimbledon cesped",
+      "pista1": "Wimbledon cesped",
+      "pista2": "Tiene 2 palabras.",
       "pista3": "Roland Garros tierra",
       "pista_extra": "Cuatro torneos",
       "respuesta": "grand slam"
@@ -290,59 +290,59 @@
       "respuesta": "tour de francia"
     },
     {
-      "pista1": "Posicion baloncesto pivote",
-      "pista2": "Tapones y rebotes",
-      "pista3": "Numero cinco a veces",
-      "pista_extra": "Ingles center",
+      "pista1": "Tapones y rebotes",
+      "pista2": "Tiene 1 palabra.",
+      "pista3": "Número cinco a veces",
+      "pista_extra": "Inglés center",
       "respuesta": "pivot"
     },
     {
-      "pista1": "Sistema puntuacion voleibol rally",
-      "pista2": "Veinticinco puntos set",
+      "pista1": "Veinticinco puntos set",
+      "pista2": "Tiene 1 palabra.",
       "pista3": "Ventaja minima dos",
       "pista_extra": "Libero camiseta distinta",
       "respuesta": "voleibol"
     },
     {
-      "pista1": "Deporte invierno biathlon",
-      "pista2": "Esqui y tiro",
+      "pista1": "Esqui y tiro",
+      "pista2": "Tiene 1 palabra.",
       "pista3": "Nordico combinado distinto",
       "pista_extra": "Dos disciplinas",
       "respuesta": "biathlon"
     },
     {
-      "pista1": "Regla cricket seis carreras",
-      "pista2": "Bat wicket",
+      "pista1": "Bat wicket",
+      "pista2": "Tiene 1 palabra.",
       "pista3": "Commonwealth popular",
       "pista_extra": "Over de seis bolas",
       "respuesta": "cricket"
     },
     {
-      "pista1": "NFL touchdown seis puntos",
-      "pista2": "Super Bowl febrero",
+      "pista1": "Super Bowl febrero",
+      "pista2": "Tiene 1 palabra.",
       "pista3": "Quarterback pase",
       "pista_extra": "Futbol americano",
       "respuesta": "nfl"
     },
     {
-      "pista1": "Formula uno bandera a cuadros",
-      "pista2": "DRS ala movil",
+      "pista1": "DRS ala movil",
+      "pista2": "Tiene 2 palabras.",
       "pista3": "Neumaticos slicks",
       "pista_extra": "Monoplaza",
       "respuesta": "formula uno"
     },
     {
-      "pista1": "MMA jaula octogonal",
-      "pista2": "UFC marca",
+      "pista1": "UFC marca",
+      "pista2": "Tiene 1 palabra.",
       "pista3": "Ground and pound",
       "pista_extra": "Artes mixtas",
       "respuesta": "mma"
     },
     {
-      "pista1": "Gimnasia aparato aro",
-      "pista2": "Ritmica o artistica",
+      "pista1": "Ritmica o artistica",
+      "pista2": "Tiene 1 palabra.",
       "pista3": "Olimpiadas",
-      "pista_extra": "Aro de metal",
+      "pista_extra": "Extra amable: Tiene 1 palabra.",
       "respuesta": "aro"
     },
     {
@@ -353,43 +353,43 @@
       "respuesta": "salto de esqui"
     },
     {
-      "pista1": "Hockey hielo porteria pequena",
-      "pista2": "Puck disco",
+      "pista1": "Puck disco",
+      "pista2": "Tiene 2 palabras.",
       "pista3": "NHL liga",
       "pista_extra": "Patin sobre hielo",
       "respuesta": "hockey hielo"
     },
     {
-      "pista1": "Rugby union cinco puntos ensayo",
-      "pista2": "Mel scrum",
-      "pista3": "Seis naciones europa",
+      "pista1": "Mel scrum",
+      "pista2": "Tiene 1 palabra.",
+      "pista3": "Seis naciones Europa",
       "pista_extra": "Oval sin cantos",
       "respuesta": "rugby"
     },
     {
-      "pista1": "Beisbol innings nueve",
-      "pista2": "Home run valla",
+      "pista1": "Home run valla",
+      "pista2": "Tiene 1 palabra.",
       "pista3": "MLB liga",
       "pista_extra": "Bate y pelota",
       "respuesta": "beisbol"
     },
     {
-      "pista1": "Boxeo categorias peso pluma",
-      "pista2": "Knockout cuenta diez",
+      "pista1": "Knockout cuenta diez",
+      "pista2": "Tiene 1 palabra.",
       "pista3": "Ring esquinas",
       "pista_extra": "Guantes doce onzas",
       "respuesta": "boxeo"
     },
     {
-      "pista1": "Natacion estilo mariposa",
-      "pista2": "Doble batida piernas",
+      "pista1": "Doble batida piernas",
+      "pista2": "Tiene 1 palabra.",
       "pista3": "Phelps muchas medallas",
-      "pista_extra": "Ingles butterfly",
+      "pista_extra": "Inglés butterfly",
       "respuesta": "mariposa"
     },
     {
-      "pista1": "Esgrima florete valida torso",
-      "pista2": "Espada y sable otros",
+      "pista1": "Espada y sable otros",
+      "pista2": "Tiene 1 palabra.",
       "pista3": "Toque electrico",
       "pista_extra": "Deporte duelo",
       "respuesta": "esgrima"

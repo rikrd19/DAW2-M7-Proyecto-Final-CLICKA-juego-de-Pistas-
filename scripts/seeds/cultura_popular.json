@@ -13,7 +13,7 @@
       "pista1": "Concurso de talentos con jurado y botón dorado",
       "pista2": "Artistas amateurs suben al escenario",
       "pista3": "Franquicia global nacida en Reino Unido",
-      "pista_extra": "Got Talent suena en el título español",
+      "pista_extra": "Extra amable: Empieza por g y tiene 9 letras.",
       "respuesta": "got talent"
     },
     {
@@ -130,9 +130,9 @@
     },
     {
       "pista1": "Serie de mensajes enlazados en una red social",
-      "pista2": "Hilo de Twitter famoso para denuncias o humor",
+      "pista2": "Va otra: Palabra que también es de coser",
       "pista3": "Palabra que también es de coser",
-      "pista_extra": "En español sinónimo de hilo conductor",
+      "pista_extra": "Extra amable: Tiene 1 palabra.",
       "respuesta": "hilo"
     },
     {
@@ -178,14 +178,14 @@
       "respuesta": "tomatina"
     },
     {
-      "pista1": "Fiestas de Pamplona con encierros y chupinazo",
+      "pista1": "Pista con chispa: Julio es el mes clave",
       "pista2": "Julio es el mes clave",
       "pista3": "San Fermín es el santo",
       "pista_extra": "Nombre de la ciudad en una palabra",
       "respuesta": "pamplona"
     },
     {
-      "pista1": "Gala de alfombra roja antes de premios de cine",
+      "pista1": "Pista con chispa: Fotógrafos gritan a las estrellas",
       "pista2": "Fotógrafos gritan a las estrellas",
       "pista3": "No es la ceremonia dentro del teatro",
       "pista_extra": "Lugar donde posan los vestidos largos",
@@ -201,8 +201,8 @@
     {
       "pista1": "Música urbana global con raíces en Jamaica y Bronx",
       "pista2": "Rimas en compás y bases potentes",
-      "pista3": "Trap es subgénero moderno",
-      "pista_extra": "No confundir solo con deporte de raquetas",
+      "pista3": "No confundir solo con deporte de raquetas",
+      "pista_extra": "Extra amable: piensa en cultura popular y en la pista anterior.",
       "respuesta": "rap"
     },
     {
@@ -215,8 +215,8 @@
     {
       "pista1": "Fandom que colecciona álbumes con fotocards",
       "pista2": "Lightstick en conciertos",
-      "pista3": "Idol entrenado en agencia",
-      "pista_extra": "Cultura surcoreana de ídolos",
+      "pista3": "Empieza por i y tiene 4 letras.",
+      "pista_extra": "Extra amable: Tiene 1 palabra.",
       "respuesta": "idol"
     },
     {
@@ -312,7 +312,7 @@
     },
     {
       "pista1": "Podcast espanol de historia humor",
-      "pista2": "Nadie sabe nada",
+      "pista2": "Va otra: Berto Romero y Andreu Buenafuente",
       "pista3": "Berto Romero y Andreu Buenafuente",
       "pista_extra": "Radio comica",
       "respuesta": "nadie sabe nada"
@@ -320,7 +320,7 @@
     {
       "pista1": "Streamer espanol del among us",
       "pista2": "Ibai Llanos plataforma morada",
-      "pista3": "Velada del ano",
+      "pista3": "Velada del año",
       "pista_extra": "Nombre plataforma",
       "respuesta": "twitch"
     },
@@ -342,7 +342,7 @@
       "pista1": "Serie coreana del juego del calamar",
       "pista2": "Mascaras geometricas",
       "pista3": "Netflix dos mil veintiuno",
-      "pista_extra": "Titulo en ingles squid",
+      "pista_extra": "Titulo en inglés squid",
       "respuesta": "squid game"
     },
     {
@@ -362,8 +362,8 @@
     {
       "pista1": "Plataforma de streaming de Disney",
       "pista2": "Star y Marvel",
-      "pista3": "Mas caliente",
-      "pista_extra": "Nombre con mas",
+      "pista3": "Más caliente",
+      "pista_extra": "Nombre con más",
       "respuesta": "disney plus"
     },
     {
@@ -375,13 +375,13 @@
     },
     {
       "pista1": "App de mensajes verde",
-      "pista2": "Meta tambien",
+      "pista2": "Meta también",
       "pista3": "Doble tilde leido",
       "pista_extra": "Was up",
       "respuesta": "whatsapp"
     },
     {
-      "pista1": "Video largo YouTube",
+      "pista1": "Pista con chispa: Google la posee",
       "pista2": "Google la posee",
       "pista3": "Shorts competencia TikTok",
       "pista_extra": "Nombre tubo",
@@ -398,7 +398,7 @@
       "pista1": "Sitcom de cafe central perk",
       "pista2": "Ross Rachel Chandler",
       "pista3": "Noventa NBC",
-      "pista_extra": "Amigos en ingles",
+      "pista_extra": "Amigos en inglés",
       "respuesta": "friends"
     },
     {

@@ -3,9 +3,9 @@
   "fuente": "python",
   "preguntas": [
     {
-      "pista1": "Mamifero terrestre mas grande",
+      "pista1": "Mamifero terrestre más grande",
       "pista2": "Tiene trompa larga",
-      "pista3": "Vive en Africa y Asia",
+      "pista3": "Vive en África y Asia",
       "pista_extra": "Sus colmillos son de marfil",
       "respuesta": "elefante"
     },
@@ -20,7 +20,7 @@
       "pista1": "Arbol simbolo de canada",
       "pista2": "Su hoja aparece en la bandera",
       "pista3": "Da sirope dulce",
-      "pista_extra": "En ingles se llama maple",
+      "pista_extra": "En inglés se llama maple",
       "respuesta": "arce"
     },
     {
@@ -45,24 +45,24 @@
       "respuesta": "atmosfera"
     },
     {
-      "pista1": "Animal marino mas grande",
+      "pista1": "Animal marino más grande",
       "pista2": "Es un mamifero",
       "pista3": "Puede superar treinta metros",
       "pista_extra": "Su color da nombre",
       "respuesta": "ballena azul"
     },
     {
-      "pista1": "Bioma frio sin arboles altos",
+      "pista1": "Bioma frío sin arboles altos",
       "pista2": "Suelos con permafrost",
       "pista3": "Hay en zonas polares",
       "pista_extra": "Empieza por t",
       "respuesta": "tundra"
     },
     {
-      "pista1": "Felino mas rapido en tierra",
+      "pista1": "Felino más rápido en tierra",
       "pista2": "Acelera en pocos segundos",
       "pista3": "Vive en sabanas",
-      "pista_extra": "Tambien llamado guepardo",
+      "pista_extra": "También llamado guepardo",
       "respuesta": "chita"
     },
     {
@@ -104,7 +104,7 @@
       "pista1": "Mamifero acuatico de rio muy jugueton",
       "pista2": "Tiene bigotes y cuerpo alargado",
       "pista3": "Gran nadador",
-      "pista_extra": "En ingles otter",
+      "pista_extra": "En inglés otter",
       "respuesta": "nutria"
     },
     {
@@ -132,7 +132,7 @@
       "pista1": "Corriente de agua subterranea que emerge",
       "pista2": "Puede formar oasis",
       "pista3": "A veces es termal",
-      "pista_extra": "Tambien llamada manantial",
+      "pista_extra": "También llamada manantial",
       "respuesta": "fuente"
     },
     {
@@ -143,24 +143,24 @@
       "respuesta": "ciclo del agua"
     },
     {
-      "pista1": "Mamifero marino mas grande",
+      "pista1": "Mamifero marino más grande",
       "pista2": "Barbas de filtro",
       "pista3": "Canta en aguas profundas",
-      "pista_extra": "Ballena azul",
+      "pista_extra": "Empieza por b y tiene 11 letras.",
       "respuesta": "ballena azul"
     },
     {
-      "pista1": "Arbol mas alto mundo",
-      "pista2": "California secuoya",
+      "pista1": "Arbol más alto mundo",
+      "pista2": "Va otra: Hyperion nombre",
       "pista3": "Hyperion nombre",
-      "pista_extra": "Secuoya",
+      "pista_extra": "Tiene 1 palabra.",
       "respuesta": "secuoya"
     },
     {
       "pista1": "Hongo alucinogeno prohibido",
       "pista2": "Psilocibina",
       "pista3": "Sombrero con lamellas",
-      "pista_extra": "Seta magica",
+      "pista_extra": "Empieza por s y tiene 4 letras.",
       "respuesta": "seta"
     },
     {
@@ -171,24 +171,24 @@
       "respuesta": "serpiente"
     },
     {
-      "pista1": "Felino mas rapido savana",
+      "pista1": "Felino más rápido savana",
       "pista2": "Manchas negras",
       "pista3": "Caza gacelas",
-      "pista_extra": "Guepardo",
+      "pista_extra": "Empieza por g y tiene 8 letras.",
       "respuesta": "guepardo"
     },
     {
-      "pista1": "Ave no vuela corre rapido",
+      "pista1": "Ave no vuela corre rápido",
       "pista2": "Australia emblema",
       "pista3": "Huevo verde grande",
-      "pista_extra": "Emu o avestruz",
+      "pista_extra": "Empieza por a y tiene 8 letras.",
       "respuesta": "avestruz"
     },
     {
       "pista1": "Insecto metamorfosis crisalida",
       "pista2": "Poliniza flores",
       "pista3": "Lepidoptero",
-      "pista_extra": "Mariposa",
+      "pista_extra": "Empieza por m y tiene 8 letras.",
       "respuesta": "mariposa"
     },
     {
@@ -206,21 +206,21 @@
       "respuesta": "dionaea"
     },
     {
-      "pista1": "Hongo levadura pan",
+      "pista1": "Pista con chispa: Fermenta azucar",
       "pista2": "Fermenta azucar",
       "pista3": "Saccharomyces",
       "pista_extra": "Cerveza",
       "respuesta": "levadura"
     },
     {
-      "pista1": "Arbol del caucho latex",
+      "pista1": "Pista con chispa: Amazonia",
       "pista2": "Amazonia",
       "pista3": "Hevea brasiliensis",
       "pista_extra": "Goma natural",
       "respuesta": "caucho"
     },
     {
-      "pista1": "Molusco perla ostra",
+      "pista1": "Pista con chispa: Valva dos partes",
       "pista2": "Valva dos partes",
       "pista3": "Filtrador",
       "pista_extra": "Perla",
@@ -230,7 +230,7 @@
       "pista1": "Anfibio salta charca",
       "pista2": "Metamorfosis renacuajo",
       "pista3": "Piel permeable",
-      "pista_extra": "Rana",
+      "pista_extra": "Empieza por r y tiene 4 letras.",
       "respuesta": "rana"
     },
     {
@@ -241,7 +241,7 @@
       "respuesta": "ginkgo"
     },
     {
-      "pista1": "Cactus desierto saguaro",
+      "pista1": "Pista con chispa: Arizona icono",
       "pista2": "Arizona icono",
       "pista3": "Brazos altos",
       "pista_extra": "Desierto sonora",
@@ -251,18 +251,18 @@
       "pista1": "Ave rapaz nocturna",
       "pista2": "Plumas suaves vuelo silencioso",
       "pista3": "Cabeza gira",
-      "pista_extra": "Buho",
+      "pista_extra": "Empieza por b y tiene 4 letras.",
       "respuesta": "buho"
     },
     {
       "pista1": "Crustaceo pinzas rojo",
       "pista2": "Fondo marino",
       "pista3": "Camina lateral",
-      "pista_extra": "Cangrejo",
+      "pista_extra": "Empieza por c y tiene 8 letras.",
       "respuesta": "cangrejo"
     },
     {
-      "pista1": "Hierba bambu gigante",
+      "pista1": "Pista con chispa: Tallo hueco",
       "pista2": "Tallo hueco",
       "pista3": "Panda lo come",
       "pista_extra": "Graminea",
@@ -272,7 +272,7 @@
       "pista1": "Reptil con caparazon",
       "pista2": "Lento terrestre",
       "pista3": "Galapagos famosas",
-      "pista_extra": "Tortuga",
+      "pista_extra": "Empieza por t y tiene 7 letras.",
       "respuesta": "tortuga"
     },
     {

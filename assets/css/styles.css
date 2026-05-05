@@ -207,6 +207,11 @@ button.avatar-dicebear-more:focus-visible {
   opacity: 1;
 }
 
+.soft-placeholder::placeholder {
+  color: #b8bfcc;
+  opacity: 1;
+}
+
 /* ── Botones ─────────────────────────────────────────────── */
 .btn-primary {
   background: linear-gradient(135deg, var(--clika-primary), var(--clika-accent));
