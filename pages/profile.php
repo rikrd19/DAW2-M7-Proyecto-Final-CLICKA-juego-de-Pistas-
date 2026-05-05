@@ -116,7 +116,7 @@ $photoUrl = ($user['foto'] === 'default.png' || !$user['foto'])
                     $pe = (string) $_GET['error'];
                     $peMsg = match ($pe) {
                         'invalid_avatar_url' => 'El avatar seleccionado no es válido. Elige otra opción.',
-                        'invalid_public_name' => 'Nombre de usuario: 3–24 caracteres, solo minúsculas, números y guión bajo.',
+                        'invalid_public_name' => 'Nombre de usuario: mínimo 3 y máximo 20 caracteres.',
                         'duplicate_public_name' => 'Ese nombre de usuario ya está en uso. Elige otro.',
                         'duplicate_email' => 'Ya existe una cuenta con ese correo.',
                         'invalid_email' => 'Introduce un correo electrónico válido.',
@@ -139,10 +139,10 @@ $photoUrl = ($user['foto'] === 'default.png' || !$user['foto'])
                     <div class="mb-2">
                         <label class="form-label fw-bold" for="nombre_usuario">Nombre de usuario</label>
                         <input type="text" name="nombre_usuario" id="nombre_usuario" class="form-control form-control-sm"
-                            required maxlength="24" pattern="[a-z0-9_]{3,24}"
+                            required minlength="3" maxlength="20"
                             value="<?php echo htmlspecialchars((string) ($user['nombre_usuario'] ?? '')); ?>"
-                            autocomplete="username" autocapitalize="none" spellcheck="false">
-                        <div class="form-text">Visible en el ranking (único). Solo minúsculas, números y guión bajo.</div>
+                            autocomplete="username" spellcheck="false">
+                        <div class="form-text">Visible en el ranking (único). Mínimo 3 y máximo 20 caracteres.</div>
                     </div>
 
                     <?php if ($sessionRole === 'admin'): ?>

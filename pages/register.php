@@ -25,7 +25,7 @@ $err = isset($_GET['error']) ? (string) $_GET['error'] : '';
                         'weak_password' => 'La contraseña debe tener al menos 6 caracteres.',
                         'missing_fields' => 'Por favor, rellena todos los campos.',
                         'already_exists' => 'Ya existe una cuenta con ese correo.',
-                        'invalid_public_name' => 'Nombre de usuario: 3–24 caracteres, solo minúsculas, números y guión bajo.',
+                        'invalid_public_name' => 'Nombre de usuario: mínimo 3 y máximo 20 caracteres.',
                         'db_error' => 'No se pudo crear la cuenta. Inténtalo de nuevo.',
                         default => 'Ha ocurrido un error.',
                     };
@@ -35,23 +35,22 @@ $err = isset($_GET['error']) ? (string) $_GET['error'] : '';
             <form action="../processes/register.proc.php" method="POST" novalidate>
                 <div class="mb-3">
                     <label class="form-label fw-bold" for="regEmail">Correo electrónico</label>
-                    <input type="email" name="username" id="regEmail" class="form-control" required
+                    <input type="email" name="username" id="regEmail" class="form-control soft-placeholder" required
                         autocomplete="email" inputmode="email"
                         placeholder="ejemplo@correo.com">
                     <div class="form-text">Lo usarás para iniciar sesión (no se muestra en el ranking).</div>
                 </div>
                 <div class="mb-3">
                     <label class="form-label fw-bold" for="regNombre">Nombre de usuario</label>
-                    <input type="text" name="nombre_usuario" id="regNombre" class="form-control<?php echo $err === 'public_name_taken' ? ' is-invalid' : ''; ?>"
-                        required maxlength="24" pattern="[a-z0-9_]{3,24}"
+                    <input type="text" name="nombre_usuario" id="regNombre" class="form-control soft-placeholder<?php echo $err === 'public_name_taken' ? ' is-invalid' : ''; ?>"
+                        required minlength="3" maxlength="20"
                         autocomplete="username"
-                        autocapitalize="none"
                         spellcheck="false"
-                        placeholder="ej. maria_gamer">
+                        placeholder="Tu nombre de usuario">
                     <?php if ($err === 'public_name_taken'): ?>
                         <p class="form-text text-secondary mb-0 small">Este nombre de usuario ya existe. Elige otro.</p>
                     <?php else: ?>
-                        <div class="form-text">Visible en el ranking. Solo minúsculas, números y guión bajo (3–24).</div>
+                        <div class="form-text">Visible en el ranking. Mínimo 3 y máximo 20 caracteres.</div>
                     <?php endif; ?>
                 </div>
                 <div class="mb-3">
