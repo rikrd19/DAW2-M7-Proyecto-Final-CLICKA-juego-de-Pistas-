@@ -24,6 +24,10 @@ if (is_file($dbPath)) {
 
 $rankingTemaParam = isset($_GET['tema']) ? trim((string) $_GET['tema']) : '';
 $rankingPageHref  = BASE_URL . '/pages/ranking.php';
+$rankingTemaLabel = 'Global';
+if ($rankingTemaParam !== '') {
+    $rankingTemaLabel = $rankingTemaParam === 'Banderas' ? 'Banderas del Mundo' : $rankingTemaParam;
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -47,8 +51,40 @@ $rankingPageHref  = BASE_URL . '/pages/ranking.php';
       </p>
     </div>
 
-    <!-- Ranking filters: show on global and filtered views (was wrongly gated on ?tema only). -->
-    <nav class="ranking-filters mb-3" id="ranking-filters" aria-label="Filtrar ranking por categoría">
+    <!-- Mobile category selector -->
+    <div class="dropdown d-md-none mb-3">
+      <button class="btn btn-outline-accent dropdown-toggle w-100 text-start" type="button" id="rankingFiltersMobile"
+              data-bs-toggle="dropdown" aria-expanded="false">
+        Categoría: <?php echo htmlspecialchars($rankingTemaLabel, ENT_QUOTES, 'UTF-8'); ?>
+      </button>
+      <ul class="dropdown-menu w-100 shadow-sm border-0" aria-labelledby="rankingFiltersMobile">
+        <li>
+          <a class="dropdown-item<?php echo $rankingTemaParam === '' ? ' active' : ''; ?>"
+             href="<?php echo htmlspecialchars($rankingPageHref, ENT_QUOTES, 'UTF-8'); ?>">Global</a>
+        </li>
+        <?php foreach ($temasRanking as $nomTema):
+            $nomEsc = htmlspecialchars($nomTema, ENT_QUOTES, 'UTF-8');
+            $hrefT  = $rankingPageHref . '?tema=' . rawurlencode($nomTema);
+            $active = ($rankingTemaParam === $nomTema) ? ' active' : '';
+            ?>
+        <li>
+          <a class="dropdown-item<?php echo $active; ?>"
+             href="<?php echo htmlspecialchars($hrefT, ENT_QUOTES, 'UTF-8'); ?>"><?php echo $nomEsc; ?></a>
+        </li>
+        <?php endforeach; ?>
+        <?php
+        $hrefBand = $rankingPageHref . '?tema=' . rawurlencode('Banderas');
+        $actBand  = ($rankingTemaParam === 'Banderas') ? ' active' : '';
+        ?>
+        <li>
+          <a class="dropdown-item<?php echo $actBand; ?>"
+             href="<?php echo htmlspecialchars($hrefBand, ENT_QUOTES, 'UTF-8'); ?>">Banderas del Mundo</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Desktop/Tablet filters -->
+    <nav class="ranking-filters mb-3 d-none d-md-flex" id="ranking-filters" aria-label="Filtrar ranking por categoría">
       <a
         class="ranking-filter-pill<?php echo $rankingTemaParam === '' ? ' active' : ''; ?>"
         href="<?php echo htmlspecialchars($rankingPageHref, ENT_QUOTES, 'UTF-8'); ?>"
