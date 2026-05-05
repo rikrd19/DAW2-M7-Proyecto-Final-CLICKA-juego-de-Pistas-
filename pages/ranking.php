@@ -43,11 +43,11 @@ $rankingPageHref  = BASE_URL . '/pages/ranking.php';
         <i class="bi bi-trophy-fill me-2" style="color:var(--clika-primary)"></i>Ranking
       </h1>
       <p class="text-muted mb-0 small" id="ranking-lead">
-        Solo usuarios registrados.
+        Suma de puntos en todas las categorías · solo usuarios registrados.
       </p>
     </div>
 
-    <?php if ($rankingTemaParam !== ''): ?>
+    <!-- Ranking filters: show on global and filtered views (was wrongly gated on ?tema only). -->
     <nav class="ranking-filters mb-3" id="ranking-filters" aria-label="Filtrar ranking por categoría">
       <a
         class="ranking-filter-pill<?php echo $rankingTemaParam === '' ? ' active' : ''; ?>"
@@ -72,7 +72,6 @@ $rankingPageHref  = BASE_URL . '/pages/ranking.php';
         href="<?php echo htmlspecialchars($hrefBand, ENT_QUOTES, 'UTF-8'); ?>"
         data-tema-filter="Banderas">Banderas del Mundo</a>
     </nav>
-    <?php endif; ?>
 
     <?php if (!is_logged_in()): ?>
       <div class="alert alert-info d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-2 mb-3" role="alert">

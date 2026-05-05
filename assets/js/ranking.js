@@ -46,7 +46,7 @@ function updateContextCopy(temaFilter) {
     if (!eyebrowEl || !leadEl) return;
     if (!temaFilter) {
         eyebrowEl.textContent = 'Clasificación global';
-        leadEl.textContent = 'Solo usuarios registrados.';
+        leadEl.textContent = 'Suma de puntos en todas las categorías · solo usuarios registrados.';
         return;
     }
     const label = pillLabelForFilter(temaFilter);

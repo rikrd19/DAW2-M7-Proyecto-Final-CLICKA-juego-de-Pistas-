@@ -3,8 +3,7 @@
 /**
  * Game rounds (partidas) API.
  *
- * GET  → returns ranking rows for registered users (one best score per user).
- *        Optional query: ?tema=<string> → same logic but only partidas with that tema label.
+ * GET  → global: sum of all partidas’ puntos per user; ?tema=…: best partida per user in that tema.
  *        Response: [ { id, usuario_id, nombre, foto, puntos, tema, fecha }, … ]
  *
  * POST → saves a completed round.
@@ -19,7 +18,7 @@ header('Content-Type: application/json; charset=utf-8');
 
 $method = $_SERVER['REQUEST_METHOD'] ?? '';
 
-/* ── GET: ranking for registered users only (best score per user) ─────── */
+/* ── GET: global = sum(puntos) per user; filtered = best score in that tema ─ */
 if ($method === 'GET') {
     require_once dirname(__DIR__) . '/includes/db.php';
     $temaFilter = isset($_GET['tema']) && is_string($_GET['tema']) ? trim($_GET['tema']) : '';
@@ -30,23 +29,17 @@ if ($method === 'GET') {
     try {
         if ($temaFilter === '') {
             $result = $db->query(
-                "SELECT p.id,
+                'SELECT MAX(p.id) AS id,
                         p.usuario_id,
                         u.nombre_usuario AS nombre,
                         u.foto AS foto,
-                        p.puntos,
-                        p.tema,
-                        p.fecha
+                        SUM(p.puntos) AS puntos,
+                        \'\' AS tema,
+                        MAX(p.fecha) AS fecha
                  FROM partidas p
                  INNER JOIN usuarios u ON u.id = p.usuario_id
-                 WHERE p.id = (
-                     SELECT p2.id
-                     FROM partidas p2
-                     WHERE p2.usuario_id = p.usuario_id
-                     ORDER BY p2.puntos DESC, p2.fecha ASC, p2.id ASC
-                     LIMIT 1
-                 )
-                 ORDER BY p.puntos DESC, p.fecha ASC, p.id ASC"
+                 GROUP BY p.usuario_id, u.nombre_usuario, u.foto
+                 ORDER BY SUM(p.puntos) DESC, MAX(p.fecha) ASC, p.usuario_id ASC'
             );
         } else {
             $stmt = $db->prepare(
