@@ -162,7 +162,7 @@ function carregarPregunta() {
     // before adding 'revelada', so the flip transition fires correctly.
     requestAnimationFrame(() => requestAnimationFrame(() => revelarCarta(pista1El)));
 
-    respostaInput.focus();
+    focusNoScroll(respostaInput);
 }
 
 /* ── Ver siguiente pista ────────────────────────────────────── */
@@ -325,7 +325,7 @@ function comprovarResposta() {
 
     const resposta = respostaInput.value.trim();
     if (resposta === '') {
-        respostaInput.focus();
+        focusNoScroll(respostaInput);
         return;
     }
 
@@ -348,6 +348,7 @@ function comprovarResposta() {
         } else {
             mostrarFeedback('error', 'Incorrecto. Inténtalo de nuevo o revela otra carta.');
             btnComprovar.disabled = false;
+            focusNoScroll(respostaInput);
             respostaInput.select();
         }
     }
@@ -387,7 +388,16 @@ function mostrarResultat(correct, punts) {
         : 'Siguiente pregunta →';
 
     resultatEl.hidden = false;
-    btnSegurentPregunta.focus();
+    focusNoScroll(btnSegurentPregunta);
+}
+
+function focusNoScroll(el) {
+    if (!el || typeof el.focus !== 'function') return;
+    try {
+        el.focus({ preventScroll: true });
+    } catch (_) {
+        el.focus();
+    }
 }
 
 /* ── Enter advances same as "Siguiente pregunta" while result panel is open ── */

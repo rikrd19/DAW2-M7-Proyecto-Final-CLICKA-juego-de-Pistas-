@@ -1,7 +1,7 @@
 <?php
 /**
  * Profile Update Process.
- * Handles password hashing and secure image uploading with file cleanup.
+ * Handles password hashing, public name, email (admin), and secure image uploading.
  */
 require_once dirname(__DIR__) . '/includes/db.php';
 require_once dirname(__DIR__) . '/includes/auth.php';
@@ -10,7 +10,7 @@ require_once dirname(__DIR__) . '/api/lib/dicebear.php';
 check_access();
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header("Location: ../pages/profile.php");
+    header('Location: ../pages/profile.php');
     exit;
 }
 
@@ -19,7 +19,7 @@ $currentUserRole = $_SESSION['rol'];
 $returnTo = (isset($_POST['return_to']) && $_POST['return_to'] === 'users' && $currentUserRole === 'admin') ? 'users' : '';
 
 // Target logic: Admins can edit others, others only themselves
-$targetId = isset($_POST['target_id']) ? (int)$_POST['target_id'] : $currentUserId;
+$targetId = isset($_POST['target_id']) ? (int) $_POST['target_id'] : $currentUserId;
 if ($targetId !== $currentUserId && $currentUserRole !== 'admin') {
     $targetId = $currentUserId;
 }
@@ -29,33 +29,73 @@ if ($returnTo === 'users') {
     $profileRedirect .= '&return_to=users';
 }
 
-// Fetch current data to compare and handle files
-$stmt = $db->prepare("SELECT password_hash, foto FROM usuarios WHERE id = :id");
+// Fetch current row
+$stmt = $db->prepare('SELECT username, nombre_usuario, password_hash, foto FROM usuarios WHERE id = :id');
 $stmt->bindValue(':id', $targetId, SQLITE3_INTEGER);
 $res = $stmt->execute();
 $oldUser = $res->fetchArray(SQLITE3_ASSOC);
 
-if (!$oldUser) die("Error de usuario.");
+if (!$oldUser) {
+    die('Error de usuario.');
+}
 
-// 1. Password Handling
-$newPass = $_POST['password'] ?? '';
-$passFinal = !empty($newPass) ? password_hash($newPass, PASSWORD_DEFAULT) : $oldUser['password_hash'];
+$newPublic = clicka_normalize_public_username((string) ($_POST['nombre_usuario'] ?? ''));
+$pubErr = clicka_validate_public_username_key($newPublic);
+if ($pubErr !== null) {
+    header("Location: {$profileRedirect}&error=invalid_public_name");
+    exit;
+}
 
-// 2. Photo Handling
+$dup = $db->prepare('SELECT id FROM usuarios WHERE nombre_usuario = :n AND id != :id');
+$dup->bindValue(':n', $newPublic, SQLITE3_TEXT);
+$dup->bindValue(':id', $targetId, SQLITE3_INTEGER);
+if ($dup->execute()->fetchArray()) {
+    header("Location: {$profileRedirect}&error=duplicate_public_name");
+    exit;
+}
+
+$emailFinal = (string) $oldUser['username'];
+if ($currentUserRole === 'admin') {
+    $postedEmail = strtolower(trim((string) ($_POST['email'] ?? '')));
+    if ($postedEmail === '') {
+        header("Location: {$profileRedirect}&error=invalid_email");
+        exit;
+    }
+    if (!filter_var($postedEmail, FILTER_VALIDATE_EMAIL)) {
+        header("Location: {$profileRedirect}&error=invalid_email");
+        exit;
+    }
+    $dupE = $db->prepare('SELECT id FROM usuarios WHERE username = :e AND id != :id');
+    $dupE->bindValue(':e', $postedEmail, SQLITE3_TEXT);
+    $dupE->bindValue(':id', $targetId, SQLITE3_INTEGER);
+    if ($dupE->execute()->fetchArray()) {
+        header("Location: {$profileRedirect}&error=duplicate_email");
+        exit;
+    }
+    $emailFinal = $postedEmail;
+}
+
+// Password (empty = keep current; if set, same minimum as login/register)
+$newPass = isset($_POST['password']) ? (string) $_POST['password'] : '';
+if ($newPass !== '' && strlen($newPass) < 6) {
+    header("Location: {$profileRedirect}&error=weak_password");
+    exit;
+}
+$passFinal = $newPass !== '' ? password_hash($newPass, PASSWORD_DEFAULT) : $oldUser['password_hash'];
+
+// Photo handling
 $fotoFinal = $oldUser['foto'];
 $uploadsDir = dirname(__DIR__) . '/storage/uploads/';
 $deletePhoto = isset($_POST['delete_photo']);
 $selectedAvatar = $_POST['selected_avatar'] ?? '';
 
 if ($deletePhoto) {
-    // Remove old file if it wasn't the default
     if ($fotoFinal !== 'default.png' && file_exists($uploadsDir . $fotoFinal)) {
         unlink($uploadsDir . $fotoFinal);
     }
     $fotoFinal = 'default.png';
 } elseif (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
-    // Basic upload hardening: file size and MIME validation.
-    $maxBytes = 2 * 1024 * 1024; // 2MB
+    $maxBytes = 2 * 1024 * 1024;
     $allowedMime = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
     $tmpPath = $_FILES['photo']['tmp_name'];
     $mime = mime_content_type($tmpPath) ?: '';
@@ -69,20 +109,17 @@ if ($deletePhoto) {
         exit;
     }
 
-    // Generate unique filename
     $extension = pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION);
-    $newFilename = time() . "_" . $targetId . "." . $extension;
+    $newFilename = time() . '_' . $targetId . '.' . $extension;
     $targetPath = $uploadsDir . $newFilename;
 
     if (move_uploaded_file($_FILES['photo']['tmp_name'], $targetPath)) {
-        // Remove old file if it was a local file
         if ($fotoFinal !== 'default.png' && !str_starts_with($fotoFinal, 'http') && file_exists($uploadsDir . $fotoFinal)) {
             unlink($uploadsDir . $fotoFinal);
         }
         $fotoFinal = $newFilename;
     }
 } elseif (!empty($selectedAvatar)) {
-    // Remote DiceBear URL: validate host/path before storing (same spirit as centralised API helpers).
     if (!dicebear_is_allowed_remote_avatar_url($selectedAvatar)) {
         header("Location: {$profileRedirect}&error=invalid_avatar_url");
         exit;
@@ -93,16 +130,20 @@ if ($deletePhoto) {
     $fotoFinal = $selectedAvatar;
 }
 
-// 3. Database Update
 try {
-    $update = $db->prepare("UPDATE usuarios SET password_hash = :pass, foto = :foto WHERE id = :id");
+    $update = $db->prepare(
+        'UPDATE usuarios SET username = :em, nombre_usuario = :nom, password_hash = :pass, foto = :foto WHERE id = :id'
+    );
+    $update->bindValue(':em', $emailFinal, SQLITE3_TEXT);
+    $update->bindValue(':nom', $newPublic, SQLITE3_TEXT);
     $update->bindValue(':pass', $passFinal, SQLITE3_TEXT);
     $update->bindValue(':foto', $fotoFinal, SQLITE3_TEXT);
     $update->bindValue(':id', $targetId, SQLITE3_INTEGER);
     $update->execute();
 
-    // Refresh session data
     if ($targetId === $currentUserId) {
+        $_SESSION['user_email'] = $emailFinal;
+        $_SESSION['nombre_usuario'] = $newPublic;
         $_SESSION['foto'] = $fotoFinal;
     }
 

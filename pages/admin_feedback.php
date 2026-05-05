@@ -35,7 +35,8 @@ try {
         ksort($byTema, SORT_NATURAL | SORT_FLAG_CASE);
 
         $res2 = $db->query(
-            "SELECT f.id, f.tema, f.estrellas, f.comentario, f.created_at, u.username
+            "SELECT f.id, f.tema, f.estrellas, f.comentario, f.created_at,
+                    u.username AS user_email, u.nombre_usuario AS nombre_usuario
              FROM app_feedback f
              LEFT JOIN usuarios u ON u.id = f.usuario_id
              ORDER BY f.id DESC
@@ -58,6 +59,10 @@ try {
     .opinion-star-row { display: flex; align-items: center; gap: .5rem; margin-bottom: .35rem; font-size: .85rem; }
     .opinion-star-bar { flex: 1; height: 8px; background: #e8e8e8; border-radius: 4px; overflow: hidden; min-width: 40px; }
     .opinion-star-bar > i { display: block; height: 100%; background: var(--bs-primary); border-radius: 4px; }
+    /* Date-only column stays narrow; comments use remaining width */
+    .admin-feedback-detail-table th:last-child,
+    .admin-feedback-detail-table td:last-child { min-width: 38%; }
+    .admin-feedback-detail-table td:last-child { word-break: break-word; }
   </style>
 </head>
 <body class="bg-light">
@@ -120,7 +125,7 @@ try {
       <p class="text-muted">No hay filas en <code>app_feedback</code>.</p>
     <?php else: ?>
       <div class="table-responsive card shadow-sm border-0">
-        <table class="table table-sm table-hover align-middle mb-0">
+        <table class="table table-sm table-hover align-middle mb-0 admin-feedback-detail-table">
           <thead class="table-light">
             <tr>
               <th>ID</th>
@@ -133,10 +138,31 @@ try {
           </thead>
           <tbody>
             <?php foreach ($rows as $r): ?>
+              <?php
+              $rawAt        = $r['created_at'] ?? '';
+              $fechaSoloDia = '';
+              if ($rawAt !== null && (string) $rawAt !== '') {
+                  $rawStr = (string) $rawAt;
+                  $ts     = strtotime($rawStr);
+                  $fechaSoloDia = $ts !== false ? date('d/m/Y', $ts) : preg_replace('/\s.*$/', '', $rawStr);
+              }
+              ?>
               <tr>
                 <td><?php echo (int) $r['id']; ?></td>
-                <td class="text-nowrap small"><?php echo htmlspecialchars((string) ($r['created_at'] ?? '')); ?></td>
-                <td><?php echo htmlspecialchars((string) ($r['username'] ?? '—')); ?></td>
+                <td class="text-nowrap small"><?php echo htmlspecialchars($fechaSoloDia); ?></td>
+                <td class="small">
+                  <?php
+                  $nom = (string) ($r['nombre_usuario'] ?? '');
+                  $em  = (string) ($r['user_email'] ?? '');
+                  if ($nom !== '') {
+                      echo '<span class="fw-semibold">' . htmlspecialchars($nom) . '</span>';
+                      if ($em !== '') {
+                          echo '<br>';
+                      }
+                  }
+                  echo $em !== '' ? '<span class="text-muted">' . htmlspecialchars($em) . '</span>' : '—';
+                  ?>
+                </td>
                 <td><?php echo htmlspecialchars((string) ($r['tema'] ?? '')); ?></td>
                 <td><?php echo $r['estrellas'] !== null && $r['estrellas'] !== '' ? (int) $r['estrellas'] : '—'; ?></td>
                 <td class="small"><?php echo $r['comentario'] !== null && $r['comentario'] !== ''

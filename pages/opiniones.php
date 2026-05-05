@@ -117,7 +117,15 @@ try {
                 <p class="small text-muted mb-1">
                   <?php echo htmlspecialchars((string) $r['tema']); ?>
                   <?php if (!empty($r['created_at'])): ?>
-                    · <time datetime="<?php echo htmlspecialchars((string) $r['created_at']); ?>"><?php echo htmlspecialchars((string) $r['created_at']); ?></time>
+                    <?php
+                    $rawAt = (string) $r['created_at'];
+                    $ts    = strtotime($rawAt);
+                    $isoDate = $ts !== false ? date('Y-m-d', $ts) : preg_replace('/\s.*$/', '', $rawAt);
+                    $label = $ts !== false
+                        ? date('d/m/Y', $ts)
+                        : htmlspecialchars(preg_replace('/\s.*$/', '', $rawAt));
+                    ?>
+                    · <time datetime="<?php echo htmlspecialchars($isoDate); ?>"><?php echo $label; ?></time>
                   <?php endif; ?>
                 </p>
                 <p class="mb-0"><?php echo nl2br(htmlspecialchars((string) $r['comentario'])); ?></p>

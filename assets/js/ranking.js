@@ -8,7 +8,6 @@ const tbodyEl      = document.getElementById('ranking-tbody');
 const filtersEl    = document.getElementById('ranking-filters');
 const eyebrowEl    = document.getElementById('ranking-eyebrow');
 const leadEl       = document.getElementById('ranking-lead');
-const footnoteEl   = document.getElementById('ranking-footnote');
 
 /* ── Medal helpers ────────────────────────────────────────── */
 const MEDALS = ['🥇', '🥈', '🥉'];
@@ -47,21 +46,12 @@ function updateContextCopy(temaFilter) {
     if (!eyebrowEl || !leadEl) return;
     if (!temaFilter) {
         eyebrowEl.textContent = 'Clasificación global';
-        leadEl.textContent =
-            'Ranking exclusivo para usuarios registrados (mejor puntuación por jugador).';
-        if (footnoteEl) {
-            footnoteEl.textContent =
-                'Mostrando el ranking de usuarios registrados por mejor puntuación.';
-        }
+        leadEl.textContent = 'Suma de puntos en todas las categorías · solo usuarios registrados.';
         return;
     }
     const label = pillLabelForFilter(temaFilter);
-    eyebrowEl.textContent = 'Por temática';
-    leadEl.textContent = `Mejor puntuación por jugador en: ${label}`;
-    if (footnoteEl) {
-        footnoteEl.textContent =
-            'Solo cuentan partidas guardadas en esta temática (usuarios registrados).';
-    }
+    eyebrowEl.textContent = 'Ranking filtrado';
+    leadEl.textContent = `Mejor marca en: ${label}`;
 }
 
 function setActivePill(temaFilter) {
@@ -77,9 +67,23 @@ function getTemaFilterFromUrl() {
     return raw && raw.trim() !== '' ? raw.trim() : '';
 }
 
+function rankingPhotoUrl(foto) {
+    const base = typeof CLICKA_BASE === 'string' ? CLICKA_BASE : '';
+    const fallback = `${base}/assets/images/social_media/profile.svg`;
+    if (!foto || foto === 'default.png') {
+        return fallback;
+    }
+    const s = String(foto);
+    if (s.startsWith('http')) {
+        return s;
+    }
+    return `${base}/storage/uploads/${s}`;
+}
+
 /* ── Render rows ──────────────────────────────────────────── */
-function renderRanking(rows) {
+function renderRanking(rows, temaFilter) {
     const currentUserId = typeof USUARI_ID !== 'undefined' ? USUARI_ID : null;
+    const showTemaCol   = Boolean(temaFilter);
 
     tbodyEl.innerHTML = rows.map((row, i) => {
         const pos       = i + 1;
@@ -87,15 +91,28 @@ function renderRanking(rows) {
         const rowClass  = isMe ? 'ranking-row ranking-row-me' : 'ranking-row';
         const youBadge  = isMe ? ' <span class="badge ranking-you-badge ms-1">Tú</span>' : '';
 
+        const temaTd = showTemaCol
+            ? `<td class="d-none d-sm-table-cell">
+                <span class="ranking-tema">${escapeHtml(row.tema)}</span>
+            </td>`
+            : '';
+
+        const photoSrc = rankingPhotoUrl(row.foto);
+        const fallbackSrc = rankingPhotoUrl('default.png');
+
         return `<tr class="${rowClass}">
             <td class="ranking-pos-cell">${positionCell(pos)}</td>
             <td>
-                <span class="ranking-name">${escapeHtml(row.nombre)}</span>${youBadge}
-                <br><small class="text-muted">${formatDate(row.fecha)}</small>
+                <div class="ranking-player">
+                    <img class="ranking-avatar" src="${escapeHtml(photoSrc)}" alt="" width="40" height="40" loading="lazy"
+                        onerror="this.onerror=null;this.src='${escapeHtml(fallbackSrc)}'">
+                    <div>
+                        <span class="ranking-name">${escapeHtml(row.nombre)}</span>${youBadge}
+                        <br><small class="text-muted">${formatDate(row.fecha)}</small>
+                    </div>
+                </div>
             </td>
-            <td class="d-none d-sm-table-cell">
-                <span class="ranking-tema">${escapeHtml(row.tema)}</span>
-            </td>
+            ${temaTd}
             <td class="text-end">
                 <span class="ranking-punts">${row.puntos}</span>
                 <small class="text-muted"> pts</small>
@@ -145,8 +162,8 @@ async function carregarRanking() {
             const h = emptyEl.querySelector('h2');
             const p = emptyEl.querySelector('p');
             if (temaFilter && h && p) {
-                h.textContent = 'Sin datos en esta temática';
-                p.textContent = 'Aún no hay partidas registradas para este filtro.';
+                h.textContent = 'Sin datos en esta categoría';
+                p.textContent = 'Aún no hay partidas guardadas para este filtro.';
             } else if (h && p) {
                 h.textContent = '¡Sé el primero en el ranking!';
                 p.textContent =
@@ -155,7 +172,7 @@ async function carregarRanking() {
             return;
         }
 
-        renderRanking(rows);
+        renderRanking(rows, temaFilter);
         tableWrapEl.hidden = false;
     } catch (_) {
         loadingEl.hidden = true;

@@ -63,6 +63,20 @@ $rankingFiHref = BASE_URL . '/pages/ranking.php';
 if ($temaNomPreseleccionat !== '') {
     $rankingFiHref .= '?tema=' . rawurlencode($temaNomPreseleccionat);
 }
+
+$temaIconsUtf8 = [];
+foreach ($temas as $t) {
+    $temaIconsUtf8[$t['slug']] = html_entity_decode((string) $t['icono'], ENT_QUOTES | ENT_HTML5, 'UTF-8');
+}
+$slugPreseleccionatJs = '';
+if ($temaPreseleccionat !== null) {
+    foreach ($temas as $t) {
+        if ((int) $t['id'] === (int) $temaPreseleccionat) {
+            $slugPreseleccionatJs = (string) $t['slug'];
+            break;
+        }
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -105,6 +119,7 @@ if ($temaNomPreseleccionat !== '') {
                 href="<?php echo BASE_URL; ?>/pages/play.php?tema=<?php echo urlencode($tema['slug']); ?>"
                 class="btn btn-primary w-100 btn-play-tema text-decoration-none"
                 data-tema-id="<?php echo (int) $tema['id']; ?>"
+                data-tema-slug="<?php echo htmlspecialchars($tema['slug'], ENT_QUOTES | ENT_HTML5, 'UTF-8'); ?>"
                 data-tema-nom="<?php echo htmlspecialchars($tema['nombre'], ENT_QUOTES | ENT_HTML5, 'UTF-8'); ?>">
                 Jugar
               </a>
@@ -144,13 +159,21 @@ if ($temaNomPreseleccionat !== '') {
     <section id="game-area" hidden>
 
       <!-- Cabecera de la partida -->
-      <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4 pb-3 border-bottom">
+      <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
         <span id="pregunta-num" class="fw-bold fs-5" style="color:var(--clika-primary)">
           Pregunta 1/5
         </span>
         <span class="badge punts-badge fs-6 px-3 py-2">
           &#9733; <span id="punts-total">0</span> pts
         </span>
+      </div>
+
+      <!-- Theme title + icon (same identity as selector cards, larger above clues) -->
+      <div id="tema-round-banner" class="tema-round-banner text-center mb-3" hidden>
+        <h2 id="tema-round-name" class="tema-round-name h5 fw-bold mb-2 mb-sm-3"></h2>
+        <div class="tema-round-icon-wrap mx-auto" aria-hidden="true">
+          <span id="tema-round-icon" class="tema-round-icon"></span>
+        </div>
       </div>
 
       <!-- Pistas: 3D card deck -->
@@ -226,7 +249,7 @@ if ($temaNomPreseleccionat !== '') {
 
       <!-- Input de resposta + botón Comprobar -->
       <div id="resposta-area" class="mb-3">
-        <div class="input-group input-group-lg">
+        <div class="input-group resposta-input-group">
           <input
             type="text"
             id="resposta-input"
@@ -290,6 +313,8 @@ if ($temaNomPreseleccionat !== '') {
     const CAN_SEND_FEEDBACK    = USUARI_ID !== null && USUARI_ID > 0;
     const TEMA_PRESELECCIONAT  = <?php echo $temaPreseleccionat !== null ? $temaPreseleccionat : 'null'; ?>;
     const TEMA_NOM_PRESELECCIONAT = <?php echo json_encode($temaNomPreseleccionat, JSON_UNESCAPED_UNICODE); ?>;
+    const TEMA_ICON_BY_SLUG = <?php echo json_encode($temaIconsUtf8, JSON_UNESCAPED_UNICODE); ?>;
+    const TEMA_SLUG_PRESELECCIONAT = <?php echo json_encode($slugPreseleccionatJs, JSON_UNESCAPED_UNICODE); ?>;
   </script>
   <script src="../assets/js/postgame_feedback.js?v=<?php echo (int) @filemtime(__DIR__ . '/../assets/js/postgame_feedback.js'); ?>"></script>
   <script src="../assets/js/joc.js?v=<?php echo (int) @filemtime(__DIR__ . '/../assets/js/joc.js'); ?>"></script>

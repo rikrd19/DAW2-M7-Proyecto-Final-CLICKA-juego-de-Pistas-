@@ -64,7 +64,7 @@ $pageTitle = 'Iniciar Sesión';
 
                     <form action="../processes/login.proc.php" method="POST">
                         <div class="mb-3">
-                            <label for="username" class="form-label">Usuario</label>
+                            <label for="username" class="form-label">Correo electrónico</label>
                             <input type="email" name="username" id="username" class="form-control" required autofocus
                                 autocomplete="email" inputmode="email"
                                 placeholder="ejemplo@correo.com">

@@ -39,9 +39,14 @@ const puntsFinalsEl    = document.getElementById('punts-finals');
 const btnTornar        = document.getElementById('btn-tornar');
 const btnFiSortir      = document.getElementById('btn-fi-sortir');
 
+const temaRoundBanner  = document.getElementById('tema-round-banner');
+const temaRoundNameEl  = document.getElementById('tema-round-name');
+const temaRoundIconEl  = document.getElementById('tema-round-icon');
+
 /* ── State ──────────────────────────────────────────────────── */
 let temaId          = null;
 let temaNom         = '';
+let temaSlug        = '';
 let preguntaActual  = null;
 let numPregunta     = 0;
 let pistesVistes    = 1;   // clue counter: 1 = only pista1 revealed
@@ -79,6 +84,21 @@ function resetCartes() {
     });
 });
 
+function refreshTemaRoundBanner() {
+    if (!temaRoundBanner || !temaRoundNameEl || !temaRoundIconEl) return;
+    const nom = typeof temaNom === 'string' ? temaNom.trim() : '';
+    if (nom === '') {
+        temaRoundBanner.hidden = true;
+        return;
+    }
+    temaRoundNameEl.textContent = nom;
+    const slug = typeof temaSlug === 'string' ? temaSlug.trim() : '';
+    const map  = typeof TEMA_ICON_BY_SLUG === 'object' && TEMA_ICON_BY_SLUG !== null ? TEMA_ICON_BY_SLUG : {};
+    const ch   = slug && map[slug] ? map[slug] : '\u2753';
+    temaRoundIconEl.textContent = ch;
+    temaRoundBanner.hidden = false;
+}
+
 function iniciarPartida() {
     numPregunta  = 0;
     puntsPartida = 0;
@@ -86,6 +106,7 @@ function iniciarPartida() {
     temaSelector.hidden = true;
     gameArea.hidden     = false;
     fiPartida.hidden    = true;
+    refreshTemaRoundBanner();
     carregarPregunta(temaId);
 }
 
@@ -131,14 +152,26 @@ async function carregarPregunta(tema_id) {
     pista2Text.textContent = q.pista2;
     pista3Text.textContent = q.pista3;
 
+    // Server-authoritative count — keeps empty-submit-after-last-card in sync with validate.php.
+    const mcApi = Number(q.max_clues);
+    if (Number.isFinite(mcApi) && mcApi >= 3 && mcApi <= 4) {
+        maxPistes = mcApi;
+    } else {
+        const extraLegacy =
+            q.pista_extra != null && q.pista_extra !== ''
+                ? String(q.pista_extra).replace(/\u00a0/g, ' ').trim()
+                : '';
+        maxPistes = extraLegacy !== '' ? 4 : 3;
+    }
+
     pistaExtraEl.classList.remove('carta-bloqueada');
-    const extraText = q.pista_extra != null ? String(q.pista_extra).trim() : '';
-    if (extraText !== '') {
-        pistaExtraText.textContent = extraText;
-        maxPistes = 4;
+    if (maxPistes === 4) {
+        const extraDisplay =
+            q.pista_extra != null ? String(q.pista_extra).replace(/\u00a0/g, ' ').trim() : '';
+        pistaExtraText.textContent = extraDisplay;
     } else {
         pistaExtraEl.classList.add('carta-bloqueada');
-        maxPistes = 3;
+        pistaExtraText.textContent = '';
     }
 
     pistesMaxEl.textContent = maxPistes;
@@ -150,7 +183,7 @@ async function carregarPregunta(tema_id) {
     resetCartes();
     setTimeout(() => revelarCarta(pista1El), 0);
 
-    respostaInput.focus();
+    focusNoScroll(respostaInput);
 }
 
 /* ── Ver siguiente pista ────────────────────────────────────── */
@@ -171,7 +204,7 @@ btnSeguентPista.addEventListener('click', () => {
     if (pistesVistes >= maxPistes) {
         btnSeguентPista.hidden = true;
         // Let the player read the last clue and type before Comprobar / Enter (no auto-submit).
-        respostaInput.focus();
+        focusNoScroll(respostaInput);
     }
 });
 
@@ -186,7 +219,7 @@ async function comprovarResposta() {
 
     const resposta = respostaInput.value.trim();
     if (resposta === '' && pistesVistes < maxPistes) {
-        respostaInput.focus();
+        focusNoScroll(respostaInput);
         return;
     }
 
@@ -257,6 +290,7 @@ async function submitAnswerValidation(answerTrimmed) {
             } else {
                 mostrarFeedback('error', 'Incorrecto. Inténtalo de nuevo o revela otra carta.');
                 btnComprovar.disabled = false;
+                focusNoScroll(respostaInput);
                 respostaInput.select();
             }
         }
@@ -271,6 +305,16 @@ function mostrarFeedback(tipo, texto) {
     feedbackEl.textContent = texto;
     feedbackEl.className   = `feedback-box feedback-${tipo}`;
     feedbackEl.hidden      = false;
+}
+
+/** Keeps keyboard focus without scrolling the page (avoids jump when feedback/result appears). */
+function focusNoScroll(el) {
+    if (!el || typeof el.focus !== 'function') return;
+    try {
+        el.focus({ preventScroll: true });
+    } catch (_) {
+        el.focus();
+    }
 }
 
 function escapeHtml(str) {
@@ -311,7 +355,7 @@ function mostrarResultat(correct, punts, respuestaCorrecta = null) {
         : 'Siguiente pregunta →';
 
     resultatEl.hidden = false;
-    btnSegurentPregunta.focus();
+    focusNoScroll(btnSegurentPregunta);
 }
 
 /* ── Enter advances same as "Siguiente pregunta" while result panel is open ── */
@@ -395,11 +439,15 @@ if (btnFiSortir) {
 
 /* ── Auto-start when tema is preselected via URL ─────────── */
 if (typeof TEMA_PRESELECCIONAT !== 'undefined' && TEMA_PRESELECCIONAT !== null) {
-    const preBtn = document.querySelector(`[data-tema-id="${TEMA_PRESELECCIONAT}"]`);
+    const preBtn = document.querySelector(`a.btn-play-tema[data-tema-id="${TEMA_PRESELECCIONAT}"]`);
     temaId = TEMA_PRESELECCIONAT;
     const fromBtn = preBtn && preBtn.dataset.temaNom ? String(preBtn.dataset.temaNom).trim() : '';
     const fromPhp =
         typeof TEMA_NOM_PRESELECCIONAT === 'string' ? TEMA_NOM_PRESELECCIONAT.trim() : '';
     temaNom = fromBtn || fromPhp;
+    const fromBtnSlug = preBtn && preBtn.dataset.temaSlug ? String(preBtn.dataset.temaSlug).trim() : '';
+    const fromPhpSlug =
+        typeof TEMA_SLUG_PRESELECCIONAT === 'string' ? TEMA_SLUG_PRESELECCIONAT.trim() : '';
+    temaSlug = fromBtnSlug || fromPhpSlug;
     iniciarPartida();
 }

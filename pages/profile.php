@@ -21,7 +21,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id']) && $sessionRole === 'admin') {
 }
 
 // Fetch current user data
-$stmt = $db->prepare("SELECT id, username, rol, foto FROM usuarios WHERE id = :id");
+$stmt = $db->prepare('SELECT id, username, nombre_usuario, rol, foto FROM usuarios WHERE id = :id');
 $stmt->bindValue(':id', $targetId, SQLITE3_INTEGER);
 $res = $stmt->execute();
 $user = $res->fetchArray(SQLITE3_ASSOC);
@@ -37,7 +37,7 @@ $_galleryRoll = bin2hex(random_bytes(4));
 $_galleryBust = bin2hex(random_bytes(4));
 $_galleryItems = [];
 foreach (dicebear_gallery_styles() as $_gs) {
-    $_seed = $user['username'] . '|' . $_gs . '|' . $_galleryRoll;
+    $_seed = (string) ((int) $user['id']) . '|' . $_gs . '|' . $_galleryRoll;
     $_galleryItems[] = ['style' => $_gs, 'url' => dicebear_avatar_url($_gs, $_seed, ['cb' => $_galleryBust])];
 }
 unset($_galleryRoll, $_galleryBust, $_gs, $_seed);
@@ -104,15 +104,32 @@ $photoUrl = ($user['foto'] === 'default.png' || !$user['foto'])
             <div class="card border-0 shadow-sm p-4">
                 <div class="text-center mb-3">
                     <img src="<?php echo $photoUrl; ?>" alt="Avatar" class="avatar-preview mb-3">
-                    <h2 class="fw-bold"><?php echo htmlspecialchars($user['username']); ?></h2>
+                    <h2 class="fw-bold"><?php echo htmlspecialchars((string) ($user['nombre_usuario'] ?? '')); ?></h2>
                     <span class="badge bg-primary rounded-pill role-pill text-uppercase"><?php echo strtoupper($user['rol']); ?></span>
                 </div>
 
                 <?php if (isset($_GET['msg'])): ?>
                     <div class="alert alert-success text-center py-2"><?php echo htmlspecialchars($_GET['msg']); ?></div>
                 <?php endif; ?>
-                <?php if (isset($_GET['error']) && $_GET['error'] === 'invalid_avatar_url'): ?>
-                    <div class="alert alert-danger text-center py-2">El avatar seleccionado no es válido. Elige otra opción.</div>
+                <?php if (isset($_GET['error'])): ?>
+                    <?php
+                    $pe = (string) $_GET['error'];
+                    $peMsg = match ($pe) {
+                        'invalid_avatar_url' => 'El avatar seleccionado no es válido. Elige otra opción.',
+                        'invalid_public_name' => 'Nombre de usuario: 3–24 caracteres, solo minúsculas, números y guión bajo.',
+                        'duplicate_public_name' => 'Ese nombre de usuario ya está en uso. Elige otro.',
+                        'duplicate_email' => 'Ya existe una cuenta con ese correo.',
+                        'invalid_email' => 'Introduce un correo electrónico válido.',
+                        'file_too_large' => 'La imagen supera el tamaño máximo permitido.',
+                        'invalid_file_type' => 'Formato de imagen no permitido.',
+                        'weak_password' => 'Si cambias la contraseña, debe tener al menos 6 caracteres (igual que al registrarte o iniciar sesión).',
+                        'db_error' => 'No se pudo guardar. Inténtalo de nuevo.',
+                        default => '',
+                    };
+                    ?>
+                    <?php if ($peMsg !== ''): ?>
+                    <div class="alert alert-danger text-center py-2"><?php echo htmlspecialchars($peMsg); ?></div>
+                    <?php endif; ?>
                 <?php endif; ?>
 
                 <form action="../processes/profile.proc.php" method="POST" enctype="multipart/form-data">
@@ -120,20 +137,39 @@ $photoUrl = ($user['foto'] === 'default.png' || !$user['foto'])
                     <input type="hidden" name="return_to" value="<?php echo $returnTo; ?>">
 
                     <div class="mb-2">
-                        <label class="form-label fw-bold">Nombre de Usuario</label>
-                        <input type="text" class="form-control form-control-sm bg-light" value="<?php echo htmlspecialchars($user['username']); ?>" disabled>
-                        <div class="form-text">El nombre de usuario no se puede cambiar.</div>
+                        <label class="form-label fw-bold" for="nombre_usuario">Nombre de usuario</label>
+                        <input type="text" name="nombre_usuario" id="nombre_usuario" class="form-control form-control-sm"
+                            required maxlength="24" pattern="[a-z0-9_]{3,24}"
+                            value="<?php echo htmlspecialchars((string) ($user['nombre_usuario'] ?? '')); ?>"
+                            autocomplete="username" autocapitalize="none" spellcheck="false">
+                        <div class="form-text">Visible en el ranking (único). Solo minúsculas, números y guión bajo.</div>
                     </div>
+
+                    <?php if ($sessionRole === 'admin'): ?>
+                    <div class="mb-2">
+                        <label class="form-label fw-bold" for="profileEmail">Correo electrónico</label>
+                        <input type="email" name="email" id="profileEmail" class="form-control form-control-sm" required
+                            value="<?php echo htmlspecialchars((string) ($user['username'] ?? '')); ?>"
+                            autocomplete="email" inputmode="email">
+                    </div>
+                    <?php else: ?>
+                    <div class="mb-2">
+                        <label class="form-label fw-bold">Correo electrónico</label>
+                        <input type="email" class="form-control form-control-sm bg-light"
+                            value="<?php echo htmlspecialchars((string) ($user['username'] ?? '')); ?>" disabled>
+                        <div class="form-text">Para cambiar el correo, un administrador debe editar tu cuenta.</div>
+                    </div>
+                    <?php endif; ?>
 
                     <div class="mb-2">
                         <label for="password" class="form-label fw-bold">Nueva Contraseña</label>
                         <div class="input-group input-group-sm">
-                            <input type="password" name="password" id="password" class="form-control form-control-sm password-placeholder" placeholder="••••••••">
+                            <input type="password" name="password" id="password" class="form-control form-control-sm password-placeholder" placeholder="••••••••" minlength="6" autocomplete="new-password">
                             <button type="button" class="btn password-toggle-btn px-2" data-password-toggle="#password" aria-label="Mostrar contraseña">
                                 <i class="bi bi-eye-fill"></i>
                             </button>
                         </div>
-                        <div class="form-text">Dejar en blanco para mantener la actual.</div>
+                        <div class="form-text">Dejar en blanco para mantener la actual. Si la cambias, mínimo 6 caracteres.</div>
                     </div>
 
                     <div class="mb-3">

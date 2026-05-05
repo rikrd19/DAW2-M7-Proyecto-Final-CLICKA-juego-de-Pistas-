@@ -14,7 +14,7 @@ $pageTitle = 'Gestión de Usuarios';
 // Fetch all users
 $results = $db->query("SELECT * FROM usuarios ORDER BY 
     CASE rol WHEN 'admin' THEN 1 ELSE 2 END, 
-    username ASC");
+    nombre_usuario ASC");
 
 ?>
 <!DOCTYPE html>
@@ -65,7 +65,8 @@ $results = $db->query("SELECT * FROM usuarios ORDER BY
                 <table class="table table-hover align-middle mb-0">
                     <thead class="bg-white border-bottom">
                         <tr class="text-muted small text-uppercase fw-bold">
-                            <th class="px-4 py-3">Usuario</th>
+                            <th class="px-4 py-3">Nombre de usuario</th>
+                            <th class="px-4 py-3">Correo</th>
                             <th class="px-4 py-3">Rol</th>
                             <th class="px-4 py-3 text-center">Puntos</th>
                             <th class="px-4 py-3 text-center">Acciones</th>
@@ -83,8 +84,11 @@ $results = $db->query("SELECT * FROM usuarios ORDER BY
                                     <div class="d-flex align-items-center gap-3">
                                         <img src="<?php echo $photoUrl; ?>" alt="Avatar" class="users-user-img" 
                                              onerror="this.src='<?php echo BASE_URL; ?>/assets/images/social_media/profile.svg'">
-                                        <span class="fw-bold"><?php echo htmlspecialchars($row['username']); ?></span>
+                                        <span class="fw-bold"><?php echo htmlspecialchars((string) ($row['nombre_usuario'] ?? '')); ?></span>
                                     </div>
+                                </td>
+                                <td class="px-4 py-3 small text-break">
+                                    <?php echo htmlspecialchars((string) ($row['username'] ?? '')); ?>
                                 </td>
                                 <td class="px-4 py-3">
                                     <span class="badge <?php echo $badgeClass; ?> rounded-pill small">
