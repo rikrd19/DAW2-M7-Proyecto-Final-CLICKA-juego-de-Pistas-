@@ -95,6 +95,17 @@ Sesion PHP (auth)                              SQLite (database/clicka.db)
 Processes (login/register/delete)              Scripts Python (generator.py + seeds/*.json)
 ```
 
+## Probar `api/temas.php` con Postman (u otro cliente HTTP)
+
+La aplicacion web **no llama** a este endpoint; sirve para **consultar las categorias** cargadas en SQLite (util para revision rapida o integraciones).
+
+- **Metodo:** `GET`
+- **URL (ejemplo):** `http://localhost/<carpeta-del-proyecto>/api/temas.php`  
+  Con servidor integrado en la raiz del repo: `http://localhost:8000/api/temas.php`
+- **Cabeceras:** opcional `Accept: application/json`
+- **Respuesta:** JSON array `[{ "id": <int>, "nombre": "<string>" }, ...]` ordenado por nombre
+- **Errores:** `405` si no es GET; `500` JSON `{ "error": "..." }` si falla la base de datos
+
 ## Wireframes (Penpot)
 
 - Sustituir este enlace por el proyecto real del equipo:
@@ -104,10 +115,10 @@ Processes (login/register/delete)              Scripts Python (generator.py + se
 
 ### Diagrama de base de datos (actual)
 
-- Ruta: `assets/images/diagrama_de_tabla_relacional.png`
+- Ruta: `assets/images/diagrama_de_tabla_relacional_normalizada.png`
 - Se recomienda revisar este diagrama junto a `database/schema.sql` antes de la demo.
 
-![Diagrama relacional de tablas](assets/images/diagrama_de_tabla_relacional.png)
+![Diagrama relacional de tablas](assets/images/diagrama_de_tabla_relacional_normalizada.png)
 
 ### Capturas de funcionamiento API
 
