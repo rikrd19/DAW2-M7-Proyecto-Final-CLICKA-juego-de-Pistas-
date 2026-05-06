@@ -54,15 +54,16 @@ $err = isset($_GET['error']) ? (string) $_GET['error'] : '';
                     <?php endif; ?>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label fw-bold">Contraseña</label>
+                    <label class="form-label fw-bold" for="registerPassword">Contraseña</label>
                     <div class="input-group">
-                        <input type="password" name="password" id="registerPassword" class="form-control password-placeholder" required
+                        <input type="password" name="password" id="registerPassword" class="form-control password-placeholder soft-placeholder" required
                             minlength="6" autocomplete="new-password"
                             placeholder="Mínimo 6 caracteres">
                         <button type="button" class="btn password-toggle-btn px-2" data-password-toggle="#registerPassword" aria-label="Mostrar contraseña">
                             <i class="bi bi-eye-fill"></i>
                         </button>
                     </div>
+                    <div class="form-text">Mínimo 6 caracteres.</div>
                 </div>
                 <div class="mb-4">
                     <label class="form-label fw-bold">Rol</label>
