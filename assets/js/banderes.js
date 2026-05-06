@@ -188,7 +188,13 @@ btnSeguentPista.addEventListener('click', () => {
 /* ── Comprobar resposta ─────────────────────────────────────── */
 btnComprovar.addEventListener('click', comprovarResposta);
 respostaInput.addEventListener('keydown', e => {
-    if (e.key === 'Enter' && !btnComprovar.disabled) comprovarResposta();
+    if (e.key !== 'Enter' || e.repeat) return;
+    if (btnComprovar.disabled) return;
+    // Same Enter must not bubble to document listener (advances "Siguiente pregunta").
+    // Unlike joc.js (async validate), banderes resolves synchronously so bubbling would skip the result panel.
+    e.preventDefault();
+    e.stopPropagation();
+    comprovarResposta();
 });
 
 function normalitzar(str) {
@@ -325,6 +331,9 @@ function comprovarResposta() {
 
     const resposta = respostaInput.value.trim();
     if (resposta === '') {
+        if (pistesVistes >= MAX_PISTES) {
+            mostrarFeedback('error', 'Escribe un intento para comprobar y ver la respuesta correcta si fallas.');
+        }
         focusNoScroll(respostaInput);
         return;
     }
