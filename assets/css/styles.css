@@ -365,6 +365,7 @@ button.avatar-dicebear-more:focus-visible {
   border: 1.5px solid rgba(255,140,87,.15);
   border-radius: 18px;
   color: var(--clika-text);
+  min-height: 355px;
   position: relative;
   overflow: hidden;
   box-shadow: 0 2px 12px var(--clika-shadow-dark);
@@ -1233,6 +1234,24 @@ a.ranking-filter-pill.active:focus-visible {
   transform: scale(0.96);
 }
 
+/* Disabled: keep symmetric layout, read clearly as “no more this way” */
+.carrusel-btn:disabled {
+  opacity: 0.42;
+  cursor: not-allowed;
+  background: var(--clika-border-strong);
+  color: rgba(255, 255, 255, 0.72);
+  box-shadow: none;
+  filter: none;
+  transform: none;
+  pointer-events: none;
+}
+.carrusel-btn:disabled:hover,
+.carrusel-btn:disabled:active {
+  filter: none;
+  transform: none;
+  box-shadow: none;
+}
+
 /* Puntos — se convierten en píldora cuando están activos */
 .carrusel-dots {
   display: flex;
@@ -1272,6 +1291,7 @@ a.ranking-filter-pill.active:focus-visible {
   .carrusel-outer::after { width: 36px; }
   .carrusel-outer::before { left: 38px; }
   .carrusel-outer::after  { right: 38px; }
+  .tema-card { min-height: 330px; }
 }
 
 /* Whole theme card is clickable (play + home carousel) */

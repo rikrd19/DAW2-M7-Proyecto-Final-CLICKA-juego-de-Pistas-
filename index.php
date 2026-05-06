@@ -143,19 +143,14 @@ $temas[] = [
 
   <script>
     (function () {
-      /* ── Carrusel (infinite: duplicate slide strip + instant scroll reposition) ── */
+      /* Finite manual carousel: no auto-return and no forced jumps. */
       const track   = document.getElementById('carrusel-track');
       const btnPrev = document.getElementById('carrusel-prev');
       const btnNext = document.getElementById('carrusel-next');
       const dotsEl  = document.getElementById('carrusel-dots');
-      const originalSlides = Array.from(track.querySelectorAll('.carrusel-item'));
-      const originalTotal  = originalSlides.length;
-
-      if (originalTotal > 0) {
-        originalSlides.forEach((el) => track.appendChild(el.cloneNode(true)));
-      }
-
-      const firstCard = originalSlides[0];
+      const slides  = Array.from(track.querySelectorAll('.carrusel-item'));
+      const total   = slides.length;
+      const firstCard = slides[0];
 
       track.addEventListener('click', (e) => {
         const card = e.target.closest('.tema-card--clickable');
@@ -173,12 +168,9 @@ $temas[] = [
       });
 
       let current = 0;
-      let autoTimer = null;
-      let normalizeLock = false;
-      const AUTO_ADVANCE_MS = 6000;
 
       function perPage() {
-        if (window.innerWidth >= 992) return 4;
+        if (window.innerWidth >= 992) return 3;
         if (window.innerWidth >= 576) return 2;
         return 1;
       }
@@ -189,34 +181,18 @@ $temas[] = [
         return firstCard.offsetWidth + gap;
       }
 
-      function getLoopWidth() {
-        if (!originalTotal) return 0;
-        const half = track.scrollWidth / 2;
-        return half > 10 ? half : 0;
-      }
-
-      function normalizeInfiniteScroll() {
-        const lw = getLoopWidth();
-        if (lw < 10) return;
-        if (track.scrollLeft >= lw - 2) {
-          normalizeLock = true;
-          track.scrollLeft -= lw;
-          normalizeLock = false;
-        }
-      }
-
       function syncCurrentFromScroll() {
         const iw = itemWidth();
-        if (iw < 1 || !originalTotal) return;
+        if (iw < 1 || !total) return;
         let idx = Math.round(track.scrollLeft / iw);
-        idx = Math.max(0, idx);
-        current = ((idx % originalTotal) + originalTotal) % originalTotal;
+        const maxStart = Math.max(0, total - perPage());
+        current = Math.max(0, Math.min(idx, maxStart));
       }
 
       function buildDots() {
         dotsEl.innerHTML = '';
-        if (!originalTotal) return;
-        const pages = Math.ceil(originalTotal / perPage());
+        if (!total) return;
+        const pages = Math.ceil(total / perPage());
         for (let i = 0; i < pages; i++) {
           const d = document.createElement('button');
           d.className = 'carrusel-dot';
@@ -233,12 +209,18 @@ $temas[] = [
         dotsEl.querySelectorAll('.carrusel-dot').forEach((d, i) =>
           d.classList.toggle('active', i === page)
         );
+        updateButtons();
+      }
+
+      function updateButtons() {
+        const maxStart = Math.max(0, total - perPage());
+        btnPrev.disabled = current <= 0;
+        btnNext.disabled = current >= maxStart;
       }
 
       function scrollToIndex(idx, instant = false) {
-        const step = perPage();
         const iw = itemWidth();
-        const maxStart = Math.max(0, originalTotal - step);
+        const maxStart = Math.max(0, total - perPage());
         const clamped = Math.max(0, Math.min(idx, maxStart));
         current = clamped;
         track.scrollTo({
@@ -249,69 +231,31 @@ $temas[] = [
       }
 
       function scrollByPages(deltaPages) {
-        if (!originalTotal) return;
+        if (!total) return;
         const step = perPage();
-        const iw = itemWidth();
-        const lw = getLoopWidth();
-        let rawIdx = Math.round(track.scrollLeft / iw);
-        let nextRaw = rawIdx + deltaPages * step;
-        if (nextRaw < 0 && lw > 0) {
-          normalizeLock = true;
-          track.scrollLeft += lw;
-          normalizeLock = false;
-          rawIdx = Math.round(track.scrollLeft / iw);
-          nextRaw = rawIdx + deltaPages * step;
-        }
-        track.scrollTo({ left: nextRaw * iw, behavior: 'smooth' });
+        scrollToIndex(current + deltaPages * step);
       }
 
       btnPrev.addEventListener('click', () => {
-        stopAuto();
         scrollByPages(-1);
-        startAuto();
       });
       btnNext.addEventListener('click', () => {
-        stopAuto();
         scrollByPages(1);
-        startAuto();
       });
 
       document.addEventListener('keydown', (e) => {
         if (e.key === 'ArrowLeft') {
-          stopAuto();
           scrollByPages(-1);
-          startAuto();
         }
         if (e.key === 'ArrowRight') {
-          stopAuto();
           scrollByPages(1);
-          startAuto();
         }
       });
 
       track.addEventListener('scroll', () => {
-        if (!normalizeLock) normalizeInfiniteScroll();
         syncCurrentFromScroll();
         syncDots();
       }, { passive: true });
-
-      function advance() {
-        scrollByPages(1);
-      }
-
-      function startAuto() {
-        if (autoTimer || !originalTotal) return;
-        autoTimer = setInterval(advance, AUTO_ADVANCE_MS);
-      }
-      function stopAuto() {
-        clearInterval(autoTimer);
-        autoTimer = null;
-      }
-
-      track.addEventListener('mouseenter', stopAuto);
-      track.addEventListener('mouseleave', startAuto);
-      track.addEventListener('touchstart', stopAuto, { passive: true });
-      track.addEventListener('touchend', () => setTimeout(startAuto, 2000), { passive: true });
 
       window.addEventListener('resize', () => {
         const saved = current;
@@ -320,7 +264,7 @@ $temas[] = [
       });
 
       buildDots();
-      startAuto();
+      scrollToIndex(0, true);
     })();
   </script>
 
