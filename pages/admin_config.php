@@ -28,6 +28,20 @@ $pageTitle = 'Panel de Administración';
                 ?>. Aquí podrás
                     gestionar los temas y las preguntas.</p>
 
+                <?php if (isset($_GET['dbimport'])): ?>
+                    <?php if ($_GET['dbimport'] === 'success'): ?>
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <?php echo htmlspecialchars($_GET['msg'] ?? 'Operación completada.'); ?>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+                        </div>
+                    <?php else: ?>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <?php echo htmlspecialchars($_GET['msg'] ?? 'Ocurrió un error.'); ?>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+                        </div>
+                    <?php endif; ?>
+                <?php endif; ?>
+
                 <div class="row g-4 mt-2">
                     <div class="col-md-4">
                         <div class="card h-100 shadow-sm border-0">
@@ -59,6 +73,27 @@ $pageTitle = 'Panel de Administración';
                                 <h3 class="h5">Opiniones y valoraciones</h3>
                                 <p class="small text-muted mb-0">Solo lectura: comentarios y estrellas enviados por jugadores.</p>
                                 <a href="<?php echo BASE_URL; ?>/pages/admin_feedback.php" class="btn btn-outline-primary mt-3">Ver opiniones</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 shadow-sm border-0">
+                            <div class="card-body text-center">
+                                <h3 class="h5">Exportar Base de Datos</h3>
+                                <p class="small text-muted mb-0">Descarga una copia completa de la base de datos actual.</p>
+                                <a href="<?php echo BASE_URL; ?>/processes/export_db.proc.php" class="btn btn-success mt-3">Descargar .db</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 shadow-sm border-0">
+                            <div class="card-body text-center">
+                                <h3 class="h5">Importar Base de Datos</h3>
+                                <p class="small text-muted mb-0">Restaura una copia anterior (.db). Se creará un backup automático.</p>
+                                <form action="<?php echo BASE_URL; ?>/processes/import_db.proc.php" method="POST" enctype="multipart/form-data" class="mt-3">
+                                    <input type="file" name="dbfile" accept=".db,.sqlite,.sqlite3" class="form-control form-control-sm mb-2" required>
+                                    <button type="submit" class="btn btn-warning">Importar .db</button>
+                                </form>
                             </div>
                         </div>
                     </div>
