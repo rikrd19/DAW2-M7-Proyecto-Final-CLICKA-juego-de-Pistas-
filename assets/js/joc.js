@@ -55,6 +55,22 @@ let puntsPartida    = 0;   // accumulated score for the round
 let respostaEnviada = false;
 let roundAnswers    = [];  // per-question analytics: clues_used + correctness
 
+/* ── Prevent keyboard scroll on mobile ──────────────────────── */
+(function preventInputScroll() {
+    if (!respostaInput) return;
+    let savedScrollY = 0;
+    respostaInput.addEventListener('focus', () => {
+        savedScrollY = window.scrollY;
+        // Restore scroll after the keyboard opens
+        requestAnimationFrame(() => {
+            window.scrollTo({ top: savedScrollY, behavior: 'instant' });
+        });
+        setTimeout(() => {
+            window.scrollTo({ top: savedScrollY, behavior: 'instant' });
+        }, 50);
+    });
+})();
+
 /* ── Card reveal helper ─────────────────────────────────────── */
 function revelarCarta(el) {
     el.classList.add('revelada');
