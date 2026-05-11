@@ -6,12 +6,19 @@ El jugador elige una temática, responde **5 preguntas** por partida y suma **m�
 ## Funcionalidades principales
 
 - **Juego por categorías** cargadas en SQLite (`pages/play.php`): pistas progresivas y validación en servidor (`api/validate.php`).
-- **Temática especial Banderas del Mundo** (`pages/banderes.php`): datos de países vía API pública REST Countries (requiere red).
+- **Temática especial Banderas del Mundo** (`pages/banderes.php`): datos de países vía API pública REST Countries (requiere red). Detalle en [APIs externas utilizadas](#apis-externas-utilizadas).
+- **Perfil de usuario** (`pages/profile.php`): avatares opcionales mediante URLs generadas con la API pública **DiceBear** (SVG). Detalle en la misma sección.
 - **Ranking**: vista global (suma de puntos en todas las categorías para usuarios registrados) y filtros por temática (`pages/ranking.php`).
 - **Registro e inicio de sesión**: el acceso usa **correo electrónico** y contraseña; en ranking y comunidad se muestra el **nombre de usuario público** (`nombre_usuario`, único, 3–20 caracteres).
 - **Comunidad**: opiniones y comentarios recientes (`pages/opiniones.php`).
 - **Administración** (rol admin): usuarios, temas, preguntas (alta manual o borrador con IA), moderación de feedback.
 - **IA opcional** (Anthropic): generación de pistas desde el panel de preguntas (`api/ai_question.php`, requiere `ANTHROPIC_API_KEY`).
+
+## APIs externas utilizadas
+
+- **REST Countries**: el cliente (JavaScript en `assets/js/banderes.js`) solicita datos de países y banderas en formato JSON sobre HTTPS. Se usa en **Banderas del Mundo** (`pages/banderes.php`). Requiere red en el navegador.
+
+- **DiceBear** (`https://api.dicebear.com`): servicio de **avatares vectoriales (SVG)**; la ruta de versión usada en el proyecto es `7.x`. PHP construye y valida las URLs (`api/lib/dicebear.php`); el endpoint interno `api/dicebear_gallery.php` devuelve JSON con estilos permitidos y URLs listas para la galería del perfil. Las imágenes se cargan directamente en el navegador desde el dominio de DiceBear (requiere red). No sustituye el almacenamiento local de fotos subidas: solo ofrece avatares remotos acotados al host permitido.
 
 ## Mecánica del juego
 
