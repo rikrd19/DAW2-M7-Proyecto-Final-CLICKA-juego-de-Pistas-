@@ -20,6 +20,17 @@
 
     let feedbackStars = null;
 
+    /** Light stars 1..upTo for hover preview or confirmed rating (upTo null/invalid = none). */
+    function paintStars(upTo) {
+        if (!starRatingEl) return;
+        const thr =
+            upTo != null && Number.isFinite(upTo) && upTo >= 1 ? Math.floor(Number(upTo)) : 0;
+        starRatingEl.querySelectorAll('.btn-star').forEach(b => {
+            const n = parseInt(b.getAttribute('data-value'), 10);
+            b.classList.toggle('is-on', thr >= 1 && n <= thr);
+        });
+    }
+
     function hideValidation() {
         if (validationEl) {
             validationEl.hidden = true;
@@ -31,9 +42,7 @@
         feedbackStars = null;
         hideValidation();
         if (commentEl) commentEl.value = '';
-        if (starRatingEl) {
-            starRatingEl.querySelectorAll('.btn-star').forEach(b => b.classList.remove('is-on'));
-        }
+        paintStars(null);
     }
 
     function escapeHtml(str) {
@@ -77,6 +86,16 @@
     };
 
     if (starRatingEl) {
+        starRatingEl.addEventListener('mouseover', e => {
+            const btn = e.target.closest('.btn-star');
+            if (!btn || !starRatingEl.contains(btn)) return;
+            const val = parseInt(btn.getAttribute('data-value'), 10);
+            if (!Number.isFinite(val) || val < 1 || val > 5) return;
+            paintStars(val);
+        });
+        starRatingEl.addEventListener('mouseleave', () => {
+            paintStars(feedbackStars);
+        });
         starRatingEl.addEventListener('click', e => {
             const btn = e.target.closest('.btn-star');
             if (!btn || !starRatingEl.contains(btn)) return;
@@ -84,10 +103,7 @@
             if (!Number.isFinite(val) || val < 1 || val > 5) return;
             feedbackStars = val;
             hideValidation();
-            starRatingEl.querySelectorAll('.btn-star').forEach(b => {
-                const n = parseInt(b.getAttribute('data-value'), 10);
-                b.classList.toggle('is-on', n <= val);
-            });
+            paintStars(val);
         });
     }
 
