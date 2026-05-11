@@ -69,8 +69,29 @@ try {
         exit;
     }
 
-    // Public registration: do not open session here — user signs in on login.php (guest score in session is merged there).
-    header('Location: ../pages/login.php?registered=1');
+    // Public self-registration: sign in immediately (same session keys as login.proc.php).
+    $newId = (int) $db->lastInsertRowID();
+    session_regenerate_id(true);
+    $_SESSION['usuari_id'] = $newId;
+    $_SESSION['user_email'] = $email;
+    $_SESSION['nombre_usuario'] = $publicRaw;
+    $_SESSION['rol'] = $rol;
+    $_SESSION['foto'] = 'default.png';
+
+    if (isset($_SESSION['last_score'])) {
+        $last = $_SESSION['last_score'];
+        $insPart = $db->prepare(
+            'INSERT INTO partidas (usuario_id, puntos, tema, nombre_temporal) VALUES (:uid, :pts, :tema, :nom)'
+        );
+        $insPart->bindValue(':uid', $newId, SQLITE3_INTEGER);
+        $insPart->bindValue(':pts', $last['puntos'] ?? 0, SQLITE3_INTEGER);
+        $insPart->bindValue(':tema', $last['tema'] ?? 'general', SQLITE3_TEXT);
+        $insPart->bindValue(':nom', $last['nombre_temporal'] ?? null, SQLITE3_TEXT);
+        $insPart->execute();
+        unset($_SESSION['last_score']);
+    }
+
+    header('Location: ../index.php');
     exit;
 } catch (Throwable $e) {
     error_log('register: ' . $e->getMessage());
