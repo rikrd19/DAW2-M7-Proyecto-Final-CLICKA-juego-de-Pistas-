@@ -70,7 +70,7 @@ try {
   <?php include '../includes/menu.php'; ?>
 
   <main class="container py-4">
-    <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-4">
+    <div class="d-flex flex-wrap justify-content-between align-items-start align-items-md-center gap-2 mb-4">
       <div>
         <h1 class="h3 fw-bold mb-1">Valoraciones y comentarios</h1>
         <p class="text-muted small mb-0">Los jugadores envían esto desde el juego con sesión iniciada. El admin puede moderar comentarios ofensivos.</p>
@@ -145,10 +145,10 @@ try {
         <table class="table table-sm table-hover align-middle mb-0 admin-feedback-detail-table">
           <thead class="table-light">
             <tr>
-              <th>ID</th>
+              <th class="d-none d-sm-table-cell">ID</th>
               <th>Fecha</th>
               <th>Usuario</th>
-              <th>Tema</th>
+              <th class="d-none d-sm-table-cell">Tema</th>
               <th>★</th>
               <th>Comentario</th>
               <th class="text-center">Acciones</th>
@@ -166,7 +166,7 @@ try {
               }
               ?>
               <tr>
-                <td><?php echo (int) $r['id']; ?></td>
+                <td class="d-none d-sm-table-cell"><?php echo (int) $r['id']; ?></td>
                 <td class="text-nowrap small"><?php echo htmlspecialchars($fechaSoloDia); ?></td>
                 <td class="small">
                   <?php
@@ -181,7 +181,7 @@ try {
                   echo $em !== '' ? '<span class="text-muted">' . htmlspecialchars($em) . '</span>' : '—';
                   ?>
                 </td>
-                <td><?php echo htmlspecialchars((string) ($r['tema'] ?? '')); ?></td>
+                <td class="d-none d-sm-table-cell"><?php echo htmlspecialchars((string) ($r['tema'] ?? '')); ?></td>
                 <td><?php echo $r['estrellas'] !== null && $r['estrellas'] !== '' ? (int) $r['estrellas'] : '—'; ?></td>
                 <td class="small"><?php echo $r['comentario'] !== null && $r['comentario'] !== ''
                     ? nl2br(htmlspecialchars((string) $r['comentario']))

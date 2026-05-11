@@ -63,13 +63,13 @@ try {
 
   <?php include '../includes/menu.php'; ?>
 
-  <main class="container py-5">
-    <div class="text-center mb-5">
+  <main class="container py-4 py-md-5 px-3 px-md-2">
+    <div class="text-center mb-4 mb-md-5">
       <p class="section-eyebrow">Comunidad</p>
       <h1 class="h3 fw-bold" style="color:var(--clika-text)">
         <i class="bi bi-chat-heart me-2" style="color:var(--clika-primary)"></i>Opiniones por temática
       </h1>
-      <p class="text-muted mb-0">Distribución de estrellas (5 a 1) según la categoría jugada y comentarios recientes de la comunidad.</p>
+      <p class="text-muted mb-0 small">Distribución de estrellas (5 a 1) según la categoría jugada y comentarios recientes de la comunidad.</p>
     </div>
 
     <?php if ($tableMissing): ?>

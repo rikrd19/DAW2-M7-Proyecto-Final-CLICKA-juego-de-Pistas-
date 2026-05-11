@@ -99,9 +99,9 @@ $photoUrl = ($user['foto'] === 'default.png' || !$user['foto'])
 
     <?php include '../includes/menu.php'; ?>
 
-    <main class="container py-2">
+    <main class="container py-2 px-3 px-md-2">
         <div class="profile-card">
-            <div class="card border-0 shadow-sm p-4">
+            <div class="card border-0 shadow-sm p-3 p-md-4">
                 <div class="text-center mb-3">
                     <img src="<?php echo $photoUrl; ?>" alt="Avatar" class="avatar-preview mb-3">
                     <h2 class="fw-bold"><?php echo htmlspecialchars((string) ($user['nombre_usuario'] ?? '')); ?></h2>

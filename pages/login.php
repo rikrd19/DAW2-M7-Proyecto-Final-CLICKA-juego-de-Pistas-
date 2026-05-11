@@ -17,7 +17,7 @@ $pageTitle = 'Iniciar Sesión';
     <style>
         .login-container {
             max-width: 400px;
-            margin-top: 100px;
+            margin-top: clamp(40px, 10vh, 100px);
         }
 
         .card {
@@ -39,9 +39,9 @@ $pageTitle = 'Iniciar Sesión';
 
     <?php include '../includes/menu.php'; ?>
 
-    <div class="container d-flex justify-content-center">
+    <div class="container d-flex justify-content-center px-3 px-md-2">
         <div class="login-container w-100">
-            <div class="card p-4">
+            <div class="card p-3 p-md-4">
                 <div class="card-body">
                     <h2 class="text-center mb-4 fw-bold">Login</h2>
 

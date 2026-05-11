@@ -97,10 +97,10 @@ while ($row = $resQ->fetchArray(SQLITE3_ASSOC)) {
 
   <main class="container mt-5 pb-5">
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="d-flex flex-wrap justify-content-between align-items-start align-items-md-center gap-2 mb-4">
       <div>
-        <h1 class="fw-bold">Gestionar Preguntas</h1>
-        <p class="text-muted mb-0">Crea, consulta y elimina preguntas de la base de datos.</p>
+        <h1 class="fw-bold h3">Gestionar Preguntas</h1>
+        <p class="text-muted small mb-0">Crea, consulta y elimina preguntas de la base de datos.</p>
       </div>
       <a href="admin_config.php" class="btn btn-outline-accent btn-sm px-3">← Panel admin</a>
     </div>
@@ -254,14 +254,14 @@ while ($row = $resQ->fetchArray(SQLITE3_ASSOC)) {
     </div><!-- /tab-content -->
 
     <!-- ── Lista de preguntas ─────────────────────────────── -->
-    <div class="d-flex justify-content-between align-items-center mb-3">
+    <div class="d-flex flex-wrap justify-content-between align-items-start align-items-md-center gap-2 mb-3">
       <h5 class="fw-bold mb-0">
         Preguntas existentes
         <span class="badge bg-secondary ms-1"><?php echo count($preguntas); ?></span>
       </h5>
       <!-- Filter by theme -->
       <form method="GET" class="d-flex gap-2 align-items-center">
-        <select name="tema_id" class="form-select form-select-sm" style="width:auto"
+        <select name="tema_id" class="form-select form-select-sm" style="width:auto;min-width:10rem"
                 onchange="this.form.submit()">
           <option value="">Todos los temas</option>
           <?php foreach ($temas as $t): ?>

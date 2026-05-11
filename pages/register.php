@@ -14,8 +14,8 @@ $err = isset($_GET['error']) ? (string) $_GET['error'] : '';
 <body class="bg-light">
     <?php include '../includes/menu.php'; ?>
 
-    <div class="container mt-5" style="max-width: 500px;">
-        <div class="card shadow-sm border-0 p-4">
+    <div class="container mt-4 mt-md-5 px-3 px-md-2" style="max-width: 500px;">
+        <div class="card shadow-sm border-0 p-3 p-md-4">
             <h2 class="fw-bold text-center mb-4">Nuevo Usuario</h2>
             <?php if ($err !== '' && $err !== 'public_name_taken'): ?>
                 <div class="alert alert-danger py-2 small" role="alert">

@@ -53,13 +53,17 @@ $pageTitle = "Error " . $code;
         }
 
         .error-img {
-            max-width: 500px;
-            max-height: 40vh;
+            max-width: min(90vw, 500px);
+            max-height: 35vh;
             width: auto;
             height: auto;
             margin-bottom: 1.5rem;
             border-radius: 15px;
             object-fit: contain;
+        }
+        @media (max-width: 575px) {
+            .error-img { max-height: 28vh; margin-bottom: 1rem; }
+            .error-container h1 { font-size: 1.5rem; }
         }
     </style>
 </head>
