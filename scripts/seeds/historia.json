@@ -101,8 +101,8 @@
       "respuesta": "segunda guerra mundial"
     },
     {
-      "pista1": "Pista con chispa: Jinetes expertos y yurtas",
-      "pista2": "Jinetes expertos y yurtas",
+      "pista1": "Jinetes expertos y yurtas",
+      "pista2": "Imperio nómada más extenso en superficie terrestre del siglo XIII",
       "pista3": "Gengis Kan unificó tribus del este",
       "pista_extra": "De China al Danubio en su máximo apogeo",
       "respuesta": "imperio mongol"
@@ -117,27 +117,27 @@
     {
       "pista1": "República romana tenía dos magistrados anuales máximos",
       "pista2": "Va otra: Cincinato dejó el arado para gobernar leyenda",
-      "pista3": "Cincinato dejó el arado para gobernar leyenda",
+      "pista3": "Dos magistrados anuales con imperium compartido en Roma",
       "pista_extra": "Cargo compartido con veto mutuo",
       "respuesta": "consul"
     },
     {
-      "pista1": "Pista con chispa: Ratas y pulgas como vectores históricos",
-      "pista2": "Ratas y pulgas como vectores históricos",
+      "pista1": "Ratas y pulgas como vectores históricos",
+      "pista2": "Pandemia bubónica que diezmó Europa en el siglo XIV",
       "pista3": "Diezmo de población en Europa",
       "pista_extra": "Yersinia pestis es la bacteria",
       "respuesta": "peste negra"
     },
     {
-      "pista1": "Pista con chispa: Bolcheviques y Lenin en octubre",
-      "pista2": "Bolcheviques y Lenin en octubre",
+      "pista1": "Bolcheviques y Lenin en octubre",
+      "pista2": "La Aurora disparó en Petrogrado y cayó el gobierno provisional",
       "pista3": "Unión Soviética surgió después",
       "pista_extra": "Aurora disparó señal en Petrogrado leyenda",
       "respuesta": "revolucion rusa"
     },
     {
-      "pista1": "Pista con chispa: Cuzco capital sagrada",
-      "pista2": "Cuzco capital sagrada",
+      "pista1": "Cuzco capital sagrada",
+      "pista2": "Tahuantinsuyo con caminos del inca y tambos en los Andes",
       "pista3": "Inti dios sol y quipus contables",
       "pista_extra": "Pizarro capturó a Atahualpa",
       "respuesta": "imperio inca"
@@ -150,8 +150,8 @@
       "respuesta": "edad media"
     },
     {
-      "pista1": "Pista con chispa: Florencia Venecia y Roma como centros",
-      "pista2": "Florencia Venecia y Roma como centros",
+      "pista1": "Florencia Venecia y Roma como centros",
+      "pista2": "Humanismo italiano y patronazgo de los Médici",
       "pista3": "Mecenas y familia Médici patrocinaron artistas",
       "pista_extra": "Botte y Da Vinci son símbolos del periodo",
       "respuesta": "renacimiento"
@@ -171,36 +171,36 @@
       "respuesta": "independencia americana"
     },
     {
-      "pista1": "Pista con chispa: Ciro el Grande fundó dinastía aqueménida",
-      "pista2": "Ciro el Grande fundó dinastía aqueménida",
+      "pista1": "Ciro el Grande fundó dinastía aqueménida",
+      "pista2": "Persepolis y caminos reales de los aqueménidas",
       "pista3": "Persepolis ruinas majestuosas",
       "pista_extra": "Irán actual guarda su herencia",
       "respuesta": "imperio persa"
     },
     {
-      "pista1": "Pista con chispa: Asaltaron monasterios y fundaron Normandía",
-      "pista2": "Asaltaron monasterios y fundaron Normandía",
+      "pista1": "Asaltaron monasterios y fundaron Normandía",
+      "pista2": "Drakkares surcaron el Atlántico norte y el Volga",
       "pista3": "Runas y mitología nórdica",
       "pista_extra": "Odín y Thor en sus mitos",
       "respuesta": "vikingos"
     },
     {
-      "pista1": "Pista con chispa: Pancho Villa y Emiliano Zapata",
-      "pista2": "Pancho Villa y Emiliano Zapata",
+      "pista1": "Pancho Villa y Emiliano Zapata",
+      "pista2": "Caída de Porfirio Díaz y constitución de mil novecientos diecisiete",
       "pista3": "Grito de Dolores es antecedente decimonónico",
       "pista_extra": "No confundir con independencia de mil ochocientos diez",
       "respuesta": "revolucion mexicana"
     },
     {
-      "pista1": "Pista con chispa: Conferencia de Bandung y paises no alineados",
-      "pista2": "Conferencia de Bandung y paises no alineados",
+      "pista1": "Conferencia de Bandung y paises no alineados",
+      "pista2": "Naciones independientes en África y Asia tras mil novecientos cuarenta y cinco",
       "pista3": "Ghana independiente mil novecientos cincuenta y siete pionera",
       "pista_extra": "Nombre general del fin del imperio europeo en el continente",
       "respuesta": "descolonizacion"
     },
     {
-      "pista1": "Pista con chispa: Juana de Arco levantó el asedio de Orleans",
-      "pista2": "Juana de Arco levantó el asedio de Orleans",
+      "pista1": "Juana de Arco levantó el asedio de Orleans",
+      "pista2": "Coronas de Inglaterra y Francia disputaron la monarquía francesa",
       "pista3": "Arco largo inglés en Crécy y Azincourt",
       "pista_extra": "Mil treinta y siete a mil cuatrocientos cincuenta y tres",
       "respuesta": "guerra de los cien anos"
@@ -227,8 +227,8 @@
       "respuesta": "cleopatra"
     },
     {
-      "pista1": "Pista con chispa: Felipe II contra Isabel I de Inglaterra",
-      "pista2": "Felipe II contra Isabel I de Inglaterra",
+      "pista1": "Felipe II contra Isabel I de Inglaterra",
+      "pista2": "Mil quinientos ochenta y ocho y batalla naval contra ingleses",
       "pista3": "Canal de la Mancha escenario",
       "pista_extra": "Calótipo inglés venció a galeones españoles",
       "respuesta": "armada invencible"
@@ -257,20 +257,20 @@
     {
       "pista1": "Batalla mil quinientos veintinueve imperio inca",
       "pista2": "Va otra: Atahualpa prisionero",
-      "pista3": "Atahualpa prisionero",
+      "pista3": "Capitulación del Inca ante los conquistadores españoles",
       "pista_extra": "Conquista peru",
       "respuesta": "cajamarca"
     },
     {
-      "pista1": "Pista con chispa: Fin guerra treinta años",
-      "pista2": "Fin guerra treinta años",
+      "pista1": "Fin guerra treinta años",
+      "pista2": "Tratados firmados en Osnabrück y Münster",
       "pista3": "Soberania estatal",
       "pista_extra": "Extra amable: Tiene 1 palabra.",
       "respuesta": "westfalia"
     },
     {
-      "pista1": "Pista con chispa: Mil setecientos ochenta y nueve",
-      "pista2": "Mil setecientos ochenta y nueve",
+      "pista1": "Mil setecientos ochenta y nueve",
+      "pista2": "Fortaleza parisina tomada el catorce de julio",
       "pista3": "Paris verano",
       "pista_extra": "Catorce de julio",
       "respuesta": "bastilla"
@@ -278,7 +278,7 @@
     {
       "pista1": "Guerra punica elefantes alpes",
       "pista2": "Va otra: Zama derrota",
-      "pista3": "Zama derrota",
+      "pista3": "Aníbal perdió en África ante Escipión el Africano",
       "pista_extra": "Roma cartago",
       "respuesta": "anibal"
     },
@@ -290,8 +290,8 @@
       "respuesta": "constantinopla"
     },
     {
-      "pista1": "Pista con chispa: Napoleon derrotado",
-      "pista2": "Napoleon derrotado",
+      "pista1": "Napoleon derrotado",
+      "pista2": "Mil ochocientos quince y fin del primer imperio napoleónico",
       "pista3": "Wellington britanico",
       "pista_extra": "Belgica",
       "respuesta": "waterloo"
@@ -313,13 +313,13 @@
     {
       "pista1": "Revolucion rusa octubre mil novecientos diecisiete",
       "pista2": "Va otra: Zar Nicolas segundo",
-      "pista3": "Zar Nicolas segundo",
+      "pista3": "Los bolcheviques tomaron el Palacio de Invierno",
       "pista_extra": "Palacio invierno",
       "respuesta": "bolchevique"
     },
     {
-      "pista1": "Pista con chispa: Golpe franco",
-      "pista2": "Golpe franco",
+      "pista1": "Golpe franco",
+      "pista2": "Mil novecientos treinta y seis a treinta y nueve entre republicanos y sublevados",
       "pista3": "Brigadas internacionales",
       "pista_extra": "Alzamiento nacional",
       "respuesta": "guerra civil espanola"
@@ -339,15 +339,15 @@
       "respuesta": "qin shi huang"
     },
     {
-      "pista1": "Pista con chispa: Ratas pulgas",
-      "pista2": "Ratas pulgas",
+      "pista1": "Ratas pulgas",
+      "pista2": "Se propagó por rutas comerciales y puertos mediterráneos",
       "pista3": "Europa tercio poblacion",
       "pista_extra": "Yersinia pestis",
       "respuesta": "peste negra"
     },
     {
-      "pista1": "Pista con chispa: Juana de arco Orleans",
-      "pista2": "Juana de arco Orleans",
+      "pista1": "Juana de arco Orleans",
+      "pista2": "Juana fue ejecutada en Rouen tras un proceso político",
       "pista3": "Inglaterra Francia",
       "pista_extra": "Longbow Crécy",
       "respuesta": "guerra de los cien anos"
@@ -360,36 +360,36 @@
       "respuesta": "independencia estados unidos"
     },
     {
-      "pista1": "Pista con chispa: Mil cuatrocientos setenta y seis tradicional",
-      "pista2": "Mil cuatrocientos setenta y seis tradicional",
+      "pista1": "Mil cuatrocientos setenta y seis tradicional",
+      "pista2": "Último emperador occidental depuesto según la fecha tradicional",
       "pista3": "Odoacro rey",
       "pista_extra": "Roma saqueo visigodos antes",
       "respuesta": "imperio romano"
     },
     {
-      "pista1": "Pista con chispa: Don Juan de austria",
-      "pista2": "Don Juan de austria",
+      "pista1": "Don Juan de austria",
+      "pista2": "Mil quinientos setenta y uno Liga Santa frente a otomanos",
       "pista3": "Turcos otomanos",
       "pista_extra": "Galeotas mediterraneo",
       "respuesta": "lepanto"
     },
     {
-      "pista1": "Pista con chispa: Metternich",
-      "pista2": "Metternich",
+      "pista1": "Metternich",
+      "pista2": "Congreso tras Napoleón para redibujar Europa",
       "pista3": "Restauracion monarquias",
       "pista_extra": "Mil ochocientos quince",
       "respuesta": "congreso de viena"
     },
     {
-      "pista1": "Pista con chispa: Pancho villa zapata",
-      "pista2": "Pancho villa zapata",
+      "pista1": "Pancho villa zapata",
+      "pista2": "Ejército constitucionalista con Carranza y Obregón",
       "pista3": "Porfirio diaz cae",
       "pista_extra": "Constitucion mil novecientos diecisiete",
       "respuesta": "revolucion mexicana"
     },
     {
-      "pista1": "Pista con chispa: URSS USA",
-      "pista2": "URSS USA",
+      "pista1": "URSS USA",
+      "pista2": "Bloques OTAN y Pacto de Varsovia con carrera nuclear",
       "pista3": "Muro doctrina truman",
       "pista_extra": "Sputnik mil novecientos cincuenta y siete",
       "respuesta": "guerra fria"

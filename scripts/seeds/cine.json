@@ -59,10 +59,10 @@
       "respuesta": "inception"
     },
     {
-      "pista1": "Pista con chispa: Ridley Scott y Russell Crowe",
-      "pista2": "Ridley Scott y Russell Crowe",
-      "pista3": "Frase soy Maximo Meridio",
-      "pista_extra": "Coliseo y arena sangrienta",
+      "pista1": "Ridley Scott y Russell Crowe",
+      "pista2": "Frase soy Maximo Meridio",
+      "pista3": "Coliseo y arena sangrienta",
+      "pista_extra": null,
       "respuesta": "gladiador"
     },
     {
@@ -143,10 +143,10 @@
       "respuesta": "alien"
     },
     {
-      "pista1": "Pista con chispa: Steven Spielberg y música dos notas",
-      "pista2": "Steven Spielberg y música dos notas",
-      "pista3": "Isla Amity y cazador Quint",
-      "pista_extra": "Necesitamos un barco más grande",
+      "pista1": "Steven Spielberg y música dos notas",
+      "pista2": "Isla Amity y cazador Quint",
+      "pista3": "Necesitamos un barco más grande",
+      "pista_extra": null,
       "respuesta": "tiburon"
     },
     {

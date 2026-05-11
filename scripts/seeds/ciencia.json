@@ -136,17 +136,17 @@
       "respuesta": "atmosfera"
     },
     {
-      "pista1": "Pista con chispa: Ocupa un locus en un cromosoma",
-      "pista2": "Ocupa un locus en un cromosoma",
-      "pista3": "Puede ser dominante o recesivo en el fenotipo",
-      "pista_extra": "Mendel los estudió en guisantes",
+      "pista1": "Ocupa un locus en un cromosoma",
+      "pista2": "Puede ser dominante o recesivo en el fenotipo",
+      "pista3": "Mendel los estudió en guisantes",
+      "pista_extra": null,
       "respuesta": "gen"
     },
     {
-      "pista1": "Pista con chispa: Relaciona energía masa y esta velocidad en famosa ecuación",
-      "pista2": "Relaciona energía masa y esta velocidad en famosa ecuación",
-      "pista3": "Es un límite para la transmisión de información causal",
-      "pista_extra": "Aproximadamente trescientos mil kilómetros por segundo",
+      "pista1": "Relaciona energía masa y esta velocidad en famosa ecuación",
+      "pista2": "Es un límite para la transmisión de información causal",
+      "pista3": "Aproximadamente trescientos mil kilómetros por segundo",
+      "pista_extra": null,
       "respuesta": "luz"
     },
     {
@@ -234,10 +234,10 @@
       "respuesta": "asteroide"
     },
     {
-      "pista1": "Pista con chispa: Incluye la equivalencia masa-energía",
-      "pista2": "Incluye la equivalencia masa-energía",
-      "pista3": "Describe gravedad como geometría",
-      "pista_extra": "No confundir solo con la especial de mil novecientos cinco",
+      "pista1": "Incluye la equivalencia masa-energía",
+      "pista2": "Describe gravedad como geometría",
+      "pista3": "No confundir solo con la especial de mil novecientos cinco",
+      "pista_extra": null,
       "respuesta": "relatividad"
     },
     {
@@ -283,10 +283,10 @@
       "respuesta": "neutrino"
     },
     {
-      "pista1": "Pista con chispa: Arn guia y nuclease",
-      "pista2": "Arn guia y nuclease",
-      "pista3": "Bacterias defensivas",
-      "pista_extra": "Apellido Doudna Charpentier premio nobel",
+      "pista1": "Arn guia y nuclease",
+      "pista2": "Bacterias defensivas",
+      "pista3": "Apellido Doudna Charpentier premio nobel",
+      "pista_extra": null,
       "respuesta": "crispr"
     },
     {
@@ -304,10 +304,10 @@
       "respuesta": "foton"
     },
     {
-      "pista1": "Pista con chispa: Proton tiene dos arriba uno abajo",
-      "pista2": "Proton tiene dos arriba uno abajo",
-      "pista3": "Confinamiento en hadrones",
-      "pista_extra": "Fraccion un tercio o dos tercios",
+      "pista1": "Proton tiene dos arriba uno abajo",
+      "pista2": "Confinamiento en hadrones",
+      "pista3": "Fraccion un tercio o dos tercios",
+      "pista_extra": null,
       "respuesta": "quark"
     },
     {
@@ -318,10 +318,10 @@
       "respuesta": "newton enfriamiento"
     },
     {
-      "pista1": "Pista con chispa: Mol de particulas",
-      "pista2": "Mol de particulas",
-      "pista3": "Diez a la veintitres aprox",
-      "pista_extra": "Constante NA",
+      "pista1": "Mol de particulas",
+      "pista2": "Diez a la veintitres aprox",
+      "pista3": "Constante NA",
+      "pista_extra": null,
       "respuesta": "avogadro"
     },
     {
@@ -339,10 +339,10 @@
       "respuesta": "pauli"
     },
     {
-      "pista1": "Pista con chispa: Microscopio de barrido usa sonda",
-      "pista2": "Microscopio de barrido usa sonda",
-      "pista3": "Decaimiento alfa relacion",
-      "pista_extra": "Probabilidad exponencial",
+      "pista1": "Microscopio de barrido usa sonda",
+      "pista2": "Decaimiento alfa relacion",
+      "pista3": "Probabilidad exponencial",
+      "pista_extra": null,
       "respuesta": "tunel"
     },
     {

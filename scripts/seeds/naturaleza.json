@@ -206,24 +206,24 @@
       "respuesta": "dionaea"
     },
     {
-      "pista1": "Pista con chispa: Fermenta azucar",
-      "pista2": "Fermenta azucar",
-      "pista3": "Saccharomyces",
-      "pista_extra": "Cerveza",
+      "pista1": "Fermenta azucar",
+      "pista2": "Saccharomyces",
+      "pista3": "Cerveza",
+      "pista_extra": null,
       "respuesta": "levadura"
     },
     {
-      "pista1": "Pista con chispa: Amazonia",
-      "pista2": "Amazonia",
-      "pista3": "Hevea brasiliensis",
-      "pista_extra": "Goma natural",
+      "pista1": "Amazonia",
+      "pista2": "Hevea brasiliensis",
+      "pista3": "Goma natural",
+      "pista_extra": null,
       "respuesta": "caucho"
     },
     {
-      "pista1": "Pista con chispa: Valva dos partes",
-      "pista2": "Valva dos partes",
-      "pista3": "Filtrador",
-      "pista_extra": "Perla",
+      "pista1": "Valva dos partes",
+      "pista2": "Filtrador",
+      "pista3": "Perla",
+      "pista_extra": null,
       "respuesta": "ostra"
     },
     {
@@ -241,10 +241,10 @@
       "respuesta": "ginkgo"
     },
     {
-      "pista1": "Pista con chispa: Arizona icono",
-      "pista2": "Arizona icono",
-      "pista3": "Brazos altos",
-      "pista_extra": "Desierto sonora",
+      "pista1": "Arizona icono",
+      "pista2": "Brazos altos",
+      "pista3": "Desierto sonora",
+      "pista_extra": null,
       "respuesta": "saguaro"
     },
     {
@@ -262,10 +262,10 @@
       "respuesta": "cangrejo"
     },
     {
-      "pista1": "Pista con chispa: Tallo hueco",
-      "pista2": "Tallo hueco",
-      "pista3": "Panda lo come",
-      "pista_extra": "Graminea",
+      "pista1": "Tallo hueco",
+      "pista2": "Panda lo come",
+      "pista3": "Graminea",
+      "pista_extra": null,
       "respuesta": "bambu"
     },
     {

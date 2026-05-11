@@ -241,10 +241,10 @@
       "respuesta": "calendario"
     },
     {
-      "pista1": "Pista con chispa: Lluvia en cabeza evito",
-      "pista2": "Lluvia en cabeza evito",
-      "pista3": "Cordones no soy zapato",
-      "pista_extra": "Orejas tapo del frío",
+      "pista1": "Lluvia en cabeza evito",
+      "pista2": "Cordones no soy zapato",
+      "pista3": "Orejas tapo del frío",
+      "pista_extra": null,
       "respuesta": "capucha"
     },
     {
@@ -472,10 +472,10 @@
       "respuesta": "tren"
     },
     {
-      "pista1": "Pista con chispa: Entre ellos infinito fingen",
-      "pista2": "Entre ellos infinito fingen",
-      "pista3": "En ascensor a veces",
-      "pista_extra": "Te ves repetido",
+      "pista1": "Entre ellos infinito fingen",
+      "pista2": "En ascensor a veces",
+      "pista3": "Te ves repetido",
+      "pista_extra": null,
       "respuesta": "espejo"
     },
     {
