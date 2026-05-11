@@ -685,7 +685,7 @@ footer a:hover { text-decoration: underline; }
   align-items: flex-end;
   gap: 0.75rem;
   padding: 0.85rem 0 0.95rem;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 
 /* Disable flip transitions during question reset */
@@ -902,15 +902,6 @@ footer a:hover { text-decoration: underline; }
   opacity: 0.22;
   pointer-events: none;
   filter: grayscale(1);
-}
-
-/* ── Responsive ── */
-@media (max-width: 575px) {
-  .carta { width: 115px; height: 162px; }
-  .carta-back-icon { font-size: 2rem; }
-  .carta-front .carta-punts-chip--front { font-size: 0.68rem; padding-top: 0.3rem; }
-  .carta-text { font-size: 0.72rem; }
-  .cartes-container { gap: 0.5rem; padding: 0.65rem 0 0.75rem; }
 }
 
 /* ── Banderas ────────────────────────────────────────────── */
@@ -1328,4 +1319,342 @@ a.ranking-filter-pill.active:focus-visible {
 }
 .star-rating .btn-star:hover {
   transform: scale(1.05);
+}
+
+/* ══════════════════════════════════════════════════════════
+   RESPONSIVE COMPLETO – Mobile / Tablet / Laptop
+   ══════════════════════════════════════════════════════════ */
+
+/* ── Navbar móvil ───────────────────────────────────────── */
+@media (max-width: 991px) {
+  .navbar-clika .navbar-collapse {
+    padding-top: 0.5rem;
+  }
+  .navbar-clika.navbar-expand-lg .navbar-nav .nav-item {
+    text-align: right;
+  }
+  .navbar-clika.navbar-expand-lg .navbar-nav .nav-link.nav-pill {
+    margin-right: 0;
+    margin-bottom: 0.35rem;
+    width: auto;
+    display: inline-flex;
+    justify-content: center;
+  }
+  .navbar-clika.navbar-expand-lg .dropdown-menu {
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0.25rem 0 !important;
+    text-align: right;
+    min-width: auto !important;
+    width: auto !important;
+    background: transparent !important;
+    margin: 0 !important;
+  }
+  .navbar-clika.navbar-expand-lg .dropdown-menu .dropdown-item {
+    text-align: center !important;
+    width: auto;
+    display: inline-flex;
+    justify-content: center;
+    margin-bottom: 0.25rem;
+    padding: 0.45rem 0.85rem !important;
+    border: 1px solid var(--clika-border) !important;
+    border-radius: 12px !important;
+    background: var(--clika-surface) !important;
+    color: var(--clika-primary) !important;
+    font-weight: 600 !important;
+    box-shadow: 0 2px 8px var(--clika-shadow-dark) !important;
+  }
+  .navbar-clika.navbar-expand-lg .dropdown-menu .dropdown-item:hover,
+  .navbar-clika.navbar-expand-lg .dropdown-menu .dropdown-item:focus {
+    background: #ffffff !important;
+    border-color: var(--clika-border-strong) !important;
+    color: var(--clika-primary-hover) !important;
+    box-shadow: 0 4px 12px var(--clika-shadow) !important;
+  }
+  .navbar-clika.navbar-expand-lg .dropdown-menu .dropdown-item.active,
+  .navbar-clika.navbar-expand-lg .dropdown-menu .dropdown-item:active {
+    background: linear-gradient(135deg, var(--clika-primary), var(--clika-accent)) !important;
+    border-color: transparent !important;
+    color: #fff !important;
+    box-shadow: 0 4px 12px var(--clika-shadow) !important;
+  }
+  .navbar-clika .nav-auth-guest {
+    width: 100%;
+    justify-content: flex-end !important;
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--clika-border);
+  }
+  .navbar-clika .nav-auth-guest .nav-auth-btn {
+    min-width: auto;
+    flex: 0 1 auto;
+  }
+}
+
+@media (max-width: 575px) {
+  .navbar-brand img {
+    height: 32px;
+  }
+  .navbar-clika .nav-auth-guest .nav-auth-btn {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.75rem;
+  }
+}
+
+/* ── Hero ───────────────────────────────────────────────── */
+@media (max-width: 767px) {
+  .hero-section {
+    padding: 2.5rem 0 1.5rem;
+  }
+  .hero-section::before {
+    width: 300px;
+    height: 300px;
+    top: -100px;
+    right: -80px;
+  }
+  .hero-section::after {
+    width: 220px;
+    height: 220px;
+    bottom: -60px;
+    left: -50px;
+  }
+  .hero-section .lead {
+    font-size: 1rem;
+    max-width: 90%;
+  }
+}
+
+/* ── Temas / Cards ──────────────────────────────────────── */
+@media (max-width: 767px) {
+  .tema-card {
+    min-height: auto;
+  }
+  .temas-section {
+    padding-top: 1rem;
+    padding-bottom: 2.5rem;
+  }
+}
+
+/* ── Cartas de pistas: tablets ──────────────────────────── */
+@media (max-width: 991px) {
+  .carta {
+    width: 130px;
+    height: 182px;
+  }
+  .carta-back-icon {
+    font-size: 2.2rem;
+  }
+  .carta-text {
+    font-size: 0.78rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .carta {
+    width: 104px;
+    height: 162px;
+  }
+  .carta-front {
+    padding: 0.9rem 0.7rem 0.8rem;
+  }
+  .carta-front::before {
+    border-radius: 16px 16px 0 0;
+    height: 3.5px;
+  }
+  .carta-back-icon {
+    font-size: 1.85rem;
+  }
+  .carta-front .carta-punts-chip--front {
+    font-size: 0.68rem;
+    padding-top: 0.35rem;
+  }
+  .carta-text {
+    font-size: 0.72rem;
+  }
+  .carta-num-badge {
+    font-size: 0.6rem;
+    margin-bottom: 0.5rem;
+  }
+  .cartes-container {
+    gap: 0.4rem;
+    padding: 0.6rem 0.3rem 0.85rem;
+    justify-content: center;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .cartes-container::-webkit-scrollbar {
+    display: none;
+  }
+  .cartes-container .carta {
+    scroll-snap-align: start;
+  }
+}
+
+@media (max-width: 359px) {
+  .carta {
+    width: 88px;
+    height: 138px;
+  }
+  .carta-front {
+    padding: 0.75rem 0.55rem 0.65rem;
+  }
+  .carta-back-icon {
+    font-size: 1.6rem;
+  }
+  .carta-front .carta-punts-chip--front {
+    font-size: 0.62rem;
+    padding-top: 0.25rem;
+  }
+  .carta-text {
+    font-size: 0.68rem;
+  }
+  .carta-num-badge {
+    font-size: 0.55rem;
+    margin-bottom: 0.35rem;
+  }
+  .cartes-container {
+    gap: 0.3rem;
+    padding: 0.5rem 0.2rem 0.75rem;
+  }
+}
+
+/* ── Juego: cabecera y controles ────────────────────────── */
+@media (max-width: 575px) {
+  .game-layout {
+    padding-left: 0.65rem;
+    padding-right: 0.65rem;
+    padding-top: 0.75rem;
+  }
+  #game-area #resposta-area .resposta-input-group .form-control,
+  #game-area #resposta-area .resposta-input-group .btn {
+    min-height: 2.6rem;
+    font-size: 0.95rem;
+  }
+  .badge.punts-badge {
+    font-size: 0.85rem !important;
+    padding: 0.4rem 0.75rem !important;
+  }
+  #pregunta-num {
+    font-size: 1.1rem !important;
+  }
+  #btn-seguent-pista {
+    font-size: 0.8rem;
+    padding: 0.35rem 0.7rem;
+  }
+  .tema-round-icon-wrap {
+    width: 84px;
+    height: 84px;
+    border-radius: 16px;
+  }
+  .tema-round-icon {
+    font-size: 2.6rem;
+  }
+}
+
+/* ── Fin de partida ─────────────────────────────────────── */
+@media (max-width: 575px) {
+  .fi-partida-card {
+    padding: 1.5rem 1rem;
+    max-width: 100%;
+  }
+  .punts-finals-num {
+    font-size: 2.6rem;
+  }
+}
+
+/* ── Login / Register ───────────────────────────────────── */
+@media (max-width: 575px) {
+  .login-container {
+    margin-top: 40px !important;
+  }
+}
+
+/* ── Ranking ────────────────────────────────────────────── */
+@media (max-width: 767px) {
+  .ranking-table-container {
+    max-height: 60vh;
+    border-radius: 14px;
+  }
+  .ranking-th {
+    padding: 0.5rem 0.6rem;
+    font-size: 0.68rem;
+  }
+  .ranking-row td {
+    padding: 0.5rem 0.6rem;
+    font-size: 0.88rem;
+  }
+  .ranking-avatar {
+    width: 34px;
+    height: 34px;
+  }
+  .ranking-punts {
+    font-size: 1rem;
+  }
+  .ranking-medal {
+    font-size: 1.2rem;
+  }
+  .ranking-pos {
+    width: 26px;
+    height: 26px;
+    font-size: 0.75rem;
+  }
+}
+
+/* ── Tablas admin ───────────────────────────────────────── */
+@media (max-width: 767px) {
+  .users-table-card .table td,
+  .users-table-card .table th {
+    padding: 0.5rem 0.6rem !important;
+    font-size: 0.88rem;
+  }
+  .users-user-img {
+    width: 34px;
+    height: 34px;
+  }
+}
+
+/* ── Admin config cards ─────────────────────────────────── */
+@media (max-width: 767px) {
+  .container.mt-5 > .row .col-md-4 {
+    margin-bottom: 1rem;
+  }
+}
+
+/* ── Opiniones barras ───────────────────────────────────── */
+@media (max-width: 575px) {
+  .opinion-star-row {
+    font-size: 0.78rem;
+    gap: 0.35rem;
+  }
+  .opinion-star-bar {
+    height: 6px;
+  }
+}
+
+/* ── Footer ─────────────────────────────────────────────── */
+@media (max-width: 575px) {
+  footer {
+    display: none;
+  }
+}
+
+/* ── Utilidades responsive ──────────────────────────────── */
+@media (max-width: 575px) {
+  .btn {
+    font-size: 0.9rem;
+  }
+  .card {
+    border-radius: 14px;
+  }
+}
+
+/* ── Scroll horizontal suave en carrusel móvil ──────────── */
+@media (max-width: 575px) {
+  .carrusel-item {
+    flex: 0 0 85%;
+    min-width: auto;
+  }
 }

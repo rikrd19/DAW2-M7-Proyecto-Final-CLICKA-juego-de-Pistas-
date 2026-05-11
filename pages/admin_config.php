@@ -17,11 +17,11 @@ $pageTitle = 'Panel de Administración';
 <body>
     <?php include '../includes/menu.php'; ?>
 
-    <main class="container mt-5">
+    <main class="container mt-4 mt-md-5">
         <div class="row">
             <div class="col-12">
-                <h1 class="mb-4">Dashboard de Administración</h1>
-                <p class="lead">Bienvenido, <?php
+                <h1 class="mb-3 mb-md-4 h3 fw-bold">Dashboard de Administración</h1>
+                <p class="lead small">Bienvenido, <?php
                 $admHello = $_SESSION['nombre_usuario']
                     ?? ($_SESSION['user_email'] ?? ($_SESSION['username'] ?? ''));
                 echo htmlspecialchars((string) $admHello);

@@ -69,11 +69,11 @@ $temas[] = [
     <!-- Hero -->
     <section class="hero-section">
       <div class="container">
-        <h1 class="mb-2">
+        <h1 class="mb-3">
           Bienvenido a&nbsp;<span
             style="background:linear-gradient(135deg,#5C7CFA,#FF4D8D);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">CLICKA</span>
         </h1>
-        <p class="lead mb-0 mb-md-2">
+        <p class="lead mb-3 mb-md-2">
           El juego de pistas que pondrá a prueba tus conocimientos.
         </p>
       </div>
@@ -81,7 +81,7 @@ $temas[] = [
 
     <!-- Carrusel de temáticas -->
     <section class="temas-section container">
-      <div class="text-center mb-3">
+      <div class="text-center mb-4">
         <h2 class="h4 fw-bold mb-0" style="color:var(--clika-text)">Elige una categoría y demuestra lo que sabes</h2>
       </div>
 

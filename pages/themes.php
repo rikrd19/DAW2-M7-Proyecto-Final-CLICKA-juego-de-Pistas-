@@ -96,10 +96,10 @@ while ($row = $res->fetchArray(SQLITE3_ASSOC)) {
 
   <main class="container mt-5">
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="d-flex flex-wrap justify-content-between align-items-start align-items-md-center gap-2 mb-4">
       <div>
-        <h1 class="fw-bold">Gestionar Temas</h1>
-        <p class="text-muted mb-0">Crea y elimina las temáticas disponibles.</p>
+        <h1 class="fw-bold h3">Gestionar Temas</h1>
+        <p class="text-muted small mb-0">Crea y elimina las temáticas disponibles.</p>
       </div>
       <a href="admin_config.php" class="btn btn-outline-accent btn-sm px-3">← Panel admin</a>
     </div>
@@ -116,7 +116,7 @@ while ($row = $res->fetchArray(SQLITE3_ASSOC)) {
       <!-- Tabla de temas -->
       <div class="col-lg-8">
         <div class="card border-0 shadow-sm">
-          <div class="card-body p-0">
+          <div class="card-body p-0 table-responsive">
             <table class="table align-middle mb-0">
               <thead class="table-light">
                 <tr>
