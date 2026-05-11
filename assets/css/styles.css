@@ -1552,6 +1552,13 @@ a.ranking-filter-pill.active:focus-visible {
   .tema-round-icon {
     font-size: 2.6rem;
   }
+  /* Evitar que el teclado mueva la pantalla al hacer foco en el input */
+  html, body {
+    overflow-anchor: none;
+  }
+  #resposta-input {
+    caret-color: var(--clika-primary);
+  }
 }
 
 /* ── Fin de partida ─────────────────────────────────────── */
