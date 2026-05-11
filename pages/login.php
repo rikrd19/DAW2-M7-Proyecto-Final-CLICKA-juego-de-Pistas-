@@ -45,6 +45,12 @@ $pageTitle = 'Iniciar Sesión';
                 <div class="card-body">
                     <h2 class="text-center mb-4 fw-bold">Login</h2>
 
+                    <?php if (isset($_GET['registered'])): ?>
+                        <div class="alert alert-success py-2 text-center" role="alert">
+                            Cuenta creada correctamente. Inicia sesión con tu correo y contraseña.
+                        </div>
+                    <?php endif; ?>
+
                     <?php if (isset($_GET['error'])): ?>
                         <div class="alert alert-danger py-2 text-center" role="alert">
                             <?php
