@@ -185,10 +185,10 @@
       "respuesta": "pila"
     },
     {
-      "pista1": "Pista con chispa: Enqueue dequeue",
-      "pista2": "Enqueue dequeue",
-      "pista3": "Breadth first search",
-      "pista_extra": "Tiene 1 palabra.",
+      "pista1": "Enqueue dequeue",
+      "pista2": "Breadth first search",
+      "pista3": "Tiene 1 palabra.",
+      "pista_extra": null,
       "respuesta": "cola"
     },
     {

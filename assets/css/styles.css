@@ -1323,8 +1323,9 @@ a.ranking-filter-pill.active:focus-visible {
   color: var(--clika-border-strong);
   transition: color 0.15s ease, transform 0.12s ease;
 }
-.star-rating .btn-star:hover,
 .star-rating .btn-star.is-on {
   color: #f5a623;
+}
+.star-rating .btn-star:hover {
   transform: scale(1.05);
 }

@@ -178,17 +178,17 @@
       "respuesta": "tomatina"
     },
     {
-      "pista1": "Pista con chispa: Julio es el mes clave",
-      "pista2": "Julio es el mes clave",
-      "pista3": "San Fermín es el santo",
-      "pista_extra": "Nombre de la ciudad en una palabra",
+      "pista1": "Julio es el mes clave",
+      "pista2": "San Fermín es el santo",
+      "pista3": "Nombre de la ciudad en una palabra",
+      "pista_extra": null,
       "respuesta": "pamplona"
     },
     {
-      "pista1": "Pista con chispa: Fotógrafos gritan a las estrellas",
-      "pista2": "Fotógrafos gritan a las estrellas",
-      "pista3": "No es la ceremonia dentro del teatro",
-      "pista_extra": "Lugar donde posan los vestidos largos",
+      "pista1": "Fotógrafos gritan a las estrellas",
+      "pista2": "No es la ceremonia dentro del teatro",
+      "pista3": "Lugar donde posan los vestidos largos",
+      "pista_extra": null,
       "respuesta": "alfombra roja"
     },
     {
@@ -381,10 +381,10 @@
       "respuesta": "whatsapp"
     },
     {
-      "pista1": "Pista con chispa: Google la posee",
-      "pista2": "Google la posee",
-      "pista3": "Shorts competencia TikTok",
-      "pista_extra": "Nombre tubo",
+      "pista1": "Google la posee",
+      "pista2": "Shorts competencia TikTok",
+      "pista3": "Nombre tubo",
+      "pista_extra": null,
       "respuesta": "youtube"
     },
     {

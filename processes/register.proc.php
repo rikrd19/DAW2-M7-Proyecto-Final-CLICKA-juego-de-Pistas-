@@ -69,7 +69,7 @@ try {
         exit;
     }
 
-    // Public self-registration: sign in immediately (aligns session keys with login.proc.php).
+    // Public self-registration: sign in immediately (same session keys as login.proc.php).
     $newId = (int) $db->lastInsertRowID();
     session_regenerate_id(true);
     $_SESSION['usuari_id'] = $newId;
@@ -80,7 +80,9 @@ try {
 
     if (isset($_SESSION['last_score'])) {
         $last = $_SESSION['last_score'];
-        $insPart = $db->prepare('INSERT INTO partidas (usuario_id, puntos, tema, nombre_temporal) VALUES (:uid, :pts, :tema, :nom)');
+        $insPart = $db->prepare(
+            'INSERT INTO partidas (usuario_id, puntos, tema, nombre_temporal) VALUES (:uid, :pts, :tema, :nom)'
+        );
         $insPart->bindValue(':uid', $newId, SQLITE3_INTEGER);
         $insPart->bindValue(':pts', $last['puntos'] ?? 0, SQLITE3_INTEGER);
         $insPart->bindValue(':tema', $last['tema'] ?? 'general', SQLITE3_TEXT);

@@ -4,7 +4,12 @@
 # remain tracked in Git. Do NOT add rules that ignore:
 #   - db/*.db / db/*.sqlite
 #   - assignment image assets
+#
+# SQLite WAL mode creates ephemeral companion files alongside *.db — ignore those only.
 # =============================================================================
+
+database/*.db-wal
+database/*.db-shm
 
 .DS_Store
 *.log

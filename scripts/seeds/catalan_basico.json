@@ -283,10 +283,10 @@
       "respuesta": "negre"
     },
     {
-      "pista1": "Pista con chispa: Lo contrario de pequeno",
-      "pista2": "Lo contrario de pequeno",
-      "pista3": "Empieza por g",
-      "pista_extra": "Acaba en ran",
+      "pista1": "Lo contrario de pequeno",
+      "pista2": "Empieza por g",
+      "pista3": "Acaba en ran",
+      "pista_extra": null,
       "respuesta": "gran"
     },
     {

@@ -129,8 +129,8 @@
       "respuesta": "gibraltar"
     },
     {
-      "pista1": "Pista con chispa: Viento fuerte y estepa arbustiva",
-      "pista2": "Viento fuerte y estepa arbustiva",
+      "pista1": "Viento fuerte y estepa arbustiva",
+      "pista2": "Región austral compartida por Argentina y Chile",
       "pista3": "No es cálido como el Sahara",
       "pista_extra": "Nombre comparte con region sur",
       "respuesta": "patagonia"
@@ -178,8 +178,8 @@
       "respuesta": "australia"
     },
     {
-      "pista1": "Pista con chispa: Petróleo y gas desde plataformas offshore",
-      "pista2": "Petróleo y gas desde plataformas offshore",
+      "pista1": "Petróleo y gas desde plataformas offshore",
+      "pista2": "Margen entre Gran Bretaña y Noruega Dinamarca",
       "pista3": "Pesca del arenque historica",
       "pista_extra": "Nombre en inglés North Sea",
       "respuesta": "mar del norte"
@@ -192,8 +192,8 @@
       "respuesta": "croacia"
     },
     {
-      "pista1": "Pista con chispa: Dunas naranjas junto al oceano",
-      "pista2": "Dunas naranjas junto al oceano",
+      "pista1": "Dunas naranjas junto al oceano",
+      "pista2": "Costa del esqueleto y desierto del Namib",
       "pista3": "Pais homonimo al desierto",
       "pista_extra": "Skeleton Coast nombre turistico",
       "respuesta": "namibia"
@@ -220,8 +220,8 @@
       "respuesta": "somalia"
     },
     {
-      "pista1": "Pista con chispa: Macizo herciniano antiguo",
-      "pista2": "Macizo herciniano antiguo",
+      "pista1": "Macizo herciniano antiguo",
+      "pista2": "Mesetas elevadas en el interior peninsular",
       "pista3": "Empieza por m y tiene 6 letras.",
       "pista_extra": "Altitud media elevada interior seca",
       "respuesta": "meseta"
@@ -297,8 +297,8 @@
       "respuesta": "brahmaputra"
     },
     {
-      "pista1": "Pista con chispa: Dunas rojas",
-      "pista2": "Dunas rojas",
+      "pista1": "Dunas rojas",
+      "pista2": "Desierto más antiguo del mundo junto al Atlántico",
       "pista3": "Skeleton coast",
       "pista_extra": "Nombre del desierto",
       "respuesta": "namib"
@@ -376,13 +376,13 @@
     {
       "pista1": "Desierto sur Argentina chile",
       "pista2": "Va otra: Avestruces no nativas",
-      "pista3": "Avestruces no nativas",
+      "pista3": "Glaciares australes y estepa ventosa",
       "pista_extra": "Tiene 1 palabra.",
       "respuesta": "patagonia"
     },
     {
-      "pista1": "Pista con chispa: Yakarta sur",
-      "pista2": "Yakarta sur",
+      "pista1": "Yakarta sur",
+      "pista2": "Isla indonesia más poblada del archipiélago",
       "pista3": "Volcan merapi",
       "pista_extra": "Nombre isla",
       "respuesta": "java"
@@ -390,7 +390,7 @@
     {
       "pista1": "Rio que cruza Paris",
       "pista2": "Va otra: Notre Dame orilla",
-      "pista3": "Notre Dame orilla",
+      "pista3": "Su estuario llega al canal de la Mancha en Normandía",
       "pista_extra": "Tiene 1 palabra.",
       "respuesta": "sen"
     },
