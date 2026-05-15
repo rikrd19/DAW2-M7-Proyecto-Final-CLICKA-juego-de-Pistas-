@@ -68,7 +68,6 @@ $results = $db->query("SELECT * FROM usuarios ORDER BY
                             <th class="px-4 py-3">Nombre de usuario</th>
                             <th class="px-4 py-3">Correo</th>
                             <th class="px-4 py-3">Rol</th>
-                            <th class="px-4 py-3 text-center">Puntos</th>
                             <th class="px-4 py-3 text-center">Acciones</th>
                         </tr>
                     </thead>
@@ -94,9 +93,6 @@ $results = $db->query("SELECT * FROM usuarios ORDER BY
                                     <span class="badge <?php echo $badgeClass; ?> rounded-pill small">
                                         <?php echo strtoupper($row['rol']); ?>
                                     </span>
-                                </td>
-                                <td class="px-4 py-3 text-center fw-semibold">
-                                    <?php echo $row['puntos']; ?>
                                 </td>
                                 <td class="px-4 py-3 text-center">
                                     <div class="d-flex justify-content-center gap-2">
