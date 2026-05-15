@@ -74,6 +74,10 @@ Dependencias Python:
 
 - `scripts/generator.py` usa solo la librería estándar (no requiere `pip install`).
 
+## Uso de Python — alcance final (entrega)
+
+El segundo avance del proyecto planteó, de forma exploratoria, un script adicional de informes estadísticos sobre SQLite (`stats_report.py`, salidas en `docs/reports/`, etc.). **No forma parte del alcance final obligatorio del curso** y, para priorizar estabilidad, revisión de contenido y tiempo de entrega, **la entrega se centra únicamente en `scripts/generator.py`**: carga de preguntas desde `scripts/seeds/*.json` hacia `database/clicka.db`, misma base que consume PHP. El historial de feedbacks académicos sigue siendo válido como evidencia de evolución; esta sección fija la decisión de producto/documentación respecto al código que se entrega en el repositorio.
+
 Arrancar servidor PHP:
 
 - **Opción A** (XAMPP/MAMP): DocumentRoot apuntando a la carpeta del proyecto.
