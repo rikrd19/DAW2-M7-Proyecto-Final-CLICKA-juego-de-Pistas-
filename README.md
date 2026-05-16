@@ -74,6 +74,10 @@ Dependencias Python:
 
 - `scripts/generator.py` usa solo la librería estándar (no requiere `pip install`).
 
+## Uso de Python — alcance final (entrega)
+
+El segundo avance del proyecto planteó, de forma exploratoria, un script adicional de informes estadísticos sobre SQLite (`stats_report.py`, salidas en `docs/reports/`, etc.). **No forma parte del alcance final obligatorio del curso** y, para priorizar estabilidad, revisión de contenido y tiempo de entrega, **la entrega se centra únicamente en `scripts/generator.py`**: carga de preguntas desde `scripts/seeds/*.json` hacia `database/clicka.db`, misma base que consume PHP. El historial de feedbacks académicos sigue siendo válido como evidencia de evolución; esta sección fija la decisión de producto/documentación respecto al código que se entrega en el repositorio.
+
 Arrancar servidor PHP:
 
 - **Opción A** (XAMPP/MAMP): DocumentRoot apuntando a la carpeta del proyecto.
@@ -134,6 +138,31 @@ La aplicación web **no consume** este endpoint en el front; sirve para **listar
 - Revisar junto con `database/schema.sql`.
 
 ![Diagrama relacional de tablas](assets/images/diagrama_de_tabla_relacional_normalizada.png)
+
+### Maquetas de interfaz (wireframes)
+
+Carpeta: `assets/images/stack/`. Maquetas de baja fidelidad del diseño de pantallas (presentación y documentación del proyecto).
+
+**Planche 1 — acceso y página principal**
+
+- Archivo: [`imag_wireframe_1.png`](assets/images/stack/imag_wireframe_1.png)
+- Contenido: inicio (carrusel), registro de usuario, ranking/comunidad y login.
+
+[![Maqueta 1 — inicio, registro, ranking y login](assets/images/stack/imag_wireframe_1.png)](assets/images/stack/imag_wireframe_1.png)
+
+**Planche 2 — comunidad, perfil y panel admin**
+
+- Archivo: [`imag_wireframe_2.png`](assets/images/stack/imag_wireframe_2.png)
+- Contenido: calificaciones, opiniones, edición de perfil (avatares) y dashboard de administración.
+
+[![Maqueta 2 — comunidad, perfil y dashboard admin](assets/images/stack/imag_wireframe_2.png)](assets/images/stack/imag_wireframe_2.png)
+
+**Planche 3 — gestión admin de temas y preguntas**
+
+- Archivo: [`imag_wireframe_3.png`](assets/images/stack/imag_wireframe_3.png)
+- Contenido: listado y alta de temas; listado de preguntas con pistas y fuente.
+
+[![Maqueta 3 — gestión de temas y preguntas](assets/images/stack/imag_wireframe_3.png)](assets/images/stack/imag_wireframe_3.png)
 
 ### Capturas de funcionamiento API
 
